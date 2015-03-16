@@ -12,29 +12,33 @@
 // Note that the ordering must give the same result on both computers
 // but, it doesn't have to guarantee perfect ordering (e.g. see improveApprox)
 //
-// then delta encoded values will be compressed
-//   at the moment it's using flate, but even simple RLE gives good results
-//
 // Anyways, the percentiles for the snapshot size distribution
 //
-//         size      speed      improve     encode     decode
-// MIN    7.240kb  434.400kbps  370.277us  110.324us   82.184us
-// P05    8.728kb  523.680kbps  484.620us  131.763us  106.304us
-// P10    8.784kb  527.040kbps  602.090us  136.230us  113.004us
-// P25   10.560kb  633.600kbps  862.043us  145.609us  126.850us
-// P50   12.184kb  731.040kbps 1006.759us  154.096us  142.036us
-// P75   13.656kb  819.360kbps 1119.316us  160.796us  153.649us
-// P90   15.360kb  921.600kbps 1177.828us  167.495us  166.602us
-// P95   16.512kb  990.720kbps 1191.228us  171.962us  174.195us
-// MAX   18.664kb 1119.840kbps 1348.897us  247.893us  239.407us
+// MIN      9.600 kbps
+// P05     15.840 kbps
+// P10     37.920 kbps
+// P25    136.800 kbps
+// P50    206.880 kbps
+// P75    278.400 kbps
+// P90    338.400 kbps
+// P95    395.520 kbps
+// MAX    492.960 kbps
 //
-// TOTAL 31669.424kb
+// TOTAL    8899.984 kb
+//   AVG       3.432 kb per frame
+//   AVG       3.809 bits per cube
+//
+// TIMING:
+//                   MIN        10%        25%        50%        75%        90%        MAX
+//    improve   58.511µs   72.358µs   78.164µs   82.184µs   84.864µs    87.99µs  195.188µs
+//     encode  348.837µs  453.354µs  522.585µs  564.124µs  595.837µs  621.296µs 1.102343ms
+//     decode  116.576µs  146.056µs  158.562µs  170.622µs  180.895µs  192.954µs  379.209µs
+//   pimprove  548.491µs  620.403µs  665.961µs  713.753µs  762.439µs  806.658µs 1.119316ms
 
 package main
 
 import (
 	"bufio"
-	"bytes"
 	"encoding/binary"
 	"flag"
 	"fmt"
@@ -43,7 +47,6 @@ import (
 	"runtime"
 	"sort"
 
-	"github.com/egonelbre/deltagolomb"
 	"github.com/egonelbre/exp/qpc"
 
 	"github.com/montanaflynn/stats"
@@ -64,28 +67,28 @@ type Delta struct {
 
 type Deltas []Delta
 
-func Encode(order *Ordering, curr Deltas) (snapshot []byte) {
+func Encode(order *Ordering, baseline, current Deltas) (snapshot []byte) {
 	wr := NewWriter()
 
-	wr.Write(order.Largest, curr, getLargest)
-	wr.Write(order.Interacting, curr, getInteracting)
+	wr.Write(order.Largest, current, getLargest)
+	wr.Write(order.Interacting, current, getInteracting)
 
-	wr.WriteIndexed(order.ABC, curr)
-	wr.WriteIndexed(order.XYZ, curr)
+	wr.WriteIndexed(order.ABC, baseline, current)
+	wr.WriteIndexed(order.XYZ, baseline, current)
 
 	wr.Close()
 	return wr.Bytes()
 }
 
 // ignores reading errors
-func Decode(order *Ordering, curr Deltas, snapshot []byte) {
+func Decode(order *Ordering, baseline, current Deltas, snapshot []byte) {
 	rd := NewReader(snapshot)
 
-	rd.Read(order.Largest, curr, setLargest)
-	rd.Read(order.Interacting, curr, setInteracting)
+	rd.Read(order.Largest, current, setLargest)
+	rd.Read(order.Interacting, current, setInteracting)
 
-	rd.ReadIndexed(order.ABC, curr)
-	rd.ReadIndexed(order.XYZ, curr)
+	rd.ReadIndexed(order.ABC, baseline, current)
+	rd.ReadIndexed(order.XYZ, baseline, current)
 }
 
 func ReadDeltas(r io.Reader, prev, curr Deltas) error {
@@ -116,6 +119,7 @@ func main() {
 	improve := qpc.NewHistory("improve")
 	encode := qpc.NewHistory("encode")
 	decode := qpc.NewHistory("decode")
+	pimprove := qpc.NewHistory("pimprove")
 
 	const N = 901
 	baseline := make(Deltas, N)
@@ -135,17 +139,23 @@ func main() {
 
 		runtime.GC()
 
+		//===
 		improve.Start()
 		order.Improve(baseline)
 		improve.Stop()
 
 		encode.Start()
-		snapshot := Encode(order, current)
+		snapshot := Encode(order, baseline, current)
 		encode.Stop()
 
 		decode.Start()
-		Decode(order, mirror, snapshot)
+		Decode(order, baseline, mirror, snapshot)
 		decode.Stop()
+
+		pimprove.Start()
+		order.PostImprove(baseline, mirror)
+		pimprove.Stop()
+		//===
 
 		size := float64(len(snapshot)*8) / 1000.0
 		total += size
@@ -157,7 +167,7 @@ func main() {
 			if !current.Equals(mirror) {
 				fmt.Print("! ")
 			}
-			fmt.Printf("%04d %8.3fkbps %10s %10s %10s\n", frame, speed, improve.Last(), encode.Last(), decode.Last())
+			fmt.Printf("%04d %8.3fkbps %10s %10s %10s %10s\n", frame, speed, improve.Last(), encode.Last(), decode.Last(), pimprove.Last())
 		} else {
 			if current.Equals(mirror) {
 				fmt.Print(".")
@@ -182,7 +192,7 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("TIMING:")
-	qpc.PrintSummary(improve, encode, decode)
+	qpc.PrintSummary(improve, encode, decode, pimprove)
 }
 
 // delta utilities
@@ -223,96 +233,6 @@ type Ordering struct {
 	Interacting []int
 }
 
-type IndexValue struct {
-	Value byte
-	Index int
-}
-
-func (v IndexValue) Get(deltas Deltas) int32 {
-	switch v.Value {
-	case 0:
-		return deltas[v.Index].A
-	case 1:
-		return deltas[v.Index].B
-	case 2:
-		return deltas[v.Index].C
-	case 3:
-		return deltas[v.Index].X
-	case 4:
-		return deltas[v.Index].Y
-	case 5:
-		return deltas[v.Index].Z
-	}
-	return 0
-}
-
-func (v IndexValue) Set(deltas Deltas, x int32) {
-	switch v.Value {
-	case 0:
-		deltas[v.Index].A = x
-	case 1:
-		deltas[v.Index].B = x
-	case 2:
-		deltas[v.Index].C = x
-	case 3:
-		deltas[v.Index].X = x
-	case 4:
-		deltas[v.Index].Y = x
-	case 5:
-		deltas[v.Index].Z = x
-	}
-}
-
-type byValue struct {
-	order  []IndexValue
-	deltas Deltas
-}
-
-func (s *byValue) Len() int           { return len(s.order) }
-func (s *byValue) Swap(i, j int)      { s.order[i], s.order[j] = s.order[j], s.order[i] }
-func (s *byValue) Less(i, j int) bool { return s.order[i].Get(s.deltas) < s.order[j].Get(s.deltas) }
-
-func sequence(n int) []int {
-	r := make([]int, n)
-	for i := range r {
-		r[i] = i
-	}
-	return r
-}
-
-func NewOrdering(deltas Deltas) *Ordering {
-	n := len(deltas)
-	order := &Ordering{
-		Largest:     sequence(n),
-		Interacting: sequence(n),
-
-		ABC: make([]IndexValue, n*3),
-		XYZ: make([]IndexValue, n*3),
-	}
-
-	for i := 0; i < n*3; i += 1 {
-		order.ABC[i].Index = i % n
-		order.ABC[i].Value = byte(i / n)
-
-		order.XYZ[i].Index = i % n
-		order.XYZ[i].Value = byte(i/n + 3)
-	}
-
-	return order
-}
-
-type sorter struct {
-	order  []int
-	deltas Deltas
-	get    Getter
-}
-
-func (s *sorter) Len() int      { return len(s.order) }
-func (s *sorter) Swap(i, j int) { s.order[i], s.order[j] = s.order[j], s.order[i] }
-func (s *sorter) Less(i, j int) bool {
-	return s.get(&s.deltas[s.order[i]]) < s.get(&s.deltas[s.order[j]])
-}
-
 var improve = improveSort
 
 func improveSort(order []int, deltas Deltas, get Getter) {
@@ -339,91 +259,14 @@ func improveApprox(order []int, deltas Deltas, get Getter) {
 	}
 }
 
-func (order *Ordering) Improve(deltas Deltas) {
-	sort.Sort(&byValue{order.ABC, deltas})
-	sort.Sort(&byValue{order.XYZ, deltas})
-	improve(order.Largest, deltas, getLargest)
-	improve(order.Interacting, deltas, getInteracting)
+func (order *Ordering) Improve(baseline Deltas) {
+	improve(order.Largest, baseline, getLargest)
+	improve(order.Interacting, baseline, getInteracting)
 }
 
-// Delta Writer/Reader
-type Getter func(a *Delta) int32
-type Setter func(a *Delta, v int32)
-
-type Writer struct {
-	enc *deltagolomb.ExpGolombEncoder
-	buf *bytes.Buffer
-}
-
-func NewWriter() *Writer {
-	var buf bytes.Buffer
-	return &Writer{deltagolomb.NewExpGolombEncoder(&buf), &buf}
-}
-
-func (wr *Writer) Write(order []int, values Deltas, get Getter) {
-	p := int32(0)
-	for _, i := range order {
-		v := get(&values[i])
-		d := v - p
-		wr.enc.WriteInt(int(d))
-		p = v
-	}
-	return
-}
-
-func (wr *Writer) WriteIndexed(order []IndexValue, values Deltas) {
-	p := int32(0)
-	for _, i := range order {
-		v := i.Get(values)
-		d := v - p
-		wr.enc.WriteInt(int(d))
-		p = v
-	}
-	return
-}
-
-func (wr *Writer) Close()        { wr.enc.Close() }
-func (wr *Writer) Bytes() []byte { return wr.buf.Bytes() }
-
-type Reader struct {
-	dec *deltagolomb.ExpGolombDecoder
-	buf *bytes.Buffer
-}
-
-func NewReader(data []byte) *Reader {
-	buf := bytes.NewBuffer(data)
-	dec := deltagolomb.NewExpGolombDecoder(buf)
-	return &Reader{dec, buf}
-}
-
-func (rd *Reader) Read(order []int, values Deltas, set Setter) error {
-	deltas := make([]int, len(order))
-	rd.dec.Read(deltas)
-
-	p := int32(0)
-	for i, idx := range order {
-		d := int32(deltas[i])
-		v := p + d
-		set(&values[idx], v)
-		p = v
-	}
-
-	return nil
-}
-
-func (rd *Reader) ReadIndexed(order []IndexValue, values Deltas) error {
-	deltas := make([]int, len(order))
-	rd.dec.Read(deltas)
-
-	p := int32(0)
-	for i, idx := range order {
-		d := int32(deltas[i])
-		v := p + d
-		idx.Set(values, v)
-		p = v
-	}
-
-	return nil
+func (order *Ordering) PostImprove(baseline, current Deltas) {
+	sort.Sort(&byDelta{order.ABC, baseline, current})
+	sort.Sort(&byDelta{order.XYZ, baseline, current})
 }
 
 // reading input/output
