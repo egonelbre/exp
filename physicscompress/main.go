@@ -44,7 +44,7 @@ import (
 	"sort"
 
 	"github.com/egonelbre/deltagolomb"
-	"github.com/egonelbre/sandbox/qpc"
+	"github.com/egonelbre/exp/qpc"
 
 	"github.com/montanaflynn/stats"
 )
