@@ -54,10 +54,10 @@ func (hist *History) PrintSummary() {
 	fmt.Println()
 }
 
-var percentiles = []float64{5, 10, 25, 50, 75, 90, 95}
+var percentiles = []float64{10, 25, 50, 75, 90}
 
 func FprintSummary(out io.Writer, hists ...*History) {
-	fmt.Fprintf(out, "%10s", "NAME")
+	fmt.Fprintf(out, "%10s", "")
 	fmt.Fprintf(out, " %10s", "MIN")
 	for _, p := range percentiles {
 		fmt.Fprintf(out, " %9d%%", int(p))

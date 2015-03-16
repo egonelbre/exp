@@ -110,12 +110,12 @@ func main() {
 
 	buffer := bufio.NewReader(file)
 
-	sizes := make([]float64, 0)
+	total := 0.0
 	speeds := make([]float64, 0)
 
-	improves := make([]float64, 0)
-	encodes := make([]float64, 0)
-	decodes := make([]float64, 0)
+	improve := qpc.NewHistory("improve")
+	encode := qpc.NewHistory("encode")
+	decode := qpc.NewHistory("decode")
 
 	const N = 901
 	baseline := make(Deltas, N)
@@ -133,40 +133,31 @@ func main() {
 		check(err)
 		frame += 1
 
-		// measuring of code
-		//
-		// order.Improve(baseline)
-		// snapshot := Encode(order, current)
-		// Decode(order, mirror, snapshot)
-		//
-
 		runtime.GC()
 
-		start := qpc.Now()
+		improve.Start()
 		order.Improve(baseline)
-		improving := qpc.Since(start)
-		improves = append(improves, improving.Seconds()*1000)
+		improve.Stop()
 
-		start = qpc.Now()
+		encode.Start()
 		snapshot := Encode(order, current)
-		encoding := qpc.Since(start)
-		encodes = append(improves, encoding.Seconds()*1000)
+		encode.Stop()
 
-		start = qpc.Now()
+		decode.Start()
 		Decode(order, mirror, snapshot)
-		decoding := qpc.Since(start)
-		decodes = append(decodes, decoding.Seconds()*1000)
+		decode.Stop()
 
 		size := float64(len(snapshot)*8) / 1000.0
-		sizes = append(sizes, size)
+		total += size
 
 		speed := size * 60.0
 		speeds = append(speeds, speed)
+
 		if *verbose {
 			if !current.Equals(mirror) {
 				fmt.Print("! ")
 			}
-			fmt.Printf("%04d %8.3fkb %8.3fkbps %8.3fus %8.3fus %8.3fus\n", frame, size, speed, improving, encoding, decoding)
+			fmt.Printf("%04d %8.3fkbps %10s %10s %10s\n", frame, speed, improve.Last(), encode.Last(), decode.Last())
 		} else {
 			if current.Equals(mirror) {
 				fmt.Print(".")
@@ -177,19 +168,21 @@ func main() {
 	}
 	fmt.Println()
 
-	fmt.Printf("    %8s   %8s     %8s   %8s   %8s  \n", "size", "speed", "improve", "encode", "decode")
-
-	fmt.Printf("MIN %8.3fkb %8.3fkbps %8.3fus %8.3fus %8.3fus\n", stats.Min(sizes), stats.Min(speeds), stats.Min(improves), stats.Min(encodes), stats.Min(decodes))
+	fmt.Printf("MIN %10.3f kbps\n", stats.Min(speeds))
 	for _, p := range []float64{5, 10, 25, 50, 75, 90, 95} {
-		fmt.Printf("P%02.f %8.3fkb %8.3fkbps %8.3fus %8.3fus %8.3fus\n", p, stats.Percentile(sizes, p), stats.Percentile(speeds, p), stats.Percentile(improves, p), stats.Percentile(encodes, p), stats.Percentile(decodes, p))
+		fmt.Printf("P%02.f %10.3f kbps\n", p, stats.Percentile(speeds, p))
 	}
-	fmt.Printf("MAX %8.3fkb %8.3fkbps %8.3fus %8.3fus %8.3fus\n", stats.Max(sizes), stats.Max(speeds), stats.Max(improves), stats.Max(encodes), stats.Max(decodes))
+	fmt.Printf("MAX %10.3f kbps\n", stats.Max(speeds))
 
 	fmt.Println()
-	total := stats.Sum(sizes)
-	fmt.Printf("TOTAL %.3fkb\n", total)
-	fmt.Printf("AVG %.3fkb per frame\n", total/float64(frame))
-	fmt.Printf("AVG %.3fbits per cube\n", total*1000/float64(frame*N))
+
+	fmt.Printf("TOTAL  %10.3f kb\n", total)
+	fmt.Printf("  AVG  %10.3f kb per frame\n", total/float64(frame))
+	fmt.Printf("  AVG  %10.3f bits per cube\n", total*1000/float64(frame*N))
+
+	fmt.Println()
+	fmt.Println("TIMING:")
+	qpc.PrintSummary(improve, encode, decode)
 }
 
 // delta utilities
