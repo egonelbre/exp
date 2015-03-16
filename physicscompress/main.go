@@ -42,10 +42,9 @@ import (
 	"os"
 	"runtime"
 	"sort"
-	"syscall"
-	"unsafe"
 
 	"github.com/egonelbre/deltagolomb"
+	"github.com/egonelbre/sandbox/qpc"
 
 	"github.com/montanaflynn/stats"
 )
@@ -109,19 +108,7 @@ func main() {
 	check(err)
 	defer file.Close()
 
-	output, err := os.Create("snaps_data.out")
-	check(err)
-
-	defer output.Close()
-	outbuf := bufio.NewWriter(output)
-	defer outbuf.Flush()
-
 	buffer := bufio.NewReader(file)
-
-	var start, stop, freq int64
-	QueryPerformanceCounter(&start)
-	QueryPerformanceCounter(&stop)
-	QueryPerformanceFrequency(&freq)
 
 	sizes := make([]float64, 0)
 	speeds := make([]float64, 0)
@@ -152,43 +139,29 @@ func main() {
 		// snapshot := Encode(order, current)
 		// Decode(order, mirror, snapshot)
 		//
-		const scale = 1000000.0
 
 		runtime.GC()
-		QueryPerformanceCounter(&start)
+
+		start := qpc.Now()
 		order.Improve(baseline)
-		QueryPerformanceCounter(&stop)
-		improving := (float64(stop-start) * scale) / float64(freq)
-		improves = append(improves, improving)
+		improving := qpc.Since(start)
+		improves = append(improves, improving.Seconds()*1000)
 
-		runtime.GC()
-		QueryPerformanceCounter(&start)
+		start = qpc.Now()
 		snapshot := Encode(order, current)
-		QueryPerformanceCounter(&stop)
-		encoding := (float64(stop-start) * scale) / float64(freq)
-		encodes = append(encodes, encoding)
+		encoding := qpc.Since(start)
+		encodes = append(improves, encoding.Seconds()*1000)
 
-		runtime.GC()
-		QueryPerformanceCounter(&start)
+		start = qpc.Now()
 		Decode(order, mirror, snapshot)
-		QueryPerformanceCounter(&stop)
-		decoding := (float64(stop-start) * scale) / float64(freq)
-		decodes = append(decodes, decoding)
-		// ---
-
-		outbuf.Write(snapshot)
-
-		// statistics, validation
-		fps := 60.0
-
-		// uint64_t bps = sizeof( packet ) * 60; float kbps = bps * 8.0 / 1000.0;
+		decoding := qpc.Since(start)
+		decodes = append(decodes, decoding.Seconds()*1000)
 
 		size := float64(len(snapshot)*8) / 1000.0
 		sizes = append(sizes, size)
 
-		speed := size * fps
+		speed := size * 60.0
 		speeds = append(speeds, speed)
-
 		if *verbose {
 			if !current.Equals(mirror) {
 				fmt.Print("! ")
@@ -479,35 +452,4 @@ func write(w io.Writer, vs ...interface{}) error {
 		}
 	}
 	return nil
-}
-
-// precision timing
-var (
-	modkernel32                   = syscall.NewLazyDLL("kernel32.dll")
-	procQueryPerformanceFrequency = modkernel32.NewProc("QueryPerformanceFrequency")
-	procQueryPerformanceCounter   = modkernel32.NewProc("QueryPerformanceCounter")
-)
-
-func QueryPerformanceFrequency(frequency *int64) (err error) {
-	r1, _, e1 := syscall.Syscall(procQueryPerformanceFrequency.Addr(), 1, uintptr(unsafe.Pointer(frequency)), 0, 0)
-	if r1 == 0 {
-		if e1 != 0 {
-			err = error(e1)
-		} else {
-			err = syscall.EINVAL
-		}
-	}
-	return
-}
-
-func QueryPerformanceCounter(counter *int64) (err error) {
-	r1, _, e1 := syscall.Syscall(procQueryPerformanceCounter.Addr(), 1, uintptr(unsafe.Pointer(counter)), 0, 0)
-	if r1 == 0 {
-		if e1 != 0 {
-			err = error(e1)
-		} else {
-			err = syscall.EINVAL
-		}
-	}
-	return
 }
