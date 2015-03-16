@@ -6,15 +6,13 @@ import (
 	"unsafe"
 )
 
-type Count int64
-
 // precision timing
 var (
 	modkernel32 = syscall.NewLazyDLL("kernel32.dll")
 	procFreq    = modkernel32.NewProc("QueryPerformanceFrequency")
 	procCounter = modkernel32.NewProc("QueryPerformanceCounter")
 
-	Freq Count = getFrequency()
+	cachedFreq Count = getFrequency()
 )
 
 // getFrequency returns frequency in ticks per second
@@ -40,11 +38,9 @@ func Now() Count {
 func (a Count) Sub(b Count) Count { return a - b }
 
 func (count Count) Nanoseconds() int64 {
-	return int64(count * 1e9 / Freq)
+	return int64(count * 1e9 / cachedFreq)
 }
 
 func (count Count) Duration() time.Duration {
-	return time.Duration(count) * time.Second / time.Duration(Freq)
+	return time.Duration(count) * time.Second / time.Duration(cachedFreq)
 }
-
-func Since(start Count) time.Duration { return Now().Sub(start).Duration() }
