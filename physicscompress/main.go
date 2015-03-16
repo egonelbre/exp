@@ -12,29 +12,29 @@
 // Note that the ordering must give the same result on both computers
 // but, it doesn't have to guarantee perfect ordering (e.g. see improveApprox)
 //
-// Anyways, the percentiles for the snapshot size distribution
+// Anyways, the all the interesting stats
 //
-// MIN      9.600 kbps
+// MIN      7.680 kbps
 // P05     15.840 kbps
-// P10     37.920 kbps
-// P25    136.800 kbps
-// P50    206.880 kbps
-// P75    278.400 kbps
-// P90    338.400 kbps
-// P95    395.520 kbps
-// MAX    492.960 kbps
+// P10     25.440 kbps
+// P25     76.800 kbps
+// P50    185.760 kbps
+// P75    358.080 kbps
+// P90    595.680 kbps
+// P95    680.160 kbps
+// MAX    936.960 kbps
 //
-// TOTAL    8899.984 kb
-//   AVG       3.432 kb per frame
-//   AVG       3.809 bits per cube
+// TOTAL   57885.568 kb
+//   AVG       4.131 kb per frame
+//   AVG       4.585 bits per cube
 //
 // TIMING:
 //                   MIN        10%        25%        50%        75%        90%        MAX
-//    improve   58.511µs   72.358µs   78.164µs   82.184µs   84.864µs    87.99µs  195.188µs
-//     encode  348.837µs  453.354µs  522.585µs  564.124µs  595.837µs  621.296µs 1.102343ms
-//     decode  116.576µs  146.056µs  158.562µs  170.622µs  180.895µs  192.954µs  379.209µs
-//   pimprove  548.491µs  620.403µs  665.961µs  713.753µs  762.439µs  806.658µs 1.119316ms
-
+//    improve   60.298µs   78.164µs    90.67µs    94.69µs  100.497µs  105.857µs  286.305µs
+//     encode  342.583µs  445.314µs  499.806µs  571.271µs  639.609µs  707.947µs 1.665127ms
+//     decode   114.79µs  158.562µs  167.048µs  183.574µs  209.034µs  260.846µs 6.371972ms
+//   pimprove  531.965µs  629.336µs  653.902µs  719.113µs   846.41µs 1.044278ms 7.549354ms
+// \
 package main
 
 import (
@@ -91,12 +91,9 @@ func Decode(order *Ordering, baseline, current Deltas, snapshot []byte) {
 	rd.ReadIndexed(order.XYZ, baseline, current)
 }
 
-func ReadDeltas(r io.Reader, prev, curr Deltas) error {
-	for i := range prev {
-		if err := curr[i].ReadFrom(r); err != nil {
-			return err
-		}
-		if err := prev[i].ReadFrom(r); err != nil {
+func ReadDelta(r io.Reader, current Deltas) error {
+	for i := range current {
+		if err := current[i].ReadFrom(r); err != nil {
 			return err
 		}
 	}
@@ -125,12 +122,24 @@ func main() {
 	baseline := make(Deltas, N)
 	order := NewOrdering(baseline)
 
-	current := make(Deltas, N)
-	mirror := make(Deltas, N)
+	var history [7]Deltas
+	for i := range history {
+		history[i] = make(Deltas, N)
+	}
 
 	frame := 0
+	for i := 0; i < 6; i += 1 {
+		ReadDelta(buffer, history[frame])
+		frame += 1
+	}
+
+	mirror := make(Deltas, N)
+
 	for {
-		err = ReadDeltas(buffer, baseline, current)
+		baseline := history[(frame-6+len(history))%len(history)]
+		current := history[frame%len(history)]
+
+		err = ReadDelta(buffer, current)
 		if err == io.EOF {
 			break
 		}
