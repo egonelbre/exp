@@ -14,25 +14,25 @@
 //
 // Anyways, the all the interesting stats
 //
-// MIN     17.760 kbps
-// P05     27.360 kbps
-// P10    152.160 kbps
-// P25    293.760 kbps
-// P50    416.640 kbps
-// P75    525.120 kbps
-// P90    617.760 kbps
-// P95    666.720 kbps
-// MAX    764.640 kbps
+// MIN      6.720 kbps
+// P05     15.360 kbps
+// P10    128.640 kbps
+// P25    269.760 kbps
+// P50    382.560 kbps
+// P75    481.440 kbps
+// P90    568.800 kbps
+// P95    623.520 kbps
+// MAX    706.080 kbps
 //
-// TOTAL   18928.200 kb
-//   AVG       6.672 kb per frame
-//   AVG       7.405 bits per cube
+// TOTAL   17390.264 kb
+//   AVG       6.130 kb per frame
+//   AVG       6.803 bits per cube
 //
 // TIMING:
 //                   MIN        10%        25%        50%        75%        90%        MAX
-//    improve  611.469µs  742.339µs  810.231µs  879.909µs   949.14µs 1.013905ms 6.925824ms
-//     encode  770.925µs  996.932µs 1.110829ms 1.181401ms 1.230533ms 1.269838ms 7.492182ms
-//     decode  891.969µs  963.433µs  983.533µs 1.012565ms 1.031771ms 1.047851ms 1.308697ms
+//    improve  772.265µs 1.139862ms 1.175594ms 1.229193ms 1.301104ms 1.368102ms 1.661108ms
+//     encode  271.565µs  428.341µs  528.392µs  611.023µs  686.507µs  756.632µs 1.444927ms
+//     decode  129.083µs  186.254µs  245.659µs  296.578µs  339.904µs  374.296µs  472.113µs
 package main
 
 import (
