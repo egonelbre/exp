@@ -74,3 +74,22 @@ func (s *byGetter) Swap(i, j int) { s.order[i], s.order[j] = s.order[j], s.order
 func (s *byGetter) Less(i, j int) bool {
 	return s.get(&s.deltas[s.order[i]]) < s.get(&s.deltas[s.order[j]])
 }
+
+type bySameness struct {
+	order    []int
+	baseline Deltas
+	current  Deltas
+}
+
+func (s *bySameness) Len() int      { return len(s.order) }
+func (s *bySameness) Swap(i, j int) { s.order[i], s.order[j] = s.order[j], s.order[i] }
+func (s *bySameness) Less(i, j int) bool {
+	ai, aj := 0, 0
+	if s.baseline[i] != s.current[i] {
+		ai = 1
+	}
+	if s.baseline[j] != s.current[j] {
+		aj = 1
+	}
+	return ai < aj
+}

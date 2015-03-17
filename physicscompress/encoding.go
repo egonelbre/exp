@@ -24,10 +24,23 @@ func NewWriter() *Writer {
 	return &Writer{&buf, pack}
 }
 
-func (wr *Writer) WriteDelta(order []int, current Deltas, get Getter) {
+func (wr *Writer) WriteBools(order []int, current []bool) {
+	for _, idx := range order {
+		if current[idx] {
+			IntWriter{wr}.WriteInt(1)
+		} else {
+			IntWriter{wr}.WriteInt(0)
+		}
+	}
+}
+
+func (wr *Writer) WriteDelta(nochange []bool, order []int, current Deltas, get Getter) {
 	p := int32(0)
-	for _, i := range order {
-		v := get(&current[i])
+	for _, idx := range order {
+		if nochange[idx] {
+			continue
+		}
+		v := get(&current[idx])
 		d := v - p
 		IntWriter{wr}.WriteInt(int(d))
 		p = v
@@ -35,8 +48,11 @@ func (wr *Writer) WriteDelta(order []int, current Deltas, get Getter) {
 	return
 }
 
-func (wr *Writer) WriteIndexed(order []IndexValue, baseline, current Deltas) {
+func (wr *Writer) WriteIndexed(nochange []bool, order []IndexValue, baseline, current Deltas) {
 	for _, idx := range order {
+		if nochange[idx.Index] {
+			continue
+		}
 		d := idx.Get(current) - idx.Get(baseline)
 		IntWriter{wr}.WriteInt(int(d))
 	}
@@ -57,23 +73,34 @@ func NewReader(data []byte) *Reader {
 	return &Reader{buf, pack}
 }
 
-func (rd *Reader) ReadDelta(order []int, current Deltas, set Setter) error {
+func (rd *Reader) ReadBools(order []int, current []bool) {
+	for _, i := range order {
+		v, _ := IntReader{rd}.ReadInt()
+		current[i] = v == 1
+	}
+}
+
+func (rd *Reader) ReadDelta(nochange []bool, order []int, current Deltas, set Setter) {
 	p := int32(0)
 	for _, idx := range order {
+		if nochange[idx] {
+			continue
+		}
 		d, _ := IntReader{rd}.ReadInt()
 		v := p + int32(d)
 		set(&current[idx], v)
 		p = v
 	}
-	return nil
 }
 
-func (rd *Reader) ReadIndexed(order []IndexValue, baseline, current Deltas) error {
+func (rd *Reader) ReadIndexed(nochange []bool, order []IndexValue, baseline, current Deltas) {
 	for _, idx := range order {
+		if nochange[idx.Index] {
+			continue
+		}
 		d, _ := IntReader{rd}.ReadInt()
 		idx.Set(current, int32(d)+idx.Get(baseline))
 	}
-	return nil
 }
 
 // IntWriter/IntReader

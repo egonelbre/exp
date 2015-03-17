@@ -65,13 +65,22 @@ type Delta struct {
 
 type Deltas []Delta
 
+var previous_nochange []bool
+
 func Encode(order *Ordering, baseline, current Deltas) (snapshot []byte) {
 	wr := NewWriter()
 
-	wr.WriteDelta(order.Largest, current, getLargest)
-	wr.WriteDelta(order.Interacting, current, getInteracting)
-	wr.WriteIndexed(order.ABC, baseline, current)
-	wr.WriteIndexed(order.XYZ, baseline, current)
+	nochange := make([]bool, len(baseline))
+	for i := range baseline {
+		nochange[i] = baseline[i] == current[i]
+	}
+	previous_nochange = nochange
+	wr.WriteBools(order.Sameness, nochange)
+
+	wr.WriteDelta(nochange, order.Largest, current, getLargest)
+	wr.WriteDelta(nochange, order.Interacting, current, getInteracting)
+	wr.WriteIndexed(nochange, order.ABC, baseline, current)
+	wr.WriteIndexed(nochange, order.XYZ, baseline, current)
 
 	wr.Close()
 	return wr.Bytes()
@@ -81,10 +90,15 @@ func Encode(order *Ordering, baseline, current Deltas) (snapshot []byte) {
 func Decode(order *Ordering, baseline, current Deltas, snapshot []byte) {
 	rd := NewReader(snapshot)
 
-	rd.ReadDelta(order.Largest, current, setLargest)
-	rd.ReadDelta(order.Interacting, current, setInteracting)
-	rd.ReadIndexed(order.ABC, baseline, current)
-	rd.ReadIndexed(order.XYZ, baseline, current)
+	nochange := make([]bool, len(baseline))
+	rd.ReadBools(order.Sameness, nochange)
+
+	copy(current, baseline)
+
+	rd.ReadDelta(nochange, order.Largest, current, setLargest)
+	rd.ReadDelta(nochange, order.Interacting, current, setInteracting)
+	rd.ReadIndexed(nochange, order.ABC, baseline, current)
+	rd.ReadIndexed(nochange, order.XYZ, baseline, current)
 }
 
 func ReadDelta(r io.Reader, current Deltas) error {
@@ -228,6 +242,8 @@ func setInteracting(a *Delta, v int32) { a.Interacting = v }
 // Order management
 
 type Ordering struct {
+	Sameness []int
+
 	Largest     []int
 	Interacting []int
 	ABC         []IndexValue
@@ -237,6 +253,8 @@ type Ordering struct {
 func NewOrdering(deltas Deltas) *Ordering {
 	n := len(deltas)
 	order := &Ordering{
+		Sameness: make([]int, n),
+
 		Largest:     make([]int, n),
 		Interacting: make([]int, n),
 
@@ -245,6 +263,7 @@ func NewOrdering(deltas Deltas) *Ordering {
 	}
 
 	for i := range order.Largest {
+		order.Sameness[i] = i
 		order.Largest[i] = i
 		order.Interacting[i] = i
 	}
@@ -287,6 +306,8 @@ func improveApprox(order []int, deltas Deltas, get Getter) {
 }
 
 func (order *Ordering) Improve(historic, baseline Deltas) {
+	sort.Sort(&bySameness{order.Sameness, historic, baseline})
+	sort.Sort(&byGetter{order.Largest, baseline, getLargest})
 	sort.Sort(&byGetter{order.Largest, baseline, getLargest})
 	sort.Sort(&byGetter{order.Interacting, baseline, getInteracting})
 	sort.Sort(&byDelta{order.ABC, historic, baseline})
