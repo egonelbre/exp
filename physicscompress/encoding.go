@@ -15,8 +15,15 @@ type Writer struct {
 	io.WriteCloser
 }
 
+type noclose struct{ *bytes.Buffer }
+
+func (nc noclose) Close() error { return nil }
+
 func NewWriter() *Writer {
 	var buf bytes.Buffer
+	if dontpack {
+		return &Writer{&buf, noclose{&buf}}
+	}
 	pack, err := flate.NewWriter(&buf, flate.DefaultCompression)
 	if err != nil {
 		panic(err)
@@ -27,9 +34,9 @@ func NewWriter() *Writer {
 func (wr *Writer) WriteBools(order []int, current []bool) {
 	for _, idx := range order {
 		if current[idx] {
-			IntWriter{wr}.WriteInt(1)
+			IntWriter{wr}.WriteByte(0)
 		} else {
-			IntWriter{wr}.WriteInt(0)
+			IntWriter{wr}.WriteByte(1)
 		}
 	}
 }
@@ -67,14 +74,17 @@ type Reader struct {
 
 func NewReader(data []byte) *Reader {
 	buf := bytes.NewBuffer(data)
+	if dontpack {
+		return &Reader{buf, noclose{buf}}
+	}
 	pack := flate.NewReader(buf)
 	return &Reader{buf, pack}
 }
 
 func (rd *Reader) ReadBools(order []int, current []bool) {
 	for _, i := range order {
-		v, _ := IntReader{rd}.ReadInt()
-		current[i] = v == 1
+		v, _ := IntReader{rd}.ReadByte()
+		current[i] = v == 0
 	}
 }
 
@@ -103,6 +113,13 @@ func (rd *Reader) ReadIndexed(nochange []bool, order []IndexValue, baseline, cur
 
 // IntWriter/IntReader
 type IntWriter struct{ io.Writer }
+
+func (w IntWriter) WriteByte(v byte) error {
+	var x [1]byte
+	x[0] = v
+	_, err := w.Write(x[:])
+	return err
+}
 
 func (w IntWriter) WriteInt(x int) (int, error) {
 	var buf [binary.MaxVarintLen64]byte

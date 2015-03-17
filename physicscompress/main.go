@@ -14,25 +14,26 @@
 //
 // Anyways, the all the interesting stats
 //
+// # 2831 366.63912398445837 kbps
 // MIN      6.720 kbps
 // P05     15.360 kbps
-// P10    128.640 kbps
-// P25    269.760 kbps
-// P50    382.560 kbps
-// P75    481.440 kbps
-// P90    568.800 kbps
-// P95    623.520 kbps
-// MAX    706.080 kbps
+// P10    126.240 kbps
+// P25    268.800 kbps
+// P50    380.640 kbps
+// P75    479.520 kbps
+// P90    565.920 kbps
+// P95    620.640 kbps
+// MAX    703.680 kbps
 //
-// TOTAL   17390.264 kb
-//   AVG       6.130 kb per frame
-//   AVG       6.803 bits per cube
+// TOTAL   17299.256 kb
+//   AVG       6.111 kb per frame
+//   AVG       6.782 bits per cube
 //
 // TIMING:
 //                   MIN        10%        25%        50%        75%        90%        MAX
-//    improve  772.265µs 1.139862ms 1.175594ms 1.229193ms 1.301104ms 1.368102ms 1.661108ms
-//     encode  271.565µs  428.341µs  528.392µs  611.023µs  686.507µs  756.632µs 1.444927ms
-//     decode  129.083µs  186.254µs  245.659µs  296.578µs  339.904µs  374.296µs  472.113µs
+//    improve  782.538µs 1.141648ms 1.179167ms 1.238126ms 1.312717ms 1.382842ms 7.493075ms
+//     encode  261.739µs  438.614µs  532.412µs  616.383µs   698.12µs  771.818µs 1.650388ms
+//     decode   71.018µs  126.849µs  183.128µs  232.706µs  275.585µs  309.978µs  487.746µs
 package main
 
 import (
@@ -41,6 +42,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 	"runtime"
 	"sort"
@@ -49,6 +51,9 @@ import (
 
 	"github.com/montanaflynn/stats"
 )
+
+const dontpack = false
+const debugsnap = dontpack
 
 func check(err error) {
 	if err != nil {
@@ -120,7 +125,7 @@ func main() {
 
 	buffer := bufio.NewReader(file)
 
-	total := 0.0
+	sizes := make([]float64, 0)
 	speeds := make([]float64, 0)
 
 	improve := qpc.NewHistory("improve")
@@ -167,13 +172,17 @@ func main() {
 		snapshot := Encode(order, baseline, current)
 		encode.Stop()
 
+		if debugsnap && (frame == 1000 || frame == 1001 || frame == 1002) {
+			ioutil.WriteFile(fmt.Sprintf("snapshot_%d.bin", frame), snapshot, 0755)
+		}
+
 		decode.Start()
 		Decode(order, baseline, mirror, snapshot)
 		decode.Stop()
 		//===
 
 		size := float64(len(snapshot)*8) / 1000.0
-		total += size
+		sizes = append(sizes, size)
 
 		speed := size * 60.0
 		speeds = append(speeds, speed)
@@ -191,6 +200,9 @@ func main() {
 			}
 		}
 	}
+
+	fmt.Println()
+	fmt.Printf("#%d %.3fkbps ±%.3fkbps\n", len(sizes), stats.Mean(speeds), stats.StdDevS(speeds))
 	fmt.Println()
 
 	fmt.Printf("MIN %10.3f kbps\n", stats.Min(speeds))
@@ -201,9 +213,9 @@ func main() {
 
 	fmt.Println()
 
-	fmt.Printf("TOTAL  %10.3f kb\n", total)
-	fmt.Printf("  AVG  %10.3f kb per frame\n", total/float64(frame))
-	fmt.Printf("  AVG  %10.3f bits per cube\n", total*1000/float64(frame*N))
+	fmt.Printf("TOTAL  %10.3f kb\n", stats.Sum(sizes))
+	fmt.Printf("  AVG  %10.3f kb per frame\n", stats.Mean(sizes))
+	fmt.Printf("  AVG  %10.3f bits per cube\n", stats.Mean(sizes)*1000/float64(N))
 
 	fmt.Println()
 	fmt.Println("TIMING:")
