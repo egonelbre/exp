@@ -11,7 +11,7 @@ type Writer struct {
 
 func NewWriter(w io.Writer) *Writer { return &Writer{w, 0, 0, nil} }
 
-// flushpartial flushes all the remaining half bytes
+// flush writes as much as it can to the underlying writer
 func (w *Writer) flush() {
 	if w.err != nil {
 		w.nbits = 0
@@ -45,7 +45,7 @@ func (w *Writer) flushpartial() {
 	}
 }
 
-// WriteBits width lowest bits from x to the underlying writer
+// WriteBits writes width lowest bits to the underlying writer
 func (w *Writer) WriteBits(x, width uint) error {
 	w.bits |= uint64(x) << w.nbits
 	w.nbits += width
@@ -53,6 +53,11 @@ func (w *Writer) WriteBits(x, width uint) error {
 		w.flush()
 	}
 	return w.err
+}
+
+// WriteBitsReverse writes width lowest bits in reverse order to the underlying writer
+func (w *Writer) WriteBitsReverse(x, width uint) error {
+	return w.WriteBits(ReverseBits(x, width), width)
 }
 
 // WriteBit writes the lowest bit in x to the underlying writer
@@ -98,7 +103,6 @@ func (r *Reader) Align() {
 }
 
 // ReadBits reads width bits from the underlying reader
-// width must be less than 32
 func (r *Reader) ReadBits(width uint) (uint, error) {
 	if r.err != nil {
 		return 0, r.err
@@ -126,6 +130,12 @@ func (r *Reader) ReadBits(width uint) (uint, error) {
 	r.nbits += width
 	mask := uint(1<<width - 1)
 	return x & mask, nil
+}
+
+// ReadBitsReverse reads width bits from the underlying reader in reverse order
+func (r *Reader) ReadBitsReverse(width uint) (uint, error) {
+	rx, err := r.ReadBits(width)
+	return ReverseBits(rx, width), err
 }
 
 // ReadBit reads a single bit from the underlying reader
