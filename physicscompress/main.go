@@ -32,9 +32,9 @@
 //
 // TIMING:
 //                   MIN        10%        25%        50%        75%        90%        MAX
-//    improve  648.542µs  734.746µs  797.278µs  862.043µs  926.361µs  985.766µs 1.421701ms
-//     encode  211.714µs  361.343µs  446.654µs  515.439µs  575.737µs  623.083µs 6.759669ms
-//     decode   35.732µs    86.65µs  145.609µs  194.741µs  237.173µs  273.352µs  621.296µs
+//    improve  609.236µs  734.746µs  795.491µs   854.45µs  916.535µs  976.386µs 2.951939ms
+//     encode  211.714µs  356.876µs  443.974µs  508.292µs  564.124µs  611.023µs 1.047404ms
+//     decode   39.305µs   85.311µs  144.716µs  192.508µs  234.046µs  267.992µs  460.054µs
 package main
 
 import (
@@ -54,6 +54,7 @@ import (
 )
 
 const dontpack = false
+const dontsort = false
 const debugsnap = true
 
 func check(err error) {
@@ -82,7 +83,6 @@ func Encode(order *Ordering, baseline, current Deltas) (snapshot []byte) {
 	}
 	previous_nochange = nochange
 	wr.WriteBools(nochange)
-
 	wr.WriteDelta(nochange, order.Largest, current, getLargest)
 	wr.WriteDelta(nochange, order.Interacting, current, getInteracting)
 	wr.WriteIndexed(nochange, order.ABC, baseline, current)
@@ -317,10 +317,12 @@ func improveApprox(order []int, deltas Deltas, get Getter) {
 }
 
 func (order *Ordering) Improve(historic, baseline Deltas) {
-	sort.Sort(&byGetter{order.Largest, baseline, getLargest})
-	sort.Sort(&byGetter{order.Interacting, baseline, getInteracting})
-	sort.Sort(&byDelta{order.ABC, historic, baseline})
-	sort.Sort(&byDelta{order.XYZ, historic, baseline})
+	if !dontsort {
+		sort.Sort(&byGetter{order.Largest, baseline, getLargest})
+		sort.Sort(&byGetter{order.Interacting, baseline, getInteracting})
+		sort.Sort(&byDelta{order.ABC, historic, baseline})
+		sort.Sort(&byDelta{order.XYZ, historic, baseline})
+	}
 }
 
 // reading input/output
