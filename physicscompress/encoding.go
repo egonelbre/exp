@@ -45,7 +45,6 @@ func (wr *Writer) WriteDelta(nochange []bool, order []int, current Deltas, get G
 		IntWriter{wr}.WriteInt(int(d))
 		p = v
 	}
-	return
 }
 
 func (wr *Writer) WriteIndexed(nochange []bool, order []IndexValue, baseline, current Deltas) {
@@ -56,7 +55,6 @@ func (wr *Writer) WriteIndexed(nochange []bool, order []IndexValue, baseline, cu
 		d := idx.Get(current) - idx.Get(baseline)
 		IntWriter{wr}.WriteInt(int(d))
 	}
-	return
 }
 
 func (wr *Writer) Close() error  { return wr.WriteCloser.Close() }
