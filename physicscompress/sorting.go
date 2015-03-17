@@ -63,43 +63,14 @@ func (s *byDelta) Less(i, j int) bool {
 	return di < dj
 }
 
-func sequence(n int) []int {
-	r := make([]int, n)
-	for i := range r {
-		r[i] = i
-	}
-	return r
-}
-
-func NewOrdering(deltas Deltas) *Ordering {
-	n := len(deltas)
-	order := &Ordering{
-		Largest:     sequence(n),
-		Interacting: sequence(n),
-
-		ABC: make([]IndexValue, n*3),
-		XYZ: make([]IndexValue, n*3),
-	}
-
-	for i := 0; i < n*3; i += 1 {
-		order.ABC[i].Index = i % n
-		order.ABC[i].Value = byte(i / n)
-
-		order.XYZ[i].Index = i % n
-		order.XYZ[i].Value = byte(i/n + 3)
-	}
-
-	return order
-}
-
-type sorter struct {
+type byGetter struct {
 	order  []int
 	deltas Deltas
 	get    Getter
 }
 
-func (s *sorter) Len() int      { return len(s.order) }
-func (s *sorter) Swap(i, j int) { s.order[i], s.order[j] = s.order[j], s.order[i] }
-func (s *sorter) Less(i, j int) bool {
+func (s *byGetter) Len() int      { return len(s.order) }
+func (s *byGetter) Swap(i, j int) { s.order[i], s.order[j] = s.order[j], s.order[i] }
+func (s *byGetter) Less(i, j int) bool {
 	return s.get(&s.deltas[s.order[i]]) < s.get(&s.deltas[s.order[j]])
 }

@@ -65,7 +65,6 @@ func (rd *Reader) ReadDelta(order []int, current Deltas, set Setter) error {
 		set(&current[idx], v)
 		p = v
 	}
-
 	return nil
 }
 
@@ -74,7 +73,6 @@ func (rd *Reader) ReadIndexed(order []IndexValue, baseline, current Deltas) erro
 		d, _ := IntReader{rd}.ReadInt()
 		idx.Set(current, int32(d)+idx.Get(baseline))
 	}
-
 	return nil
 }
 

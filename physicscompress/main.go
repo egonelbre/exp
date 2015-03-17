@@ -70,7 +70,6 @@ func Encode(order *Ordering, baseline, current Deltas) (snapshot []byte) {
 
 	wr.WriteDelta(order.Largest, current, getLargest)
 	wr.WriteDelta(order.Interacting, current, getInteracting)
-
 	wr.WriteIndexed(order.ABC, baseline, current)
 	wr.WriteIndexed(order.XYZ, baseline, current)
 
@@ -84,7 +83,6 @@ func Decode(order *Ordering, baseline, current Deltas, snapshot []byte) {
 
 	rd.ReadDelta(order.Largest, current, setLargest)
 	rd.ReadDelta(order.Interacting, current, setInteracting)
-
 	rd.ReadIndexed(order.ABC, baseline, current)
 	rd.ReadIndexed(order.XYZ, baseline, current)
 }
@@ -231,15 +229,41 @@ func setInteracting(a *Delta, v int32) { a.Interacting = v }
 
 type Ordering struct {
 	Largest     []int
+	Interacting []int
 	ABC         []IndexValue
 	XYZ         []IndexValue
-	Interacting []int
+}
+
+func NewOrdering(deltas Deltas) *Ordering {
+	n := len(deltas)
+	order := &Ordering{
+		Largest:     make([]int, n),
+		Interacting: make([]int, n),
+
+		ABC: make([]IndexValue, n*3),
+		XYZ: make([]IndexValue, n*3),
+	}
+
+	for i := range order.Largest {
+		order.Largest[i] = i
+		order.Interacting[i] = i
+	}
+
+	for i := 0; i < n*3; i += 1 {
+		order.ABC[i].Index = i % n
+		order.ABC[i].Value = byte(i / n)
+
+		order.XYZ[i].Index = i % n
+		order.XYZ[i].Value = byte(i/n + 3)
+	}
+
+	return order
 }
 
 var improve = improveSort
 
 func improveSort(order []int, deltas Deltas, get Getter) {
-	sort.Sort(&sorter{order, deltas, get})
+	sort.Sort(&byGetter{order, deltas, get})
 }
 
 func improveApprox(order []int, deltas Deltas, get Getter) {
@@ -263,8 +287,8 @@ func improveApprox(order []int, deltas Deltas, get Getter) {
 }
 
 func (order *Ordering) Improve(historic, baseline Deltas) {
-	improve(order.Largest, baseline, getLargest)
-	improve(order.Interacting, baseline, getInteracting)
+	sort.Sort(&byGetter{order.Largest, baseline, getLargest})
+	sort.Sort(&byGetter{order.Interacting, baseline, getInteracting})
 	sort.Sort(&byDelta{order.ABC, historic, baseline})
 	sort.Sort(&byDelta{order.XYZ, historic, baseline})
 }
