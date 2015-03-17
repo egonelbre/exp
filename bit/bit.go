@@ -7,7 +7,7 @@ import "io"
 type Writer struct {
 	w     io.Writer
 	bits  uint64
-	nbits uint
+	nbits uint64
 	err   error
 }
 
@@ -54,9 +54,9 @@ func (w *Writer) Align() error {
 }
 
 // WriteBits writes width lowest bits to the underlying writer
-func (w *Writer) WriteBits(x, width uint) error {
+func (w *Writer) WriteBits(x, width uint64) error {
 	if width > 32 {
-		w.WriteBits(uint(uint32(x)), 32)
+		w.WriteBits(uint64(uint32(x)), 32)
 		x >>= 32
 		width -= 32
 		if w.err != nil {
@@ -72,13 +72,13 @@ func (w *Writer) WriteBits(x, width uint) error {
 }
 
 // WriteBitsReverse writes width lowest bits in reverse order to the underlying writer
-func (w *Writer) WriteBitsReverse(x, width uint) error {
+func (w *Writer) WriteBitsReverse(x, width uint64) error {
 	return w.WriteBits(ReverseBits(x, width), width)
 }
 
 // WriteBit writes the lowest bit in x to the underlying writer
 func (w *Writer) WriteBit(x int) error {
-	return w.WriteBits(uint(x&1), 1)
+	return w.WriteBits(uint64(x&1), 1)
 }
 
 // WriteBool writes a bool the underlying writer depending on x
@@ -91,15 +91,15 @@ func (w *Writer) WriteBool(x bool) error {
 
 // WriteByte writes a byte to the underlying writer
 func (w *Writer) WriteByte(v byte) error {
-	return w.WriteBits(uint(v), 8)
+	return w.WriteBits(uint64(v), 8)
 }
 
 func (w *Writer) Close() error { return w.Align() }
 
 type Reader struct {
 	r     io.Reader
-	bits  uint
-	nbits uint
+	bits  uint64
+	nbits uint64
 	err   error
 }
 
@@ -116,7 +116,7 @@ func (r *Reader) read() {
 
 	var temp [1]byte
 	_, r.err = r.r.Read(temp[:])
-	r.bits = uint(temp[0])
+	r.bits = uint64(temp[0])
 }
 
 // Align aligns the reader to the next byte so that the next ReadBits will start
@@ -126,14 +126,14 @@ func (r *Reader) Align() {
 }
 
 // ReadBits reads width bits from the underlying reader
-func (r *Reader) ReadBits(width uint) (uint, error) {
+func (r *Reader) ReadBits(width uint64) (uint64, error) {
 	if r.err != nil {
 		return 0, r.err
 	}
 
 	left := 8 - int(r.nbits)
 	if left > int(width) {
-		mask := uint((1 << width) - 1)
+		mask := uint64((1 << width) - 1)
 		x := r.bits >> r.nbits
 		r.nbits += width
 		return x & mask, nil
@@ -151,12 +151,12 @@ func (r *Reader) ReadBits(width uint) (uint, error) {
 		n += 8
 	}
 	r.nbits += width
-	mask := uint(1<<width - 1)
+	mask := uint64(1<<width - 1)
 	return x & mask, nil
 }
 
 // ReadBitsReverse reads width bits from the underlying reader in reverse order
-func (r *Reader) ReadBitsReverse(width uint) (uint, error) {
+func (r *Reader) ReadBitsReverse(width uint64) (uint64, error) {
 	rx, err := r.ReadBits(width)
 	return ReverseBits(rx, width), err
 }
