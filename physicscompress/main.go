@@ -14,26 +14,25 @@
 //
 // Anyways, the all the interesting stats
 //
-// MIN     11.520 kbps
-// P05     18.240 kbps
-// P10    137.760 kbps
-// P25    277.440 kbps
-// P50    407.040 kbps
-// P75    517.440 kbps
-// P90    613.440 kbps
-// P95    662.400 kbps
-// MAX    765.120 kbps
+// MIN     17.760 kbps
+// P05     27.360 kbps
+// P10    152.160 kbps
+// P25    293.760 kbps
+// P50    416.640 kbps
+// P75    525.120 kbps
+// P90    617.760 kbps
+// P95    666.720 kbps
+// MAX    764.640 kbps
 //
-// TOTAL   18472.320 kb
-//   AVG       6.511 kb per frame
-//   AVG       7.227 bits per cube
+// TOTAL   18928.200 kb
+//   AVG       6.672 kb per frame
+//   AVG       7.405 bits per cube
 //
 // TIMING:
 //                   MIN        10%        25%        50%        75%        90%        MAX
-//    improve  636.035µs  753.506µs  833.903µs  928.148µs 1.013459ms 1.091623ms  1.31897ms
-//     encode  369.383µs  532.858µs   608.79µs  666.408µs  716.433µs  756.632µs 6.995502ms
-//     decode  122.829µs  166.602µs  189.828µs  211.714µs  249.233µs  266.206µs  381.889µs
-//
+//    improve  611.469µs  742.339µs  810.231µs  879.909µs   949.14µs 1.013905ms 6.925824ms
+//     encode  770.925µs  996.932µs 1.110829ms 1.181401ms 1.230533ms 1.269838ms 7.492182ms
+//     decode  891.969µs  963.433µs  983.533µs 1.012565ms 1.031771ms 1.047851ms 1.308697ms
 package main
 
 import (
@@ -69,8 +68,8 @@ type Deltas []Delta
 func Encode(order *Ordering, baseline, current Deltas) (snapshot []byte) {
 	wr := NewWriter()
 
-	wr.Write(order.Largest, current, getLargest)
-	wr.Write(order.Interacting, current, getInteracting)
+	wr.WriteDelta(order.Largest, current, getLargest)
+	wr.WriteDelta(order.Interacting, current, getInteracting)
 
 	wr.WriteIndexed(order.ABC, baseline, current)
 	wr.WriteIndexed(order.XYZ, baseline, current)
@@ -83,8 +82,8 @@ func Encode(order *Ordering, baseline, current Deltas) (snapshot []byte) {
 func Decode(order *Ordering, baseline, current Deltas, snapshot []byte) {
 	rd := NewReader(snapshot)
 
-	rd.Read(order.Largest, current, setLargest)
-	rd.Read(order.Interacting, current, setInteracting)
+	rd.ReadDelta(order.Largest, current, setLargest)
+	rd.ReadDelta(order.Interacting, current, setInteracting)
 
 	rd.ReadIndexed(order.ABC, baseline, current)
 	rd.ReadIndexed(order.XYZ, baseline, current)
@@ -120,7 +119,7 @@ func main() {
 	baseline := make(Deltas, N)
 	order := NewOrdering(baseline)
 
-	var history [13]Deltas
+	var history [9]Deltas
 	for i := range history {
 		history[i] = make(Deltas, N)
 	}
@@ -134,7 +133,7 @@ func main() {
 	mirror := make(Deltas, N)
 
 	for {
-		historic := history[(frame-12+len(history))%len(history)]
+		historic := history[(frame-8+len(history))%len(history)]
 		baseline := history[(frame-6+len(history))%len(history)]
 		current := history[frame%len(history)]
 

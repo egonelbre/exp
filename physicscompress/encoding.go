@@ -3,37 +3,33 @@ package main
 import (
 	"bytes"
 	"compress/flate"
+	"encoding/binary"
 	"io"
-
-	"github.com/egonelbre/deltagolomb"
 )
 
-// Delta Writer/Reader
 type Getter func(a *Delta) int32
 type Setter func(a *Delta, v int32)
 
 type Writer struct {
-	enc *deltagolomb.ExpGolombEncoder
-	com *flate.Writer
 	buf *bytes.Buffer
+	io.WriteCloser
 }
 
 func NewWriter() *Writer {
 	var buf bytes.Buffer
-	com, err := flate.NewWriter(&buf, flate.DefaultCompression)
+	pack, err := flate.NewWriter(&buf, flate.DefaultCompression)
 	if err != nil {
 		panic(err)
 	}
-	enc := deltagolomb.NewExpGolombEncoder(com)
-	return &Writer{enc, com, &buf}
+	return &Writer{&buf, pack}
 }
 
-func (wr *Writer) Write(order []int, current Deltas, get Getter) {
+func (wr *Writer) WriteDelta(order []int, current Deltas, get Getter) {
 	p := int32(0)
 	for _, i := range order {
 		v := get(&current[i])
 		d := v - p
-		wr.enc.WriteInt(int(d))
+		IntWriter{wr}.WriteInt(int(d))
 		p = v
 	}
 	return
@@ -41,39 +37,31 @@ func (wr *Writer) Write(order []int, current Deltas, get Getter) {
 
 func (wr *Writer) WriteIndexed(order []IndexValue, baseline, current Deltas) {
 	for _, idx := range order {
-		v := idx.Get(current) - idx.Get(baseline)
-		wr.enc.WriteInt(int(v))
+		d := idx.Get(current) - idx.Get(baseline)
+		IntWriter{wr}.WriteInt(int(d))
 	}
 	return
 }
 
-func (wr *Writer) Close() {
-	wr.enc.Close()
-	wr.com.Close()
-}
+func (wr *Writer) Close() error  { return wr.WriteCloser.Close() }
 func (wr *Writer) Bytes() []byte { return wr.buf.Bytes() }
 
 type Reader struct {
-	dec *deltagolomb.ExpGolombDecoder
-	com io.ReadCloser
 	buf *bytes.Buffer
+	io.ReadCloser
 }
 
 func NewReader(data []byte) *Reader {
 	buf := bytes.NewBuffer(data)
-	com := flate.NewReader(buf)
-	dec := deltagolomb.NewExpGolombDecoder(com)
-	return &Reader{dec, com, buf}
+	pack := flate.NewReader(buf)
+	return &Reader{buf, pack}
 }
 
-func (rd *Reader) Read(order []int, current Deltas, set Setter) error {
-	deltas := make([]int, len(order))
-	rd.dec.Read(deltas)
-
+func (rd *Reader) ReadDelta(order []int, current Deltas, set Setter) error {
 	p := int32(0)
-	for i, idx := range order {
-		d := int32(deltas[i])
-		v := p + d
+	for _, idx := range order {
+		d, _ := IntReader{rd}.ReadInt()
+		v := p + int32(d)
 		set(&current[idx], v)
 		p = v
 	}
@@ -82,13 +70,32 @@ func (rd *Reader) Read(order []int, current Deltas, set Setter) error {
 }
 
 func (rd *Reader) ReadIndexed(order []IndexValue, baseline, current Deltas) error {
-	deltas := make([]int, len(order))
-	rd.dec.Read(deltas)
-
-	for i, idx := range order {
-		d := int32(deltas[i])
-		idx.Set(current, d+idx.Get(baseline))
+	for _, idx := range order {
+		d, _ := IntReader{rd}.ReadInt()
+		idx.Set(current, int32(d)+idx.Get(baseline))
 	}
 
 	return nil
+}
+
+// IntWriter/IntReader
+type IntWriter struct{ io.Writer }
+
+func (w IntWriter) WriteInt(x int) (int, error) {
+	var buf [binary.MaxVarintLen64]byte
+	n := binary.PutVarint(buf[:], int64(x))
+	return w.Write(buf[:n])
+}
+
+type IntReader struct{ io.Reader }
+
+func (r IntReader) ReadByte() (byte, error) {
+	var x [1]byte
+	_, err := r.Read(x[:])
+	return x[0], err
+}
+
+func (r IntReader) ReadInt() (int, error) {
+	x, err := binary.ReadVarint(r)
+	return int(x), err
 }
