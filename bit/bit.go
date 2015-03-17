@@ -1,3 +1,5 @@
+// Package bit implements bit level encoding wrappers for io.Reader / io.Writer
+// All operations are Little Endian where applicable
 package bit
 
 import "io"
@@ -11,7 +13,7 @@ type Writer struct {
 
 func NewWriter(w io.Writer) *Writer { return &Writer{w, 0, 0, nil} }
 
-// flush writes as much as it can to the underlying writer
+// flush writes as much full bytes as possible to the underlying writer
 func (w *Writer) flush() {
 	if w.err != nil {
 		w.nbits = 0
@@ -30,8 +32,8 @@ func (w *Writer) flush() {
 	_, w.err = w.w.Write(buf[0:n])
 }
 
-// flushpartial flushes all the remaining half bytes
-func (w *Writer) flushpartial() {
+// flushAll writes all the remaining half bytes
+func (w *Writer) flushAll() {
 	w.flush()
 	if w.err != nil {
 		w.nbits = 0
@@ -47,12 +49,20 @@ func (w *Writer) flushpartial() {
 
 // Align aligns the writer to the next byte
 func (w *Writer) Align() error {
-	w.flushpartial()
+	w.flushAll()
 	return w.err
 }
 
 // WriteBits writes width lowest bits to the underlying writer
 func (w *Writer) WriteBits(x, width uint) error {
+	if width > 32 {
+		w.WriteBits(uint(uint32(x)), 32)
+		x >>= 32
+		width -= 32
+		if w.err != nil {
+			return w.err
+		}
+	}
 	w.bits |= uint64(x) << w.nbits
 	w.nbits += width
 	if w.nbits > 16 {
@@ -71,7 +81,7 @@ func (w *Writer) WriteBit(x int) error {
 	return w.WriteBits(uint(x&1), 1)
 }
 
-// WriteBool writes the lowest bit in x to the underlying writer
+// WriteBool writes a bool the underlying writer depending on x
 func (w *Writer) WriteBool(x bool) error {
 	if x {
 		return w.WriteBits(1, 1)
@@ -157,7 +167,7 @@ func (r *Reader) ReadBit() (int, error) {
 	return int(x), err
 }
 
-// ReadBool reads a single bit from the underlying reader
+// ReadBool reads a single bool from the underlying reader
 func (r *Reader) ReadBool() (bool, error) {
 	x, err := r.ReadBits(1)
 	return x == 1, err

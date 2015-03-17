@@ -83,8 +83,15 @@ func Encode(order *Ordering, baseline, current Deltas) (snapshot []byte) {
 	}
 	previous_nochange = nochange
 	wr.WriteBools(nochange)
-	wr.WriteDelta(nochange, order.Largest, current, getLargest)
-	wr.WriteDelta(nochange, order.Interacting, current, getInteracting)
+
+	largest := Reorder(nochange, order.Largest, current, getLargest)
+	wr.WriteBytes(PackBit2(largest))
+
+	interacting := Reorder(nochange, order.Interacting, current, getInteracting)
+	wr.WriteBytes(PackBit1(interacting))
+
+	//wr.WriteDelta(nochange, order.Largest, current, getLargest)
+	//wr.WriteDelta(nochange, order.Interacting, current, getInteracting)
 	wr.WriteIndexed(nochange, order.ABC, baseline, current)
 	wr.WriteIndexed(nochange, order.XYZ, baseline, current)
 

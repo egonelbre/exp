@@ -28,6 +28,7 @@ func NewWriter() *Writer {
 	if err != nil {
 		panic(err)
 	}
+
 	return &Writer{&buf, pack}
 }
 
@@ -161,4 +162,32 @@ func UnpackBools(packed []byte, into []bool) {
 	for i := range into {
 		into[i] = (packed[i/8] >> uint(i%8) & 1) == 0
 	}
+}
+
+func Reorder(nochange []bool, order []int, current Deltas, get Getter) []int32 {
+	r := make([]int32, 0, len(order))
+	for _, i := range order {
+		if !nochange[i] {
+			r = append(r, get(&current[i]))
+		}
+	}
+	return r
+}
+
+func PackBit1(vs []int32) []byte {
+	r := make([]byte, (len(vs)+7)/8)
+	for i, v := range vs {
+		if v == 1 {
+			r[i/8] |= byte(1 << uint(i%8))
+		}
+	}
+	return r
+}
+
+func PackBit2(vs []int32) []byte {
+	r := make([]byte, (len(vs)+3)/4)
+	for i, v := range vs {
+		r[i/4] |= byte((v & 3) << uint(i%4))
+	}
+	return r
 }

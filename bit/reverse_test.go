@@ -7,7 +7,7 @@ import (
 
 func TestReverseBitsRandom(t *testing.T) {
 	for i := 0; i < 1521; i += 1 {
-		width := uint(rand.Intn(31) + 1)
+		width := uint(rand.Intn(61) + 1)
 		x := uint(rand.Intn(1<<width - 1))
 		rx := ReverseBits(x, width)
 		rrx := ReverseBits(rx, width)
