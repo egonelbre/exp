@@ -16,24 +16,23 @@
 //
 // MIN     11.520 kbps
 // P05     18.240 kbps
-// P10    122.880 kbps
-// P25    250.080 kbps
-// P50    367.200 kbps
-// P75    471.840 kbps
-// P90    564.000 kbps
-// P95    607.680 kbps
-// MAX    705.120 kbps
+// P10    137.760 kbps
+// P25    277.440 kbps
+// P50    407.040 kbps
+// P75    517.440 kbps
+// P90    613.440 kbps
+// P95    662.400 kbps
+// MAX    765.120 kbps
 //
-// TOTAL   16804.168 kb
-//   AVG       5.923 kb per frame
-//   AVG       6.574 bits per cube
+// TOTAL   18472.320 kb
+//   AVG       6.511 kb per frame
+//   AVG       7.227 bits per cube
 //
 // TIMING:
 //                   MIN        10%        25%        50%        75%        90%        MAX
-//    improve   58.065µs   75.037µs   80.844µs    86.65µs    92.01µs   95.584µs   208.14µs
-//     encode   340.35µs  516.332µs  580.204µs  627.549µs  670.428µs  709.287µs 1.327903ms
-//     decode  118.363µs  167.942µs  187.148µs  205.461µs  242.086µs  259.059µs  428.788µs
-//   pimprove  535.092µs  664.175µs  748.592µs  835.243µs  920.108µs 1.001399ms  1.57133ms
+//    improve  636.035µs  753.506µs  833.903µs  928.148µs 1.013459ms 1.091623ms  1.31897ms
+//     encode  369.383µs  532.858µs   608.79µs  666.408µs  716.433µs  756.632µs 6.995502ms
+//     decode  122.829µs  166.602µs  189.828µs  211.714µs  249.233µs  266.206µs  381.889µs
 //
 package main
 
@@ -116,13 +115,12 @@ func main() {
 	improve := qpc.NewHistory("improve")
 	encode := qpc.NewHistory("encode")
 	decode := qpc.NewHistory("decode")
-	pimprove := qpc.NewHistory("pimprove")
 
 	const N = 901
 	baseline := make(Deltas, N)
 	order := NewOrdering(baseline)
 
-	var history [7]Deltas
+	var history [13]Deltas
 	for i := range history {
 		history[i] = make(Deltas, N)
 	}
@@ -136,6 +134,7 @@ func main() {
 	mirror := make(Deltas, N)
 
 	for {
+		historic := history[(frame-12+len(history))%len(history)]
 		baseline := history[(frame-6+len(history))%len(history)]
 		current := history[frame%len(history)]
 
@@ -150,7 +149,7 @@ func main() {
 
 		//===
 		improve.Start()
-		order.Improve(baseline)
+		order.Improve(historic, baseline)
 		improve.Stop()
 
 		encode.Start()
@@ -160,10 +159,6 @@ func main() {
 		decode.Start()
 		Decode(order, baseline, mirror, snapshot)
 		decode.Stop()
-
-		pimprove.Start()
-		order.PostImprove(baseline, mirror)
-		pimprove.Stop()
 		//===
 
 		size := float64(len(snapshot)*8) / 1000.0
@@ -176,7 +171,7 @@ func main() {
 			if !current.Equals(mirror) {
 				fmt.Print("! ")
 			}
-			fmt.Printf("%04d %8.3fkbps %10s %10s %10s %10s\n", frame, speed, improve.Last(), encode.Last(), decode.Last(), pimprove.Last())
+			fmt.Printf("%04d %8.3fkbps %10s %10s %10s %10s\n", frame, speed, improve.Last(), encode.Last(), decode.Last())
 		} else {
 			if current.Equals(mirror) {
 				fmt.Print(".")
@@ -201,7 +196,7 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("TIMING:")
-	qpc.PrintSummary(improve, encode, decode, pimprove)
+	qpc.PrintSummary(improve, encode, decode)
 }
 
 // delta utilities
@@ -268,14 +263,11 @@ func improveApprox(order []int, deltas Deltas, get Getter) {
 	}
 }
 
-func (order *Ordering) Improve(baseline Deltas) {
+func (order *Ordering) Improve(historic, baseline Deltas) {
 	improve(order.Largest, baseline, getLargest)
 	improve(order.Interacting, baseline, getInteracting)
-}
-
-func (order *Ordering) PostImprove(baseline, current Deltas) {
-	sort.Sort(&byDelta{order.ABC, baseline, current})
-	sort.Sort(&byDelta{order.XYZ, baseline, current})
+	sort.Sort(&byDelta{order.ABC, historic, baseline})
+	sort.Sort(&byDelta{order.XYZ, historic, baseline})
 }
 
 // reading input/output
