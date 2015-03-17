@@ -45,6 +45,12 @@ func (w *Writer) flushpartial() {
 	}
 }
 
+// Align aligns the writer to the next byte
+func (w *Writer) Align() error {
+	w.flushpartial()
+	return w.err
+}
+
 // WriteBits writes width lowest bits to the underlying writer
 func (w *Writer) WriteBits(x, width uint) error {
 	w.bits |= uint64(x) << w.nbits
@@ -65,10 +71,17 @@ func (w *Writer) WriteBit(x int) error {
 	return w.WriteBits(uint(x&1), 1)
 }
 
-// Align aligns the writer to the next byte
-func (w *Writer) Align() error {
-	w.flushpartial()
-	return w.err
+// WriteBool writes the lowest bit in x to the underlying writer
+func (w *Writer) WriteBool(x bool) error {
+	if x {
+		return w.WriteBits(1, 1)
+	}
+	return w.WriteBits(0, 1)
+}
+
+// WriteByte writes a byte to the underlying writer
+func (w *Writer) WriteByte(v byte) error {
+	return w.WriteBits(uint(v), 8)
 }
 
 func (w *Writer) Close() error { return w.Align() }
@@ -142,4 +155,16 @@ func (r *Reader) ReadBitsReverse(width uint) (uint, error) {
 func (r *Reader) ReadBit() (int, error) {
 	x, err := r.ReadBits(1)
 	return int(x), err
+}
+
+// ReadBool reads a single bit from the underlying reader
+func (r *Reader) ReadBool() (bool, error) {
+	x, err := r.ReadBits(1)
+	return x == 1, err
+}
+
+// ReadByte reads a single bit from the underlying reader
+func (r *Reader) ReadByte() (byte, error) {
+	x, err := r.ReadBits(8)
+	return byte(x), err
 }
