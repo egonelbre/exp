@@ -14,26 +14,27 @@
 //
 // Anyways, the all the interesting stats
 //
-// # 2831 366.63912398445837 kbps
-// MIN      6.720 kbps
-// P05     15.360 kbps
-// P10    126.240 kbps
-// P25    268.800 kbps
-// P50    380.640 kbps
-// P75    479.520 kbps
-// P90    565.920 kbps
-// P95    620.640 kbps
-// MAX    703.680 kbps
+// #2831 337.941kbps ±152.762kbps
 //
-// TOTAL   17299.256 kb
-//   AVG       6.111 kb per frame
-//   AVG       6.782 bits per cube
+// MIN      4.320 kbps
+// P05     13.920 kbps
+// P10    120.000 kbps
+// P25    243.840 kbps
+// P50    349.440 kbps
+// P75    444.000 kbps
+// P90    525.600 kbps
+// P95    578.880 kbps
+// MAX    661.920 kbps
+//
+// TOTAL   15945.160 kb
+//   AVG       5.632 kb per frame
+//   AVG       6.251 bits per cube
 //
 // TIMING:
 //                   MIN        10%        25%        50%        75%        90%        MAX
-//    improve  782.538µs 1.141648ms 1.179167ms 1.238126ms 1.312717ms 1.382842ms 7.493075ms
-//     encode  261.739µs  438.614µs  532.412µs  616.383µs   698.12µs  771.818µs 1.650388ms
-//     decode   71.018µs  126.849µs  183.128µs  232.706µs  275.585µs  309.978µs  487.746µs
+//    improve  648.542µs  734.746µs  797.278µs  862.043µs  926.361µs  985.766µs 1.421701ms
+//     encode  211.714µs  361.343µs  446.654µs  515.439µs  575.737µs  623.083µs 6.759669ms
+//     decode   35.732µs    86.65µs  145.609µs  194.741µs  237.173µs  273.352µs  621.296µs
 package main
 
 import (
@@ -53,7 +54,7 @@ import (
 )
 
 const dontpack = false
-const debugsnap = dontpack
+const debugsnap = true
 
 func check(err error) {
 	if err != nil {
@@ -80,7 +81,7 @@ func Encode(order *Ordering, baseline, current Deltas) (snapshot []byte) {
 		nochange[i] = baseline[i] == current[i]
 	}
 	previous_nochange = nochange
-	wr.WriteBools(order.Sameness, nochange)
+	wr.WriteBools(nochange)
 
 	wr.WriteDelta(nochange, order.Largest, current, getLargest)
 	wr.WriteDelta(nochange, order.Interacting, current, getInteracting)
@@ -96,7 +97,7 @@ func Decode(order *Ordering, baseline, current Deltas, snapshot []byte) {
 	rd := NewReader(snapshot)
 
 	nochange := make([]bool, len(baseline))
-	rd.ReadBools(order.Sameness, nochange)
+	rd.ReadBools(nochange)
 
 	copy(current, baseline)
 
@@ -136,7 +137,7 @@ func main() {
 	baseline := make(Deltas, N)
 	order := NewOrdering(baseline)
 
-	var history [9]Deltas
+	var history [8]Deltas
 	for i := range history {
 		history[i] = make(Deltas, N)
 	}
@@ -150,7 +151,7 @@ func main() {
 	mirror := make(Deltas, N)
 
 	for {
-		historic := history[(frame-8+len(history))%len(history)]
+		historic := history[(frame-7+len(history))%len(history)]
 		baseline := history[(frame-6+len(history))%len(history)]
 		current := history[frame%len(history)]
 
@@ -172,7 +173,10 @@ func main() {
 		snapshot := Encode(order, baseline, current)
 		encode.Stop()
 
-		if debugsnap && (frame == 1000 || frame == 1001 || frame == 1002) {
+		if debugsnap && (frame == 1000 || frame == 1200 || frame == 1201 || frame == 1770) {
+			size := float64(len(snapshot)*8) / 1000.0
+			speed := size * 60
+			fmt.Printf("\n<%d,%.3fkb,%.3fkbps>\n", frame, size, speed)
 			ioutil.WriteFile(fmt.Sprintf("snapshot_%d.bin", frame), snapshot, 0755)
 		}
 
@@ -191,7 +195,7 @@ func main() {
 			if !current.Equals(mirror) {
 				fmt.Print("! ")
 			}
-			fmt.Printf("%04d %8.3fkbps %10s %10s %10s %10s\n", frame, speed, improve.Last(), encode.Last(), decode.Last())
+			fmt.Printf("%04d %8.3fkbps %10s %10s %10s\n", frame, speed, improve.Last(), encode.Last(), decode.Last())
 		} else {
 			if current.Equals(mirror) {
 				fmt.Print(".")
@@ -254,8 +258,6 @@ func setInteracting(a *Delta, v int32) { a.Interacting = v }
 // Order management
 
 type Ordering struct {
-	Sameness []int
-
 	Largest     []int
 	Interacting []int
 	ABC         []IndexValue
@@ -265,8 +267,6 @@ type Ordering struct {
 func NewOrdering(deltas Deltas) *Ordering {
 	n := len(deltas)
 	order := &Ordering{
-		Sameness: make([]int, n),
-
 		Largest:     make([]int, n),
 		Interacting: make([]int, n),
 
@@ -275,7 +275,6 @@ func NewOrdering(deltas Deltas) *Ordering {
 	}
 
 	for i := range order.Largest {
-		order.Sameness[i] = i
 		order.Largest[i] = i
 		order.Interacting[i] = i
 	}
@@ -318,8 +317,6 @@ func improveApprox(order []int, deltas Deltas, get Getter) {
 }
 
 func (order *Ordering) Improve(historic, baseline Deltas) {
-	sort.Sort(&bySameness{order.Sameness, historic, baseline})
-	sort.Sort(&byGetter{order.Largest, baseline, getLargest})
 	sort.Sort(&byGetter{order.Largest, baseline, getLargest})
 	sort.Sort(&byGetter{order.Interacting, baseline, getInteracting})
 	sort.Sort(&byDelta{order.ABC, historic, baseline})

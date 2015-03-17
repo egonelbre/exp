@@ -31,13 +31,14 @@ func NewWriter() *Writer {
 	return &Writer{&buf, pack}
 }
 
-func (wr *Writer) WriteBools(order []int, current []bool) {
-	for _, idx := range order {
-		if current[idx] {
-			IntWriter{wr}.WriteByte(0)
-		} else {
-			IntWriter{wr}.WriteByte(1)
-		}
+func (wr *Writer) WriteBools(current []bool) {
+	wr.WriteBytes(PackBools(current))
+}
+
+func (wr *Writer) WriteBytes(data []byte) {
+	x := IntWriter{wr}
+	for _, v := range data {
+		x.WriteByte(v)
 	}
 }
 
@@ -81,10 +82,16 @@ func NewReader(data []byte) *Reader {
 	return &Reader{buf, pack}
 }
 
-func (rd *Reader) ReadBools(order []int, current []bool) {
-	for _, i := range order {
+func (rd *Reader) ReadBools(current []bool) {
+	packed := make([]byte, (len(current)+7)/8)
+	rd.ReadBytes(packed)
+	UnpackBools(packed, current)
+}
+
+func (rd *Reader) ReadBytes(current []byte) {
+	for i, _ := range current {
 		v, _ := IntReader{rd}.ReadByte()
-		current[i] = v == 0
+		current[i] = v
 	}
 }
 
@@ -138,4 +145,20 @@ func (r IntReader) ReadByte() (byte, error) {
 func (r IntReader) ReadInt() (int, error) {
 	x, err := binary.ReadVarint(r)
 	return int(x), err
+}
+
+func PackBools(vs []bool) []byte {
+	r := make([]byte, (len(vs)+7)/8)
+	for i, v := range vs {
+		if !v {
+			r[i/8] |= byte(1 << uint(i%8))
+		}
+	}
+	return r
+}
+
+func UnpackBools(packed []byte, into []bool) {
+	for i := range into {
+		into[i] = (packed[i/8] >> uint(i%8) & 1) == 0
+	}
 }
