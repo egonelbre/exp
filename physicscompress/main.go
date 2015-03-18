@@ -1,39 +1,5 @@
 // Response to Data Compression Challenge
 // http://gafferongames.com/2015/03/14/the-networked-physics-data-compression-challenge/
-//
-// The main insight that this compression uses is
-// given some previous state P and current state S
-// the ordering by some attribute is very similar
-//   order(P, attr) ~= order(S, attr)
-//
-// so we use the previous state to determine the order and pack in that order
-//
-// Note that the ordering must give the same result on both computers
-// but, it doesn't have to guarantee perfect ordering (e.g. see improveApprox)
-//
-// Anyways, the all the interesting stats
-//
-// #2831 337.941kbps ±152.762kbps
-//
-// MIN      4.320 kbps
-// P05     13.920 kbps
-// P10    120.000 kbps
-// P25    243.840 kbps
-// P50    349.440 kbps
-// P75    444.000 kbps
-// P90    525.600 kbps
-// P95    578.880 kbps
-// MAX    661.920 kbps
-//
-// TOTAL   15945.160 kb
-//   AVG       5.632 kb per frame
-//   AVG       6.251 bits per cube
-//
-// TIMING:
-//                   MIN        10%        25%        50%        75%        90%        MAX
-//    improve  609.236µs  734.746µs  795.491µs   854.45µs  916.535µs  976.386µs 2.951939ms
-//     encode  211.714µs  356.876µs  443.974µs  508.292µs  564.124µs  611.023µs 1.047404ms
-//     decode   39.305µs   85.311µs  144.716µs  192.508µs  234.046µs  267.992µs  460.054µs
 package main
 
 import (
@@ -106,6 +72,8 @@ func main() {
 		// ===
 
 		DebugSnapshot(frame, snapshot)
+
+		runtime.GC()
 
 		// Client side
 		decode.Start()
