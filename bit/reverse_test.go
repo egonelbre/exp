@@ -26,3 +26,15 @@ func TestReverseBitsPowers(t *testing.T) {
 		}
 	}
 }
+
+func TestReverseBitsOracle(t *testing.T) {
+	for i := 0; i < 1521; i += 1 {
+		width := uint64(rand.Intn(61) + 1)
+		x := uint64(rand.Intn(1<<width - 1))
+		rx := ReverseBits(x, width)
+		rx2 := slowReverseBits(x, width)
+		if rx != rx2 {
+			t.Errorf("failed <%v,%v>: got %v exp %v", x, width, rx, rx2)
+		}
+	}
+}
