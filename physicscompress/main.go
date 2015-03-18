@@ -77,6 +77,7 @@ func main() {
 
 		// Client side
 		decode.Start()
+		client.IncFrame()
 		client.Decode(snapshot)
 		decode.Stop()
 		// ===
