@@ -3,10 +3,14 @@ package physics
 import (
 	"bytes"
 	"compress/flate"
+	"flag"
+	"io"
 
 	"github.com/egonelbre/exp/bit"
 	"github.com/egonelbre/exp/bit/expgolomb"
 )
+
+var flagFlate = flag.Bool("flate", true, "use flate compression")
 
 func encode32(v int32) uint64 { return uint64(bit.AbsEncode(int64(v))) }
 func decode32(v uint64) int32 { return int32(bit.AbsDecode(v)) }
@@ -55,10 +59,18 @@ func deltabits(base, cube *Cube) uint {
 }
 
 func (s *State) Encode() []byte {
-	var buf bytes.Buffer
+	var next io.Writer
 
-	pack, _ := flate.NewWriter(&buf, flate.DefaultCompression)
-	w := bit.NewWriter(pack)
+	var buf bytes.Buffer
+	next = &buf
+
+	var pack *flate.Writer
+	if *flagFlate {
+		pack, _ = flate.NewWriter(next, flate.BestCompression)
+		next = pack
+	}
+
+	w := bit.NewWriter(next)
 
 	baseline := s.Baseline()
 	current := s.Current()
@@ -87,14 +99,20 @@ func (s *State) Encode() []byte {
 	}
 
 	w.Close()
-	pack.Close()
+	if pack != nil {
+		pack.Close()
+	}
 	return buf.Bytes()
 }
 
 func (s *State) Decode(snapshot []byte) {
+	var next io.Reader
 	buf := bytes.NewBuffer(snapshot)
-	pack := flate.NewReader(buf)
-	r := bit.NewReader(pack)
+	next = buf
+	if *flagFlate {
+		next = flate.NewReader(next)
+	}
+	r := bit.NewReader(next)
 
 	baseline := s.Baseline()
 	current := s.Current()
