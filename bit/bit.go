@@ -1,5 +1,6 @@
 // Package bit implements bit level encoding wrappers for io.Reader / io.Writer
 // All operations are Little Endian where applicable
+//
 package bit
 
 import "io"
