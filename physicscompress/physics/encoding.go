@@ -5,6 +5,7 @@ import (
 	"compress/flate"
 
 	"github.com/egonelbre/exp/bit"
+	"github.com/egonelbre/exp/bit/expgolomb"
 )
 
 func encode32(v int32) uint64 { return uint64(bit.AbsEncode(int64(v))) }
@@ -31,7 +32,7 @@ func maxbits(vs ...int32) (r uint) {
 	r = 0
 	for _, x := range vs {
 		if x != 0 {
-			bits := bit.ScanRight(bit.AbsEncode(int64(x))) + 4
+			bits := bit.ScanRight(bit.AbsEncode(int64(x))) + 1
 			if r < bits {
 				r = bits
 			}
@@ -65,21 +66,14 @@ func (s *State) Encode() []byte {
 	for i, cube := range current.Cubes {
 		base := baseline.Cubes[i]
 
-		//bits := deltabits(&base, &cube)
-		bits := uint(32)
+		if cube == base {
+			w.WriteBit(0)
+			continue
+		}
+		w.WriteBit(1)
 
-		//w.WriteBits(bits, 6)
-		//if bits == 0 {
-		//	continue
-		//}
-
-		//if bits == 0 {
-		//	w.WriteBit(0)
-		//	continue
-		//}
-		//w.WriteBit(1)
-		//w.WriteBits(bits, 6)
-		//expgolomb.WriteInt(w, int(bits)-9)
+		bits := deltabits(&base, &cube)
+		expgolomb.WriteInt(w, int(bits)-9)
 
 		write(w, cube.Interacting^base.Interacting, 1)
 		write(w, cube.Largest^base.Largest, 2)
@@ -104,22 +98,19 @@ func (s *State) Decode(snapshot []byte) {
 
 	baseline := s.Baseline()
 	current := s.Current()
+	current.Assign(baseline)
 
 	for i := range current.Cubes {
 		base := baseline.Cubes[i]
 		cube := &current.Cubes[i]
 
-		bits := uint(32)
-		//bits, _ := r.ReadBits(6)
-		//if bits == 0 {
-		//	continue
-		//}
+		isSame, _ := r.ReadBit()
+		if isSame == 0 {
+			continue
+		}
 
-		//xbits, _ := expgolomb.ReadInt(r)
-		//if xbits == 0 {
-		//	continue
-		//}
-		//bits := uint64(xbits + 9)
+		x, _ := expgolomb.ReadInt(r)
+		bits := uint(x + 9)
 
 		cube.Interacting = read(r, 1) ^ base.Interacting
 		cube.Largest = read(r, 2) ^ base.Largest
