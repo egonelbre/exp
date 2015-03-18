@@ -51,7 +51,7 @@ func TestWriteReadRandomBitsLarge(t *testing.T) { testRandomBits(t, 1251) }
 func testRandomBits(t *testing.T, N int) {
 	values := make([]pair, N)
 	for i := range values {
-		width := uint64(rand.Intn(61) + 1)
+		width := uint(rand.Intn(61) + 1)
 		value := uint64(rand.Intn(1<<width - 1))
 		values[i] = pair{value, width}
 	}
@@ -60,7 +60,7 @@ func testRandomBits(t *testing.T, N int) {
 
 type pair struct {
 	value uint64
-	width uint64
+	width uint
 }
 
 func testReadWrite(t *testing.T, values []pair) {

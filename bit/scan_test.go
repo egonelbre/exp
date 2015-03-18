@@ -6,7 +6,7 @@ import (
 )
 
 func TestScanPowers(t *testing.T) {
-	for shift := uint64(0); shift < 64; shift += 1 {
+	for shift := uint(0); shift < 64; shift += 1 {
 		sl := ScanLeft(1 << shift)
 		sr := ScanRight(1 << shift)
 		if sl != shift || sr != shift {

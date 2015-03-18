@@ -7,7 +7,7 @@ import (
 
 func TestReverseRandom(t *testing.T) {
 	for i := 0; i < 1521; i += 1 {
-		width := uint64(rand.Intn(61) + 1)
+		width := uint(rand.Intn(61) + 1)
 		x := uint64(rand.Intn(1<<width - 1))
 		rx := Reverse(x, width)
 		rrx := Reverse(rx, width)
@@ -18,7 +18,7 @@ func TestReverseRandom(t *testing.T) {
 }
 
 func TestReversePowers(t *testing.T) {
-	for width := uint64(2); width < 8; width += 1 {
+	for width := uint(2); width < 8; width += 1 {
 		exp := uint64(1 << (width - 1))
 		got := Reverse(1, width)
 		if exp != got {
@@ -29,7 +29,7 @@ func TestReversePowers(t *testing.T) {
 
 func TestReverseOracle(t *testing.T) {
 	for i := 0; i < 1521; i += 1 {
-		width := uint64(rand.Intn(61) + 1)
+		width := uint(rand.Intn(61) + 1)
 		x := uint64(rand.Intn(1<<width - 1))
 		rx := Reverse(x, width)
 		rx2 := slowReverse(x, width)

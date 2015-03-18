@@ -10,24 +10,24 @@ import (
 func encode32(v int32) uint64 { return uint64(bit.AbsEncode(int64(v))) }
 func decode32(v uint64) int32 { return int32(bit.AbsDecode(v)) }
 
-func write(w *bit.Writer, v int32, bits uint64) {
+func write(w *bit.Writer, v int32, bits uint) {
 	w.WriteBits(uint64(v), bits)
 }
-func read(r *bit.Reader, bits uint64) int32 {
+func read(r *bit.Reader, bits uint) int32 {
 	v, _ := r.ReadBits(bits)
 	return int32(v)
 }
 
-func write32(w *bit.Writer, v int32, bits uint64) {
+func write32(w *bit.Writer, v int32, bits uint) {
 	w.WriteBits(bit.AbsEncode(int64(v)), bits)
 }
 
-func read32(r *bit.Reader, bits uint64) int32 {
+func read32(r *bit.Reader, bits uint) int32 {
 	v, _ := r.ReadBits(bits)
 	return int32(bit.AbsDecode(v))
 }
 
-func maxbits(vs ...int32) (r uint64) {
+func maxbits(vs ...int32) (r uint) {
 	r = 0
 	for _, x := range vs {
 		if x != 0 {
@@ -40,7 +40,7 @@ func maxbits(vs ...int32) (r uint64) {
 	return
 }
 
-func deltabits(base, cube *Cube) uint64 {
+func deltabits(base, cube *Cube) uint {
 	return maxbits(
 		cube.Interacting^base.Interacting,
 		cube.Largest^base.Largest,
@@ -66,7 +66,7 @@ func (s *State) Encode() []byte {
 		base := baseline.Cubes[i]
 
 		//bits := deltabits(&base, &cube)
-		bits := uint64(32)
+		bits := uint(32)
 
 		//w.WriteBits(bits, 6)
 		//if bits == 0 {
@@ -109,7 +109,7 @@ func (s *State) Decode(snapshot []byte) {
 		base := baseline.Cubes[i]
 		cube := &current.Cubes[i]
 
-		bits := uint64(32)
+		bits := uint(32)
 		//bits, _ := r.ReadBits(6)
 		//if bits == 0 {
 		//	continue

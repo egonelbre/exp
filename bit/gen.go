@@ -16,7 +16,7 @@ import (
 	"math"
 )
 
-const notFound = math.MaxUint64
+const notFound = 0xFF
 
 func scanRight(x uint64) uint64 {
 	for k := 63; k >= 0; k -= 1 {
@@ -50,7 +50,7 @@ var filename = flag.String("output", "tables.go", "output file name")
 func table(out io.Writer, name string, count int, fn func(v uint64) uint64) {
 	line := int(math.Sqrt(float64(count)))
 
-	fmt.Fprintf(out, "var %s = [%d]uint64{\n", name, count)
+	fmt.Fprintf(out, "var %s = [%d]byte{\n", name, count)
 	for i := 0; i < count; i += 1 {
 		if i&(line-1) == 0 {
 			fmt.Fprint(out, "\t")

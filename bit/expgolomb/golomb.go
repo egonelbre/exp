@@ -30,7 +30,7 @@ func WriteInt(w *bit.Writer, v int) error {
 }
 
 func ReadInt(r *bit.Reader) (int, error) {
-	bits := uint64(0)
+	bits := uint(0)
 
 	zero, err := r.ReadBit()
 	for err == nil && zero == 0 {
@@ -80,7 +80,7 @@ func WriteUint(w *bit.Writer, v uint) error {
 }
 
 func ReadUint(r *bit.Reader) (uint, error) {
-	bits := uint64(0)
+	bits := uint(0)
 
 	zero, err := r.ReadBit()
 	for err == nil && zero == 0 {

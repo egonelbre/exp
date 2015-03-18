@@ -8,7 +8,7 @@ import "io"
 type Writer struct {
 	w     io.Writer
 	bits  uint64
-	nbits uint64
+	nbits uint
 	err   error
 }
 
@@ -55,7 +55,7 @@ func (w *Writer) Align() error {
 }
 
 // WriteBits writes width lowest bits to the underlying writer
-func (w *Writer) WriteBits(x, width uint64) error {
+func (w *Writer) WriteBits(x uint64, width uint) error {
 	if width > 32 {
 		w.WriteBits(uint64(uint32(x)), 32)
 		x >>= 32
@@ -74,7 +74,7 @@ func (w *Writer) WriteBits(x, width uint64) error {
 }
 
 // WriteBitsReverse writes width lowest bits in reverse order to the underlying writer
-func (w *Writer) WriteBitsReverse(x, width uint64) error {
+func (w *Writer) WriteBitsReverse(x uint64, width uint) error {
 	return w.WriteBits(Reverse(x, width), width)
 }
 
@@ -101,7 +101,7 @@ func (w *Writer) Close() error { return w.Align() }
 type Reader struct {
 	r     io.Reader
 	bits  uint64
-	nbits uint64
+	nbits uint
 	err   error
 }
 
@@ -128,7 +128,7 @@ func (r *Reader) Align() {
 }
 
 // ReadBits reads width bits from the underlying reader
-func (r *Reader) ReadBits(width uint64) (uint64, error) {
+func (r *Reader) ReadBits(width uint) (uint64, error) {
 	if r.err != nil {
 		return 0, r.err
 	}
@@ -158,7 +158,7 @@ func (r *Reader) ReadBits(width uint64) (uint64, error) {
 }
 
 // ReadBitsReverse reads width bits from the underlying reader in reverse order
-func (r *Reader) ReadBitsReverse(width uint64) (uint64, error) {
+func (r *Reader) ReadBitsReverse(width uint) (uint64, error) {
 	rx, err := r.ReadBits(width)
 	return Reverse(rx, width), err
 }
