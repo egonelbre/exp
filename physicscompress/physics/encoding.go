@@ -2,6 +2,7 @@ package physics
 
 import (
 	"bytes"
+	"compress/flate"
 
 	"github.com/egonelbre/exp/bit"
 	"github.com/egonelbre/exp/bit/expgolomb"
@@ -48,12 +49,12 @@ func (b *bits) ReadFrom(r *bit.Reader) {
 func (b *bits) Update(baseline, current *Frame) {
 	for i, cube := range current.Cubes {
 		base := baseline.Cubes[i]
-		b.ABC = maxbits(b.ABC, cube.A-base.A)
-		b.ABC = maxbits(b.ABC, cube.B-base.B)
-		b.ABC = maxbits(b.ABC, cube.C-base.C)
-		b.XYZ = maxbits(b.XYZ, cube.X-base.X)
-		b.XYZ = maxbits(b.XYZ, cube.Y-base.Y)
-		b.XYZ = maxbits(b.XYZ, cube.Z-base.Z)
+		b.ABC = maxbits(b.ABC, cube.A^base.A)
+		b.ABC = maxbits(b.ABC, cube.B^base.B)
+		b.ABC = maxbits(b.ABC, cube.C^base.C)
+		b.XYZ = maxbits(b.XYZ, cube.X^base.X)
+		b.XYZ = maxbits(b.XYZ, cube.Y^base.Y)
+		b.XYZ = maxbits(b.XYZ, cube.Z^base.Z)
 	}
 }
 
@@ -68,9 +69,11 @@ func maxbits(a uint64, b int32) uint64 {
 
 func (s *State) Encode() []byte {
 	var buf bytes.Buffer
-	w := bit.NewWriter(&buf)
 
-	baseline := s.Prev(6)
+	pack, _ := flate.NewWriter(&buf, flate.DefaultCompression)
+	w := bit.NewWriter(pack)
+
+	baseline := s.Baseline()
 	current := s.Current()
 
 	var bits bits
@@ -80,27 +83,29 @@ func (s *State) Encode() []byte {
 	for i, cube := range current.Cubes {
 		base := baseline.Cubes[i]
 
-		write(w, cube.Interacting, 1)
-		write(w, cube.Largest, 2)
+		write(w, cube.Interacting^base.Interacting, 1)
+		write(w, cube.Largest^base.Largest, 2)
 
-		write32(w, cube.A-base.A, bits.ABC)
-		write32(w, cube.B-base.B, bits.ABC)
-		write32(w, cube.C-base.C, bits.ABC)
+		write32(w, cube.A^base.A, bits.ABC)
+		write32(w, cube.B^base.B, bits.ABC)
+		write32(w, cube.C^base.C, bits.ABC)
 
-		write32(w, cube.X-base.X, bits.XYZ)
-		write32(w, cube.Y-base.Y, bits.XYZ)
-		write32(w, cube.Z-base.Z, bits.XYZ)
+		write32(w, cube.X^base.X, bits.XYZ)
+		write32(w, cube.Y^base.Y, bits.XYZ)
+		write32(w, cube.Z^base.Z, bits.XYZ)
 	}
 
 	w.Close()
+	pack.Close()
 	return buf.Bytes()
 }
 
 func (s *State) Decode(snapshot []byte) {
 	buf := bytes.NewBuffer(snapshot)
-	r := bit.NewReader(buf)
+	pack := flate.NewReader(buf)
+	r := bit.NewReader(pack)
 
-	baseline := s.Prev(6)
+	baseline := s.Baseline()
 	current := s.Current()
 
 	var bits bits
@@ -110,15 +115,15 @@ func (s *State) Decode(snapshot []byte) {
 		base := baseline.Cubes[i]
 		cube := &current.Cubes[i]
 
-		cube.Interacting = read(r, 1)
-		cube.Largest = read(r, 2)
+		cube.Interacting = read(r, 1) ^ base.Interacting
+		cube.Largest = read(r, 2) ^ base.Largest
 
-		cube.A = read32(r, bits.ABC) + base.A
-		cube.B = read32(r, bits.ABC) + base.B
-		cube.C = read32(r, bits.ABC) + base.C
+		cube.A = read32(r, bits.ABC) ^ base.A
+		cube.B = read32(r, bits.ABC) ^ base.B
+		cube.C = read32(r, bits.ABC) ^ base.C
 
-		cube.X = read32(r, bits.XYZ) + base.X
-		cube.Y = read32(r, bits.XYZ) + base.Y
-		cube.Z = read32(r, bits.XYZ) + base.Z
+		cube.X = read32(r, bits.XYZ) ^ base.X
+		cube.Y = read32(r, bits.XYZ) ^ base.Y
+		cube.Z = read32(r, bits.XYZ) ^ base.Z
 	}
 }

@@ -97,9 +97,8 @@ func (s *State) ReadNext(r io.Reader) error {
 	return s.Current().ReadFrom(r)
 }
 
-func (s *State) Current() *Frame {
-	return s.History[s.FrameIndex%HistorySize]
-}
+func (s *State) Current() *Frame  { return s.Prev(0) }
+func (s *State) Baseline() *Frame { return s.Prev(6) }
 
 func (s *State) Prev(i int) *Frame {
 	return s.History[(s.FrameIndex-i+HistorySize)%HistorySize]
