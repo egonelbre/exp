@@ -65,10 +65,6 @@ func (s *State) Encode() []byte {
 	current := s.Current()
 
 	for i, cube := range current.Cubes {
-		if w.Error() != nil {
-			break
-		}
-
 		base := baseline.Cubes[i]
 
 		if cube == base {
@@ -115,10 +111,6 @@ func (s *State) Decode(snapshot []byte) {
 	current.Assign(baseline)
 
 	for i := range current.Cubes {
-		if r.Error() != nil {
-			break
-		}
-
 		base := baseline.Cubes[i]
 		cube := &current.Cubes[i]
 
