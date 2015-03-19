@@ -72,11 +72,6 @@ func (w *Writer) WriteBits(x uint64, width uint) {
 	}
 }
 
-// WriteBitsReverse writes width lowest bits in reverse order to the underlying writer
-func (w *Writer) WriteBitsReverse(x uint64, width uint) {
-	w.WriteBits(Reverse(x, width), width)
-}
-
 // WriteBit writes the lowest bit in x to the underlying writer
 func (w *Writer) WriteBit(x int) {
 	w.WriteBits(uint64(x&1), 1)
@@ -159,11 +154,6 @@ func (r *Reader) ReadBits(width uint) uint64 {
 	r.nbits += width
 	mask := uint64(1<<width - 1)
 	return x & mask
-}
-
-// ReadBitsReverse reads width bits from the underlying reader in reverse order
-func (r *Reader) ReadBitsReverse(width uint) uint64 {
-	return Reverse(r.ReadBits(width), width)
 }
 
 // ReadBit reads a single bit from the underlying reader
