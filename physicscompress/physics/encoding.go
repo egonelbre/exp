@@ -12,20 +12,20 @@ import (
 
 var flagFlate = flag.Bool("flate", true, "use flate compression")
 
-func encode32(v int32) uint64 { return uint64(bit.AbsEncode(int64(v))) }
-func decode32(v uint64) int32 { return int32(bit.AbsDecode(v)) }
+func encode32(v int32) uint64 { return uint64(bit.ZEncode(int64(v))) }
+func decode32(v uint64) int32 { return int32(bit.ZDecode(v)) }
 
 func write(w *bit.Writer, v int32, bits uint) { w.WriteBits(uint64(v), bits) }
 func read(r *bit.Reader, bits uint) int32     { return int32(r.ReadBits(bits)) }
 
-func write32(w *bit.Writer, v int32, bits uint) { w.WriteBits(bit.AbsEncode(int64(v)), bits) }
-func read32(r *bit.Reader, bits uint) int32     { return int32(bit.AbsDecode(r.ReadBits(bits))) }
+func write32(w *bit.Writer, v int32, bits uint) { w.WriteBits(bit.ZEncode(int64(v)), bits) }
+func read32(r *bit.Reader, bits uint) int32     { return int32(bit.ZDecode(r.ReadBits(bits))) }
 
 func maxbits(vs ...int32) (r uint) {
 	r = 0
 	for _, x := range vs {
 		if x != 0 {
-			bits := bit.ScanRight(bit.AbsEncode(int64(x))) + 1
+			bits := bit.ScanRight(bit.ZEncode(int64(x))) + 1
 			if r < bits {
 				r = bits
 			}
