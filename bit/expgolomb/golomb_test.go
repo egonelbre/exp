@@ -35,7 +35,7 @@ func testInt(t *testing.T, n int) {
 
 	r := bit.NewReader(&buf)
 	for i, exp := range values {
-		got, err := ReadInt(r)
+		got, err := ReadInt(r), r.Error()
 		if err != nil {
 			t.Errorf("ReadInt: %v", err)
 			return
@@ -70,7 +70,7 @@ func testUint(t *testing.T, n int) {
 
 	r := bit.NewReader(&buf)
 	for i, exp := range values {
-		got, err := ReadUint(r)
+		got, err := ReadUint(r), r.Error()
 		if err != nil {
 			t.Errorf("ReadUint: %v", err)
 			return

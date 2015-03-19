@@ -1,6 +1,9 @@
 // Package bit implements bit level encoding wrappers for io.Reader / io.Writer
 // All operations are Little Endian where applicable
 //
+// Note that Write/Read operations do not return error for convenience,
+// you must check bit.Reader.Error() or bit.Writer.Error() manually
+//
 package bit
 
 import "io"
@@ -48,55 +51,54 @@ func (w *Writer) flushAll() {
 	}
 }
 
+func (w *Writer) Error() error { return w.err }
+
 // Align aligns the writer to the next byte
-func (w *Writer) Align() error {
-	w.flushAll()
-	return w.err
-}
+func (w *Writer) Align() { w.flushAll() }
 
 // WriteBits writes width lowest bits to the underlying writer
-func (w *Writer) WriteBits(x uint64, width uint) error {
+func (w *Writer) WriteBits(x uint64, width uint) {
 	if width > 32 {
 		w.WriteBits(uint64(uint32(x)), 32)
 		x >>= 32
 		width -= 32
-		if w.err != nil {
-			return w.err
-		}
 	}
+
 	mask := uint64(1<<width - 1)
 	w.bits |= x & mask << w.nbits
 	w.nbits += width
 	if w.nbits > 16 {
 		w.flush()
 	}
-	return w.err
 }
 
 // WriteBitsReverse writes width lowest bits in reverse order to the underlying writer
-func (w *Writer) WriteBitsReverse(x uint64, width uint) error {
-	return w.WriteBits(Reverse(x, width), width)
+func (w *Writer) WriteBitsReverse(x uint64, width uint) {
+	w.WriteBits(Reverse(x, width), width)
 }
 
 // WriteBit writes the lowest bit in x to the underlying writer
-func (w *Writer) WriteBit(x int) error {
-	return w.WriteBits(uint64(x&1), 1)
+func (w *Writer) WriteBit(x int) {
+	w.WriteBits(uint64(x&1), 1)
 }
 
 // WriteBool writes a bool the underlying writer depending on x
-func (w *Writer) WriteBool(x bool) error {
+func (w *Writer) WriteBool(x bool) {
 	if x {
-		return w.WriteBits(1, 1)
+		w.WriteBits(1, 1)
 	}
-	return w.WriteBits(0, 1)
+	w.WriteBits(0, 1)
 }
 
 // WriteByte writes a byte to the underlying writer
-func (w *Writer) WriteByte(v byte) error {
-	return w.WriteBits(uint64(v), 8)
+func (w *Writer) WriteByte(v byte) {
+	w.WriteBits(uint64(v), 8)
 }
 
-func (w *Writer) Close() error { return w.Align() }
+func (w *Writer) Close() error {
+	w.Align()
+	return w.err
+}
 
 type Reader struct {
 	r     io.Reader
@@ -121,6 +123,8 @@ func (r *Reader) read() {
 	r.bits = uint64(temp[0])
 }
 
+func (r *Reader) Error() error { return r.err }
+
 // Align aligns the reader to the next byte so that the next ReadBits will start
 // reading a new byte from the underlying reader
 func (r *Reader) Align() {
@@ -128,9 +132,9 @@ func (r *Reader) Align() {
 }
 
 // ReadBits reads width bits from the underlying reader
-func (r *Reader) ReadBits(width uint) (uint64, error) {
+func (r *Reader) ReadBits(width uint) uint64 {
 	if r.err != nil {
-		return 0, r.err
+		return 0
 	}
 
 	left := 8 - int(r.nbits)
@@ -138,7 +142,7 @@ func (r *Reader) ReadBits(width uint) (uint64, error) {
 		mask := uint64((1 << width) - 1)
 		x := r.bits >> r.nbits
 		r.nbits += width
-		return x & mask, nil
+		return x & mask
 	}
 
 	n := 8 - r.nbits
@@ -147,36 +151,26 @@ func (r *Reader) ReadBits(width uint) (uint64, error) {
 		r.read()
 		r.nbits -= 8
 		if r.err != nil {
-			return 0, r.err
+			return 0
 		}
 		x |= r.bits << n
 		n += 8
 	}
 	r.nbits += width
 	mask := uint64(1<<width - 1)
-	return x & mask, nil
+	return x & mask
 }
 
 // ReadBitsReverse reads width bits from the underlying reader in reverse order
-func (r *Reader) ReadBitsReverse(width uint) (uint64, error) {
-	rx, err := r.ReadBits(width)
-	return Reverse(rx, width), err
+func (r *Reader) ReadBitsReverse(width uint) uint64 {
+	return Reverse(r.ReadBits(width), width)
 }
 
 // ReadBit reads a single bit from the underlying reader
-func (r *Reader) ReadBit() (int, error) {
-	x, err := r.ReadBits(1)
-	return int(x), err
-}
+func (r *Reader) ReadBit() int { return int(r.ReadBits(1)) }
 
 // ReadBool reads a single bool from the underlying reader
-func (r *Reader) ReadBool() (bool, error) {
-	x, err := r.ReadBits(1)
-	return x == 1, err
-}
+func (r *Reader) ReadBool() bool { return r.ReadBits(1) == 1 }
 
 // ReadByte reads a single bit from the underlying reader
-func (r *Reader) ReadByte() (byte, error) {
-	x, err := r.ReadBits(8)
-	return byte(x), err
-}
+func (r *Reader) ReadByte() byte { return byte(r.ReadBits(8)) }

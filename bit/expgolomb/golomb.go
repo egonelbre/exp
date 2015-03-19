@@ -2,9 +2,10 @@ package expgolomb
 
 import "github.com/egonelbre/exp/bit"
 
-func WriteInt(w *bit.Writer, v int) error {
+func WriteInt(w *bit.Writer, v int) {
 	if v == 0 {
-		return w.WriteBit(1)
+		w.WriteBit(1)
+		return
 	}
 
 	sign := 0
@@ -15,90 +16,63 @@ func WriteInt(w *bit.Writer, v int) error {
 
 	bits := bit.ScanRight(uint64(v)) + 1
 
-	if err := w.WriteBits(0, bits); err != nil {
-		return err
-	}
-	if err := w.WriteBitsReverse(uint64(v), bits); err != nil {
-		return err
-	}
-
-	if err := w.WriteBit(sign); err != nil {
-		return err
-	}
-
-	return nil
+	w.WriteBits(0, bits)
+	w.WriteBitsReverse(uint64(v), bits)
+	w.WriteBit(sign)
 }
 
-func ReadInt(r *bit.Reader) (int, error) {
+func ReadInt(r *bit.Reader) int {
 	bits := uint(0)
 
-	zero, err := r.ReadBit()
+	zero, err := r.ReadBit(), r.Error()
 	for err == nil && zero == 0 {
 		bits += 1
-		zero, err = r.ReadBit()
+		zero, err = r.ReadBit(), r.Error()
 	}
 
 	if bits == 0 || err != nil {
-		return 0, err
+		return 0
 	}
 
-	x, err := r.ReadBits(bits - 1)
-	if err != nil {
-		return 0, err
-	}
+	x := r.ReadBits(bits - 1)
 	x = x<<1 | 1
-
 	x = bit.Reverse(x, bits)
 
-	sign, err := r.ReadBit()
-	if err != nil {
-		return 0, err
-	}
-
+	sign := r.ReadBit()
 	v := int(x)
 	if sign == 1 {
 		v = -v
 	}
-	return v, nil
+
+	return v
 }
 
-func WriteUint(w *bit.Writer, v uint) error {
+func WriteUint(w *bit.Writer, v uint) {
 	if v == 0 {
-		return w.WriteBit(1)
+		w.WriteBit(1)
+		return
 	}
 
 	bits := bit.ScanRight(uint64(v)) + 1
 
-	if err := w.WriteBits(0, bits); err != nil {
-		return err
-	}
-	if err := w.WriteBitsReverse(uint64(v), bits); err != nil {
-		return err
-	}
-
-	return nil
+	w.WriteBits(0, bits)
+	w.WriteBitsReverse(uint64(v), bits)
 }
 
-func ReadUint(r *bit.Reader) (uint, error) {
+func ReadUint(r *bit.Reader) uint {
 	bits := uint(0)
-
-	zero, err := r.ReadBit()
+	zero, err := r.ReadBit(), r.Error()
 	for err == nil && zero == 0 {
 		bits += 1
-		zero, err = r.ReadBit()
+		zero, err = r.ReadBit(), r.Error()
 	}
 
 	if bits == 0 || err != nil {
-		return 0, err
+		return 0
 	}
 
-	x, err := r.ReadBits(bits - 1)
-	if err != nil {
-		return 0, err
-	}
+	x := r.ReadBits(bits - 1)
 	x = x<<1 | 1
-
 	x = bit.Reverse(x, bits)
-
-	return uint(x), nil
+	return uint(x)
 }

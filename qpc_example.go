@@ -1,10 +1,12 @@
+// +build ignore
+
 package main
 
 import (
 	"math/rand"
 	"time"
 
-	"./qpc"
+	"github.com/egonelbre/exp/qpc"
 )
 
 func main() {

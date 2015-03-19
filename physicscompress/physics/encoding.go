@@ -15,22 +15,11 @@ var flagFlate = flag.Bool("flate", true, "use flate compression")
 func encode32(v int32) uint64 { return uint64(bit.AbsEncode(int64(v))) }
 func decode32(v uint64) int32 { return int32(bit.AbsDecode(v)) }
 
-func write(w *bit.Writer, v int32, bits uint) {
-	w.WriteBits(uint64(v), bits)
-}
-func read(r *bit.Reader, bits uint) int32 {
-	v, _ := r.ReadBits(bits)
-	return int32(v)
-}
+func write(w *bit.Writer, v int32, bits uint) { w.WriteBits(uint64(v), bits) }
+func read(r *bit.Reader, bits uint) int32     { return int32(r.ReadBits(bits)) }
 
-func write32(w *bit.Writer, v int32, bits uint) {
-	w.WriteBits(bit.AbsEncode(int64(v)), bits)
-}
-
-func read32(r *bit.Reader, bits uint) int32 {
-	v, _ := r.ReadBits(bits)
-	return int32(bit.AbsDecode(v))
-}
+func write32(w *bit.Writer, v int32, bits uint) { w.WriteBits(bit.AbsEncode(int64(v)), bits) }
+func read32(r *bit.Reader, bits uint) int32     { return int32(bit.AbsDecode(r.ReadBits(bits))) }
 
 func maxbits(vs ...int32) (r uint) {
 	r = 0
@@ -76,6 +65,10 @@ func (s *State) Encode() []byte {
 	current := s.Current()
 
 	for i, cube := range current.Cubes {
+		if w.Error() != nil {
+			break
+		}
+
 		base := baseline.Cubes[i]
 
 		if cube == base {
@@ -98,7 +91,10 @@ func (s *State) Encode() []byte {
 		write32(w, cube.Z^base.Z, bits)
 	}
 
-	w.Close()
+	if err := w.Close(); err != nil {
+		panic(err)
+	}
+
 	if pack != nil {
 		pack.Close()
 	}
@@ -119,16 +115,19 @@ func (s *State) Decode(snapshot []byte) {
 	current.Assign(baseline)
 
 	for i := range current.Cubes {
+		if r.Error() != nil {
+			break
+		}
+
 		base := baseline.Cubes[i]
 		cube := &current.Cubes[i]
 
-		isSame, _ := r.ReadBit()
+		isSame := r.ReadBit()
 		if isSame == 0 {
 			continue
 		}
 
-		x, _ := expgolomb.ReadInt(r)
-		bits := uint(x + 9)
+		bits := uint(expgolomb.ReadInt(r) + 9)
 
 		cube.Interacting = read(r, 1) ^ base.Interacting
 		cube.Largest = read(r, 2) ^ base.Largest

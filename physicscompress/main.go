@@ -1,3 +1,5 @@
+// +build ignore
+
 // Response to Data Compression Challenge
 // http://gafferongames.com/2015/03/14/the-networked-physics-data-compression-challenge/
 /*

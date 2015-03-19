@@ -19,7 +19,7 @@ func TestWriteReadRandomBit(t *testing.T) {
 
 	r := NewReader(&buf)
 	for i, exp := range values {
-		got, err := r.ReadBit()
+		got, err := r.ReadBit(), r.Error()
 		if err != nil {
 			t.Errorf("r.ReadBits: %v", err)
 			return
@@ -78,7 +78,7 @@ func testReadWrite(t *testing.T, values []pair) {
 
 	r := NewReader(&buf)
 	for i, exp := range values {
-		got, err := r.ReadBits(exp.width)
+		got, err := r.ReadBits(exp.width), r.Error()
 		if err != nil {
 			t.Errorf("r.ReadBit: %v", err)
 			return
