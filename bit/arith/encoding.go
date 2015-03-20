@@ -1,26 +1,15 @@
+// This package implements simple arithmetic coders
+// based on code by https://github.com/rygorous/mini_arith
 package arith
 
-const (
-	PBits = 12
-	MaxP  = 1 << PBits
-)
-
-type P uint32
-
-func Prob(p float64) P { return P(float64(p) * float64(MaxP)) }
-
-func (p P) midpoint32(lo, hi uint32) uint32 {
-	return lo + uint32(uint64(hi-lo)*uint64(p)>>PBits)
-}
-
-type BinEncoder struct {
+type Encoder struct {
 	lo, hi uint32
 	data   []byte
 }
 
-func NewBinEncoder() *BinEncoder { return &BinEncoder{lo: 0, hi: ^uint32(0)} }
+func NewEncoder() *Encoder { return &Encoder{lo: 0, hi: ^uint32(0)} }
 
-func (enc *BinEncoder) Encode(bit int, prob P) {
+func (enc *Encoder) Encode(bit uint, prob P) {
 	x := prob.midpoint32(enc.lo, enc.hi)
 
 	if bit == 1 {
@@ -36,24 +25,24 @@ func (enc *BinEncoder) Encode(bit int, prob P) {
 	}
 }
 
-func (enc *BinEncoder) Close() {
+func (enc *Encoder) Close() {
 	for i := 0; i < 4; i++ {
 		enc.data = append(enc.data, byte(enc.lo>>24))
 		enc.lo <<= 8
 	}
 }
 
-func (enc *BinEncoder) Bytes() []byte { return enc.data }
+func (enc *Encoder) Bytes() []byte { return enc.data }
 
-type BinDecoder struct {
+type Decoder struct {
 	lo, hi uint32
 	code   uint32
 	data   []byte
 	read   int
 }
 
-func NewBinDecoder(data []byte) *BinDecoder {
-	dec := &BinDecoder{lo: 0, hi: ^uint32(0)}
+func NewDecoder(data []byte) *Decoder {
+	dec := &Decoder{lo: 0, hi: ^uint32(0)}
 	dec.data = data
 
 	for i := 0; i < 4; i++ {
@@ -64,7 +53,7 @@ func NewBinDecoder(data []byte) *BinDecoder {
 	return dec
 }
 
-func (dec *BinDecoder) Decode(prob P) (bit int) {
+func (dec *Decoder) Decode(prob P) (bit uint) {
 	x := prob.midpoint32(dec.lo, dec.hi)
 
 	if dec.code < x {

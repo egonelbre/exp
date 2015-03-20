@@ -6,25 +6,25 @@ import (
 )
 
 type pair struct {
-	bit  int
+	bit  uint
 	prob P
 }
 
 func TestRandomEncodeDecode(t *testing.T) {
 	bits := make([]pair, 2141)
 	for i := range bits {
-		bits[i].bit = rand.Intn(2)
-		bits[i].prob = P(rand.Intn(MaxP))
+		bits[i].bit = uint(rand.Intn(2))
+		bits[i].prob = P(rand.Intn(maxProb))
 	}
 
-	enc := NewBinEncoder()
+	enc := NewEncoder()
 	for _, v := range bits {
 		enc.Encode(v.bit, v.prob)
 	}
 	enc.Close()
 	data := enc.Bytes()
 
-	dec := NewBinDecoder(data)
+	dec := NewDecoder(data)
 	for i, v := range bits {
 		x := dec.Decode(v.prob)
 		if x != v.bit {
@@ -35,7 +35,7 @@ func TestRandomEncodeDecode(t *testing.T) {
 
 func TestPacking(t *testing.T) {
 	const N = 1 << 16
-	enc := NewBinEncoder()
+	enc := NewEncoder()
 	p := Prob(0.1)
 	for i := 0; i < N; i++ {
 		if rand.Intn(100) < 10 {
