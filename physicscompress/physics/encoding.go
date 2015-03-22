@@ -52,7 +52,7 @@ func mZeros() arith.Model {
 
 func mValues(nbits uint) arith.Model {
 	return arith.NewTree(nbits, func() arith.Model {
-		return &arith.Shift2{P0: 0x1, I0: 0x4, P1: 0x2, I1: 0x6}
+		return &arith.Shift2{P0: 0x438, I0: 0x3, P1: 0x61a, I1: 0x1}
 	})
 }
 
@@ -90,7 +90,7 @@ func (s *State) Encode() []byte {
 	}
 
 	items6 := Index6(items, len(baseline))
-	SortByZ(items6, Delta6(baseline, historic))
+	SortByZ(items6, Delta6(historic, baseline))
 	ext6 := Extra6(historic, baseline, current)
 
 	max := uint64(0)
@@ -124,7 +124,6 @@ func (s *State) Encode() []byte {
 }
 
 func (s *State) Decode(snapshot []byte) {
-	return
 	dec := arith.NewDecoder(snapshot)
 
 	s.Current().Assign(s.Baseline())
@@ -153,19 +152,24 @@ func (s *State) Decode(snapshot []byte) {
 	}
 
 	items6 := Index6(items, len(baseline))
-	SortByZ(items6, Delta6(baseline, historic))
+	SortByZ(items6, Delta6(historic, baseline))
 	set6 := SetExtra6(historic, baseline, current)
 
-	nbits := 0
+	nbits := uint(0)
 	for mzeros.Decode(dec) == 0 {
 		nbits += 1
 	}
 
-	for _, i := range items6 {
-		z := uint(0)
-		for i := 0; i < int(nbits); i += 1 {
-			z = (z << 1) | mzeros.Decode(dec)
+	if nbits == 0 {
+		for _, i := range items6 {
+			set6(i, 0)
 		}
+		return
+	}
+
+	mvalues := mValues(nbits)
+	for _, i := range items6 {
+		z := mvalues.Decode(dec)
 		v := bit.ZDecode(uint64(z))
 		set6(i, int32(v))
 	}
