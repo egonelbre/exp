@@ -64,7 +64,6 @@ func (s *State) Encode() []byte {
 	enc := arith.NewEncoder()
 
 	historic := s.Historic().Cubes
-	_ = historic
 	baseline := s.Baseline().Cubes
 	current := s.Current().Cubes
 
@@ -93,56 +92,32 @@ func (s *State) Encode() []byte {
 	}
 
 	items6 := index6(items, len(baseline))
-	cur6 := Delta6(historic, baseline)
+	SortByZ(items6, Delta6(baseline, historic))
 	ext6 := Extra6(historic, baseline, current)
 
-	SortByZ(items6, cur6)
+	max := uint64(0)
 	for _, i := range items6 {
 		ext := uint64(bit.ZEncode(int64(ext6(i))))
-
-		if ext != 0 {
-			totalext += int(bit.ScanRight(ext) + 1)
-		}
-		if cur != 0 {
-			totalcur += int(bit.ScanRight(cur) + 1)
+		if max < ext {
+			max = ext
 		}
 	}
 
-	/*
-		items6 := index6(items, len(baseline))
-		old6 := Delta6(historic, baseline)
-		SortByZ(items6, old6)
+	nbits := bit.ScanRight(max) + 1
+	for i := 0; i < int(nbits); i += 1 {
+		mzeros.Encode(enc, 0)
+	}
+	mzeros.Encode(enc, 1)
 
-		mrand := mZeros()
-		cur6 := Delta6(historic, current)
-
-		for _, i := range items6 {
-			v := uint64(bit.ZEncode(int64(cur6(i))))
-			if v == 0 {
-				mzeros.Encode(enc, 0)
-				continue
-			}
-
-			nbits := int(bit.ScanRight(v) + 1)
-			if nbits < 5 {
-				nbits = 5
-			}
-
-			if nbits&1 == 1 {
-				nbits += 1
-			}
-			for i := 5; i < nbits; i += 2 {
-				mzeros.Encode(enc, 1)
-			}
-			mzeros.Encode(enc, 0)
-
-			rbits := uint(bit.Reverse(v, uint(nbits)))
-			for i := 0; i < nbits; i += 1 {
-				mrand.Encode(enc, rbits&1)
-				rbits >>= 1
-			}
+	for _, i := range items6 {
+		ext := uint64(bit.ZEncode(int64(ext6(i))))
+		rbits := bit.Reverse(ext, nbits)
+		for i := 0; i < int(nbits); i += 1 {
+			mzeros.Encode(enc, uint(rbits&1))
+			rbits >>= 1
 		}
-	*/
+	}
+
 	enc.Close()
 	return enc.Bytes()
 }
@@ -151,10 +126,12 @@ func (s *State) Decode(snapshot []byte) {
 	dec := arith.NewDecoder(snapshot)
 
 	s.Current().Assign(s.Baseline())
+	historic := s.Historic().Cubes
 	baseline := s.Baseline().Cubes
 	current := s.Current().Cubes
 
 	mzeros := mZeros()
+
 	items := []int{}
 	for i := range current {
 		if mzeros.Decode(dec) == 1 {
@@ -173,7 +150,23 @@ func (s *State) Decode(snapshot []byte) {
 		cube.Largest = base.Largest ^ int32(v1<<1|v0)
 	}
 
-	return
+	items6 := index6(items, len(baseline))
+	SortByZ(items6, Delta6(baseline, historic))
+	set6 := SetExtra6(historic, baseline, current)
+
+	nbits := 0
+	for mzeros.Decode(dec) == 0 {
+		nbits += 1
+	}
+
+	for _, i := range items6 {
+		z := uint(0)
+		for i := 0; i < int(nbits); i += 1 {
+			z = (z << 1) | mzeros.Decode(dec)
+		}
+		v := bit.ZDecode(uint64(z))
+		set6(i, int32(v))
+	}
 }
 
 func index6(index []int, N int) []int {
@@ -247,6 +240,29 @@ func Extra6(hist, base, cur []Cube) func(i int) int32 {
 			return cur[k].Y - base[k].Y + (hist[k].Y - base[k].Y)
 		case 5:
 			return cur[k].Z - base[k].Z + (hist[k].Z - base[k].Z)
+		default:
+			panic("invalid")
+		}
+	}
+}
+
+func SetExtra6(hist, base, cur []Cube) func(i int, v int32) {
+	N := len(base)
+	return func(i int, v int32) {
+		k := i % N
+		switch i / N {
+		case 0:
+			cur[k].A = v + base[k].A - (hist[k].B - base[k].A)
+		case 1:
+			cur[k].B = v + base[k].B - (hist[k].B - base[k].B)
+		case 2:
+			cur[k].C = v + base[k].C - (hist[k].C - base[k].C)
+		case 3:
+			cur[k].X = v + base[k].X - (hist[k].X - base[k].X)
+		case 4:
+			cur[k].Y = v + base[k].Y - (hist[k].Y - base[k].Y)
+		case 5:
+			cur[k].Z = v + base[k].Z - (hist[k].Z - base[k].Z)
 		default:
 			panic("invalid")
 		}
