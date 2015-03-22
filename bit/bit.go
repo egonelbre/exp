@@ -64,8 +64,8 @@ func (w *Writer) WriteBits(x uint64, width uint) {
 		width -= 32
 	}
 
-	mask := uint64(1<<width - 1)
-	w.bits |= x & mask << w.nbits
+	x &= 1<<width - 1
+	w.bits |= x << w.nbits
 	w.nbits += width
 	if w.nbits > 16 {
 		w.flush()

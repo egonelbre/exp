@@ -49,8 +49,8 @@ func main() {
 	count8 := make(map[byte]int)
 
 	var v int
-	for err == nil {
-		v, err = r.ReadBit()
+	for r.Error() == nil {
+		v = r.ReadBit()
 		circle <<= 1
 		circle |= byte(v)
 
