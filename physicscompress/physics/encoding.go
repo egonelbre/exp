@@ -47,33 +47,38 @@ func deltabits(base, cube *Cube) uint {
 
 // encodes zeros well
 func mZeros() arith.Model {
+	return &arith.Shift2{P0: 0x34a, I0: 0x1, P1: 0xd0, I1: 0x5}
+}
+
+func mBits() arith.Model {
+	return &arith.Shift{P: arith.MaxP * 2 / 3, I: 0x5}
+}
+
+func mRandom() arith.Model {
 	return &arith.Shift2{P0: 0x500, I0: 0x1, P1: 0x150, I1: 0x5}
 }
 
-var sameness []bool
+var totalbits = 0
 
 func (s *State) Encode() []byte {
 	enc := arith.NewEncoder()
 
+	historic := s.Historic().Cubes
+	_ = historic
 	baseline := s.Baseline().Cubes
 	current := s.Current().Cubes
 
 	mzeros := mZeros()
-	same := make([]bool, len(current))
-
-	items := make([]int, 0, len(current))
-	for i, cube := range current {
-		base := baseline[i]
-		same[i] = cube == base
-		if same[i] {
+	items := []int{}
+	for i := range current {
+		cube, base := &current[i], &baseline[i]
+		if *cube == *base {
 			mzeros.Encode(enc, 0)
 		} else {
 			mzeros.Encode(enc, 1)
 			items = append(items, i)
 		}
 	}
-	sameness = same
-	_ = items
 
 	for _, i := range items {
 		cube := &current[i]
@@ -87,42 +92,57 @@ func (s *State) Encode() []byte {
 		mzeros.Encode(enc, v>>1)
 	}
 
-	SortByZ(items, func(i int) int32 {
-		return current[i].X ^ baseline[i].X
-	})
+	items6 := index6(items, len(baseline))
+	cur6 := Delta6(historic, baseline)
+	ext6 := Extra6(historic, baseline, current)
 
-	fmt.Println(len(items))
-	for _, i := range items {
-		fmt.Println(current[i].X^baseline[i].X, current[i].Y^baseline[i].Y, current[i].Z^baseline[i].Z)
+	SortByZ(items6, cur6)
+	for _, i := range items6 {
+		ext := uint64(bit.ZEncode(int64(ext6(i))))
+
+		if ext != 0 {
+			totalext += int(bit.ScanRight(ext) + 1)
+		}
+		if cur != 0 {
+			totalcur += int(bit.ScanRight(cur) + 1)
+		}
 	}
 
-	//SortBy(items, baseline.Cubes, func(i int) int32 { return })
-
 	/*
-		for i, cube := range current {
-			base := baseline.Cubes[i]
+		items6 := index6(items, len(baseline))
+		old6 := Delta6(historic, baseline)
+		SortByZ(items6, old6)
 
-			if cube == base {
-				w.WriteBit(0)
+		mrand := mZeros()
+		cur6 := Delta6(historic, current)
+
+		for _, i := range items6 {
+			v := uint64(bit.ZEncode(int64(cur6(i))))
+			if v == 0 {
+				mzeros.Encode(enc, 0)
 				continue
 			}
-			w.WriteBit(1)
 
-			bits := deltabits(&base, &cube)
-			expgolomb.WriteInt(w, int(bits)-9)
+			nbits := int(bit.ScanRight(v) + 1)
+			if nbits < 5 {
+				nbits = 5
+			}
 
-			write(w, cube.Interacting^base.Interacting, 1)
-			write(w, cube.Largest^base.Largest, 2)
+			if nbits&1 == 1 {
+				nbits += 1
+			}
+			for i := 5; i < nbits; i += 2 {
+				mzeros.Encode(enc, 1)
+			}
+			mzeros.Encode(enc, 0)
 
-			write32(w, cube.A^base.A, bits)
-			write32(w, cube.B^base.B, bits)
-			write32(w, cube.C^base.C, bits)
-			write32(w, cube.X^base.X, bits)
-			write32(w, cube.Y^base.Y, bits)
-			write32(w, cube.Z^base.Z, bits)
+			rbits := uint(bit.Reverse(v, uint(nbits)))
+			for i := 0; i < nbits; i += 1 {
+				mrand.Encode(enc, rbits&1)
+				rbits >>= 1
+			}
 		}
 	*/
-
 	enc.Close()
 	return enc.Bytes()
 }
@@ -135,19 +155,16 @@ func (s *State) Decode(snapshot []byte) {
 	current := s.Current().Cubes
 
 	mzeros := mZeros()
-	same := make([]bool, len(current))
-	items := make([]int, 0, len(current))
+	items := []int{}
 	for i := range current {
-		same[i] = mzeros.Decode(dec) == 0
-		if !same[i] {
+		if mzeros.Decode(dec) == 1 {
 			items = append(items, i)
 		}
 	}
 
 	for _, i := range items {
 		cube := &current[i]
-		v := mzeros.Decode(dec)
-		cube.Interacting = int32(v ^ 1)
+		cube.Interacting = int32(mzeros.Decode(dec) ^ 1)
 	}
 
 	for _, i := range items {
@@ -157,30 +174,83 @@ func (s *State) Decode(snapshot []byte) {
 	}
 
 	return
+}
 
-	/*
-		for i := range current.Cubes {
-			base := baseline.Cubes[i]
-			cube := &current.Cubes[i]
+func index6(index []int, N int) []int {
+	r := make([]int, 0, len(index)*6)
+	for _, v := range index {
+		r = append(r, v, v+N, v+N*2, v+N*3, v+N*4, v+N*5)
+	}
+	return r
+}
 
-			isSame := r.ReadBit()
-			if isSame == 0 {
-				continue
-			}
+func Value6(base []Cube) func(i int) int32 {
+	N := len(base)
+	return func(i int) int32 {
+		k := i % N
+		switch i / N {
+		case 0:
+			return base[k].A
+		case 1:
+			return base[k].B
+		case 2:
+			return base[k].C
+		case 3:
+			return base[k].X
+		case 4:
+			return base[k].Y
+		case 5:
+			return base[k].Z
+		default:
+			panic("invalid")
+		}
+	}
+}
 
-			bits := uint(expgolomb.ReadInt(r) + 9)
+func Delta6(hist, base []Cube) func(i int) int32 {
+	N := len(base)
+	return func(i int) int32 {
+		k := i % N
+		switch i / N {
+		case 0:
+			return hist[k].B - base[k].A
+		case 1:
+			return hist[k].B - base[k].B
+		case 2:
+			return hist[k].C - base[k].C
+		case 3:
+			return hist[k].X - base[k].X
+		case 4:
+			return hist[k].Y - base[k].Y
+		case 5:
+			return hist[k].Z - base[k].Z
+		default:
+			panic("invalid")
+		}
+	}
+}
 
-			cube.Interacting = read(r, 1) ^ base.Interacting
-			cube.Largest = read(r, 2) ^ base.Largest
-
-			cube.A = read32(r, bits) ^ base.A
-			cube.B = read32(r, bits) ^ base.B
-			cube.C = read32(r, bits) ^ base.C
-
-			cube.X = read32(r, bits) ^ base.X
-			cube.Y = read32(r, bits) ^ base.Y
-			cube.Z = read32(r, bits) ^ base.Z
-		}*/
+func Extra6(hist, base, cur []Cube) func(i int) int32 {
+	N := len(base)
+	return func(i int) int32 {
+		k := i % N
+		switch i / N {
+		case 0:
+			return cur[k].A - base[k].A + (hist[k].B - base[k].A)
+		case 1:
+			return cur[k].B - base[k].B + (hist[k].B - base[k].B)
+		case 2:
+			return cur[k].C - base[k].C + (hist[k].C - base[k].C)
+		case 3:
+			return cur[k].X - base[k].X + (hist[k].X - base[k].X)
+		case 4:
+			return cur[k].Y - base[k].Y + (hist[k].Y - base[k].Y)
+		case 5:
+			return cur[k].Z - base[k].Z + (hist[k].Z - base[k].Z)
+		default:
+			panic("invalid")
+		}
+	}
 }
 
 func SameBools(a, b []bool) {

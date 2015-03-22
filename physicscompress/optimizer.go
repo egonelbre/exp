@@ -1,12 +1,15 @@
 package main
 
 import (
+	"encoding/gob"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"math/rand"
+	"os"
+	"time"
 
 	"github.com/egonelbre/exp/coder/arith"
+	"github.com/egonelbre/exp/physicscompress/physics"
 )
 
 func check(err error) {
@@ -20,24 +23,17 @@ var (
 )
 
 func RandomModel() (m1, m2 arith.Model, desc string) {
-	switch rand.Intn(3) {
+	switch rand.Intn(1) {
 	case 0:
-		x1 := arith.Shift{
-			P: arith.Prob(rand.Float64()),
-			I: byte(rand.Intn(8)),
+		x1 := arith.Shift2{
+			P0: arith.P(rand.Intn(arith.MaxP / 2)),
+			I0: byte(rand.Intn(8) + 1),
+			P1: arith.P(rand.Intn(arith.MaxP / 2)),
+			I1: byte(rand.Intn(8) + 1),
 		}
 		x2 := x1
 		m1, m2 = &x1, &x2
 	case 1:
-		x1 := arith.Shift2{
-			P0: arith.Prob(rand.Float64()),
-			I0: byte(rand.Intn(10)),
-			P1: arith.Prob(rand.Float64()),
-			I1: byte(rand.Intn(10)),
-		}
-		x2 := x1
-		m1, m2 = &x1, &x2
-	case 2:
 		x1 := arith.Shift4{
 			P: [4]arith.P{
 				arith.P(rand.Intn(arith.MaxP / 4)),
@@ -46,10 +42,10 @@ func RandomModel() (m1, m2 arith.Model, desc string) {
 				arith.P(rand.Intn(arith.MaxP / 4)),
 			},
 			I: [4]byte{
-				byte(rand.Intn(10)),
-				byte(rand.Intn(10)),
-				byte(rand.Intn(10)),
-				byte(rand.Intn(10)),
+				byte(rand.Intn(7) + 1),
+				byte(rand.Intn(7) + 1),
+				byte(rand.Intn(7) + 1),
+				byte(rand.Intn(7) + 1),
 			},
 		}
 		x2 := x1
@@ -62,26 +58,48 @@ func RandomModel() (m1, m2 arith.Model, desc string) {
 func main() {
 	flag.Parse()
 
-	data, err := ioutil.ReadFile(flag.Arg(0))
+	rand.Seed(time.Now().UnixNano())
+
+	var baseline []physics.Cube
+	var current []physics.Cube
+
+	file, err := os.Open(flag.Arg(0))
 	check(err)
 
-	minimal := len(data)
-NEXT:
-	for i := 0; i < *tries; i += 1 {
-		menc, mdec, desc := RandomModel()
-		enc := arith.NewEncoder()
-		for _, b := range data {
-			menc.Encode(enc, uint(b))
-		}
-		enc.Close()
+	dec := gob.NewDecoder(file)
+	dec.Decode(&current)
+	dec.Decode(&baseline)
 
-		dec := arith.NewDecoder(enc.Bytes())
-		for _, b := range data {
-			v := mdec.Decode(dec)
-			if v != uint(b) {
-				continue NEXT
+	minimal := 1 << 10
+
+	for i := 0; i < *tries; i += 1 {
+		menc, _, desc := RandomModel()
+		enc := arith.NewEncoder()
+
+		items := []int{}
+		for i := range current {
+			cube, base := &current[i], &baseline[i]
+			if *cube == *base {
+				menc.Encode(enc, 0)
+			} else {
+				menc.Encode(enc, 1)
+				items = append(items, i)
 			}
 		}
+
+		for _, i := range items {
+			cube := &current[i]
+			menc.Encode(enc, uint(cube.Interacting^1))
+		}
+
+		for _, i := range items {
+			cube, base := &current[i], &baseline[i]
+			v := uint(cube.Largest ^ base.Largest)
+			menc.Encode(enc, v&1)
+			menc.Encode(enc, v>>1)
+		}
+
+		enc.Close()
 
 		if len(enc.Bytes()) < minimal {
 			fmt.Printf("%6d %5d   - %s\n", i, len(enc.Bytes()), desc)

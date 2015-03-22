@@ -1,12 +1,13 @@
 package physics
 
 import (
+	"encoding/gob"
 	"io"
 
 	"github.com/egonelbre/exp/bit"
 )
 
-const HistorySize = 8
+const HistorySize = 16
 
 type State struct {
 	History    [HistorySize]*Frame
@@ -99,7 +100,12 @@ func (s *State) ReadNext(r io.Reader) error {
 
 func (s *State) Current() *Frame  { return s.Prev(0) }
 func (s *State) Baseline() *Frame { return s.Prev(6) }
+func (s *State) Historic() *Frame { return s.Prev(10) }
 
 func (s *State) Prev(i int) *Frame {
 	return s.History[(s.FrameIndex-i+HistorySize)%HistorySize]
+}
+
+func init() {
+	gob.Register([]Cube{})
 }
