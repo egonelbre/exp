@@ -3,26 +3,26 @@
 // Response to Data Compression Challenge
 // http://gafferongames.com/2015/03/14/the-networked-physics-data-compression-challenge/
 /*
-#2831 309.119kbps ±150.121kbps
+#2831 307.044kbps ±149.095kbps
 
 MIN      2.880 kbps
 P05     10.080 kbps
 P10     96.000 kbps
-P25    208.800 kbps
-P50    315.360 kbps
-P75    418.080 kbps
-P90    503.040 kbps
-P95    556.320 kbps
-MAX    632.160 kbps
+P25    208.320 kbps
+P50    312.960 kbps
+P75    414.720 kbps
+P90    498.720 kbps
+P95    551.040 kbps
+MAX    631.680 kbps
 
-TOTAL   14585.272 kb
-  AVG       5.152 kb per frame
-  AVG       1.820 bits per cube
+TOTAL   14487.360 kb
+  AVG       5.117 kb per frame
+  AVG       1.808 bits per cube
 
 TIMING:
                   MIN        10%        25%        50%        75%        90%        MAX
-    encode   24.565µs  174.641µs  383.676µs   581.99µs  773.605µs  933.954µs 1.669147ms
-    decode   20.546µs  155.882µs  357.323µs  548.938µs   731.62µs  882.142µs 1.622695ms
+    encode   24.565µs  172.855µs  369.829µs  552.958µs   722.24µs  884.822µs 1.450287ms
+    decode   20.099µs  154.542µs   343.03µs  521.245µs  682.488µs  836.583µs 1.461453ms
 */
 package main
 
