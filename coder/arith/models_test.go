@@ -21,9 +21,7 @@ func ModelTest(t *testing.T, N int, model func() Model) {
 	}
 	enc.Close()
 
-	data := enc.Bytes()
-
-	dec := NewDecoder(data)
+	dec := NewDecoder(enc.Bytes())
 	for i, v := range bits {
 		x := decm.Decode(dec) & mask
 		if x != v {
@@ -59,4 +57,30 @@ func TestTreeModel(t *testing.T) {
 		m[2] = &Shift2{Prob(0.5), 3, Prob(0.1), 1}
 		return m
 	})
+}
+
+func TestByteModel(t *testing.T) {
+	B := func() Model { return &Shift{Prob(0.5), 5} }
+	T := func() Model { return NewTree(8, B) }
+
+	encm, decm := T(), T()
+
+	data := make([]byte, 25192)
+	for i := range data {
+		data[i] = byte(rand.Int())
+	}
+
+	enc := NewEncoder()
+	for _, b := range data {
+		encm.Encode(enc, uint(b))
+	}
+	enc.Close()
+
+	dec := NewDecoder(enc.Bytes())
+	for i, v := range data {
+		x := decm.Decode(dec)
+		if byte(x) != v {
+			t.Fatalf("fail %v: got %v exp %v", i, x, v)
+		}
+	}
 }
