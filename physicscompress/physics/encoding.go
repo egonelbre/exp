@@ -50,12 +50,10 @@ func mZeros() arith.Model {
 	return &arith.Shift2{P0: 0x34a, I0: 0x1, P1: 0xd0, I1: 0x5}
 }
 
-func mBits() arith.Model {
-	return &arith.Shift{P: arith.MaxP * 2 / 3, I: 0x5}
-}
-
-func mRandom() arith.Model {
-	return &arith.Shift2{P0: 0x500, I0: 0x1, P1: 0x150, I1: 0x5}
+func mValues(nbits uint) arith.Model {
+	return arith.NewTree(nbits, func() arith.Model {
+		return &arith.Shift2{P0: 0x1, I0: 0x4, P1: 0x2, I1: 0x6}
+	})
 }
 
 var totalbits = 0
@@ -91,7 +89,7 @@ func (s *State) Encode() []byte {
 		mzeros.Encode(enc, v>>1)
 	}
 
-	items6 := index6(items, len(baseline))
+	items6 := Index6(items, len(baseline))
 	SortByZ(items6, Delta6(baseline, historic))
 	ext6 := Extra6(historic, baseline, current)
 
@@ -103,19 +101,22 @@ func (s *State) Encode() []byte {
 		}
 	}
 
+	if max == 0 {
+		mzeros.Encode(enc, 1)
+		enc.Close()
+		return enc.Bytes()
+	}
+
 	nbits := bit.ScanRight(max) + 1
 	for i := 0; i < int(nbits); i += 1 {
 		mzeros.Encode(enc, 0)
 	}
 	mzeros.Encode(enc, 1)
 
+	mvalues := mValues(nbits)
 	for _, i := range items6 {
-		ext := uint64(bit.ZEncode(int64(ext6(i))))
-		rbits := bit.Reverse(ext, nbits)
-		for i := 0; i < int(nbits); i += 1 {
-			mzeros.Encode(enc, uint(rbits&1))
-			rbits >>= 1
-		}
+		val := uint(bit.ZEncode(int64(ext6(i))))
+		mvalues.Encode(enc, val)
 	}
 
 	enc.Close()
@@ -123,6 +124,7 @@ func (s *State) Encode() []byte {
 }
 
 func (s *State) Decode(snapshot []byte) {
+	return
 	dec := arith.NewDecoder(snapshot)
 
 	s.Current().Assign(s.Baseline())
@@ -150,7 +152,7 @@ func (s *State) Decode(snapshot []byte) {
 		cube.Largest = base.Largest ^ int32(v1<<1|v0)
 	}
 
-	items6 := index6(items, len(baseline))
+	items6 := Index6(items, len(baseline))
 	SortByZ(items6, Delta6(baseline, historic))
 	set6 := SetExtra6(historic, baseline, current)
 
@@ -169,7 +171,7 @@ func (s *State) Decode(snapshot []byte) {
 	}
 }
 
-func index6(index []int, N int) []int {
+func Index6(index []int, N int) []int {
 	r := make([]int, 0, len(index)*6)
 	for _, v := range index {
 		r = append(r, v, v+N, v+N*2, v+N*3, v+N*4, v+N*5)

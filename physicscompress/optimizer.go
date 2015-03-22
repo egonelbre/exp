@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/egonelbre/exp/bit"
 	"github.com/egonelbre/exp/coder/arith"
 	"github.com/egonelbre/exp/physicscompress/physics"
 )
@@ -55,6 +56,23 @@ func RandomModel() (m1, m2 arith.Model, desc string) {
 	return
 }
 
+func RandomTree(nbits uint) (m1 arith.Model, desc string) {
+	x1 := arith.Shift2{
+		P0: arith.P(rand.Intn(arith.MaxP / 2)),
+		I0: byte(rand.Intn(8) + 1),
+		P1: arith.P(rand.Intn(arith.MaxP / 2)),
+		I1: byte(rand.Intn(8) + 1),
+	}
+
+	m1 = arith.NewTree(nbits, func() arith.Model {
+		x := x1
+		return &x
+	})
+
+	desc = fmt.Sprintf("%#v", x1)
+	return
+}
+
 func main() {
 	flag.Parse()
 
@@ -72,20 +90,29 @@ func main() {
 
 	minimal := 1 << 10
 
-	for i := 0; i < *tries; i += 1 {
-		menc, _, desc := RandomModel()
-		enc := arith.NewEncoder()
-
-		items := []int{}
-		for i := range current {
-			cube, base := &current[i], &baseline[i]
-			if *cube == *base {
-				menc.Encode(enc, 0)
-			} else {
-				menc.Encode(enc, 1)
-				items = append(items, i)
-			}
+	items := []int{}
+	for i := range current {
+		cube, base := &current[i], &baseline[i]
+		if *cube != *base {
+			items = append(items, i)
 		}
+	}
+
+	items6 := physics.Index6(items, len(current))
+	cur6 := physics.Delta6(baseline, current)
+	max := uint64(0)
+	for _, i := range items6 {
+		ext := uint64(bit.ZEncode(int64(cur6(i))))
+		if max < ext {
+			max = ext
+		}
+	}
+
+	nbits := bit.ScanRight(max) + 1
+
+	for i := 0; i < *tries; i += 1 {
+		menc, desc := RandomTree(nbits)
+		enc := arith.NewEncoder()
 
 		for _, i := range items {
 			cube := &current[i]
