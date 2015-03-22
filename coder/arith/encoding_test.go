@@ -14,7 +14,7 @@ func TestRandomEncodeDecode(t *testing.T) {
 	bits := make([]pair, 2141)
 	for i := range bits {
 		bits[i].bit = uint(rand.Intn(2))
-		bits[i].prob = P(rand.Intn(maxProb))
+		bits[i].prob = P(rand.Intn(MaxP))
 	}
 
 	enc := NewEncoder()

@@ -56,7 +56,7 @@ func NewDecoder(data []byte) *Decoder {
 func (dec *Decoder) Decode(prob P) (bit uint) {
 	x := prob.midpoint32(dec.lo, dec.hi)
 
-	if dec.code < x {
+	if dec.code <= x {
 		dec.hi = x
 		bit = 1
 	} else {

@@ -18,7 +18,7 @@ func (m *Shift) NBits() uint { return 1 }
 func (m *Shift) adapt(bit uint) {
 	switch bit {
 	case 1:
-		m.P += (maxProb - m.P) >> m.I
+		m.P += (MaxP - m.P) >> m.I
 	case 0:
 		m.P -= m.P >> m.I
 	}
@@ -48,8 +48,8 @@ func (m *Shift2) NBits() uint { return 1 }
 func (m *Shift2) adapt(bit uint) {
 	switch bit {
 	case 1:
-		m.P0 += (maxProb/2 - m.P0) >> m.I0
-		m.P1 += (maxProb/2 - m.P1) >> m.I1
+		m.P0 += (MaxP/2 - m.P0) >> m.I0
+		m.P1 += (MaxP/2 - m.P1) >> m.I1
 	case 0:
 		m.P0 -= m.P0 >> m.I0
 		m.P1 -= m.P1 >> m.I1

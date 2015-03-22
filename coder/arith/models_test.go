@@ -84,3 +84,30 @@ func TestByteModel(t *testing.T) {
 		}
 	}
 }
+
+func TestShift_Failure(t *testing.T) {
+	model := func() Model { return &Shift{MaxP / 2, 7} }
+
+	encm, decm := model(), model()
+	const N = 47
+
+	enc := NewEncoder()
+	encm.Encode(enc, 1)
+	for i := 0; i < N; i += 1 {
+		encm.Encode(enc, 0)
+	}
+	enc.Close()
+
+	dec := NewDecoder(enc.Bytes())
+	v := decm.Decode(dec)
+	if v != 1 {
+		t.Fatalf("0:got %v expected 1", v)
+	}
+
+	for i := 0; i < N; i += 1 {
+		v = decm.Decode(dec)
+		if v != 0 {
+			t.Fatalf("%d: got %v expected 0", i+1, v)
+		}
+	}
+}
