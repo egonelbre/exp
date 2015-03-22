@@ -67,6 +67,39 @@ func (m *Shift2) Decode(dec *Decoder) (bit uint) {
 	return bit
 }
 
+type Shift4 struct {
+	P [4]P
+	I [4]byte
+}
+
+func (m *Shift4) NBits() uint { return 1 }
+
+func (m *Shift4) adapt(bit uint) {
+	switch bit {
+	case 1:
+		m.P[0] += (MaxP/4 - m.P[0]) >> m.I[0]
+		m.P[1] += (MaxP/4 - m.P[1]) >> m.I[1]
+		m.P[2] += (MaxP/4 - m.P[2]) >> m.I[2]
+		m.P[3] += (MaxP/4 - m.P[3]) >> m.I[3]
+	case 0:
+		m.P[0] -= m.P[0] >> m.I[0]
+		m.P[1] -= m.P[1] >> m.I[1]
+		m.P[2] -= m.P[2] >> m.I[2]
+		m.P[3] -= m.P[3] >> m.I[3]
+	}
+}
+
+func (m *Shift4) Encode(enc *Encoder, bit uint) {
+	enc.Encode(bit, m.P[0]+m.P[1]+m.P[2]+m.P[3])
+	m.adapt(bit)
+}
+
+func (m *Shift4) Decode(dec *Decoder) (bit uint) {
+	bit = dec.Decode(m.P[0] + m.P[1] + m.P[2] + m.P[3])
+	m.adapt(bit)
+	return bit
+}
+
 type Tree []Model
 
 func (tree Tree) NBits() uint { return bit.ScanRight(uint64(tree.syms())) }

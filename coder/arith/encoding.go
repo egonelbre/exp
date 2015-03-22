@@ -9,6 +9,10 @@ type Encoder struct {
 
 func NewEncoder() *Encoder { return &Encoder{lo: 0, hi: ^uint32(0)} }
 
+func (p P) midpoint32(lo, hi uint32) uint32 {
+	return lo + uint32(uint64(hi-lo)*uint64(p)>>probBits)
+}
+
 func (enc *Encoder) Encode(bit uint, prob P) {
 	x := prob.midpoint32(enc.lo, enc.hi)
 

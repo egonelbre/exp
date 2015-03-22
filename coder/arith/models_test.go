@@ -85,11 +85,38 @@ func TestByteModel(t *testing.T) {
 	}
 }
 
-func TestShift_Failure(t *testing.T) {
-	model := func() Model { return &Shift{MaxP / 2, 7} }
+func TestShiftZeros(t *testing.T) {
+	model := func() Model { return &Shift{MaxP / 1000, 7} }
 
 	encm, decm := model(), model()
-	const N = 47
+	const N = 900
+
+	enc := NewEncoder()
+	encm.Encode(enc, 1)
+	for i := 0; i < N; i += 1 {
+		encm.Encode(enc, 0)
+	}
+	enc.Close()
+
+	dec := NewDecoder(enc.Bytes())
+	v := decm.Decode(dec)
+	if v != 1 {
+		t.Fatalf("0:got %v expected 1", v)
+	}
+
+	for i := 0; i < N; i += 1 {
+		v = decm.Decode(dec)
+		if v != 0 {
+			t.Fatalf("%d: got %v expected 0", i+1, v)
+		}
+	}
+}
+
+func TestShift2Zeros(t *testing.T) {
+	model := func() Model { return &Shift2{P0: 0x500, I0: 0x1, P1: 0x150, I1: 0x5} }
+
+	encm, decm := model(), model()
+	const N = 1e5
 
 	enc := NewEncoder()
 	encm.Encode(enc, 1)
