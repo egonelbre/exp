@@ -31,7 +31,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"runtime"
 
@@ -40,17 +39,6 @@ import (
 
 	"github.com/montanaflynn/stats"
 )
-
-var DebugSnap = flag.Bool("snap", true, "take debug frame snapshots")
-
-func DebugSnapshot(frame int, snapshot []byte) {
-	if *DebugSnap && (frame == 1000 || frame == 1200 || frame == 1201 || frame == 1770) {
-		size := float64(len(snapshot)*8) / 1000.0
-		speed := size * 60
-		fmt.Printf("\n<%d,%.3fkb,%.3fkbps>\n", frame, size, speed)
-		ioutil.WriteFile(fmt.Sprintf("snapshot_%d.bin", frame), snapshot, 0755)
-	}
-}
 
 func main() {
 	verbose := flag.Bool("v", false, "verbose output")
@@ -94,8 +82,6 @@ func main() {
 		snapshot := server.Encode()
 		encode.Stop()
 		// ===
-
-		DebugSnapshot(frame, snapshot)
 
 		runtime.GC()
 

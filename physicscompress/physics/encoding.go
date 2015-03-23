@@ -91,11 +91,11 @@ func (s *State) Encode() []byte {
 
 	items6 := Index6(items, len(baseline))
 	SortByZ(items6, Delta6(historic, baseline))
-	ext6 := Extra6(historic, baseline, current)
+	get6 := Extra6(historic, baseline, current)
 
 	max := uint64(0)
 	for _, i := range items6 {
-		ext := uint64(bit.ZEncode(int64(ext6(i))))
+		ext := uint64(bit.ZEncode(int64(get6(i))))
 		if max < ext {
 			max = ext
 		}
@@ -115,7 +115,7 @@ func (s *State) Encode() []byte {
 
 	mvalues := mValues(nbits)
 	for _, i := range items6 {
-		val := uint(bit.ZEncode(int64(ext6(i))))
+		val := uint(bit.ZEncode(int64(get6(i))))
 		mvalues.Encode(enc, val)
 	}
 
