@@ -1,49 +1,11 @@
 package physics
 
 import (
-	"flag"
 	"fmt"
 
 	"github.com/egonelbre/exp/bit"
 	"github.com/egonelbre/exp/coder/arith"
 )
-
-var flagFlate = flag.Bool("flate", true, "use flate compression")
-
-func encode32(v int32) uint64 { return uint64(bit.ZEncode(int64(v))) }
-func decode32(v uint64) int32 { return int32(bit.ZDecode(v)) }
-
-func write(w *bit.Writer, v int32, bits uint) { w.WriteBits(uint64(v), bits) }
-func read(r *bit.Reader, bits uint) int32     { return int32(r.ReadBits(bits)) }
-
-func write32(w *bit.Writer, v int32, bits uint) { w.WriteBits(bit.ZEncode(int64(v)), bits) }
-func read32(r *bit.Reader, bits uint) int32     { return int32(bit.ZDecode(r.ReadBits(bits))) }
-
-func maxbits(vs ...int32) (r uint) {
-	r = 0
-	for _, x := range vs {
-		if x != 0 {
-			bits := bit.ScanRight(bit.ZEncode(int64(x))) + 1
-			if r < bits {
-				r = bits
-			}
-		}
-	}
-	return
-}
-
-func deltabits(base, cube *Cube) uint {
-	return maxbits(
-		cube.Interacting^base.Interacting,
-		cube.Largest^base.Largest,
-		cube.A^base.A,
-		cube.B^base.B,
-		cube.C^base.C,
-		cube.X^base.X,
-		cube.Y^base.Y,
-		cube.Z^base.Z,
-	)
-}
 
 // encodes zeros well
 func mZeros() arith.Model {
