@@ -212,7 +212,7 @@ func Delta6(hist, base []Cube) func(i int) int32 {
 		k := i % N
 		switch i / N {
 		case 0:
-			return hist[k].B - base[k].A
+			return hist[k].A - base[k].A
 		case 1:
 			return hist[k].B - base[k].B
 		case 2:
@@ -235,7 +235,7 @@ func Extra6(hist, base, cur []Cube) func(i int) int32 {
 		k := i % N
 		switch i / N {
 		case 0:
-			return cur[k].A - base[k].A + (hist[k].B - base[k].A)
+			return cur[k].A - base[k].A + (hist[k].A - base[k].A)
 		case 1:
 			return cur[k].B - base[k].B + (hist[k].B - base[k].B)
 		case 2:
@@ -258,7 +258,7 @@ func SetExtra6(hist, base, cur []Cube) func(i int, v int32) {
 		k := i % N
 		switch i / N {
 		case 0:
-			cur[k].A = v + base[k].A - (hist[k].B - base[k].A)
+			cur[k].A = v + base[k].A - (hist[k].A - base[k].A)
 		case 1:
 			cur[k].B = v + base[k].B - (hist[k].B - base[k].B)
 		case 2:
