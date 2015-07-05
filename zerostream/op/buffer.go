@@ -30,70 +30,82 @@ type Stroke struct{}
 type Fill struct{}
 
 type Stream struct {
+	Base uintptr
 	Data []byte
 }
 
+func NewStream(max int) Stream {
+	data := make([]byte, max, max)
+	return Stream{
+		Base: uintptr(unsafe.Pointer(&data[0])),
+		Data: data,
+	}
+}
+
+func (s Stream) Iterate() *Iterator {
+	return &Iterator{s.Base}
+}
+
 type Iterator struct {
-	Stream
-	Head int
+	Head uintptr
 }
 
 func (it *Iterator) EOF() bool { return it.Type() == EOF }
 
-func (it *Iterator) Type() Type { return Type(it.Data[it.Head]) }
+func (it *Iterator) Type() Type { return Type(*(*byte)(unsafe.Pointer(it.Head))) }
 
 func (it *Iterator) Start() *Start {
-	it.Data[it.Head] = byte(TypeStart)
-	r := (*Start)(unsafe.Pointer(&it.Data[it.Head+1]))
-	it.Head += 1 + int(unsafe.Sizeof(Start{}))
+	*(*byte)(unsafe.Pointer(it.Head)) = byte(TypeStart)
+	r := (*Start)(unsafe.Pointer(it.Head + 1))
+	it.Head += 1 + unsafe.Sizeof(Start{})
 	return r
 }
 
 func (it *Iterator) Close() *Close {
-	it.Data[it.Head] = byte(TypeClose)
-	r := (*Close)(unsafe.Pointer(&it.Data[it.Head+1]))
-	it.Head += 1 + int(unsafe.Sizeof(Close{}))
+	*(*byte)(unsafe.Pointer(it.Head)) = byte(TypeClose)
+	r := (*Close)(unsafe.Pointer(it.Head + 1))
+	it.Head += 1 + unsafe.Sizeof(Close{})
 	return r
 }
 
 func (it *Iterator) Translate() *Translate {
-	it.Data[it.Head] = byte(TypeTranslate)
-	r := (*Translate)(unsafe.Pointer(&it.Data[it.Head+1]))
-	it.Head += 1 + int(unsafe.Sizeof(Translate{}))
+	*(*byte)(unsafe.Pointer(it.Head)) = byte(TypeTranslate)
+	r := (*Translate)(unsafe.Pointer(it.Head + 1))
+	it.Head += 1 + unsafe.Sizeof(Translate{})
 	return r
 }
 
 func (it *Iterator) MoveTo() *MoveTo {
-	it.Data[it.Head] = byte(TypeMoveTo)
-	r := (*MoveTo)(unsafe.Pointer(&it.Data[it.Head+1]))
-	it.Head += 1 + int(unsafe.Sizeof(MoveTo{}))
+	*(*byte)(unsafe.Pointer(it.Head)) = byte(TypeMoveTo)
+	r := (*MoveTo)(unsafe.Pointer(it.Head + 1))
+	it.Head += 1 + unsafe.Sizeof(MoveTo{})
 	return r
 }
 
 func (it *Iterator) LineTo() *LineTo {
-	it.Data[it.Head] = byte(TypeLineTo)
-	r := (*LineTo)(unsafe.Pointer(&it.Data[it.Head+1]))
-	it.Head += 1 + int(unsafe.Sizeof(LineTo{}))
+	*(*byte)(unsafe.Pointer(it.Head)) = byte(TypeLineTo)
+	r := (*LineTo)(unsafe.Pointer(it.Head + 1))
+	it.Head += 1 + unsafe.Sizeof(LineTo{})
 	return r
 }
 
 func (it *Iterator) LineWidth() *LineWidth {
-	it.Data[it.Head] = byte(TypeLineWidth)
-	r := (*LineWidth)(unsafe.Pointer(&it.Data[it.Head+1]))
-	it.Head += 1 + int(unsafe.Sizeof(LineWidth{}))
+	*(*byte)(unsafe.Pointer(it.Head)) = byte(TypeLineWidth)
+	r := (*LineWidth)(unsafe.Pointer(it.Head + 1))
+	it.Head += 1 + unsafe.Sizeof(LineWidth{})
 	return r
 }
 
 func (it *Iterator) Stroke() *Stroke {
-	it.Data[it.Head] = byte(TypeStroke)
-	r := (*Stroke)(unsafe.Pointer(&it.Data[it.Head+1]))
-	it.Head += 1 + int(unsafe.Sizeof(Stroke{}))
+	*(*byte)(unsafe.Pointer(it.Head)) = byte(TypeStroke)
+	r := (*Stroke)(unsafe.Pointer(it.Head + 1))
+	it.Head += 1 + unsafe.Sizeof(Stroke{})
 	return r
 }
 
 func (it *Iterator) Fill() *Fill {
-	it.Data[it.Head] = byte(TypeFill)
-	r := (*Fill)(unsafe.Pointer(&it.Data[it.Head+1]))
-	it.Head += 1 + int(unsafe.Sizeof(Fill{}))
+	*(*byte)(unsafe.Pointer(it.Head)) = byte(TypeFill)
+	r := (*Fill)(unsafe.Pointer(it.Head + 1))
+	it.Head += 1 + unsafe.Sizeof(Fill{})
 	return r
 }

@@ -27,8 +27,8 @@ func (r Rect) Render(out *op.Iterator) {
 }
 
 func main() {
-	x := op.Stream{make([]byte, 1<<30)}
-	it := &op.Iterator{x, 0}
+	x := op.NewStream(1 << 30)
+	it := x.Iterate()
 
 	defer profile.Start(&profile.Config{
 		CPUProfile:  true,
@@ -44,7 +44,7 @@ func main() {
 	fmt.Println("Last ", it.Head)
 
 	start = time.Now()
-	it = &op.Iterator{x, 0}
+	it = x.Iterate()
 	z := int32(0)
 
 RENDER:
