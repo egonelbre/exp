@@ -5,6 +5,8 @@ import (
 	"time"
 
 	"github.com/egonelbre/exp/zerostream/op"
+
+	"github.com/davecheney/profile"
 )
 
 type Rect struct{ X, Y, W, H int32 }
@@ -28,6 +30,11 @@ func main() {
 	x := op.Stream{make([]byte, 1<<30)}
 	it := &op.Iterator{x, 0}
 
+	defer profile.Start(&profile.Config{
+		CPUProfile:  true,
+		ProfilePath: ".",
+	}).Stop()
+
 	start := time.Now()
 	for i := 0; i < 1<<20; i += 1 {
 		*it.Translate() = op.Translate{2, 2}
@@ -39,8 +46,12 @@ func main() {
 	start = time.Now()
 	it = &op.Iterator{x, 0}
 	z := int32(0)
-	for !it.EOF() {
+
+RENDER:
+	for {
 		switch it.Type() {
+		case op.EOF:
+			break RENDER
 		case op.TypeStart:
 			it.Start()
 		case op.TypeClose:
