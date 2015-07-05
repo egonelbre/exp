@@ -76,3 +76,24 @@ func (it *Iterator) LineTo() *LineTo {
 	it.Head += 1 + int(unsafe.Sizeof(LineTo{}))
 	return r
 }
+
+func (it *Iterator) LineWidth() *LineWidth {
+	it.Data[it.Head] = byte(TypeLineWidth)
+	r := (*LineWidth)(unsafe.Pointer(&it.Data[it.Head+1]))
+	it.Head += 1 + int(unsafe.Sizeof(LineWidth{}))
+	return r
+}
+
+func (it *Iterator) Stroke() *Stroke {
+	it.Data[it.Head] = byte(TypeStroke)
+	r := (*Stroke)(unsafe.Pointer(&it.Data[it.Head+1]))
+	it.Head += 1 + int(unsafe.Sizeof(Stroke{}))
+	return r
+}
+
+func (it *Iterator) Fill() *Fill {
+	it.Data[it.Head] = byte(TypeFill)
+	r := (*Fill)(unsafe.Pointer(&it.Data[it.Head+1]))
+	it.Head += 1 + int(unsafe.Sizeof(Fill{}))
+	return r
+}
