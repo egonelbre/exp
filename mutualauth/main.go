@@ -143,9 +143,9 @@ func (ln tcpKeepAliveListener) Accept() (c net.Conn, err error) {
 }
 
 func NewCert(pemfile string) error {
-	priv, err := rsa.GenerateKey(rand.Reader, 2048)
+	priv, err := rsa.GenerateKey(rand.Reader, 4096)
 	if err != nil {
-		return fmt.Errorf("rsa.GenerateKey: %s", err)
+		return fmt.Errorf("error generating new key: %s", err)
 	}
 
 	notBefore := time.Now()
