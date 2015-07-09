@@ -6,8 +6,8 @@ package xxx
 import "github.com/egonelbre/exp/mm"
 
 type Fallback struct {
-	Primary  {{ .Primary.Name  }}
-	Fallback {{ .Fallback.Name }}
+	Primary  {{ .Primary.Type  }}
+	Fallback {{ .Fallback.Type }}
 }
 
 func (m *Fallback) Alignment() int {

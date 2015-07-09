@@ -31,21 +31,19 @@ type Emptyer interface {
 }
 
 type Spec struct {
-	Name      string
+	Type      string
 	Alignment int
 	Dealloc   bool
 	Owns      bool
 	Empty     bool
 }
 
-func (s *Spec) String() string { return s.Name }
-
 func SpecFor(v Allocator) *Spec {
 	_, dealloc := v.(Deallocator)
 	_, owns := v.(Owner)
 	_, empty := v.(Emptyer)
 	return &Spec{
-		Name:      fmt.Sprintf("%+T", v),
+		Type:      fmt.Sprintf("%+T", v),
 		Alignment: v.Alignment(),
 		Dealloc:   dealloc,
 		Owns:      owns,

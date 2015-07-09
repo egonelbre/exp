@@ -5,7 +5,7 @@ package xxx
 import "github.com/egonelbre/exp/mm"
 
 type Fallback struct {
-	Primary  *mm.Malloc
+	Primary  mm.Malloc
 	Fallback *mm.Region
 }
 
