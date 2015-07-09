@@ -4,4 +4,4 @@ Experimental memory-allocator generator, based on https://www.youtube.com/watch?
 
 To generate an example: `go run gen.go`.
 
-*Notes: It rarely makes sense to use such custom-allocators in Go. If you need to use it, you'll probably be better off implementing that thing in some other language (e.g. D, Rust etc.).*
+*Notes: It rarely makes sense to use such custom-allocators in Go. If you need to use it, you might be better off implementing that thing in some other language (e.g. C++, D, Rust, C etc.).*
