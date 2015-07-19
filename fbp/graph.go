@@ -17,10 +17,14 @@ type Registry map[Type]MakeFn
 type MakeFn func() Node
 
 type Graph struct {
-	Comm     interface{}
+	// Comm is used for input/output from the Graph
+	Comm interface{}
+	// Registry contains all the constructors for nodes
 	Registry Registry
-	Nodes    map[Name]Node
-	Chans    map[string]*Chan
+	// Nodes contains created node information
+	Nodes map[Name]Node
+	// Ports contains all tha ports
+	Ports map[string]*Port
 }
 
 type Node interface{}
@@ -29,18 +33,18 @@ type Runnable interface {
 	Run() error
 }
 
-type Chan struct {
+type Port struct {
 	Name string
-	Val  reflect.Value
+	Chan reflect.Value
 	Refs int32
 }
 
-func NewChan(name string, v reflect.Value) *Chan { return &Chan{name, v, 0} }
+func NewPort(name string, v reflect.Value) *Port { return &Port{name, v, 0} }
 
-func (c *Chan) Acquire() { atomic.AddInt32(&c.Refs, 1) }
-func (c *Chan) Release() {
+func (c *Port) Acquire() { atomic.AddInt32(&c.Refs, 1) }
+func (c *Port) Release() {
 	if atomic.AddInt32(&c.Refs, -1) == 0 {
-		c.Val.Close()
+		c.Chan.Close()
 	}
 }
 
@@ -50,10 +54,11 @@ func New(comm interface{}) *Graph {
 
 		Registry: make(Registry),
 		Nodes:    make(map[Name]Node),
-		Chans:    make(map[string]*Chan),
+		Ports:    make(map[string]*Port),
 	}
 }
 
+// Setup is convenience for parsing the wiring and wiring up the graph
 func (g *Graph) Setup(def string) error {
 	wiring, err := ParseWiring(def)
 	if err != nil {
@@ -63,8 +68,11 @@ func (g *Graph) Setup(def string) error {
 }
 
 func (g *Graph) WireUp(w *Wiring) error {
+	// we add comm as a node to the graph, this simplifies all the wiring
+	// I can use $ in the wiring and avoid multiple lookup mechanisms
 	g.Nodes["$"] = g.Comm
 
+	// create all the nodes
 	for name, typ := range w.Decls {
 		mk, ok := g.Registry[typ]
 		if !ok {
@@ -74,82 +82,107 @@ func (g *Graph) WireUp(w *Wiring) error {
 	}
 
 	for _, wire := range w.Wires {
+		// lookup the source node
 		from, ok := g.Nodes[wire.From]
 		if !ok {
 			return fmt.Errorf("source node %s does not exist", wire.From)
 		}
 
+		// lookup the destination node
 		to, ok := g.Nodes[wire.To]
 		if !ok {
 			return fmt.Errorf("target node %s does not exist", wire.To)
 		}
 
+		// find the actual source node struct
 		rfrom := reflect.ValueOf(from)
+		// deref pointers
+		// we need to have the actual struct for the FieldByName to work
 		for rfrom.Kind() == reflect.Ptr {
 			rfrom = rfrom.Elem()
 		}
+		// same as previous, but for destination node
 		rto := reflect.ValueOf(to)
 		for rto.Kind() == reflect.Ptr {
 			rto = rto.Elem()
 		}
 
+		// find the channel fields from nodes
 		rsrc := rfrom.FieldByName(string(wire.Src))
 		rdst := rto.FieldByName(string(wire.Dst))
 
-		if !rsrc.IsValid() {
+		// sanity checks
+		switch {
+		case !rsrc.IsValid():
 			return fmt.Errorf("source node %s does not have port %s", wire.From, wire.Src)
-		}
-		if rsrc.Kind() != reflect.Chan {
+		case rsrc.Kind() != reflect.Chan:
 			return fmt.Errorf("source %s.%s is not a chan", wire.From, wire.Src)
-		}
-
-		if !rdst.IsValid() {
+		case !rdst.IsValid():
 			return fmt.Errorf("target node %s does not have port %s", wire.To, wire.Dst)
-		}
-		if rdst.Kind() != reflect.Chan {
+		case rdst.Kind() != reflect.Chan:
 			return fmt.Errorf("target %s.%s is not a chan", wire.To, wire.Dst)
 		}
 
+		// recreate the full port names
 		srcname := string(wire.From) + "." + string(wire.Src)
 		dstname := string(wire.To) + "." + string(wire.Dst)
 
-		var src, dst *Chan
-
+		var src, dst *Port
+		// have attached the channel to the node already?
 		if rsrc.IsNil() {
-			v := reflect.MakeChan(rsrc.Type(), BufferSize)
-			rsrc.Set(v)
-			src = NewChan(srcname, v)
-			g.Chans[srcname] = src
+			// create new channel with correct type
+			ch := reflect.MakeChan(rsrc.Type(), BufferSize)
+			// add it to the struct
+			rsrc.Set(ch)
+			// create a port for it
+			src = NewPort(srcname, ch)
+			// add it to graph
+			g.Ports[srcname] = src
 		} else {
-			src, ok = g.Chans[srcname]
+			// look up the port
+			src, ok = g.Ports[srcname]
+			// sanity check
 			if !ok {
 				panic("uninitialized src " + srcname)
 			}
 		}
 
+		// have attached the channel to the node already?
 		if rdst.IsNil() {
-			v := reflect.MakeChan(rsrc.Type(), BufferSize)
-			rdst.Set(v)
-			dst = NewChan(dstname, v)
-			g.Chans[dstname] = dst
+			// create new channel with correct type
+			ch := reflect.MakeChan(rsrc.Type(), BufferSize)
+			// add it to the struct
+			rdst.Set(ch)
+			// create a port for it
+			dst = NewPort(dstname, ch)
+			// add it to graph
+			g.Ports[dstname] = dst
 		} else {
-			dst, ok = g.Chans[dstname]
+			// look up the port
+			dst, ok = g.Ports[dstname]
+			// sanity check
 			if !ok {
 				panic("uninitialized dst " + dstname)
 			}
 		}
 
+		// we acquire the destination port
 		dst.Acquire()
 
 		// create a copying routine
 		go func() {
+			// when the source finishes we release the destination port
+			// this way when the counter hits 0 i.e. there are no more incoming
+			// values to the In port of a node then it can be closed
 			defer dst.Release()
 			for {
-				v, ok := src.Val.Recv()
+				// pull out a value from the output of a node
+				v, ok := src.Chan.Recv()
 				if !ok {
 					return
 				}
-				dst.Val.Send(v)
+				// put it into result
+				dst.Chan.Send(v)
 			}
 		}()
 	}
@@ -200,9 +233,9 @@ func ParseWiring(def string) (*Wiring, error) {
 
 			wiring.Wires = append(wiring.Wires, Wire{
 				From: Name(xs[0][1]),
-				Src:  Port(xs[0][2]),
+				Src:  PortName(xs[0][2]),
 				To:   Name(xs[0][3]),
-				Dst:  Port(xs[0][4]),
+				Dst:  PortName(xs[0][4]),
 			})
 		}
 	}
@@ -212,7 +245,7 @@ func ParseWiring(def string) (*Wiring, error) {
 
 type Name string
 type Type string
-type Port string
+type PortName string
 
 type Wiring struct {
 	Decls map[Name]Type
@@ -221,7 +254,7 @@ type Wiring struct {
 
 type Wire struct {
 	From Name
-	Src  Port
+	Src  PortName
 	To   Name
-	Dst  Port
+	Dst  PortName
 }
