@@ -37,13 +37,17 @@ func main() {
 		written += n
 		count++
 	}
-	db.Flush()
 	elapsed := time.Since(start)
 
 	mb := float64(written) / float64(1<<20)
 	fmt.Printf("Write %.3fMB in %v\n", mb, elapsed)
 	fmt.Printf("      %.3fMB/s\n", mb/elapsed.Seconds())
 	fmt.Printf("      %v entries\n", count)
+
+	start = time.Now()
+	db.Flush()
+	elapsed = time.Since(start)
+	fmt.Printf("Flush %v\n", elapsed)
 
 	start = time.Now()
 	read := 0
