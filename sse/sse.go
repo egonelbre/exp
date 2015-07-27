@@ -1,12 +1,10 @@
 package sse
 
-func AddU32(dst, src []uint32)
-func SubU32(dst, src []uint32)
-func MulU32(dst, src []uint32)
+func AddU32_ASM(dst, src []uint32)
+func SubU32_ASM(dst, src []uint32)
+func MulU32_ASM(dst, src []uint32)
 
-func MinU32Len(dst, src []uint32) int
-
-func addU32(dst, src []uint32) {
+func AddU32_Slow(dst, src []uint32) {
 	n := len(dst)
 	if n > len(src) {
 		n = len(src)
@@ -17,7 +15,7 @@ func addU32(dst, src []uint32) {
 	}
 }
 
-func subU32(dst, src []uint32) {
+func SubU32_Slow(dst, src []uint32) {
 	n := len(dst)
 	if n > len(src) {
 		n = len(src)
@@ -28,7 +26,7 @@ func subU32(dst, src []uint32) {
 	}
 }
 
-func mulU32(dst, src []uint32) {
+func MulU32_Slow(dst, src []uint32) {
 	n := len(dst)
 	if n > len(src) {
 		n = len(src)

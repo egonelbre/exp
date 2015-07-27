@@ -1,18 +1,7 @@
 #include "textflag.h"
 
-// func MinU32Len(dst, src []uint32) int
-TEXT ·MinU32Len(SB),NOSPLIT,$0-56
-	MOVQ    dst+8(FP),  BX // len(dst)
-	MOVQ    src+32(FP), CX // len(src)
-
-	CMPQ     CX, BX
-	CMOVQGT  BX, CX
-
-	MOVL     CX, res+48(FP)
-	RET
-
-// func AddU32(dst, src []uint32)
-TEXT ·AddU32(SB),NOSPLIT,$0-48
+// func AddU32_ASM(dst, src []uint32)
+TEXT ·AddU32_ASM(SB),NOSPLIT,$0-48
 	MOVQ     dst+8(FP),  CX // CX = len(dst)
 	MOVQ     src+32(FP), BX // BX = len(src)
 
@@ -38,8 +27,8 @@ next:
 done:
 	RET
 
-// func SubU32(dst, src []uint32)
-TEXT ·SubU32(SB),NOSPLIT,$0
+// func SubU32_ASM(dst, src []uint32)
+TEXT ·SubU32_ASM(SB),NOSPLIT,$0
 	MOVQ     dst+8(FP),  CX // CX = len(dst)
 	MOVQ     src+32(FP), BX // BX = len(src)
 
@@ -65,8 +54,8 @@ next:
 done:
     RET
 
-// func MulU32(dst, src []uint32)
-TEXT ·MulU32(SB),NOSPLIT,$0
+// func MulU32_ASM(dst, src []uint32)
+TEXT ·MulU32_ASM(SB),NOSPLIT,$0
 	MOVQ     dst+8(FP),  CX // CX = len(dst)
 	MOVQ     src+32(FP), BX // BX = len(src)
 
