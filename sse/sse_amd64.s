@@ -1,5 +1,14 @@
 #include "textflag.h"
 
+// AX = &dst[0], BX = &src[0], CX = min(len(dst), len(src))
+#define SetupSlices \
+	MOVQ     dst+8(FP),  CX ; \
+	MOVQ     src+32(FP), BX ; \
+	CMPQ     CX, BX         ; \
+	CMOVQGT  BX, CX         ; \
+	MOVQ     dst+0(FP),  AX ; \
+	MOVQ     src+24(FP), BX ; \
+
 #define Load4x(FROM, A, B, C, D) \
 	MOVOU  +00(FROM), A; \
 	MOVOU  +16(FROM), B; \
@@ -21,12 +30,7 @@
 
 // func AddU32_SSE(dst, src []uint32)
 TEXT ·AddU32_SSE(SB),NOSPLIT,$0-48
-	MOVQ     dst+8(FP),  CX // CX = len(dst)
-	MOVQ     src+32(FP), BX // BX = len(src)
-	CMPQ     CX, BX         //
-	CMOVQGT  BX, CX         // CX = min(CX, BX)
-	MOVQ     dst+0(FP),  AX // AX = &dst[0]
-	MOVQ     src+24(FP), BX // BX = &src[0]
+	SetupSlices
 
 	vector:
 		SUBQ     $16, CX
@@ -57,12 +61,7 @@ TEXT ·AddU32_SSE(SB),NOSPLIT,$0-48
 
 // func SubU32_SSE(dst, src []uint32)
 TEXT ·SubU32_SSE(SB),NOSPLIT,$0
-	MOVQ     dst+8(FP),  CX // CX = len(dst)
-	MOVQ     src+32(FP), BX // BX = len(src)
-	CMPQ     CX, BX         //
-	CMOVQGT  BX, CX         // CX = min(CX, BX)
-	MOVQ     dst+0(FP),  AX // AX = &dst[0]
-	MOVQ     src+24(FP), BX // BX = &src[0]
+	SetupSlices
 
 	vector:
 		SUBQ     $16, CX
@@ -94,12 +93,7 @@ TEXT ·SubU32_SSE(SB),NOSPLIT,$0
 
 // func MulU32_SSE(dst, src []uint32)
 TEXT ·MulU32_SSE(SB),NOSPLIT,$0
-	MOVQ     dst+8(FP),  CX // CX = len(dst)
-	MOVQ     src+32(FP), BX // BX = len(src)
-	CMPQ     CX, BX         //
-	CMOVQGT  BX, CX         // CX = min(CX, BX)
-	MOVQ     dst+0(FP),  AX // AX = &dst[0]
-	MOVQ     src+24(FP), BX // BX = &src[0]
+	SetupSlices
 
 	vector:
 		SUBQ     $16, CX
