@@ -1,33 +1,21 @@
 #include "textflag.h"
 
-#define Load4xLow(FROM)   \
-	MOVOU  +00(FROM), X0; \
-	MOVOU  +16(FROM), X1; \
-	MOVOU  +32(FROM), X2; \
-	MOVOU  +48(FROM), X3;
+#define Load4x(FROM, A, B, C, D) \
+	MOVOU  +00(FROM), A; \
+	MOVOU  +16(FROM), B; \
+	MOVOU  +32(FROM), C; \
+	MOVOU  +48(FROM), D;
 
-#define Store4xLow(INTO)  \
-	MOVOU  X0, +00(INTO); \
-	MOVOU  X1, +16(INTO); \
-	MOVOU  X2, +32(INTO); \
-	MOVOU  X3, +48(INTO);
+#define Store4x(INTO, A, B, C, D)  \
+	MOVOU  A, +00(INTO); \
+	MOVOU  B, +16(INTO); \
+	MOVOU  C, +32(INTO); \
+	MOVOU  D, +48(INTO);
 
-#define Load4xHigh(FROM)  \
-	MOVOU  +00(FROM), X4; \
-	MOVOU  +16(FROM), X5; \
-	MOVOU  +32(FROM), X6; \
-	MOVOU  +48(FROM), X7;
-
-#define Store4xHigh(INTO) \
-	MOVOU  X4, +00(INTO); \
-	MOVOU  X5, +16(INTO); \
-	MOVOU  X6, +32(INTO); \
-	MOVOU  X7, +48(INTO);
-
-#define Apply4xLowHigh(OP) \
-	OP X0, X4;             \
-	OP X1, X5;             \
-	OP X2, X6;             \
+#define Apply4x(OP) \
+	OP X0, X4;      \
+	OP X1, X5;      \
+	OP X2, X6;      \
 	OP X3, X7;
 
 
@@ -44,10 +32,10 @@ TEXT ·AddU32_SSE(SB),NOSPLIT,$0-48
 		SUBQ     $16, CX
 		JL trailing
 
-		Load4xLow(BX)
-		Load4xHigh(AX)
-		Apply4xLowHigh(PADDL)
-		Store4xHigh(AX)
+		Load4x(BX, X0, X1, X2, X3)
+		Load4x(AX, X4, X5, X6, X7)
+		Apply4x(PADDL)
+		Store4x(AX, X4, X5, X6, X7)
 
 		// increment
 		ADDQ $64, BX
@@ -80,10 +68,10 @@ TEXT ·SubU32_SSE(SB),NOSPLIT,$0
 		SUBQ     $16, CX
 		JL trailing
 
-		Load4xLow(BX)
-		Load4xHigh(AX)
-		Apply4xLowHigh(PSUBL)
-		Store4xHigh(AX)
+		Load4x(BX, X0, X1, X2, X3)
+		Load4x(AX, X4, X5, X6, X7)
+		Apply4x(PSUBL)
+		Store4x(AX, X4, X5, X6, X7)
 
 		ADDQ $64, BX
 		ADDQ $64, AX
@@ -117,11 +105,10 @@ TEXT ·MulU32_SSE(SB),NOSPLIT,$0
 		SUBQ     $16, CX
 		JL trailing
 
-		// incorrect code!!!!!!!!
-		Load4xLow(BX)
-		Load4xHigh(AX)
-		Apply4xLowHigh(PADDL)
-		Store4xHigh(AX)
+		Load4x(BX, X0, X1, X2, X3)
+		Load4x(AX, X4, X5, X6, X7)
+		Apply4x(PMULLW)
+		Store4x(AX, X4, X5, X6, X7)
 
 		// increment
 		ADDQ $64, BX
