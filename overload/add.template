@@ -1,0 +1,8 @@
+// +build ignore
+
+package template
+
+import g "github.com/egonelbre/exp/overload/template"
+
+func before(a, b g.Vector) g.Vector { return a + b }
+func after(a, b g.Vector) g.Vector  { return a.Add(b) }
