@@ -1,3 +1,51 @@
+/*
+Example how you would translate the ASN1 spec
+
+  SignerInfo ::= SEQUENCE {
+     version CMSVersion,
+     sid SignerIdentifier,
+     digestAlgorithm DigestAlgorithmIdentifier,
+     signedAttrs [0] IMPLICIT SignedAttributes OPTIONAL,
+     signatureAlgorithm SignatureAlgorithmIdentifier,
+     signature SignatureValue,
+     unsignedAttrs [1] IMPLICIT UnsignedAttributes OPTIONAL }
+
+   SignerIdentifier ::= CHOICE {
+     issuerAndSerialNumber IssuerAndSerialNumber,
+     subjectKeyIdentifier [0] SubjectKeyIdentifier }
+
+   SignatureValue ::= OCTET STRING
+
+type asnSignerInfo struct {
+	Version            int64
+	Issuer             asnIssuerAndSerialNumber
+	SubjectKeyId       []byte
+	DigestAlgorithm    pkix.AlgorithmIdentifier
+	SignedAttrs        asnAttributeSet
+	SignatureAlgorithm pkix.AlgorithmIdentifier
+	Signature          []byte
+	UnsignedAttrs      asnAttributeSet
+}
+
+func (d *asnSignerInfo) marshaler() ber.Marshaler {
+	return ber.Sequence{
+		ber.Check{ber.Universal, ber.TagInteger, ber.Int64{&d.Version}},
+		ber.Choice{
+			ber.Check{ber.Universal, ber.TagSequence, &d.Issuer},
+			ber.Check{ber.Context, 0, ber.OctetString{&d.SubjectKeyId}},
+		},
+		ber.Check{ber.Universal, ber.TagSequence, (*asnAlgorithmIdentifier)(&d.DigestAlgorithm)},
+		ber.Optional{ber.Check{ber.Context, 0, &d.SignedAttrs}},
+		ber.Check{ber.Universal, ber.TagSequence, (*asnAlgorithmIdentifier)(&d.SignatureAlgorithm)},
+		ber.Check{ber.Universal, ber.TagOctetString, ber.OctetString{&d.Signature}},
+		ber.Optional{ber.Check{ber.Context, 1, &d.UnsignedAttrs}},
+	}
+}
+
+func (d *asnSignerInfo) Unmarshal(tree *ber.Tree) error { return d.marshaler().Unmarshal(tree) }
+func (d *asnSignerInfo) Marshal() (*ber.Tree, error) { return d.marshaler().Marshal() }
+*/
+
 package ber
 
 // http://play.golang.org/p/MdL7k8-5ER
