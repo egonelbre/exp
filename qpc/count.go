@@ -45,12 +45,15 @@ func (hist *History) PrintSummary() {
 	}
 
 	fmt.Printf("%10s", hist.name)
-	fmt.Printf(" %10s", time.Duration(stats.Min(nanos)))
+	min, _ := stats.Min(nanos)
+	fmt.Printf(" %10s", time.Duration(min))
 	for _, p := range percentiles {
-		nano := time.Duration(stats.Percentile(nanos, p))
+		per, _ := stats.Percentile(nanos, p)
+		nano := time.Duration(per)
 		fmt.Printf(" %10s", nano)
 	}
-	fmt.Printf(" %10s", time.Duration(stats.Max(nanos)))
+	max, _ := stats.Max(nanos)
+	fmt.Printf(" %10s", time.Duration(max))
 	fmt.Println()
 }
 
@@ -72,11 +75,14 @@ func FprintSummary(out io.Writer, hists ...*History) {
 		}
 
 		fmt.Fprintf(out, "%10s", hist.name)
-		fmt.Fprintf(out, " %10s", time.Duration(stats.Min(nanos)))
+		min, _ := stats.Min(nanos)
+		fmt.Fprintf(out, " %10s", time.Duration(min))
 		for _, p := range percentiles {
-			fmt.Fprintf(out, " %10s", time.Duration(stats.Percentile(nanos, p)))
+			per, _ := stats.Percentile(nanos, p)
+			fmt.Fprintf(out, " %10s", time.Duration(per))
 		}
-		fmt.Fprintf(out, " %10s", time.Duration(stats.Max(nanos)))
+		max, _ := stats.Max(nanos)
+		fmt.Fprintf(out, " %10s", time.Duration(max))
 		fmt.Fprintln(out)
 	}
 }
