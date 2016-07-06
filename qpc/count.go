@@ -28,13 +28,15 @@ type History struct {
 }
 
 func NewHistory(name string) *History { return &History{name: name} }
-func (hist *History) Start()          { hist.start = Now() }
 
+func (hist *History) Start() { hist.start = Now() }
 func (hist *History) Stop() {
 	now := Now()
 	hist.last = now.Sub(hist.start).Duration()
 	hist.values = append(hist.values, hist.last)
 }
+
+func (hist *History) SampleCount() int { return len(hist.values) }
 
 func (hist *History) Last() time.Duration { return hist.last }
 
