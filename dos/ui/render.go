@@ -21,8 +21,8 @@ func (form *Form) Init() {
 func (form *Form) UpdateLayout() {
 	form.ClientRect = form.BoundsRect
 
-	form.ClientRect.Left += 1
-	form.ClientRect.Top += 3
+	form.ClientRect.Left = 1
+	form.ClientRect.Top = 3
 	form.ClientRect.Width -= 2
 	form.ClientRect.Height -= 4
 
@@ -47,4 +47,9 @@ func (form *Form) Render() {
 	}
 
 	form.DrawFlush()
+}
+
+func (form *Form) Erase() {
+	r := Rect{0, 0, form.BoundsRect.Width, form.BoundsRect.Height}
+	form.DrawBlock(r, termbox.Cell{Ch: ' '})
 }

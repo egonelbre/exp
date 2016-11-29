@@ -3,14 +3,17 @@ package ui
 import termbox "github.com/nsf/termbox-go"
 
 func (form *Form) Show() {
+	// initial load
 	err := form.Record.Load()
 	if err != nil {
 		//TODO: handle error properly
 		panic(err)
 	}
 
+	// init all components, layouts
 	form.Init()
 
+	// save if needed
 	defer func() {
 		if form.Save {
 			if err := form.Record.Save(); err != nil {
@@ -20,10 +23,17 @@ func (form *Form) Show() {
 		}
 	}()
 
+	// update global forms list
+	form.Screen.Push(form)
+	defer form.Screen.Pop()
+
+	// initial render
 	if len(form.Screen.Actions) == 0 {
 		form.Render()
 	}
+	defer form.Erase()
 
+	// handle actions
 	for action := range form.Screen.Actions {
 		form.Handle(action)
 
