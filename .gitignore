@@ -2,6 +2,7 @@
 *.exe
 *.*~
 *.~.*
-
+*~
+~*
 
 *.sublime-workspace
