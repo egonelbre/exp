@@ -3,22 +3,30 @@ package main
 import (
 	"fmt"
 
-	"github.com/egonelbre/exp/uirender/ui"
+	"github.com/egonelbre/exp/htmlrender/dom"
 )
+
+var CustomTemplate = dom.MustTemplate(`
+	<div id="{{.id}}">
+		<span>{{.glyph}}</span>
+		<span>{{.title}}</span>
+		<span>{{ Render .child }}</span>
+	</div>
+`)
 
 type Input struct {
 	ID          string
 	Placeholder string
 }
 
-func (input Input) Render(w ui.Writer) {
+func (input Input) Render(w dom.Writer) {
 	w.Open("input")
 	if input.ID != "" {
 		w.Attr("id", input.ID)
 		w.Attr("name", input.ID)
 	}
 
-	ui.Class{"mdl-input"}.Render(w)
+	dom.Class{"mdl-input"}.Render(w)
 
 	if input.Placeholder != "" {
 		w.Attr("placeholder", input.Placeholder)
@@ -28,14 +36,21 @@ func (input Input) Render(w ui.Writer) {
 }
 
 func main() {
-	writer := ui.NewWriter()
+	writer := dom.NewWriter()
 
-	writer.Render(ui.Form{
-		ui.Class{"example", "test"},
-		ui.Method{"POST"},
+	writer.Render(dom.Form{
+		dom.Class{"example", "test"},
+		dom.Method{"POST"},
 
 		Input{"first", "First Name"},
 		Input{"last", "Last Name"},
+
+		CustomTemplate.Renderer(map[string]interface{}{
+			"id":    "clicky",
+			"glyph": "pen",
+			"title": "clicky",
+			"child": Input{"middle", "Middle Name"},
+		}),
 	})
 
 	fmt.Println(writer.String())

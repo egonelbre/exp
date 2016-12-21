@@ -1,4 +1,4 @@
-package ui
+package dom
 
 type Writer interface {
 	Open(tag string)
@@ -30,6 +30,10 @@ type RendererExtended interface {
 	RenderOpen(w Writer)
 	RenderClose(w Writer)
 }
+
+type RenderFunc func(w Writer)
+
+func (fn RenderFunc) Render(w Writer) { fn(w) }
 
 func (w *writer) Wrap(r RendererExtended) func() {
 	r.RenderOpen(w)

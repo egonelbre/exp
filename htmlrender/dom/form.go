@@ -1,4 +1,4 @@
-package ui
+package dom
 
 type Name struct{ Value string }
 
