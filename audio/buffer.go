@@ -1,10 +1,14 @@
 package audio
 
-import "errors"
+import (
+	"errors"
+	"math"
+	"time"
+)
 
 type Format struct {
-	SampleRate uint32
-	Channels   int16
+	SampleRate int
+	Channels   int
 }
 
 type Buffer32 struct {
@@ -17,17 +21,29 @@ type Buffer64 struct {
 	Data []float64
 }
 
-func NewBuffer32(format Format, sampleCount int) *Buffer32 {
+func NewBuffer32(format Format, duration time.Duration) *Buffer32 {
+	samples := math.Ceil(duration.Seconds() / float64(format.SampleRate))
+	return NewBuffer32Samples(format, int(samples))
+}
+
+func NewBuffer64(format Format, duration time.Duration) *Buffer64 {
+	samples := math.Ceil(duration.Seconds() / float64(format.SampleRate))
+	return NewBuffer64Samples(format, int(samples))
+}
+
+func NewBuffer32Samples(format Format, sampleCount int) *Buffer32 {
+	n := format.Channels * sampleCount
 	return &Buffer32{
 		Format: format,
-		Data:   make([]float32, sampleCount, sampleCount),
+		Data:   make([]float32, n, n),
 	}
 }
 
-func NewBuffer64(format Format, sampleCount int) *Buffer64 {
+func NewBuffer64Samples(format Format, sampleCount int) *Buffer64 {
+	n := format.Channels * sampleCount
 	return &Buffer64{
 		Format: format,
-		Data:   make([]float64, sampleCount, sampleCount),
+		Data:   make([]float64, n, n),
 	}
 }
 
@@ -36,22 +52,9 @@ var (
 	ErrDifferentBufferSize = errors.New("different buffer sizes")
 )
 
-func (format Format) Same(other Format) error {
-	if Debug {
-		if !format.Equals(other) {
-			return ErrIncompatibleFormat
-		}
-	}
-	return nil
-}
-
-func (format Format) Equals(other Format) bool {
-	return format == other
-}
-
 func (buffer *Buffer32) Process32(output *Buffer32) error {
-	if err := buffer.Format.Same(output.Format); err != nil {
-		return err
+	if Debug && buffer.Format != output.Format {
+		return ErrIncompatibleFormat
 	}
 	if len(buffer.Data) != len(output.Data) {
 		return ErrDifferentBufferSize
@@ -63,8 +66,8 @@ func (buffer *Buffer32) Process32(output *Buffer32) error {
 }
 
 func (buffer *Buffer32) Process64(output *Buffer64) error {
-	if err := buffer.Format.Same(output.Format); err != nil {
-		return err
+	if Debug && buffer.Format != output.Format {
+		return ErrIncompatibleFormat
 	}
 	if len(buffer.Data) != len(output.Data) {
 		return ErrDifferentBufferSize
@@ -78,8 +81,8 @@ func (buffer *Buffer32) Process64(output *Buffer64) error {
 }
 
 func (buffer *Buffer64) Process32(output *Buffer32) error {
-	if err := buffer.Format.Same(output.Format); err != nil {
-		return err
+	if Debug && buffer.Format != output.Format {
+		return ErrIncompatibleFormat
 	}
 	if len(buffer.Data) != len(output.Data) {
 		return ErrDifferentBufferSize
@@ -93,8 +96,8 @@ func (buffer *Buffer64) Process32(output *Buffer32) error {
 }
 
 func (buffer *Buffer64) Process64(output *Buffer64) error {
-	if err := buffer.Format.Same(output.Format); err != nil {
-		return err
+	if Debug && buffer.Format != output.Format {
+		return ErrIncompatibleFormat
 	}
 	if len(buffer.Data) != len(output.Data) {
 		return ErrDifferentBufferSize

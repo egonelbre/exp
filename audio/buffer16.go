@@ -8,8 +8,8 @@ type BufferInt16 struct {
 }
 
 func (buffer *BufferInt16) Process32(output *Buffer32) error {
-	if err := buffer.Format.Same(output.Format); err != nil {
-		return err
+	if Debug && buffer.Format != output.Format {
+		return ErrIncompatibleFormat
 	}
 	if len(buffer.Data) != len(output.Data) {
 		return ErrDifferentBufferSize
@@ -23,8 +23,8 @@ func (buffer *BufferInt16) Process32(output *Buffer32) error {
 }
 
 func (buffer *BufferInt16) Process64(output *Buffer64) error {
-	if err := buffer.Format.Same(output.Format); err != nil {
-		return err
+	if Debug && buffer.Format != output.Format {
+		return ErrIncompatibleFormat
 	}
 	if len(buffer.Data) != len(output.Data) {
 		return ErrDifferentBufferSize
