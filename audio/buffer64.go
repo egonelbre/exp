@@ -50,7 +50,7 @@ func (buffer *Buffer64) Process32(output *Buffer32) (int, error) {
 		output.Data[i] = float32(v)
 	}
 
-	return 0, nil
+	return len(output.Data), nil
 }
 
 func (buffer *Buffer64) Process64(output *Buffer64) (int, error) {
@@ -62,5 +62,5 @@ func (buffer *Buffer64) Process64(output *Buffer64) (int, error) {
 	}
 
 	copy(output.Data, buffer.Data)
-	return 0, nil
+	return len(output.Data), nil
 }

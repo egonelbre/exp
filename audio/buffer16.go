@@ -19,7 +19,7 @@ func (buffer *BufferInt16) Process32(output *Buffer32) (int, error) {
 		output.Data[i] = float32(v) * int16scale
 	}
 
-	return 0, nil
+	return len(output.Data), nil
 }
 
 func (buffer *BufferInt16) Process64(output *Buffer64) (int, error) {
@@ -34,5 +34,5 @@ func (buffer *BufferInt16) Process64(output *Buffer64) (int, error) {
 		output.Data[i] = float64(v) * int16scale
 	}
 
-	return 0, nil
+	return len(output.Data), nil
 }

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"io"
 	"math"
 	"time"
@@ -12,32 +11,29 @@ import (
 
 type Reader struct {
 	freqs []float64
-	head  int
-
-	frameDuration time.Duration
+	pos   time.Duration
+	decay time.Duration
+	phase float64
 }
 
 func NewReader(freqs ...float64) *Reader {
 	return &Reader{
 		freqs: freqs,
-		head:  0,
-
-		frameDuration: time.Second,
+		pos:   0,
+		decay: time.Second,
+		phase: 0.0,
 	}
 }
 
-func (reader *Reader) NewFrame() audio.Frame {
-	return &Frame{0, reader.frameDuration, reader.frameDuration, 0}
-}
-
 func (reader *Reader) Duration() time.Duration {
-	return time.Duration(len(reader.freqs)) * reader.frameDuration
+	return time.Duration(len(reader.freqs)) * reader.decay
 }
 
 func (reader *Reader) Position() time.Duration {
-	return time.Duration(reader.head) * reader.frameDuration
+	return reader.pos
 }
 
+/*
 func (reader *Reader) Seek(offset time.Duration, whence int) (time.Duration, error) {
 	//TODO: handle whence parameter
 	var err error
@@ -54,88 +50,54 @@ func (reader *Reader) Seek(offset time.Duration, whence int) (time.Duration, err
 
 	return reader.Position(), err
 }
+*/
 
-func (reader *Reader) Read(frame audio.Frame) error {
-	f, ok := frame.(*Frame)
-	if !ok {
-		return audio.ErrInvalidFrame
-	}
-
-	if reader.head >= len(reader.freqs) {
-		return io.EOF
-	}
-
-	f.offset = reader.Position()
-	f.position = 0
-	f.duration = reader.frameDuration
-	f.frequency = reader.freqs[reader.head]
-
-	reader.head++
-	if reader.head >= len(reader.freqs) {
-		return io.EOF
-	}
-
-	return nil
-}
-
-type Frame struct {
-	offset    time.Duration
-	position  time.Duration
-	duration  time.Duration
-	frequency float64
-}
-
-func (frame *Frame) Offset() time.Duration   { return frame.offset }
-func (frame *Frame) Position() time.Duration { return frame.position }
-func (frame *Frame) Duration() time.Duration { return frame.duration }
-
-func (frame *Frame) Seek(offset time.Duration, whence int) (time.Duration, error) {
-	// TODO: implement whence
-	frame.position = offset
-	return offset, errors.New("seek not supported")
-}
-
-func (frame *Frame) Done() bool {
-	return frame.position >= frame.duration
-}
-
-func (frame *Frame) Process32(buf *audio.Buffer32) (int, error) {
-	inv := 2.0 * math.Pi / float64(buf.SampleRate)
-	speed := frame.frequency * inv
-	phase := speed * float64(buf.Format.SamplesPerChannel(frame.position))
-
-	samplesPerChannel := buf.Format.SamplesPerChannel(frame.duration - frame.position)
+func (reader *Reader) Process32(buf *audio.Buffer32) (int, error) {
+	// only render as much as we should
+	timeLeft := reader.Duration() - reader.Position()
+	samplesPerChannel := buf.Format.SamplesPerChannel(timeLeft)
 	samplesLeft := samplesPerChannel * buf.Format.ChannelCount
 	if samplesLeft < len(buf.Data) {
 		buf = buf.Slice(0, samplesLeft)
 	}
+
+	// current frequency
+	head := int(reader.pos / reader.decay)
+	pos := reader.pos - time.Duration(head)*reader.decay
+	freq := reader.freqs[head]
+
+	// params
+	timeStep := buf.Format.BufferDuration(1)
+	inv := 2.0 * math.Pi / float64(buf.SampleRate)
+	speed := freq * inv
+	phase := reader.phase
 
 	generate.Mono32(buf, func() float32 {
 		r := math.Cos(phase)
 		phase += speed
+		pos += timeStep
+		if pos > reader.decay {
+			pos = 0
+			head++
+			if head < len(reader.freqs) {
+				freq = reader.freqs[head]
+				speed = freq * inv
+			}
+		}
 		return float32(r)
 	})
 
-	frame.position += buf.Duration()
+	reader.pos += buf.Duration()
+	reader.phase = phase
+
+	if reader.Position() >= reader.Duration() {
+		return len(buf.Data), io.EOF
+	}
+
 	return len(buf.Data), nil
 }
 
-func (frame *Frame) Process64(buf *audio.Buffer64) (int, error) {
-	inv := 2.0 * math.Pi / float64(buf.SampleRate)
-	speed := frame.frequency * inv
-	phase := speed * float64(buf.Format.SamplesPerChannel(frame.position))
-
-	samplesPerChannel := buf.Format.SamplesPerChannel(frame.duration - frame.position)
-	samplesLeft := samplesPerChannel * buf.Format.ChannelCount
-	if samplesLeft < len(buf.Data) {
-		buf = buf.Slice(0, samplesLeft)
-	}
-
-	generate.Mono64(buf, func() float64 {
-		r := math.Cos(phase)
-		phase += speed
-		return r
-	})
-	frame.position += buf.Duration()
-	return len(buf.Data), nil
+func (reader *Reader) Process64(buf *audio.Buffer64) (int, error) {
+	panic("TODO")
+	return 0, nil
 }

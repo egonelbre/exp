@@ -34,7 +34,6 @@ func main() {
 		}
 		defer device.Close()
 		info := device.OutputInfo()
-		frame := device.NewFrame()
 
 		work := audio.NewBuffer32Samples(audio.Format{
 			ChannelCount: info.ChannelCount,
@@ -44,8 +43,7 @@ func main() {
 		for {
 			sine.Process32(work)
 			gain.Process32(work)
-			frame.Process32(work)
-			if err := device.Write(frame); err != nil {
+			if _, err := device.Process32(work); err != nil {
 				log.Fatal("failed to write audio frame: ", err)
 			}
 		}

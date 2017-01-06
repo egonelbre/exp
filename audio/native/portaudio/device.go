@@ -1,8 +1,6 @@
 package portaudio
 
 import (
-	"time"
-
 	"github.com/egonelbre/exp/audio"
 	"github.com/gordonklaus/portaudio"
 )
@@ -12,81 +10,48 @@ func init() {
 }
 
 type OutputDevice struct {
-	stream     *portaudio.Stream
-	backbuffer audio.Buffer32
-	info       audio.DeviceInfo
-}
+	stream *portaudio.Stream
+	info   audio.DeviceInfo
 
-func (device *OutputDevice) Position() time.Duration { return 0 }
-
-func (device *OutputDevice) OutputInfo() audio.DeviceInfo {
-	return device.info
-}
-
-func (device *OutputDevice) Write(frame audio.Frame) error {
-	f, ok := frame.(*Frame)
-	if !ok ||
-		f.buffer.Format != device.backbuffer.Format ||
-		len(f.buffer.Data) != len(device.backbuffer.Data) {
-		return audio.ErrInvalidFrame
-	}
-
-	for i := range f.buffer.Data[f.head:] {
-		f.buffer.Data[f.head+i] = 0
-	}
-
-	copy(device.backbuffer.Data, f.buffer.Data)
-	f.head = 0
-
-	return device.stream.Write()
-}
-
-func (device *OutputDevice) Close() error {
-	return device.stream.Stop()
-}
-
-type Frame struct {
 	head   int
 	buffer audio.Buffer32
 }
 
-func (device *OutputDevice) NewFrame() audio.Frame {
-	return &Frame{0, *device.backbuffer.Clone()}
-}
+func (device *OutputDevice) OutputInfo() audio.DeviceInfo { return device.info }
 
-func (frame *Frame) Done() bool {
-	return frame.head >= len(frame.buffer.Data)
-}
-
-func (frame *Frame) Offset() time.Duration { return 0 }
-
-func (frame *Frame) Seek(offset time.Duration, whence int) (time.Duration, error) {
-	panic("TODO")
-	return 0, nil
-}
-
-func (frame *Frame) Position() time.Duration {
-	return frame.buffer.Format.BufferDuration(frame.head)
-}
-
-func (frame *Frame) Duration() time.Duration {
-	return frame.buffer.Format.BufferDuration(len(frame.buffer.Data))
-}
-
-func (frame *Frame) Process32(buf *audio.Buffer32) (int, error) {
+func (device *OutputDevice) Process32(buf *audio.Buffer32) (int, error) {
 	// TODO: support all conversions
-	if buf.Format != frame.buffer.Format {
+	if buf.Format != device.buffer.Format {
 		return 0, audio.ErrInvalidFrame
 	}
 
-	n := copy(frame.buffer.Data[frame.head:], buf.Data)
-	frame.head += n
+	partial := buf.Data
+	total := 0
+	for len(partial) > 0 {
+		n := copy(device.buffer.Data[device.head:], partial)
+		partial = partial[n:]
 
-	return n, nil
+		total += n
+		device.head += n
+
+		if device.head >= len(device.buffer.Data) {
+			device.head = 0
+			if err := device.stream.Write(); err != nil {
+				return total, err
+			}
+		}
+	}
+
+	return total, nil
 }
 
-func (frame *Frame) Process64(buf *audio.Buffer64) (int, error) {
+func (device *OutputDevice) Process64(buf *audio.Buffer64) (int, error) {
+	panic("TODO")
 	return 0, audio.ErrIncompatibleFormat
+}
+
+func (device *OutputDevice) Close() error {
+	return device.stream.Stop()
 }
 
 func NewOutputDevice(pref audio.DeviceInfo) (audio.OutputDevice, error) {
@@ -95,7 +60,7 @@ func NewOutputDevice(pref audio.DeviceInfo) (audio.OutputDevice, error) {
 
 	device.info = pref
 
-	device.backbuffer = *audio.NewBuffer32Samples(audio.Format{
+	device.buffer = *audio.NewBuffer32Samples(audio.Format{
 		ChannelCount: pref.ChannelCount,
 		SampleRate:   pref.SampleRate,
 	}, pref.SamplesPerChannel)
@@ -103,8 +68,8 @@ func NewOutputDevice(pref audio.DeviceInfo) (audio.OutputDevice, error) {
 	device.stream, err = portaudio.OpenDefaultStream(
 		0, int(pref.ChannelCount),
 		float64(pref.SampleRate),
-		len(device.backbuffer.Data),
-		&device.backbuffer.Data,
+		len(device.buffer.Data),
+		&device.buffer.Data,
 	)
 	if err != nil {
 		return nil, err

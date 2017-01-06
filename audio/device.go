@@ -10,11 +10,11 @@ type DeviceInfo struct {
 type OutputDevice interface {
 	OutputInfo() DeviceInfo
 	Close() error
-	StreamWriter
+	Node
 }
 
 type InputDevice interface {
 	InputInfo() DeviceInfo
 	Close() error
-	StreamReader
+	Node
 }
