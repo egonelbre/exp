@@ -7,7 +7,7 @@ type Clip struct {
 	buffer audio.BufferInt16
 }
 
-func (clip *Clip) Process32(output *audio.Buffer32) error {
+func (clip *Clip) Process32(output *audio.Buffer32) (int, error) {
 	tmp := clip.buffer
 	// TODO: fix bounds
 	tmp.Data = tmp.Data[clip.head : clip.head+len(output.Data)]
@@ -15,7 +15,7 @@ func (clip *Clip) Process32(output *audio.Buffer32) error {
 	return tmp.Process32(output)
 }
 
-func (clip *Clip) Process64(output *audio.Buffer64) error {
+func (clip *Clip) Process64(output *audio.Buffer64) (int, error) {
 	tmp := clip.buffer
 	// TODO: fix bounds
 	tmp.Data = tmp.Data[clip.head : clip.head+len(output.Data)]

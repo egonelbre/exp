@@ -7,32 +7,32 @@ type BufferInt16 struct {
 	Data []int16
 }
 
-func (buffer *BufferInt16) Process32(output *Buffer32) error {
+func (buffer *BufferInt16) Process32(output *Buffer32) (int, error) {
 	if Debug && buffer.Format != output.Format {
-		return ErrIncompatibleFormat
+		return 0, ErrIncompatibleFormat
 	}
 	if len(buffer.Data) != len(output.Data) {
-		return ErrDifferentBufferSize
+		return 0, ErrDifferentBufferSize
 	}
 
 	for i, v := range buffer.Data {
 		output.Data[i] = float32(v) * int16scale
 	}
 
-	return nil
+	return 0, nil
 }
 
-func (buffer *BufferInt16) Process64(output *Buffer64) error {
+func (buffer *BufferInt16) Process64(output *Buffer64) (int, error) {
 	if Debug && buffer.Format != output.Format {
-		return ErrIncompatibleFormat
+		return 0, ErrIncompatibleFormat
 	}
 	if len(buffer.Data) != len(output.Data) {
-		return ErrDifferentBufferSize
+		return 0, ErrDifferentBufferSize
 	}
 
 	for i, v := range buffer.Data {
 		output.Data[i] = float64(v) * int16scale
 	}
 
-	return nil
+	return 0, nil
 }

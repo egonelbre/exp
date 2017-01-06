@@ -10,7 +10,7 @@ type Gain struct {
 	current float64
 }
 
-func (gain *Gain) Process32(buf *audio.Buffer32) error {
+func (gain *Gain) Process32(buf *audio.Buffer32) (int, error) {
 	target := float32(gain.Value.Get())
 	current := float32(gain.current)
 
@@ -18,10 +18,10 @@ func (gain *Gain) Process32(buf *audio.Buffer32) error {
 		for i, v := range buf.Data {
 			buf.Data[i] = v * current
 		}
-		return nil
+		return len(buf.Data), nil
 	}
 
-	switch buf.Channels {
+	switch buf.ChannelCount {
 	case 1:
 		for i, v := range buf.Data {
 			buf.Data[i] = v * current
@@ -37,8 +37,8 @@ func (gain *Gain) Process32(buf *audio.Buffer32) error {
 			}
 		}
 	default:
-		for i := 0; i < len(buf.Data); i += int(buf.Channels) {
-			for k := 0; k < int(buf.Channels); k++ {
+		for i := 0; i < len(buf.Data); i += int(buf.ChannelCount) {
+			for k := 0; k < int(buf.ChannelCount); k++ {
 				buf.Data[i+k] *= current
 			}
 			current = (current + target) * 0.5
@@ -47,14 +47,14 @@ func (gain *Gain) Process32(buf *audio.Buffer32) error {
 
 	if atomic2.AlmostEqual32(current, target) {
 		gain.current = gain.Value.Get()
-		return nil
+		return len(buf.Data), nil
 	}
 	gain.current = float64(current)
 
-	return nil
+	return len(buf.Data), nil
 }
 
-func (gain *Gain) Process64(buf *audio.Buffer64) error {
+func (gain *Gain) Process64(buf *audio.Buffer64) (int, error) {
 	target := gain.Value.Get()
 	current := gain.current
 
@@ -62,10 +62,10 @@ func (gain *Gain) Process64(buf *audio.Buffer64) error {
 		for i, v := range buf.Data {
 			buf.Data[i] = v * current
 		}
-		return nil
+		return len(buf.Data), nil
 	}
 
-	switch buf.Channels {
+	switch buf.ChannelCount {
 	case 1:
 		for i, v := range buf.Data {
 			buf.Data[i] = v * current
@@ -81,8 +81,8 @@ func (gain *Gain) Process64(buf *audio.Buffer64) error {
 			}
 		}
 	default:
-		for i := 0; i < len(buf.Data); i += int(buf.Channels) {
-			for k := 0; k < int(buf.Channels); k++ {
+		for i := 0; i < len(buf.Data); i += int(buf.ChannelCount) {
+			for k := 0; k < int(buf.ChannelCount); k++ {
 				buf.Data[i+k] *= current
 			}
 			current = (current + target) * 0.5
@@ -91,9 +91,9 @@ func (gain *Gain) Process64(buf *audio.Buffer64) error {
 
 	if atomic2.AlmostEqual64(current, target) {
 		gain.current = target
-		return nil
+		return len(buf.Data), nil
 	}
 	gain.current = current
 
-	return nil
+	return len(buf.Data), nil
 }

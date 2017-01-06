@@ -11,7 +11,7 @@ import (
 	"github.com/egonelbre/exp/audio"
 	"github.com/egonelbre/exp/audio/example/internal/effect"
 	"github.com/egonelbre/exp/audio/example/internal/osc"
-	"github.com/gordonklaus/portaudio"
+	"github.com/egonelbre/exp/audio/native"
 )
 
 func main() {
@@ -24,35 +24,29 @@ func main() {
 	go func() {
 		runtime.LockOSThread()
 
-		work := audio.NewBuffer32(audio.Format{
-			Channels:   1,
-			SampleRate: 44100,
-		}, 512)
-
-		portaudio.Initialize()
-		defer portaudio.Terminate()
-
-		stream, err := portaudio.OpenDefaultStream(
-			0, int(work.Channels),
-			float64(work.SampleRate),
-			len(work.Data), &work.Data,
-		)
+		device, err := native.NewOutputDevice(audio.DeviceInfo{
+			ChannelCount:      2,
+			SampleRate:        44100,
+			SamplesPerChannel: 64,
+		})
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal("failed to create device: ", err)
 		}
+		defer device.Close()
+		info := device.OutputInfo()
+		frame := device.NewFrame()
 
-		if err := stream.Start(); err != nil {
-			log.Fatal(err)
-		}
-
-		defer stream.Stop()
+		work := audio.NewBuffer32Samples(audio.Format{
+			ChannelCount: info.ChannelCount,
+			SampleRate:   info.SampleRate,
+		}, info.SamplesPerChannel)
 
 		for {
 			sine.Process32(work)
 			gain.Process32(work)
-
-			if err := stream.Write(); err != nil {
-				log.Fatal(err)
+			frame.Process32(work)
+			if err := device.Write(frame); err != nil {
+				log.Fatal("failed to write audio frame: ", err)
 			}
 		}
 	}()

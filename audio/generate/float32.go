@@ -3,7 +3,7 @@ package generate
 import "github.com/egonelbre/exp/audio"
 
 func Mono32(out *audio.Buffer32, sample func() float32) {
-	switch out.Channels {
+	switch out.ChannelCount {
 	case 1:
 		for i := 0; i < len(out.Data); i++ {
 			out.Data[i] = sample()
@@ -15,9 +15,9 @@ func Mono32(out *audio.Buffer32, sample func() float32) {
 			out.Data[i+1] = v
 		}
 	default:
-		for i := 0; i < len(out.Data); i += int(out.Channels) {
+		for i := 0; i < len(out.Data); i += int(out.ChannelCount) {
 			v := sample()
-			for k := 0; k < int(out.Channels); k++ {
+			for k := 0; k < int(out.ChannelCount); k++ {
 				out.Data[i+k] = v
 			}
 		}
@@ -25,7 +25,7 @@ func Mono32(out *audio.Buffer32, sample func() float32) {
 }
 
 func Stereo32(out *audio.Buffer32, sample func() (float32, float32)) {
-	switch out.Channels {
+	switch out.ChannelCount {
 	case 1:
 		for i := 0; i < len(out.Data); i++ {
 			left, right := sample()
@@ -36,11 +36,11 @@ func Stereo32(out *audio.Buffer32, sample func() (float32, float32)) {
 			out.Data[i], out.Data[i+1] = sample()
 		}
 	default:
-		for i := 0; i < len(out.Data); i += int(out.Channels) {
+		for i := 0; i < len(out.Data); i += int(out.ChannelCount) {
 			left, right := sample()
 			out.Data[i] = left
 			out.Data[i+1] = right
-			for k := 2; k < int(out.Channels); k++ {
+			for k := 2; k < int(out.ChannelCount); k++ {
 				out.Data[i+k] = 0
 			}
 		}

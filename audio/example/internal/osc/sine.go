@@ -15,7 +15,7 @@ type Sine struct {
 	phase     float64
 }
 
-func (sine *Sine) Process32(buf *audio.Buffer32) error {
+func (sine *Sine) Process32(buf *audio.Buffer32) (int, error) {
 	inv := 2.0 * math.Pi / float64(buf.SampleRate)
 	target := sine.Frequency.Get() * inv
 	speed := sine.frequency * inv
@@ -28,7 +28,7 @@ func (sine *Sine) Process32(buf *audio.Buffer32) error {
 			return float32(r)
 		})
 		sine.phase = phase
-		return nil
+		return len(buf.Data), nil
 	}
 
 	generate.Mono32(buf, func() float32 {
@@ -40,10 +40,10 @@ func (sine *Sine) Process32(buf *audio.Buffer32) error {
 	sine.phase = phase
 	sine.frequency = speed / inv
 
-	return nil
+	return len(buf.Data), nil
 }
 
-func (sine *Sine) Process64(buf *audio.Buffer64) error {
+func (sine *Sine) Process64(buf *audio.Buffer64) (int, error) {
 	inv := 2.0 * math.Pi / float64(buf.SampleRate)
 	target := sine.Frequency.Get() * inv
 	speed := sine.frequency * inv
@@ -56,7 +56,7 @@ func (sine *Sine) Process64(buf *audio.Buffer64) error {
 			return r
 		})
 		sine.phase = phase
-		return nil
+		return len(buf.Data), nil
 	}
 
 	generate.Mono64(buf, func() float64 {
@@ -69,5 +69,5 @@ func (sine *Sine) Process64(buf *audio.Buffer64) error {
 	sine.phase = phase
 	sine.frequency = speed / inv
 
-	return nil
+	return len(buf.Data), nil
 }
