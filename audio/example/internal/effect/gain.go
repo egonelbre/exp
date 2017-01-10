@@ -10,6 +10,12 @@ type Gain struct {
 	current float64
 }
 
+func NewGain(value float64) *Gain {
+	gain := &Gain{}
+	gain.Value.Set(value)
+	return gain
+}
+
 func (gain *Gain) Process(buf audio.Buffer) error {
 	target := gain.Value.Get()
 	current := gain.current

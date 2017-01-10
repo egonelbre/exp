@@ -4,12 +4,13 @@ import (
 	"log"
 
 	"github.com/egonelbre/exp/audio"
+	"github.com/egonelbre/exp/audio/example/internal/effect"
 	"github.com/egonelbre/exp/audio/native"
 )
 
 func main() {
-	dec := NewReader(440, 460, 512, 531, 713, 734)
-	out, err := native.NewOutputDevice(audio.DeviceInfo{
+	reader := NewReader(440, 460, 512, 531, 713, 734)
+	output, err := native.NewOutputDevice(audio.DeviceInfo{
 		ChannelCount:      2,
 		SampleRate:        44100,
 		SamplesPerChannel: 128,
@@ -18,8 +19,11 @@ func main() {
 		log.Fatal(err)
 	}
 
+	gain := effect.NewGain(0.5)
+
 	buf := audio.NewBufferF32Frames(audio.Format{44100, 2}, 128)
-	err = audio.Copy(out, dec, buf)
+	pipe := audio.Pipe{reader, gain, output}
+	err = pipe.Run(buf)
 	if err != nil {
 		log.Fatal(err)
 	}
