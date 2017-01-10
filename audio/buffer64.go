@@ -2,65 +2,52 @@ package audio
 
 import "time"
 
-type Buffer64 struct {
-	Format
-	Data []float64
+type BufferF64 struct {
+	Format Format
+	Data   []float64
 }
 
-func NewBuffer64(format Format, duration time.Duration) *Buffer64 {
-	return NewBuffer64Samples(format, format.SamplesPerChannel(duration))
+func NewBufferF64(format Format, duration time.Duration) *BufferF64 {
+	return NewBufferF64Frames(format, format.FrameCount(duration))
 }
 
-func NewBuffer64Samples(format Format, samplesPerChannel int) *Buffer64 {
-	n := format.ChannelCount * samplesPerChannel
-	return &Buffer64{
+func NewBufferF64Frames(format Format, frames int) *BufferF64 {
+	n := format.ChannelCount * frames
+	return &BufferF64{
 		Format: format,
 		Data:   make([]float64, n, n),
 	}
 }
 
-func (buffer *Buffer64) Clone() *Buffer64 {
-	return &Buffer64{
-		Format: buffer.Format,
-		Data:   make([]float64, len(buffer.Data), len(buffer.Data)),
+func (b *BufferF64) SampleRate() int   { return b.Format.SampleRate }
+func (b *BufferF64) ChannelCount() int { return b.Format.ChannelCount }
+
+func (b *BufferF64) Empty() bool { return len(b.Data) == 0 }
+
+func (b *BufferF64) FrameCount() int {
+	return len(b.Data) / b.ChannelCount()
+}
+
+func (b *BufferF64) Duration() time.Duration {
+	return time.Duration(int(time.Second) * b.FrameCount() / b.SampleRate())
+}
+
+func (b *BufferF64) ShallowCopy() Buffer {
+	return &BufferF64{
+		Format: b.Format,
+		Data:   b.Data,
 	}
 }
 
-func (buffer *Buffer64) Duration() time.Duration {
-	return buffer.Format.BufferDuration(len(buffer.Data))
+func (b *BufferF64) DeepCopy() Buffer {
+	x := &BufferF64{
+		Format: b.Format,
+		Data:   make([]float64, len(b.Data), len(b.Data)),
+	}
+	copy(x.Data, b.Data)
+	return x
 }
 
-// TODO: get rid of this allocation
-func (buffer *Buffer64) Slice(start, end int) *Buffer64 {
-	return &Buffer64{
-		Format: buffer.Format,
-		Data:   buffer.Data[start:end],
-	}
-}
-
-func (buffer *Buffer64) Process32(output *Buffer32) (int, error) {
-	if Debug && buffer.Format != output.Format {
-		return 0, ErrIncompatibleFormat
-	}
-	if len(buffer.Data) != len(output.Data) {
-		return 0, ErrDifferentBufferSize
-	}
-
-	for i, v := range buffer.Data {
-		output.Data[i] = float32(v)
-	}
-
-	return len(output.Data), nil
-}
-
-func (buffer *Buffer64) Process64(output *Buffer64) (int, error) {
-	if Debug && buffer.Format != output.Format {
-		return 0, ErrIncompatibleFormat
-	}
-	if len(buffer.Data) != len(output.Data) {
-		return 0, ErrDifferentBufferSize
-	}
-
-	copy(output.Data, buffer.Data)
-	return len(output.Data), nil
+func (b *BufferF64) Slice(lowFrame, highFrame int) {
+	b.Data = b.Data[lowFrame*b.ChannelCount() : highFrame*b.ChannelCount()]
 }

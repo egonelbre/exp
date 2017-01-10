@@ -18,7 +18,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = audio.CopyBuffer32(out, dec, audio.Format{44100, 2}, 128)
+	buf := audio.NewBufferF32Frames(audio.Format{44100, 2}, 128)
+	err = audio.Copy(out, dec, buf)
 	if err != nil {
 		log.Fatal(err)
 	}

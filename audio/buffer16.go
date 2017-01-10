@@ -1,5 +1,6 @@
 package audio
 
+/* TODO:
 const int16scale = 1.0 / 0x8000
 
 type BufferInt16 struct {
@@ -7,7 +8,7 @@ type BufferInt16 struct {
 	Data []int16
 }
 
-func (buffer *BufferInt16) Process32(output *Buffer32) (int, error) {
+func (buffer *BufferInt16) ConvertToF32(output *Buffer32) (int, error) {
 	if Debug && buffer.Format != output.Format {
 		return 0, ErrIncompatibleFormat
 	}
@@ -22,7 +23,7 @@ func (buffer *BufferInt16) Process32(output *Buffer32) (int, error) {
 	return len(output.Data), nil
 }
 
-func (buffer *BufferInt16) Process64(output *Buffer64) (int, error) {
+func (buffer *BufferInt16) ConvertToF64(output *Buffer64) (int, error) {
 	if Debug && buffer.Format != output.Format {
 		return 0, ErrIncompatibleFormat
 	}
@@ -36,3 +37,4 @@ func (buffer *BufferInt16) Process64(output *Buffer64) (int, error) {
 
 	return len(output.Data), nil
 }
+*/

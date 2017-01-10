@@ -10,90 +10,52 @@ type Gain struct {
 	current float64
 }
 
-func (gain *Gain) Process32(buf *audio.Buffer32) (int, error) {
-	target := float32(gain.Value.Get())
-	current := float32(gain.current)
-
-	if target == current {
-		for i, v := range buf.Data {
-			buf.Data[i] = v * current
-		}
-		return len(buf.Data), nil
-	}
-
-	switch buf.ChannelCount {
-	case 1:
-		for i, v := range buf.Data {
-			buf.Data[i] = v * current
-			current = (current + target) * 0.5
-		}
-
-	case 2:
-		// not sure what is the fastest way to code this
-		for i, v := range buf.Data {
-			buf.Data[i] = v * current
-			if i&1 == 1 {
-				current = (current + target) * 0.5
-			}
-		}
-	default:
-		for i := 0; i < len(buf.Data); i += int(buf.ChannelCount) {
-			for k := 0; k < int(buf.ChannelCount); k++ {
-				buf.Data[i+k] *= current
-			}
-			current = (current + target) * 0.5
-		}
-	}
-
-	if atomic2.AlmostEqual32(current, target) {
-		gain.current = gain.Value.Get()
-		return len(buf.Data), nil
-	}
-	gain.current = float64(current)
-
-	return len(buf.Data), nil
-}
-
-func (gain *Gain) Process64(buf *audio.Buffer64) (int, error) {
+func (gain *Gain) Process(buf audio.Buffer) error {
 	target := gain.Value.Get()
 	current := gain.current
 
 	if target == current {
-		for i, v := range buf.Data {
-			buf.Data[i] = v * current
+		switch buf := buf.(type) {
+		case *audio.BufferF32:
+			current := float32(current)
+			for i, v := range buf.Data {
+				buf.Data[i] = v * current
+			}
+		case *audio.BufferF64:
+			for i, v := range buf.Data {
+				buf.Data[i] = v * current
+			}
+		default:
+			return audio.ErrUnknownBuffer
 		}
-		return len(buf.Data), nil
+		return nil
 	}
 
-	switch buf.ChannelCount {
-	case 1:
-		for i, v := range buf.Data {
-			buf.Data[i] = v * current
+	channelCount := buf.ChannelCount()
+	switch buf := buf.(type) {
+	case *audio.BufferF32:
+		for i := 0; i < len(buf.Data); i += channelCount {
+			for k := 0; k < channelCount; k++ {
+				buf.Data[k] *= float32(current)
+			}
 			current = (current + target) * 0.5
 		}
-
-	case 2:
-		// not sure what is the fastest way to code this
-		for i, v := range buf.Data {
-			buf.Data[i] = v * current
-			if i&1 == 1 {
-				current = (current + target) * 0.5
+	case *audio.BufferF64:
+		for i := 0; i < len(buf.Data); i += channelCount {
+			for k := 0; k < channelCount; k++ {
+				buf.Data[k] *= current
 			}
+			current = (current + target) * 0.5
 		}
 	default:
-		for i := 0; i < len(buf.Data); i += int(buf.ChannelCount) {
-			for k := 0; k < int(buf.ChannelCount); k++ {
-				buf.Data[i+k] *= current
-			}
-			current = (current + target) * 0.5
-		}
+		return audio.ErrUnknownBuffer
 	}
 
 	if atomic2.AlmostEqual64(current, target) {
 		gain.current = target
-		return len(buf.Data), nil
+	} else {
+		gain.current = current
 	}
-	gain.current = current
 
-	return len(buf.Data), nil
+	return nil
 }

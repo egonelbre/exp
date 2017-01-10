@@ -52,13 +52,15 @@ func (reader *Reader) Seek(offset time.Duration, whence int) (time.Duration, err
 }
 */
 
-func (reader *Reader) Process32(buf *audio.Buffer32) (int, error) {
+func (reader *Reader) Read(buf audio.Buffer) (int, error) {
+	fmt := audio.Format{buf.SampleRate(), buf.ChannelCount()}
+	buf = buf.ShallowCopy()
+
 	// only render as much as we should
 	timeLeft := reader.Duration() - reader.Position()
-	samplesPerChannel := buf.Format.SamplesPerChannel(timeLeft)
-	samplesLeft := samplesPerChannel * buf.Format.ChannelCount
-	if samplesLeft < len(buf.Data) {
-		buf = buf.Slice(0, samplesLeft)
+	frameCount := fmt.FrameCount(timeLeft)
+	if frameCount < buf.FrameCount() {
+		buf.Slice(0, frameCount)
 	}
 
 	// current frequency
@@ -67,12 +69,12 @@ func (reader *Reader) Process32(buf *audio.Buffer32) (int, error) {
 	freq := reader.freqs[head]
 
 	// params
-	timeStep := buf.Format.BufferDuration(1)
-	inv := 2.0 * math.Pi / float64(buf.SampleRate)
+	timeStep := time.Duration(float64(time.Second) / float64(fmt.SampleRate))
+	inv := 2.0 * math.Pi / float64(buf.SampleRate())
 	speed := freq * inv
 	phase := reader.phase
 
-	generate.Mono32(buf, func() float32 {
+	generate.MonoF64(buf, func() float64 {
 		r := math.Cos(phase)
 		phase += speed
 		pos += timeStep
@@ -84,20 +86,15 @@ func (reader *Reader) Process32(buf *audio.Buffer32) (int, error) {
 				speed = freq * inv
 			}
 		}
-		return float32(r)
+		return r
 	})
 
 	reader.pos += buf.Duration()
 	reader.phase = phase
 
 	if reader.Position() >= reader.Duration() {
-		return len(buf.Data), io.EOF
+		return buf.FrameCount(), io.EOF
 	}
 
-	return len(buf.Data), nil
-}
-
-func (reader *Reader) Process64(buf *audio.Buffer64) (int, error) {
-	panic("TODO")
-	return 0, nil
+	return buf.FrameCount(), nil
 }
