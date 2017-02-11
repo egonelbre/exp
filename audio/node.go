@@ -11,6 +11,7 @@ var (
 
 type Buffer interface {
 	SampleRate() int
+	// Channel(int index) []T
 	ChannelCount() int
 	FrameCount() int
 	Duration() time.Duration
@@ -18,7 +19,9 @@ type Buffer interface {
 
 	ShallowCopy() Buffer
 	DeepCopy() Buffer
-	Slice(lowFrame, highFrame int)
+
+	Slice(low, high int)
+	CutLeading(low int)
 }
 
 type Writer interface {

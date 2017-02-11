@@ -1,29 +1,28 @@
 package generate
 
-import "github.com/egonelbre/exp/audio"
+import (
+	"github.com/egonelbre/exp/audio"
+	"github.com/egonelbre/exp/audio/slice"
+)
 
 func MonoF32(out audio.Buffer, sample func() float32) error {
 	channelCount := out.ChannelCount()
 	switch out := out.(type) {
 	case *audio.BufferF32:
-		switch channelCount {
-		case 1:
-			for i := 0; i < len(out.Data); i++ {
-				out.Data[i] = sample()
-			}
-		case 2:
-			for i := 0; i < len(out.Data); i += 2 {
-				v := sample()
-				out.Data[i] = v
-				out.Data[i+1] = v
-			}
-		default:
-			for i := 0; i < len(out.Data); i += channelCount {
-				v := sample()
-				for k := 0; k < channelCount; k++ {
-					out.Data[i+k] = v
-				}
-			}
+		main := out.Channel(0)
+		for i := range main {
+			main[i] = float32(sample())
+		}
+		for k := 1; k < channelCount; k++ {
+			copy(out.Channel(k), main)
+		}
+	case *audio.BufferF64:
+		main := out.Channel(0)
+		for i := range main {
+			main[i] = float64(sample())
+		}
+		for k := 1; k < channelCount; k++ {
+			copy(out.Channel(k), main)
 		}
 	default:
 		//TODO: implement the slowest path
@@ -36,24 +35,37 @@ func StereoF32(out audio.Buffer, sample func() (float32, float32)) error {
 	channelCount := out.ChannelCount()
 	switch out := out.(type) {
 	case *audio.BufferF32:
-		switch channelCount {
-		case 1:
-			for i := 0; i < len(out.Data); i++ {
-				left, right := sample()
-				out.Data[i] = (left + right) * 0.5
+		if channelCount >= 2 {
+			left, right := out.Channel(0), out.Channel(1)
+			for i := range left {
+				leftsample, rightsample := sample()
+				left[i], right[i] = float32(leftsample), float32(rightsample)
 			}
-		case 2:
-			for i := 0; i < len(out.Data); i += 2 {
-				out.Data[i], out.Data[i+1] = sample()
+			for k := 2; k < channelCount; k++ {
+				slice.Zero32(out.Channel(k))
 			}
-		default:
-			for i := 0; i < len(out.Data); i += channelCount {
-				left, right := sample()
-				out.Data[i] = left
-				out.Data[i+1] = right
-				for k := 2; k < channelCount; k++ {
-					out.Data[i+k] = 0
-				}
+		} else {
+			main := out.Channel(0)
+			for i := range main {
+				leftsample, rightsample := sample()
+				main[i] = float32(leftsample+rightsample) * 0.5
+			}
+		}
+	case *audio.BufferF64:
+		if channelCount >= 2 {
+			left, right := out.Channel(0), out.Channel(1)
+			for i := range left {
+				leftsample, rightsample := sample()
+				left[i], right[i] = float64(leftsample), float64(rightsample)
+			}
+			for k := 2; k < channelCount; k++ {
+				slice.Zero64(out.Channel(k))
+			}
+		} else {
+			main := out.Channel(0)
+			for i := range main {
+				leftsample, rightsample := sample()
+				main[i] = float64(leftsample+rightsample) * 0.5
 			}
 		}
 	default:
