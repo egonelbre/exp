@@ -3,8 +3,11 @@ package audio
 import "time"
 
 type BufferF64 struct {
-	Format Format
-	Data   []float64
+	format Format
+	offset uint32
+	frames uint32
+	stride uint32
+	data   []float64
 }
 
 func NewBufferF64(format Format, duration time.Duration) *BufferF64 {
@@ -14,40 +17,47 @@ func NewBufferF64(format Format, duration time.Duration) *BufferF64 {
 func NewBufferF64Frames(format Format, frames int) *BufferF64 {
 	n := format.ChannelCount * frames
 	return &BufferF64{
-		Format: format,
-		Data:   make([]float64, n, n),
+		format: format,
+		offset: 0,
+		stride: uint32(frames),
+		frames: uint32(frames),
+		data:   make([]float64, n, n),
 	}
 }
 
-func (b *BufferF64) SampleRate() int   { return b.Format.SampleRate }
-func (b *BufferF64) ChannelCount() int { return b.Format.ChannelCount }
-
-func (b *BufferF64) Empty() bool { return len(b.Data) == 0 }
-
-func (b *BufferF64) FrameCount() int {
-	return len(b.Data) / b.ChannelCount()
+func (b *BufferF64) Channel(index int) []float64 {
+	start := int(b.offset) + index*int(b.stride)
+	return b.data[start : start+int(b.frames)]
 }
+
+func (b *BufferF64) SampleRate() int   { return b.format.SampleRate }
+func (b *BufferF64) ChannelCount() int { return b.format.ChannelCount }
+
+func (b *BufferF64) Empty() bool     { return b.frames == 0 }
+func (b *BufferF64) FrameCount() int { return int(b.frames) }
 
 func (b *BufferF64) Duration() time.Duration {
 	return time.Duration(int(time.Second) * b.FrameCount() / b.SampleRate())
 }
 
 func (b *BufferF64) ShallowCopy() Buffer {
-	return &BufferF64{
-		Format: b.Format,
-		Data:   b.Data,
-	}
+	x := *b
+	return &x
 }
 
 func (b *BufferF64) DeepCopy() Buffer {
-	x := &BufferF64{
-		Format: b.Format,
-		Data:   make([]float64, len(b.Data), len(b.Data)),
-	}
-	copy(x.Data, b.Data)
-	return x
+	x := *b
+	x.data = make([]float64, len(b.data), len(b.data))
+	copy(x.data, b.data)
+	return &x
 }
 
-func (b *BufferF64) Slice(lowFrame, highFrame int) {
-	b.Data = b.Data[lowFrame*b.ChannelCount() : highFrame*b.ChannelCount()]
+func (b *BufferF64) Slice(low, high int) {
+	b.offset += uint32(low)
+	b.frames = uint32(high - low)
+}
+
+func (b *BufferF64) CutLeading(low int) {
+	b.offset += uint32(low)
+	b.frames -= uint32(low)
 }

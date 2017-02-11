@@ -2,6 +2,7 @@ package portaudio
 
 import (
 	"github.com/egonelbre/exp/audio"
+	"github.com/egonelbre/exp/audio/slice"
 	"github.com/gordonklaus/portaudio"
 )
 
@@ -14,7 +15,7 @@ type OutputDevice struct {
 	info   audio.DeviceInfo
 
 	head   int
-	buffer audio.BufferF32
+	buffer []float32
 }
 
 func (device *OutputDevice) OutputInfo() audio.DeviceInfo { return device.info }
@@ -25,55 +26,32 @@ func (device *OutputDevice) Process(buf audio.Buffer) error {
 }
 
 func (device *OutputDevice) Write(buf audio.Buffer) (int, error) {
+	nchan := device.info.ChannelCount
+
 	// TODO: support all conversions
-	if buf.ChannelCount() != device.buffer.ChannelCount() ||
-		buf.FrameCount() != device.buffer.FrameCount() {
+	if buf.ChannelCount() != nchan {
 		return 0, audio.ErrUnknownBuffer
 	}
 
-	switch buf := buf.(type) {
-	case *audio.BufferF32:
-		head := 0
-		for head < len(buf.Data) {
-			n := copy(device.buffer.Data[device.head:], buf.Data[head:])
-			head += n
-			device.head += n
+	src := buf.ShallowCopy()
+	frameCount := buf.FrameCount()
 
-			if device.head >= len(device.buffer.Data) {
-				device.head = 0
-				if err := device.stream.Write(); err != nil {
-					return head / buf.ChannelCount(), err
-				}
+	frames := 0
+	for frames < frameCount {
+		n := slice.Interleave32(src, nchan, device.buffer[device.head:])
+		frames += n
+		src.CutLeading(n)
+		device.head += n * nchan
+
+		if device.head >= len(device.buffer) {
+			device.head = 0
+			if err := device.stream.Write(); err != nil {
+				return frames, err
 			}
 		}
-		return head / buf.ChannelCount(), nil
-
-	case *audio.BufferF64:
-		head := 0
-		for head < len(buf.Data) {
-			n := len(device.buffer.Data[device.head:])
-			if n < len(buf.Data[head:]) {
-				n = len(buf.Data[head:])
-			}
-
-			for i := 0; i < n; i++ {
-				device.buffer.Data[device.head+i] = float32(buf.Data[head+i])
-			}
-
-			head += n
-			device.head += n
-
-			if device.head >= len(device.buffer.Data) {
-				device.head = 0
-				if err := device.stream.Write(); err != nil {
-					return head / buf.ChannelCount(), err
-				}
-			}
-		}
-		return head / buf.ChannelCount(), nil
-	default:
-		return 0, audio.ErrUnknownBuffer
 	}
+
+	return frames, nil
 }
 
 func (device *OutputDevice) Close() error {
@@ -85,17 +63,13 @@ func NewOutputDevice(pref audio.DeviceInfo) (audio.OutputDevice, error) {
 	device := &OutputDevice{}
 
 	device.info = pref
-
-	device.buffer = *audio.NewBufferF32Frames(audio.Format{
-		ChannelCount: pref.ChannelCount,
-		SampleRate:   pref.SampleRate,
-	}, pref.SamplesPerChannel)
+	device.buffer = make([]float32, pref.ChannelCount*pref.SamplesPerChannel)
 
 	device.stream, err = portaudio.OpenDefaultStream(
 		0, int(pref.ChannelCount),
 		float64(pref.SampleRate),
-		len(device.buffer.Data),
-		&device.buffer.Data,
+		len(device.buffer),
+		&device.buffer,
 	)
 	if err != nil {
 		return nil, err

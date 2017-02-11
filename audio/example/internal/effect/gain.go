@@ -3,6 +3,7 @@ package effect
 import (
 	"github.com/egonelbre/exp/audio"
 	"github.com/egonelbre/exp/audio/example/internal/atomic2"
+	"github.com/egonelbre/exp/audio/slice"
 )
 
 type Gain struct {
@@ -20,16 +21,16 @@ func (gain *Gain) Process(buf audio.Buffer) error {
 	target := gain.Value.Get()
 	current := gain.current
 
+	channelCount := buf.ChannelCount()
 	if target == current {
 		switch buf := buf.(type) {
 		case *audio.BufferF32:
-			current := float32(current)
-			for i, v := range buf.Data {
-				buf.Data[i] = v * current
+			for k := 0; k < channelCount; k++ {
+				slice.Scale32(buf.Channel(k), float32(current))
 			}
 		case *audio.BufferF64:
-			for i, v := range buf.Data {
-				buf.Data[i] = v * current
+			for k := 0; k < channelCount; k++ {
+				slice.Scale64(buf.Channel(k), current)
 			}
 		default:
 			return audio.ErrUnknownBuffer
@@ -37,25 +38,32 @@ func (gain *Gain) Process(buf audio.Buffer) error {
 		return nil
 	}
 
-	channelCount := buf.ChannelCount()
+	var active float64
+
 	switch buf := buf.(type) {
 	case *audio.BufferF32:
-		for i := 0; i < len(buf.Data); i += channelCount {
-			for k := 0; k < channelCount; k++ {
-				buf.Data[k] *= float32(current)
+		for k := 0; k < channelCount; k++ {
+			active = current
+			data := buf.Channel(k)
+			for i := range data {
+				data[i] *= float32(active)
+				active = (active + target) * 0.5
 			}
-			current = (current + target) * 0.5
 		}
 	case *audio.BufferF64:
-		for i := 0; i < len(buf.Data); i += channelCount {
-			for k := 0; k < channelCount; k++ {
-				buf.Data[k] *= current
+		for k := 0; k < channelCount; k++ {
+			active = current
+			data := buf.Channel(k)
+			for i := range data {
+				data[i] *= float64(active)
+				active = (active + target) * 0.5
 			}
-			current = (current + target) * 0.5
 		}
 	default:
 		return audio.ErrUnknownBuffer
 	}
+
+	current = active
 
 	if atomic2.AlmostEqual64(current, target) {
 		gain.current = target
