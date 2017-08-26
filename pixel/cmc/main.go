@@ -9,7 +9,7 @@ import (
 	"github.com/faiface/pixel/pixelgl"
 )
 
-const Detail = 1 << 16
+const Detail = 1 << 17
 
 func main() {
 	pixelgl.Run(run)
