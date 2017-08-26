@@ -35,6 +35,8 @@ func run() {
 	background := 0.0
 	now := time.Now()
 	for !win.Closed() {
+		win.SetClosed(win.JustPressed(pixelgl.KeyEscape))
+
 		next := time.Now()
 		dt := next.Sub(now).Seconds()
 		now = next
