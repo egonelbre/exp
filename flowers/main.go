@@ -4,7 +4,6 @@ import (
 	"image/color"
 	"math"
 	"math/rand"
-	"runtime"
 	"time"
 
 	"github.com/faiface/pixel"
@@ -42,15 +41,14 @@ func run() {
 		if dt > 1.0/15.0 {
 			dt = 1.0 / 15.0
 		}
-		dt = 1 / 60.0
 
 		camera = pixel.Lerp(camera, branch.Head(), 0.7*dt)
 		background += dt
 
 		branch.Update(dt)
 
-		//win.Clear(HSL{background, 0.6, 0.99})
-		win.Clear(HSL{TAU / 3, 0.66, 0.99})
+		win.Clear(HSL{background, 0.6, 0.99})
+		//win.Clear(HSL{TAU / 3, 0.66, 0.99})
 
 		canvas.Clear()
 		canvas.Reset()
@@ -61,7 +59,6 @@ func run() {
 		canvas.Draw(win)
 
 		win.Update()
-		runtime.GC()
 	}
 }
 
