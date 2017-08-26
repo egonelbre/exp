@@ -9,7 +9,7 @@ import (
 	"github.com/faiface/pixel/pixelgl"
 )
 
-const Detail = 1 << 17
+const Detail = 1 << 16
 
 func main() {
 	pixelgl.Run(run)
@@ -71,6 +71,7 @@ func run() {
 				canvas.Put(P(p, size), HL{h, 0.1})
 			}
 		}
+		canvas.Smear()
 
 		if backbuffer.Stride != canvas.Width {
 			panic("invalid stride")

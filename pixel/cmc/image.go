@@ -42,6 +42,20 @@ func (m *Image) Put(v V, b HL) {
 	m.Pix[i] = blendhl(m.Pix[i], b)
 }
 
+func (m *Image) Smear() {
+	si := 0
+	for y := 1; y < m.Height-1; y++ {
+		for x := 1; x < m.Width; x++ {
+			ti := si + x + m.Width
+			p := m.Pix[ti]
+			p.L *= 0.5
+			m.Pix[ti-m.Width] = blendhl(m.Pix[ti-m.Width], p)
+			m.Pix[ti-1] = blendhl(m.Pix[ti-1], p)
+		}
+		si += m.Width
+	}
+}
+
 func blendhl(a, b HL) HL {
 	return HL{
 		H: (a.H*a.L + b.H*b.L) / (a.L + b.L),
