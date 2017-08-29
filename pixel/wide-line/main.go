@@ -100,7 +100,62 @@ func drawLine(m *imdraw.IMDraw, width float64, path ...pixel.Vec) {
 		b1, b2 := b.Add(abn), b.Sub(abn)
 
 		// fill the gap between bends
-		if i > 0 && radius > 1 {
+		if i > 0 && radius > 1.5 {
+			// see which direction is the gap in
+			d := Rotate(xn).Dot(abn)
+			if d < 0 {
+				m.Push(x1, a1, a)
+			} else {
+				m.Push(x2, a2, a)
+			}
+			m.Polygon(0)
+		}
+
+		// draw the segment
+		m.Push(a1, b1, b2, a2)
+		m.Polygon(0)
+
+		// update points
+		a = b
+		x1, x2, xn = b1, b2, abn
+	}
+}
+
+func drawClosedLine(m *imdraw.IMDraw, width float64, path ...pixel.Vec) {
+	if len(path) < 2 {
+		return
+	}
+
+	radius := width / 2
+
+	// draw each segment, where
+	//
+	// x1--^------a1-------^----------b1
+	//     | xn   |        | abn      |
+	// -----------a - - - - - - - - - b
+	//            |                   |
+	// x2---------a2------------------b2
+	//             drawing this segment
+	//            |-------------------|
+	//            ^__ this will contain a bend
+	// x1, x2, xn are the previous segments end
+	// corners and normal
+	a := path[len(path)-1]
+	xn := ScaleTo(SegmentNormal(path[len(path)-2], a), radius)
+	x1, x2 := a.Add(xn), a.Sub(xn)
+
+	for i, b := range path {
+		if i > 0 && a.Sub(b).Len() < 1 {
+			continue
+		}
+		// calculate
+		abn := ScaleTo(SegmentNormal(a, b), radius)
+		// segment-corners
+		a1, a2 := a.Add(abn), a.Sub(abn)
+		b1, b2 := b.Add(abn), b.Sub(abn)
+
+		// fill the gap between bends
+		if radius > 1.5 {
 			// see which direction is the gap in
 			d := Rotate(xn).Dot(abn)
 			if d < 0 {
