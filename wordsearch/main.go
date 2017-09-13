@@ -13,7 +13,8 @@ import (
 func main() {
 	root := trie.Uncompact{}
 
-	r, err := os.Open("wordlist.txt")
+	words := []string{}
+	r, err := os.Open("wordlist")
 	if err != nil {
 		panic(err)
 	}
@@ -24,12 +25,20 @@ func main() {
 		if line == "" || utf8.RuneCountInString(line) == 1 {
 			continue
 		}
-		if strings.ToLower(line) != line {
-			continue
-		}
+		words = append(words, line)
 		root.Insert(line)
 	}
 
 	compact := root.Compress()
-	fmt.Println(compact)
+	fmt.Println(compact.Size(), "bytes")
+
+	for _, word := range words {
+		if !compact.Contains(word) {
+			fmt.Println("did not find", word)
+			break
+		}
+	}
+
+	fmt.Println(compact.Contains("something"))
+	fmt.Println(compact.Contains("NOTHING"))
 }

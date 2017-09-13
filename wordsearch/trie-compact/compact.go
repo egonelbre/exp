@@ -45,31 +45,82 @@ func (t *Compact) compress(dst *cnode, src *unode) {
 	}
 }
 
-func (n *cnode) edgecount() int                { return int(n.flags >> 1) }
+func (t *Compact) ContainsBytes(s []byte) bool {
+	node := &t.root
+next:
+	for i, b := range s {
+		n := node.edgecount()
+		if node.suffix[0] != 0 && len(s)-i <= maxsuffix {
+			if node.suffixMatchBytes(s[i:]) {
+				return true
+			}
+		}
+		for i := 0; i < n; i++ {
+			child := t.edge(node, i)
+			if child.label == b {
+				node = child
+				continue next
+			}
+		}
+		return false
+	}
+	return node.terminates()
+}
+func (n *cnode) suffixMatchBytes(s []byte) bool {
+	for i, b := range n.suffix {
+		if b == 0 {
+			return i == len(s)
+		}
+		if i >= len(s) {
+			return false
+		}
+		if b != s[i] {
+			return false
+		}
+	}
+	return true
+}
+
+func (t *Compact) Contains(s string) bool {
+	node := &t.root
+next:
+	for i := 0; i < len(s); i++ {
+		b := s[i]
+		n := node.edgecount()
+		if node.suffix[0] != 0 && len(s)-i <= maxsuffix {
+			if node.suffixMatch(s[i:]) {
+				return true
+			}
+		}
+		for i := 0; i < n; i++ {
+			child := t.edge(node, i)
+			if child.label == b {
+				node = child
+				continue next
+			}
+		}
+		return false
+	}
+	return node.terminates()
+}
+func (n *cnode) suffixMatch(s string) bool {
+	for i, b := range n.suffix {
+		if b == 0 {
+			return i == len(s)
+		}
+		if i >= len(s) {
+			return false
+		}
+		if b != s[i] {
+			return false
+		}
+	}
+	return true
+}
 func (t *Compact) edge(n *cnode, i int) *cnode { return &t.nodes[int(n.edgeptr)+i] }
 
-// WARNING BUGGY
-// func (t *Compact) Contains(s []byte) bool {
-// 	node := &t.root
-// next:
-// 	for i, b := range s {
-// 		n := node.edgecount()
-// 		if node.flags&termbit == termbit && len(s)-i < maxsuffix {
-// 			if bytes.Equal(s[i:], node.suffix[:]) {
-// 				return true
-// 			}
-// 		}
-// 		for i := 0; i < n; i++ {
-// 			child := t.edge(node, i)
-// 			if child.label == b {
-// 				node = child
-// 				continue next
-// 			}
-// 		}
-// 		return false
-// 	}
-// 	return node.flags&termbit == termbit
-// }
+func (n *cnode) edgecount() int   { return int(n.flags >> 1) }
+func (n *cnode) terminates() bool { return n.flags&termbit == termbit }
 
 // debugging
 
