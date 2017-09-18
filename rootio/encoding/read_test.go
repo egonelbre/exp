@@ -11,7 +11,7 @@ import (
 //   U = no bounds checks
 
 func BenchmarkReadU32(b *testing.B) {
-	data := make([]byte, 1<<10)
+	data := make([]byte, 1003)
 	for i := range data {
 		data[i] = byte(i)
 	}
