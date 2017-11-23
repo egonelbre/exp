@@ -4,22 +4,6 @@ import "sort"
 
 const insertionSortThreshold = 48
 
-func insertionSortLocal(data []int, lo, hi int) {
-	if lo == hi {
-		return
-	}
-
-	for i := lo + 1; i < hi+1; i++ {
-		v := data[i]
-		k := i
-		for k > 0 && data[k-1] > v {
-			data[k] = data[k-1]
-			k--
-		}
-		data[k] = v
-	}
-}
-
 func insertionSort(data sort.Interface, lo, hi int) {
 	for i := lo + 1; i <= hi; i++ {
 		for k := i; k > lo && data.Less(k, k-1); k-- {
