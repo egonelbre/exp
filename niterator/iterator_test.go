@@ -13,6 +13,7 @@ import (
 	"github.com/egonelbre/exp/niterator/specialize"
 	"github.com/egonelbre/exp/niterator/unroll"
 	"github.com/egonelbre/exp/niterator/unrollinreverse"
+	"github.com/egonelbre/exp/niterator/unrollinreversebool"
 	"github.com/egonelbre/exp/niterator/unrollinverse"
 	"github.com/egonelbre/exp/niterator/unrollreverse"
 )
@@ -213,6 +214,18 @@ func BenchmarkUnrollInReverse(b *testing.B) {
 		it := unrollinreverse.NewIterator(example)
 		total := 0
 		for index, err := it.Next(); err == nil; index, err = it.Next() {
+			total += index
+		}
+		_ = total
+	}
+}
+
+func BenchmarkUnrollInReverseBool(b *testing.B) {
+	b.SetBytes(int64(example.TotalSize()))
+	for i := 0; i < b.N; i++ {
+		it := unrollinreversebool.NewIterator(example)
+		total := 0
+		for index, done := it.Next(); !done; index, done = it.Next() {
 			total += index
 		}
 		_ = total
