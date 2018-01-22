@@ -48,38 +48,38 @@ func (it *Iterator) Next() (int, error) {
 
 	x := &it.Track[0]
 	x.Track--
+	next += x.Stride
 	if x.Track > 0 {
-		next += x.Stride
 		it.NextIndex = next
 		return result, nil
 	}
 	x.Track = x.Shape
-	next -= (x.Shape - 1) * x.Stride
+	next -= x.Shape * x.Stride
 
 	x = &it.Track[1]
 	x.Track--
+	next += x.Stride
 	if x.Track > 0 {
-		next += x.Stride
 		it.NextIndex = next
 		return result, nil
 	}
 	x.Track = x.Shape
-	next -= (x.Shape - 1) * x.Stride
+	next -= x.Shape * x.Stride
 
 	x = &it.Track[2]
 	x.Track--
+	next += x.Stride
 	if x.Track > 0 {
-		next += x.Stride
 		it.NextIndex = next
 		return result, nil
 	}
 	x.Track = x.Shape
-	next -= (x.Shape - 1) * x.Stride
+	next -= x.Shape * x.Stride
 
 	x = &it.Track[3]
 	x.Track--
+	next += x.Stride
 	if x.Track > 0 {
-		next += x.Stride
 		it.NextIndex = next
 		return result, nil
 	}
