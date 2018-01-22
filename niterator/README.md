@@ -1,15 +1,16 @@
 ```
-BenchmarkBasic-4                   	    2000	   2941894 ns/op	 195.79 MB/s
-BenchmarkInstruct-4                	    2000	   2984488 ns/op	 193.00 MB/s
-BenchmarkOrdone-4                  	    3000	   2891919 ns/op	 199.18 MB/s
-BenchmarkOnearr-4                  	    3000	   2659924 ns/op	 216.55 MB/s
-BenchmarkPremul-4                  	    2000	   3447282 ns/op	 167.09 MB/s
-BenchmarkOnearrPremul-4            	    3000	   2779159 ns/op	 207.26 MB/s
-BenchmarkSpecialize-4              	    3000	   2504697 ns/op	 229.97 MB/s
-BenchmarkUnroll-4                  	    3000	   2106509 ns/op	 273.44 MB/s
-BenchmarkUnrollReverse-4           	    3000	   2083894 ns/op	 276.41 MB/s
-BenchmarkUnrollInverse-4           	    5000	   1963239 ns/op	 293.39 MB/s
-BenchmarkUnrollInReverse-4         	    3000	   1968495 ns/op	 292.61 MB/s
-BenchmarkUnrollInReverseSwitch-4   	    3000	   2454369 ns/op	 234.68 MB/s
-BenchmarkUnrollInReverseBool-4     	    5000	   1931459 ns/op	 298.22 MB/s
+BenchmarkBasic-4                   	    5000	   2977997 ns/op	 193.42 MB/s
+BenchmarkInstruct-4                	    5000	   3261112 ns/op	 176.63 MB/s
+BenchmarkOrdone-4                  	    5000	   2918813 ns/op	 197.34 MB/s
+BenchmarkOnearr-4                  	    5000	   2688237 ns/op	 214.27 MB/s
+BenchmarkOnearrRev-4               	   10000	   2243713 ns/op	 256.72 MB/s
+BenchmarkPremul-4                  	    5000	   3478809 ns/op	 165.57 MB/s
+BenchmarkOnearrPremul-4            	    5000	   2785141 ns/op	 206.81 MB/s
+BenchmarkSpecialize-4              	    5000	   2482200 ns/op	 232.05 MB/s
+BenchmarkUnroll-4                  	   10000	   2085062 ns/op	 276.25 MB/s
+BenchmarkUnrollReverse-4           	   10000	   2120794 ns/op	 271.60 MB/s
+BenchmarkUnrollInverse-4           	   10000	   1999000 ns/op	 288.14 MB/s
+BenchmarkUnrollInReverse-4         	   10000	   1998116 ns/op	 288.27 MB/s
+BenchmarkUnrollInReverseSwitch-4   	    5000	   2517595 ns/op	 228.79 MB/s
+BenchmarkUnrollInReverseBool-4     	   10000	   1929423 ns/op	 298.53 MB/s
 ```

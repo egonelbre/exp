@@ -7,6 +7,7 @@ import (
 	"github.com/egonelbre/exp/niterator/instruct"
 	"github.com/egonelbre/exp/niterator/onearr"
 	"github.com/egonelbre/exp/niterator/onearrpremul"
+	"github.com/egonelbre/exp/niterator/onearrrev"
 	"github.com/egonelbre/exp/niterator/ordone"
 	"github.com/egonelbre/exp/niterator/premul"
 	"github.com/egonelbre/exp/niterator/shape"
@@ -38,10 +39,15 @@ func init() {
 
 func testIterator(t *testing.T, it Iterator) {
 	t.Helper()
+	count := 0
 	for index, err := it.Next(); err == nil; index, err = it.Next() {
+		count++
 		if target[index] != index+1 {
 			t.Fatalf("invalid at %d", index)
 		}
+	}
+	if count != example.TotalSize() {
+		t.Fatalf("invalid count: got %d expected %d", count, example.TotalSize())
 	}
 }
 
@@ -101,6 +107,22 @@ func BenchmarkOnearr(b *testing.B) {
 	b.SetBytes(int64(example.TotalSize()))
 	for i := 0; i < b.N; i++ {
 		it := onearr.NewIterator(example)
+		total := 0
+		for index, err := it.Next(); err == nil; index, err = it.Next() {
+			total += index
+		}
+		_ = total
+	}
+}
+
+func TestOnearrRev(t *testing.T) {
+	testIterator(t, onearrrev.NewIterator(example))
+}
+
+func BenchmarkOnearrRev(b *testing.B) {
+	b.SetBytes(int64(example.TotalSize()))
+	for i := 0; i < b.N; i++ {
+		it := onearrrev.NewIterator(example)
 		total := 0
 		for index, err := it.Next(); err == nil; index, err = it.Next() {
 			total += index
