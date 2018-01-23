@@ -1,5 +1,7 @@
 package shape
 
+import "fmt"
+
 type AP struct {
 	Shape  []int
 	Stride []int
@@ -11,6 +13,10 @@ func (ap *AP) TotalSize() int {
 		total *= size
 	}
 	return total
+}
+
+func (ap *AP) String() string {
+	return fmt.Sprintf("%v", ap.Shape)
 }
 
 func New(shape ...int) *AP {

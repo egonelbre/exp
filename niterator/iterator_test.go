@@ -26,343 +26,429 @@ import (
 )
 
 var (
-	example = shape.New(24, 20, 40, 30)
-	// example = shape.New(100, 100, 100, 100)
-	target = make([]int, example.TotalSize())
+	testSizes = []*shape.AP{
+		shape.New(3, 20, 40, 24),
+		shape.New(24, 20, 40, 3),
+		shape.New(24, 20, 40, 30),
+		shape.New(5, 50, 100, 150),
+		shape.New(150, 100, 50, 5),
+		shape.New(100, 100, 100, 100),
+	}
+
+	verifyIndex = make([][]int, len(testSizes))
 )
 
 func init() {
-	it := basic.NewIterator(example)
-	i := 0
-	for index, err := it.Next(); err == nil; index, err = it.Next() {
-		i++
-		target[index] = i
-	}
-	for _, v := range target {
-		if v == 0 {
-			panic("invalid iterator")
+	for api, ap := range testSizes {
+		verify := make([]int, ap.TotalSize())
+
+		it := basic.NewIterator(ap)
+		i := 0
+		for index, err := it.Next(); err == nil; index, err = it.Next() {
+			i++
+			verify[index] = i
 		}
+		for _, v := range verify {
+			if v == 0 {
+				panic("invalid iterator")
+			}
+		}
+
+		verifyIndex[api] = verify
 	}
 }
 
-func testIterator(t *testing.T, it Iterator) {
+func testIterator(t *testing.T, newiterator func(ap *shape.AP) Iterator) {
 	t.Helper()
-	count := 0
-	i := 0
-	for index, err := it.Next(); err == nil; index, err = it.Next() {
-		count++
-		i++
-		if target[index] != i {
-			t.Fatalf("invalid at %d", index)
-		}
-	}
-	if count != example.TotalSize() {
-		t.Fatalf("invalid count: got %d expected %d", count, example.TotalSize())
+	for api, ap := range testSizes {
+		verify := verifyIndex[api]
+
+		t.Run(ap.String(), func(t *testing.T) {
+			count := 0
+			i := 0
+			it := newiterator(ap)
+			for index, err := it.Next(); err == nil; index, err = it.Next() {
+				count++
+				i++
+				if verify[index] != i {
+					t.Fatalf("invalid at %d", index)
+				}
+			}
+
+			if count != ap.TotalSize() {
+				t.Fatalf("invalid count: got %d expected %d", count, ap.TotalSize())
+			}
+		})
 	}
 }
 
 func TestBasic(t *testing.T) {
-	testIterator(t, basic.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return basic.NewIterator(ap) })
 }
 
 func BenchmarkBasic(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := basic.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := basic.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestInstruct(t *testing.T) {
-	testIterator(t, instruct.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return instruct.NewIterator(ap) })
 }
 
 func BenchmarkInstruct(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := instruct.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := instruct.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestOrdone(t *testing.T) {
-	testIterator(t, ordone.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return ordone.NewIterator(ap) })
 }
 
 func BenchmarkOrdone(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := ordone.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := ordone.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestOnearr(t *testing.T) {
-	testIterator(t, onearr.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return onearr.NewIterator(ap) })
 }
 
 func BenchmarkOnearr(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := onearr.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := onearr.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestOnearrRev(t *testing.T) {
-	testIterator(t, onearrrev.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return onearrrev.NewIterator(ap) })
 }
 
 func BenchmarkOnearrRev(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := onearrrev.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := onearrrev.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestOnearrRevAdvance(t *testing.T) {
-	testIterator(t, onearrrevadvance.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return onearrrevadvance.NewIterator(ap) })
 }
 
 func BenchmarkOnearrRevAdvance(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := onearrrevadvance.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := onearrrevadvance.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestOnearrRevSpecialize(t *testing.T) {
-	testIterator(t, onearrrevspecialize.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return onearrrevspecialize.NewIterator(ap) })
 }
 
 func BenchmarkOnearrRevSpecialize(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := onearrrevspecialize.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := onearrrevspecialize.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestOnearrRevSpecializeAdvance(t *testing.T) {
-	testIterator(t, onearrrevspecializeadvance.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return onearrrevspecializeadvance.NewIterator(ap) })
 }
 
 func BenchmarkOnearrRevSpecializeAdvance(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := onearrrevspecializeadvance.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := onearrrevspecializeadvance.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 func TestPremul(t *testing.T) {
-	testIterator(t, premul.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return premul.NewIterator(ap) })
 }
 
 func BenchmarkPremul(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := premul.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := premul.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestOnearrPremul(t *testing.T) {
-	testIterator(t, onearrpremul.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return onearrpremul.NewIterator(ap) })
 }
 
 func BenchmarkOnearrPremul(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := onearrpremul.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := onearrpremul.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestSpecialize(t *testing.T) {
-	testIterator(t, specialize.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return specialize.NewIterator(ap) })
 }
 
 func BenchmarkSpecialize(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := specialize.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := specialize.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestUnroll(t *testing.T) {
-	testIterator(t, unroll.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return unroll.NewIterator(ap) })
 }
 
 func BenchmarkUnroll(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := unroll.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := unroll.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestUnrollReverse(t *testing.T) {
-	testIterator(t, unrollreverse.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return unrollreverse.NewIterator(ap) })
 }
 
 func BenchmarkUnrollReverse(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := unrollreverse.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := unrollreverse.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestUnrollInverse(t *testing.T) {
-	testIterator(t, unrollinverse.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return unrollinverse.NewIterator(ap) })
 }
 
 func BenchmarkUnrollInverse(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := unrollinverse.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := unrollinverse.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestUnrollInReverse(t *testing.T) {
-	testIterator(t, unrollinreverse.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return unrollinreverse.NewIterator(ap) })
 }
 
 func BenchmarkUnrollInReverse(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := unrollinreverse.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := unrollinreverse.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestUnrollInReverseAdvance(t *testing.T) {
-	testIterator(t, unrollinreverseadvance.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return unrollinreverseadvance.NewIterator(ap) })
 }
 
 func BenchmarkUnrollInReverseAdvance(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := unrollinreverseadvance.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
-	}
-}
-
-func TestUnrollInReverseHardcode(t *testing.T) {
-	if example.Shape[0] != 100 && example.Shape[1] != 100 && example.Shape[2] != 100 && example.Shape[3] != 100 {
-		t.Skip()
-		return
-	}
-	testIterator(t, unrollinreversehardcode.NewIterator(example))
-}
-
-func BenchmarkUnrollInReverseHardcode(b *testing.B) {
-	if example.Shape[0] != 100 && example.Shape[1] != 100 && example.Shape[2] != 100 && example.Shape[3] != 100 {
-		b.Skip()
-		return
-	}
-
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := unrollinreversehardcode.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := unrollinreverseadvance.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func TestUnrollInReverseSwitch(t *testing.T) {
-	testIterator(t, unrollinreverseswitch.NewIterator(example))
+	testIterator(t, func(ap *shape.AP) Iterator { return unrollinreverseswitch.NewIterator(ap) })
 }
 
 func BenchmarkUnrollInReverseSwitch(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
-	for i := 0; i < b.N; i++ {
-		it := unrollinreverseswitch.NewIterator(example)
-		total := 0
-		for index, err := it.Next(); err == nil; index, err = it.Next() {
-			total += index
-		}
-		_ = total
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := unrollinreverseswitch.NewIterator(ap)
+				total := 0
+				for index, err := it.Next(); err == nil; index, err = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
 	}
 }
 
 func BenchmarkUnrollInReverseBool(b *testing.B) {
-	b.SetBytes(int64(example.TotalSize()))
+	for _, ap := range testSizes {
+		b.Run(ap.String(), func(b *testing.B) {
+			b.SetBytes(int64(ap.TotalSize()))
+			for i := 0; i < b.N; i++ {
+				it := unrollinreversebool.NewIterator(ap)
+				total := 0
+				for index, done := it.Next(); !done; index, done = it.Next() {
+					total += index
+				}
+				_ = total
+			}
+		})
+	}
+}
+
+// special
+// func TestUnrollInReverseHardcode(t *testing.T) {
+// 	testIterator(t, unrollinreversehardcode.NewIterator(shape.New(100, 100, 100, 100)))
+// }
+
+func BenchmarkUnrollInReverseHardcode(b *testing.B) {
+	ap := shape.New(100, 100, 100, 100)
+	b.SetBytes(int64(ap.TotalSize()))
 	for i := 0; i < b.N; i++ {
-		it := unrollinreversebool.NewIterator(example)
+		it := unrollinreversehardcode.NewIterator(ap)
 		total := 0
-		for index, done := it.Next(); !done; index, done = it.Next() {
+		for index, err := it.Next(); err == nil; index, err = it.Next() {
 			total += index
 		}
 		_ = total
