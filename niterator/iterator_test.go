@@ -27,7 +27,8 @@ import (
 
 var (
 	example = shape.New(24, 20, 40, 30)
-	target  = make([]int, example.TotalSize())
+	// example = shape.New(100, 100, 100, 100)
+	target = make([]int, example.TotalSize())
 )
 
 func init() {
@@ -316,10 +317,19 @@ func BenchmarkUnrollInReverseAdvance(b *testing.B) {
 }
 
 func TestUnrollInReverseHardcode(t *testing.T) {
+	if example.Shape[0] != 100 && example.Shape[1] != 100 && example.Shape[2] != 100 && example.Shape[3] != 100 {
+		t.Skip()
+		return
+	}
 	testIterator(t, unrollinreversehardcode.NewIterator(example))
 }
 
 func BenchmarkUnrollInReverseHardcode(b *testing.B) {
+	if example.Shape[0] != 100 && example.Shape[1] != 100 && example.Shape[2] != 100 && example.Shape[3] != 100 {
+		b.Skip()
+		return
+	}
+
 	b.SetBytes(int64(example.TotalSize()))
 	for i := 0; i < b.N; i++ {
 		it := unrollinreversehardcode.NewIterator(example)

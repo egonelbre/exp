@@ -21,20 +21,21 @@ type Iterator struct {
 }
 
 func NewIterator(ap *shape.AP) *Iterator {
-	//track := [4]Index{}
+	track := [4]Index{}
 
-	// this init loop is slow
-	//for i := range ap.Shape {
-	//	track[3-i].Track = uint32(ap.Shape[i])
-	//	track[3-i].Shape = uint32(ap.Shape[i])
-	//	if i == len(ap.Shape)-1 {
-	//		track[3-i].Advance = uint32(ap.Stride[i])
-	//	} else {
-	//		track[3-i].Advance = uint32(ap.Stride[i] - ap.Stride[i+1]*ap.Shape[i+1])
-	//	}
-	//}
-	//fmt.Println(track)
-	track := [4]Index{Index{30, 1, 30}, Index{40, 0, 40}, Index{20, 0, 20}, Index{24, 0, 24}}
+	last := len(ap.Shape) - 1
+	stride := ap.Stride[:last+1]
+	shape := ap.Shape[:last+1]
+
+	track[0].Track = uint32(shape[last])
+	track[0].Advance = uint32(stride[last])
+	track[0].Shape = uint32(shape[last])
+
+	for i := 1; i < last+1; i++ {
+		track[i].Track = uint32(shape[last-i])
+		track[i].Shape = uint32(shape[last-i])
+		track[i].Advance = uint32(stride[last-i] - stride[last-i+1]*shape[last-i+1])
+	}
 
 	return &Iterator{
 		AP:    ap,

@@ -12,8 +12,6 @@ type Index struct {
 	//Stride uint32
 }
 
-// 30, 30, 1; 40 40 30; 20 20 1200; 24 24 24000
-
 type Iterator struct {
 	*shape.AP
 
@@ -49,7 +47,7 @@ func (it *Iterator) Next() (int, error) {
 	next := it.NextIndex
 	result := int(next)
 
-	// {Track:30 Shape:30 Stride:1}
+	// {Track:100 Shape:100 Stride:1}
 	x := &it.Track[0]
 	x.Track--
 	next += 1
@@ -57,35 +55,35 @@ func (it *Iterator) Next() (int, error) {
 		it.NextIndex = next
 		return result, nil
 	}
-	x.Track = 30
-	next -= 30 * 1
+	x.Track = 100
+	next -= 100 * 1
 
-	// {Track:40 Shape:40 Stride:30}
+	// {Track:100 Shape:100 Stride:100}
 	x = &it.Track[1]
 	x.Track--
-	next += 30
+	next += 100
 	if x.Track > 0 {
 		it.NextIndex = next
 		return result, nil
 	}
-	x.Track = 40
-	next -= 40 * 30
+	x.Track = 100
+	next -= 100 * 100
 
-	// {Track:20 Shape:20 Stride:1200}
+	// {Track:100 Shape:100 Stride:10000}
 	x = &it.Track[2]
 	x.Track--
-	next += 1200
+	next += 10000
 	if x.Track > 0 {
 		it.NextIndex = next
 		return result, nil
 	}
-	x.Track = 20
-	next -= 20 * 1200
+	x.Track = 100
+	next -= 100 * 10000
 
-	// {Track:24 Shape:24 Stride:24000}
+	// {Track:100 Shape:100 Stride:1000000}
 	x = &it.Track[3]
 	x.Track--
-	next += 24000
+	next += 1000000
 	if x.Track > 0 {
 		it.NextIndex = next
 		return result, nil
