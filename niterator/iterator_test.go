@@ -8,6 +8,7 @@ import (
 	"github.com/egonelbre/exp/niterator/onearr"
 	"github.com/egonelbre/exp/niterator/onearrpremul"
 	"github.com/egonelbre/exp/niterator/onearrrev"
+	"github.com/egonelbre/exp/niterator/onearrrevspecialize"
 	"github.com/egonelbre/exp/niterator/ordone"
 	"github.com/egonelbre/exp/niterator/premul"
 	"github.com/egonelbre/exp/niterator/shape"
@@ -123,6 +124,22 @@ func BenchmarkOnearrRev(b *testing.B) {
 	b.SetBytes(int64(example.TotalSize()))
 	for i := 0; i < b.N; i++ {
 		it := onearrrev.NewIterator(example)
+		total := 0
+		for index, err := it.Next(); err == nil; index, err = it.Next() {
+			total += index
+		}
+		_ = total
+	}
+}
+
+func TestOnearrRevSpecialize(t *testing.T) {
+	testIterator(t, onearrrevspecialize.NewIterator(example))
+}
+
+func BenchmarkOnearrRevSpecialize(b *testing.B) {
+	b.SetBytes(int64(example.TotalSize()))
+	for i := 0; i < b.N; i++ {
+		it := onearrrevspecialize.NewIterator(example)
 		total := 0
 		for index, err := it.Next(); err == nil; index, err = it.Next() {
 			total += index

@@ -1,16 +1,17 @@
 ```
-BenchmarkBasic-4                   	    5000	   2977997 ns/op	 193.42 MB/s
-BenchmarkInstruct-4                	    5000	   3261112 ns/op	 176.63 MB/s
-BenchmarkOrdone-4                  	    5000	   2918813 ns/op	 197.34 MB/s
-BenchmarkOnearr-4                  	    5000	   2688237 ns/op	 214.27 MB/s
-BenchmarkOnearrRev-4               	   10000	   2243713 ns/op	 256.72 MB/s
-BenchmarkPremul-4                  	    5000	   3478809 ns/op	 165.57 MB/s
-BenchmarkOnearrPremul-4            	    5000	   2785141 ns/op	 206.81 MB/s
-BenchmarkSpecialize-4              	    5000	   2482200 ns/op	 232.05 MB/s
-BenchmarkUnroll-4                  	   10000	   2085062 ns/op	 276.25 MB/s
-BenchmarkUnrollReverse-4           	   10000	   2120794 ns/op	 271.60 MB/s
-BenchmarkUnrollInverse-4           	   10000	   1999000 ns/op	 288.14 MB/s
-BenchmarkUnrollInReverse-4         	   10000	   1998116 ns/op	 288.27 MB/s
-BenchmarkUnrollInReverseSwitch-4   	    5000	   2517595 ns/op	 228.79 MB/s
-BenchmarkUnrollInReverseBool-4     	   10000	   1929423 ns/op	 298.53 MB/s
+BenchmarkBasic-4                   	    5000	   2937549 ns/op	 196.08 MB/s
+BenchmarkInstruct-4                	    5000	   3224819 ns/op	 178.61 MB/s
+BenchmarkOrdone-4                  	    5000	   2876686 ns/op	 200.23 MB/s
+BenchmarkOnearr-4                  	    5000	   2663603 ns/op	 216.25 MB/s
+BenchmarkOnearrRev-4               	   10000	   2227535 ns/op	 258.58 MB/s
+BenchmarkOnearrRevSpecialize-4     	   10000	   1969871 ns/op	 292.40 MB/s
+BenchmarkPremul-4                  	    5000	   3438574 ns/op	 167.51 MB/s
+BenchmarkOnearrPremul-4            	    5000	   2774488 ns/op	 207.61 MB/s
+BenchmarkSpecialize-4              	    5000	   2568444 ns/op	 224.26 MB/s
+BenchmarkUnroll-4                  	   10000	   2059076 ns/op	 279.74 MB/s
+BenchmarkUnrollReverse-4           	   10000	   2104658 ns/op	 273.68 MB/s
+BenchmarkUnrollInverse-4           	   10000	   1968053 ns/op	 292.67 MB/s
+BenchmarkUnrollInReverse-4         	   10000	   2002197 ns/op	 287.68 MB/s
+BenchmarkUnrollInReverseSwitch-4   	    5000	   2521456 ns/op	 228.44 MB/s
+BenchmarkUnrollInReverseBool-4     	   10000	   1922431 ns/op	 299.62 MB/s
 ```
