@@ -1,4 +1,4 @@
-package onearrrevspecialize
+package onearrrevspecializeadvance
 
 import (
 	"io"
@@ -7,9 +7,10 @@ import (
 )
 
 type Index struct {
-	Track  uint32
-	Stride uint32
-	Shape  uint32
+	Track   uint32
+	Advance uint32
+	Shape   uint32
+	Stride  uint32
 }
 
 type Iterator struct {
@@ -25,11 +26,18 @@ func NewIterator(ap *shape.AP) *Iterator {
 	it.AP = ap
 
 	last := len(ap.Shape) - 1
+	stride := ap.Stride[:last+1]
+	shape := ap.Shape[:last+1]
 	track := &it.Track
-	for i := range ap.Shape {
-		(*track)[last-i].Track = uint32(ap.Shape[i])
-		(*track)[last-i].Shape = uint32(ap.Shape[i])
-		(*track)[last-i].Stride = uint32(ap.Stride[i])
+
+	(*track)[0].Track = uint32(shape[last])
+	(*track)[0].Advance = uint32(stride[last])
+	(*track)[0].Shape = uint32(shape[last])
+
+	for i := 1; i < last+1; i++ {
+		(*track)[i].Track = uint32(shape[last-i])
+		(*track)[i].Shape = uint32(shape[last-i])
+		(*track)[i].Advance = uint32(stride[last-i] - stride[last-i+1]*shape[last-i+1])
 	}
 
 	return it
@@ -49,13 +57,12 @@ func (it *Iterator) Next() (int, error) {
 	for i := range it.Track {
 		x := &it.Track[i]
 		x.Track--
+		next += x.Advance
 		if x.Track > 0 {
-			next += x.Stride
 			it.NextIndex = next
 			return int(result), nil
 		}
 		x.Track = x.Shape
-		next -= (x.Shape - 1) * x.Stride
 	}
 
 	it.Done = true

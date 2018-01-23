@@ -8,13 +8,16 @@ import (
 	"github.com/egonelbre/exp/niterator/onearr"
 	"github.com/egonelbre/exp/niterator/onearrpremul"
 	"github.com/egonelbre/exp/niterator/onearrrev"
+	"github.com/egonelbre/exp/niterator/onearrrevadvance"
 	"github.com/egonelbre/exp/niterator/onearrrevspecialize"
+	"github.com/egonelbre/exp/niterator/onearrrevspecializeadvance"
 	"github.com/egonelbre/exp/niterator/ordone"
 	"github.com/egonelbre/exp/niterator/premul"
 	"github.com/egonelbre/exp/niterator/shape"
 	"github.com/egonelbre/exp/niterator/specialize"
 	"github.com/egonelbre/exp/niterator/unroll"
 	"github.com/egonelbre/exp/niterator/unrollinreverse"
+	"github.com/egonelbre/exp/niterator/unrollinreverseadvance"
 	"github.com/egonelbre/exp/niterator/unrollinreversebool"
 	"github.com/egonelbre/exp/niterator/unrollinreversehardcode"
 	"github.com/egonelbre/exp/niterator/unrollinreverseswitch"
@@ -29,8 +32,10 @@ var (
 
 func init() {
 	it := basic.NewIterator(example)
+	i := 0
 	for index, err := it.Next(); err == nil; index, err = it.Next() {
-		target[index] = index + 1
+		i++
+		target[index] = i
 	}
 	for _, v := range target {
 		if v == 0 {
@@ -42,9 +47,11 @@ func init() {
 func testIterator(t *testing.T, it Iterator) {
 	t.Helper()
 	count := 0
+	i := 0
 	for index, err := it.Next(); err == nil; index, err = it.Next() {
 		count++
-		if target[index] != index+1 {
+		i++
+		if target[index] != i {
 			t.Fatalf("invalid at %d", index)
 		}
 	}
@@ -133,6 +140,22 @@ func BenchmarkOnearrRev(b *testing.B) {
 	}
 }
 
+func TestOnearrRevAdvance(t *testing.T) {
+	testIterator(t, onearrrevadvance.NewIterator(example))
+}
+
+func BenchmarkOnearrRevAdvance(b *testing.B) {
+	b.SetBytes(int64(example.TotalSize()))
+	for i := 0; i < b.N; i++ {
+		it := onearrrevadvance.NewIterator(example)
+		total := 0
+		for index, err := it.Next(); err == nil; index, err = it.Next() {
+			total += index
+		}
+		_ = total
+	}
+}
+
 func TestOnearrRevSpecialize(t *testing.T) {
 	testIterator(t, onearrrevspecialize.NewIterator(example))
 }
@@ -149,6 +172,21 @@ func BenchmarkOnearrRevSpecialize(b *testing.B) {
 	}
 }
 
+func TestOnearrRevSpecializeAdvance(t *testing.T) {
+	testIterator(t, onearrrevspecializeadvance.NewIterator(example))
+}
+
+func BenchmarkOnearrRevSpecializeAdvance(b *testing.B) {
+	b.SetBytes(int64(example.TotalSize()))
+	for i := 0; i < b.N; i++ {
+		it := onearrrevspecializeadvance.NewIterator(example)
+		total := 0
+		for index, err := it.Next(); err == nil; index, err = it.Next() {
+			total += index
+		}
+		_ = total
+	}
+}
 func TestPremul(t *testing.T) {
 	testIterator(t, premul.NewIterator(example))
 }
@@ -253,6 +291,22 @@ func BenchmarkUnrollInReverse(b *testing.B) {
 	b.SetBytes(int64(example.TotalSize()))
 	for i := 0; i < b.N; i++ {
 		it := unrollinreverse.NewIterator(example)
+		total := 0
+		for index, err := it.Next(); err == nil; index, err = it.Next() {
+			total += index
+		}
+		_ = total
+	}
+}
+
+func TestUnrollInReverseAdvance(t *testing.T) {
+	testIterator(t, unrollinreverseadvance.NewIterator(example))
+}
+
+func BenchmarkUnrollInReverseAdvance(b *testing.B) {
+	b.SetBytes(int64(example.TotalSize()))
+	for i := 0; i < b.N; i++ {
+		it := unrollinreverseadvance.NewIterator(example)
 		total := 0
 		for index, err := it.Next(); err == nil; index, err = it.Next() {
 			total += index
