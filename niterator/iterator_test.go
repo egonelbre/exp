@@ -33,13 +33,14 @@ type TestSize struct {
 }
 
 var (
-	testSizes = []TestSize{
-		{"3x20x40x24", shape.New(3, 20, 40, 24)},
-		{"24x20x40x3", shape.New(24, 20, 40, 3)},
-		{"24x20x40x30", shape.New(24, 20, 40, 30)},
-		{"5x50x100x150", shape.New(5, 50, 100, 150)},
-		{"150x100x50x5", shape.New(150, 100, 50, 5)},
-		{"100x100x100x100", shape.New(100, 100, 100, 100)},
+	indexOf100x = 5
+	testSizes   = []TestSize{
+		0: {"3x20x40x24", shape.New(3, 20, 40, 24)},
+		1: {"24x20x40x3", shape.New(24, 20, 40, 3)},
+		2: {"24x20x40x30", shape.New(24, 20, 40, 30)},
+		3: {"5x50x100x150", shape.New(5, 50, 100, 150)},
+		4: {"150x100x50x5", shape.New(150, 100, 50, 5)},
+		5: {"100x100x100x100", shape.New(100, 100, 100, 100)},
 	}
 
 	verifyIndex = make([][]int, len(testSizes))
@@ -69,10 +70,9 @@ func init() {
 func testIterator(t *testing.T, newiterator func(ap *shape.AP) Iterator) {
 	t.Helper()
 	for api, testsize := range testSizes {
-		ap := testsize.AP
-		verify := verifyIndex[api]
-
 		t.Run(testsize.Name, func(t *testing.T) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			count := 0
 			i := 0
 			it := newiterator(ap)
@@ -96,15 +96,16 @@ func TestBasic(t *testing.T) {
 }
 
 func BenchmarkBasic(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := basic.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -123,15 +124,16 @@ func BenchmarkInstruct(b *testing.B) {
 	if skipUseless {
 		b.Skip("skipping useless approach")
 	}
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := instruct.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -150,15 +152,16 @@ func BenchmarkOrdone(b *testing.B) {
 	if skipUseless {
 		b.Skip("skipping useless approach")
 	}
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := ordone.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -177,15 +180,16 @@ func BenchmarkPremul(b *testing.B) {
 	if skipUseless {
 		b.Skip("skipping useless approach")
 	}
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := premul.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -198,15 +202,16 @@ func TestOnearr(t *testing.T) {
 }
 
 func BenchmarkOnearr(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := onearr.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -219,15 +224,16 @@ func TestOnearrRev(t *testing.T) {
 }
 
 func BenchmarkOnearrRev(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := onearrrev.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -240,15 +246,16 @@ func TestOnearrRevAdvance(t *testing.T) {
 }
 
 func BenchmarkOnearrRevAdvance(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := onearrrevadvance.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -261,15 +268,16 @@ func TestOnearrRevSpecialize(t *testing.T) {
 }
 
 func BenchmarkOnearrRevSpecialize(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := onearrrevspecialize.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -282,15 +290,16 @@ func TestOnearrRevSpecializeAdvance(t *testing.T) {
 }
 
 func BenchmarkOnearrRevSpecializeAdvance(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := onearrrevspecializeadvance.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -309,15 +318,16 @@ func BenchmarkOnearrPremul(b *testing.B) {
 	if skipUseless {
 		b.Skip("skipping useless approach")
 	}
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := onearrpremul.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -330,15 +340,16 @@ func TestSpecialize(t *testing.T) {
 }
 
 func BenchmarkSpecialize(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := specialize.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -351,15 +362,16 @@ func TestUnroll(t *testing.T) {
 }
 
 func BenchmarkUnroll(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := unroll.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -372,15 +384,16 @@ func TestUnrollReverse(t *testing.T) {
 }
 
 func BenchmarkUnrollReverse(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := unrollreverse.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -393,15 +406,16 @@ func TestUnrollInverse(t *testing.T) {
 }
 
 func BenchmarkUnrollInverse(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := unrollinverse.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -414,15 +428,16 @@ func TestUnrollInReverse(t *testing.T) {
 }
 
 func BenchmarkUnrollInReverse(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := unrollinreverse.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -435,15 +450,16 @@ func TestUnrollInReverseAdvance(t *testing.T) {
 }
 
 func BenchmarkUnrollInReverseAdvance(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := unrollinreverseadvance.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -456,15 +472,16 @@ func TestUnrollInReverseSwitch(t *testing.T) {
 }
 
 func BenchmarkUnrollInReverseSwitch(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := unrollinreverseswitch.NewIterator(ap)
 				total := 0
 				for index, err := it.Next(); err == nil; index, err = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -473,15 +490,16 @@ func BenchmarkUnrollInReverseSwitch(b *testing.B) {
 }
 
 func BenchmarkUnrollInReverseBool(b *testing.B) {
-	for _, testsize := range testSizes {
-		ap := testsize.AP
+	for api, testsize := range testSizes {
 		b.Run(testsize.Name, func(b *testing.B) {
+			verify := verifyIndex[api]
+			ap := testsize.AP
 			b.SetBytes(int64(ap.TotalSize()))
 			for i := 0; i < b.N; i++ {
 				it := unrollinreversebool.NewIterator(ap)
 				total := 0
 				for index, done := it.Next(); !done; index, done = it.Next() {
-					total += index * index
+					total += verify[index] * index
 				}
 				_ = total
 			}
@@ -496,13 +514,14 @@ func BenchmarkUnrollInReverseBool(b *testing.B) {
 
 func BenchmarkUnrollInReverseHardcode(b *testing.B) {
 	b.Run("100x100x100x100", func(b *testing.B) {
+		verify := verifyIndex[indexOf100x]
 		ap := shape.New(100, 100, 100, 100)
 		b.SetBytes(int64(ap.TotalSize()))
 		for i := 0; i < b.N; i++ {
 			it := unrollinreversehardcode.NewIterator(ap)
 			total := 0
 			for index, err := it.Next(); err == nil; index, err = it.Next() {
-				total += index * index
+				total += verify[index] * index
 			}
 			_ = total
 		}
