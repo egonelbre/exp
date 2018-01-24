@@ -25,7 +25,7 @@ func timeout() chan int {
 
 func testReturn(t *testing.T, got interface{}, wasOk bool, expected interface{}, expectedOk bool) {
 	if wasOk != expectedOk {
-		t.Fatalf("Returned ok=%b expected %b", wasOk, expectedOk)
+		t.Fatalf("Returned ok=%v expected %v", wasOk, expectedOk)
 	}
 
 	if got != expected {
@@ -81,7 +81,7 @@ func runParallelTest(t *testing.T, test func(int)) {
 	wg := &sync.WaitGroup{}
 	for i := 0; i < cpus; i += 1 {
 		wg.Add(1)
-		go func(){
+		go func() {
 			test(N)
 			wg.Done()
 		}()
@@ -91,7 +91,7 @@ func runParallelTest(t *testing.T, test func(int)) {
 }
 
 func queuePTest(t *testing.T, q Queue) {
-	runParallelTest(t, func(N int){
+	runParallelTest(t, func(N int) {
 		for i := 0; i < N; i += 1 {
 			q.Enqueue(i)
 		}
@@ -106,7 +106,7 @@ func queuePTest(t *testing.T, q Queue) {
 }
 
 func queueP2Test(t *testing.T, q Queue) {
-	runParallelTest(t, func(N int){
+	runParallelTest(t, func(N int) {
 		for i := 0; i < N; i += 1 {
 			q.Enqueue(i)
 			_, ok := q.Dequeue()
