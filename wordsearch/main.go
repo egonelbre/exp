@@ -8,6 +8,7 @@ import (
 	"time"
 	"unicode/utf8"
 
+	"github.com/dgryski/go-cuckoof"
 	"github.com/egonelbre/exp/wordsearch/trie-compact"
 	"github.com/loov/hrtime"
 )
@@ -48,6 +49,7 @@ func main() {
 	fmt.Println(compact.Contains("NOTHING"))
 
 	BenchmarkBinarySearch(words)
+	BenchmarkCuckooFilter(words)
 }
 
 func BenchmarkBinarySearch(words []string) {
@@ -70,4 +72,21 @@ func Search(words []string, word string) int {
 		}
 	}
 	return i
+}
+
+func BenchmarkCuckooFilter(words []string) {
+	filter := cuckoof.New(1 << 17)
+	for _, word := range words {
+		filter.Insert([]byte(word))
+	}
+
+	start := hrtime.Now()
+	for _, word := range words {
+		if !filter.Lookup([]byte(word)) {
+			fmt.Println("did not find", word)
+			break
+		}
+	}
+	stop := hrtime.Now()
+	fmt.Printf("cuckoo search lookup: %v\n", (stop-start)/time.Duration(len(words)))
 }
