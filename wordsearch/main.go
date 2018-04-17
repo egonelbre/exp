@@ -46,4 +46,28 @@ func main() {
 
 	fmt.Println(compact.Contains("something"))
 	fmt.Println(compact.Contains("NOTHING"))
+
+	BenchmarkBinarySearch(words)
+}
+
+func BenchmarkBinarySearch(words []string) {
+	start := hrtime.Now()
+	for _, word := range words {
+		_ = Search(words, word)
+	}
+	stop := hrtime.Now()
+	fmt.Printf("average binary search lookup: %v\n", (stop-start)/time.Duration(len(words)))
+}
+
+func Search(words []string, word string) int {
+	i, k := 0, len(words)
+	for i < k {
+		h := int(uint(i+k) >> 1)
+		if !(words[h] >= word) {
+			i = h + 1
+		} else {
+			k = h
+		}
+	}
+	return i
 }
