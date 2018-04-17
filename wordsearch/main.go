@@ -75,7 +75,7 @@ func Search(words []string, word string) int {
 }
 
 func BenchmarkCuckooFilter(words []string) {
-	filter := cuckoof.New(1 << 17)
+	filter := cuckoof.New(1 << 19)
 	for _, word := range words {
 		filter.Insert([]byte(word))
 	}
