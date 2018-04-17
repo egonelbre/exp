@@ -6,7 +6,7 @@ import (
 
 const (
 	termbit   = 1
-	maxsuffix = 6
+	maxsuffix = 2
 )
 
 type cindex uint32
@@ -39,7 +39,7 @@ func (t *Compact) compress(dst *cnode, src *unode) {
 	copy(dst.suffix[:], []byte(src.suffix))
 
 	dst.edgeptr = cindex(len(t.nodes))
-	t.nodes = t.nodes[:len(t.nodes)+len(src.edges) : cap(t.nodes)]
+	t.nodes = t.nodes[: len(t.nodes)+len(src.edges) : cap(t.nodes)]
 	for i := range src.edges {
 		t.compress(t.edge(dst, i), &src.edges[i])
 	}
