@@ -1,0 +1,9 @@
+    bytes   runes   NFC     NFD     NFKC    NFKD    Regex   Graph.. Text
+    5       5       5       5       5       5       5       5       "hello"
+    6       2       2       2       2       2       2       2       "你好"
+    9       7       5       5       5       5       5       5       "hĕllŏ"
+    12      8       4       4       4       4       4       4       "l̲i̲n̲e̲"
+    3       1       1       1       2       2       1       1       "ﬁ"
+    3       1       1       1       3       3       1       1       "ﬃ"
+    3       1       1       1       3       3       1       1       "㈎"
+    5       2       1       1       1       1       1       1       "ẛ̣"
