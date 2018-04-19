@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/dpinela/charseg"
+	"github.com/apaxa-go/helper/unicodeh/boundaryh"
 	"golang.org/x/text/unicode/norm"
 )
 
@@ -39,13 +39,7 @@ func NFKCCount(s string) int { return NormalizedCount(norm.NFKC, s) }
 func NFKDCount(s string) int { return NormalizedCount(norm.NFKD, s) }
 
 func GraphemeCount(s string) int {
-	var count int
-	for s != "" {
-		grapheme := charseg.FirstGraphemeCluster(s)
-		count++
-		s = s[len(grapheme):]
-	}
-	return count
+	return len(boundaryh.GraphemeClusterBreaksInString(s)) - 1
 }
 
 var examples = []string{
