@@ -24,6 +24,24 @@ func BenchmarkChanUncontended(b *testing.B) {
 	})
 }
 
+func BenchmarkChanTryRecv(b *testing.B) {
+	const C = 100
+	myc := make(chan int, C*runtime.GOMAXPROCS(0))
+	b.RunParallel(func(pb *testing.PB) {
+		var value int
+		for pb.Next() {
+			select {
+			case myc <- value:
+			default:
+			}
+			select {
+			case value = <-myc:
+			default:
+			}
+		}
+	})
+}
+
 func BenchmarkChanContended(b *testing.B) {
 	const C = 100
 	myc := make(chan int, C*runtime.GOMAXPROCS(0))
