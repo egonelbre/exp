@@ -9,12 +9,6 @@ import (
 
 type Value = int
 
-const (
-	valueBytes     = 8
-	cacheLineBytes = 8 * 8
-	elementPadding = cacheLineBytes - 4 - valueBytes
-)
-
 type MPMC struct {
 	sendx  uint64
 	recvx  uint64
@@ -72,7 +66,6 @@ func NewMPMC(size int) *MPMC {
 type mpmcelement struct {
 	lap uint32
 	val Value
-	_   [elementPadding]byte
 }
 
 func (q *MPMC) cap() uint32 {
@@ -237,7 +230,7 @@ func (q *MPMC) tryRecv(result *Value) bool {
 			atomic.StoreUint32(&e.lap, e.lap+1)
 			return true
 		} else if int32(lap-elap) > 0 {
-			// The element is not yet written on the previous lap,
+			// The element is not yet written on the lap,
 			// the chan is empty.
 			return false
 		} else {
