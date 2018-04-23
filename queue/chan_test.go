@@ -8,6 +8,8 @@ import (
 	"strconv"
 	"sync/atomic"
 	"testing"
+
+	"github.com/egonelbre/async"
 )
 
 func BenchmarkChanUncontended(b *testing.B) {
@@ -109,5 +111,22 @@ func BenchmarkChanProdCons(b *testing.B) {
 		b.Run("Work"+strconv.Itoa(chanSize), func(b *testing.B) {
 			benchmarkChanProdCons(b, chanSize, 100)
 		})
+	}
+}
+
+func BenchmarkChanAsymmetric(b *testing.B) {
+	const C = 5
+	const N = 200
+	for k := 0; k < b.N; k++ {
+		q := make(chan int, N*C)
+		async.Spawn(C, func(int) {
+			for i := 0; i < N; i++ {
+				q <- i
+			}
+		})
+
+		for i := 0; i < C*N; i++ {
+			_ = <-q
+		}
 	}
 }

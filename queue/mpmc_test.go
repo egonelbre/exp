@@ -230,8 +230,8 @@ func BenchmarkMPMCProdCons(b *testing.B) {
 }
 
 func BenchmarkMPMCAsymmetric(b *testing.B) {
-	const C = 10
-	const N = 100
+	const C = 5
+	const N = 200
 	for k := 0; k < b.N; k++ {
 		q := queue.NewMPMC(N * C)
 		async.Spawn(C, func(int) {
