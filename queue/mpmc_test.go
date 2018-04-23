@@ -7,6 +7,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/egonelbre/async"
+
 	"github.com/egonelbre/exp/queue"
 )
 
@@ -254,4 +256,21 @@ func BenchmarkMPMCProdConsWork10(b *testing.B) {
 
 func BenchmarkMPMCProdConsWork100(b *testing.B) {
 	benchmarkMPMCProdCons(b, 100, 100)
+}
+
+func BenchmarkMPMCAsymmetric(b *testing.B) {
+	const C = 10
+	const N = 100
+	for k := 0; k < b.N; k++ {
+		q := queue.NewMPMC(N * C)
+		async.Spawn(C, func(int) {
+			for i := 0; i < N; i++ {
+				q.Send(i)
+			}
+		})
+
+		for i := 0; i < C*N; i++ {
+			q.RecvValue()
+		}
+	}
 }

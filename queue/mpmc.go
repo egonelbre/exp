@@ -99,8 +99,16 @@ func (q *MPMC) Recv(value *Value) bool {
 	return false
 }
 
-func (q *MPMC) TrySend(value Value) bool  { return q.trySend(&value) }
-func (q *MPMC) TryRecv(value *Value) bool { return q.tryRecv(value) }
+func (q *MPMC) TrySend(value Value) bool {
+	ok := q.trySend(&value)
+	q.recvq.Signal()
+	return ok
+}
+func (q *MPMC) TryRecv(value *Value) bool {
+	ok := q.tryRecv(value)
+	q.sendq.Signal()
+	return ok
+}
 
 func (q *MPMC) trySend(value *Value) bool {
 	for {
