@@ -15,52 +15,19 @@ type MPMC struct {
 	buffer []mpmcelement
 
 	mu    sync.Mutex
-	sendq waitqueue
-	recvq waitqueue
-}
-
-type waitqueue struct {
-	waiting []*waiter
-}
-
-type waiter struct {
-	ch chan struct{}
-}
-
-func (g *waiter) init()    { g.ch = make(chan struct{}) }
-func (g *waiter) block()   { <-g.ch }
-func (g *waiter) unblock() { g.ch <- struct{}{} }
-
-func (q *waitqueue) add(g *waiter) {
-	q.waiting = append(q.waiting, g)
-}
-func (q *waitqueue) remove(g *waiter) {
-	for i, a := range q.waiting {
-		if a == g {
-			copy(q.waiting[i:], q.waiting[i+1:])
-			q.waiting = q.waiting[: len(q.waiting)-1 : cap(q.waiting)]
-			return
-		}
-	}
-	// panic
-}
-func (q *waitqueue) empty() bool { return len(q.waiting) == 0 }
-
-func (q *waitqueue) pop() *waiter {
-	if len(q.waiting) == 0 {
-		return nil
-	}
-	g := q.waiting[len(q.waiting)-1]
-	q.waiting = q.waiting[: len(q.waiting)-1 : cap(q.waiting)]
-	return g
+	sendq sync.Cond
+	recvq sync.Cond
 }
 
 func NewMPMC(size int) *MPMC {
-	return &MPMC{
+	mpmc := &MPMC{
 		sendx:  0,
 		recvx:  1 << 32,
 		buffer: make([]mpmcelement, size, size),
 	}
+	mpmc.sendq.L = &mpmc.mu
+	mpmc.recvq.L = &mpmc.mu
+	return mpmc
 }
 
 type mpmcelement struct {
@@ -91,28 +58,14 @@ func (q *MPMC) empty() bool {
 func (q *MPMC) Send(value Value) bool {
 	for {
 		if q.trySend(&value) {
-			q.mu.Lock()
-			g := q.recvq.pop()
-			q.mu.Unlock()
-			if g != nil {
-				g.unblock()
-			}
+			q.recvq.Signal()
 			return true
 		} else {
-			var g waiter
-			g.init()
-
-			// channel full
 			q.mu.Lock()
-			q.sendq.add(&g)
-			if !q.full() {
-				q.sendq.remove(&g)
-				q.mu.Unlock()
-				continue
+			if q.full() {
+				q.sendq.Wait()
 			}
 			q.mu.Unlock()
-
-			g.block()
 		}
 	}
 	return false
@@ -133,28 +86,14 @@ func (q *MPMC) TryRecvValue() (Value, bool) {
 func (q *MPMC) Recv(value *Value) bool {
 	for {
 		if q.tryRecv(value) {
-			q.mu.Lock()
-			g := q.sendq.pop()
-			q.mu.Unlock()
-			if g != nil {
-				g.unblock()
-			}
+			q.sendq.Signal()
 			return true
 		} else {
-			var g waiter
-			g.init()
-
-			// channel full
 			q.mu.Lock()
-			q.recvq.add(&g)
-			if !q.empty() {
-				q.recvq.remove(&g)
-				q.mu.Unlock()
-				continue
+			if q.empty() {
+				q.recvq.Wait()
 			}
 			q.mu.Unlock()
-
-			g.block()
 		}
 	}
 	return false
