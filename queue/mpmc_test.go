@@ -216,28 +216,17 @@ func benchmarkMPMCProdCons(b *testing.B, chanSize, localWork int) {
 	}
 }
 
-func BenchmarkMPMCProdCons0(b *testing.B) {
-	benchmarkMPMCProdCons(b, 1, 0)
-}
-
-func BenchmarkMPMCProdCons10(b *testing.B) {
-	benchmarkMPMCProdCons(b, 10, 0)
-}
-
-func BenchmarkMPMCProdCons100(b *testing.B) {
-	benchmarkMPMCProdCons(b, 100, 0)
-}
-
-func BenchmarkMPMCProdConsWork0(b *testing.B) {
-	benchmarkMPMCProdCons(b, 1, 100)
-}
-
-func BenchmarkMPMCProdConsWork10(b *testing.B) {
-	benchmarkMPMCProdCons(b, 10, 100)
-}
-
-func BenchmarkMPMCProdConsWork100(b *testing.B) {
-	benchmarkMPMCProdCons(b, 100, 100)
+func BenchmarkMPMCProdCons(b *testing.B) {
+	for _, chanSize := range []int{1, 10, 100} {
+		b.Run(strconv.Itoa(chanSize), func(b *testing.B) {
+			benchmarkMPMCProdCons(b, chanSize, 0)
+		})
+	}
+	for _, chanSize := range []int{1, 10, 100} {
+		b.Run("Work"+strconv.Itoa(chanSize), func(b *testing.B) {
+			benchmarkMPMCProdCons(b, chanSize, 100)
+		})
+	}
 }
 
 func BenchmarkMPMCAsymmetric(b *testing.B) {

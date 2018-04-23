@@ -5,6 +5,7 @@ package queue
 
 import (
 	"runtime"
+	"strconv"
 	"sync/atomic"
 	"testing"
 )
@@ -98,18 +99,15 @@ func benchmarkChanProdCons(b *testing.B, chanSize, localWork int) {
 	}
 }
 
-func BenchmarkChanProdCons10(b *testing.B) {
-	benchmarkChanProdCons(b, 10, 0)
-}
-
-func BenchmarkChanProdCons100(b *testing.B) {
-	benchmarkChanProdCons(b, 100, 0)
-}
-
-func BenchmarkChanProdConsWork10(b *testing.B) {
-	benchmarkChanProdCons(b, 10, 100)
-}
-
-func BenchmarkChanProdConsWork100(b *testing.B) {
-	benchmarkChanProdCons(b, 100, 100)
+func BenchmarkChanProdCons(b *testing.B) {
+	for _, chanSize := range []int{1, 10, 100} {
+		b.Run(strconv.Itoa(chanSize), func(b *testing.B) {
+			benchmarkChanProdCons(b, chanSize, 0)
+		})
+	}
+	for _, chanSize := range []int{1, 10, 100} {
+		b.Run("Work"+strconv.Itoa(chanSize), func(b *testing.B) {
+			benchmarkChanProdCons(b, chanSize, 100)
+		})
+	}
 }
