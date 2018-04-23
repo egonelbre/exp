@@ -1,3 +1,5 @@
+All code here is under UNLICENSE unless otherwise indicated.
+
 Anything you find here should be considered broken, these are quick hacks
 to try out some ideas and should not be regarded as completed. There can be
 serious bugs lurking around. Other than that, these might give some nice ideas
