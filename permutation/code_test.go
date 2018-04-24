@@ -85,9 +85,20 @@ func BenchmarkPackNybble(b *testing.B) {
 		_ = PackNybble(randomized[i%N])
 	}
 }
+func BenchmarkPackNybbleUnroll(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = PackNybbleUnroll(randomized[i%N])
+	}
+}
 
 func BenchmarkPackTight(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = PackTight(randomized[i%N])
+	}
+}
+
+func BenchmarkPackTightUnroll(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = PackTightUnroll(randomized[i%N])
 	}
 }

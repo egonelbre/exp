@@ -102,3 +102,48 @@ func PackTight(perm [base]byte) int {
 	}
 	return r
 }
+
+func PackNybbleUnroll(perm [base]byte) int {
+	return int(perm[0]) +
+		int(perm[1])<<(4*1) +
+		int(perm[2])<<(4*2) +
+		int(perm[3])<<(4*3) +
+		int(perm[4])<<(4*4) +
+		int(perm[5])<<(4*5) +
+		int(perm[6])<<(4*6) +
+		int(perm[7])<<(4*7) +
+		int(perm[8])<<(4*8) +
+		int(perm[9])<<(4*9) +
+		int(perm[10])<<(4*10) +
+		int(perm[11])<<(4*11)
+}
+
+const (
+	b12_0  = 1
+	b12_1  = b12_0 * 12
+	b12_2  = b12_1 * 12
+	b12_3  = b12_2 * 12
+	b12_4  = b12_3 * 12
+	b12_5  = b12_4 * 12
+	b12_6  = b12_5 * 12
+	b12_7  = b12_6 * 12
+	b12_8  = b12_7 * 12
+	b12_9  = b12_8 * 12
+	b12_10 = b12_9 * 12
+	b12_11 = b12_10 * 12
+)
+
+func PackTightUnroll(perm [base]byte) int {
+	return int(perm[0])*b12_0 +
+		int(perm[1])*b12_1 +
+		int(perm[2])*b12_2 +
+		int(perm[3])*b12_3 +
+		int(perm[4])*b12_4 +
+		int(perm[5])*b12_5 +
+		int(perm[6])*b12_6 +
+		int(perm[7])*b12_7 +
+		int(perm[8])*b12_8 +
+		int(perm[9])*b12_9 +
+		int(perm[10])*b12_10 +
+		int(perm[11])*b12_11
+}
