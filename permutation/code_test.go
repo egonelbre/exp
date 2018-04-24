@@ -7,9 +7,9 @@ import (
 
 var examples = [][base]byte{
 	[base]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-	[base]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 10},
-	[base]byte{1, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-	[base]byte{0, 1, 9, 3, 5, 10, 6, 8, 7, 2, 11, 4},
+	//	[base]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 10},
+	//	[base]byte{1, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
+	//	[base]byte{0, 1, 9, 3, 5, 10, 6, 8, 7, 2, 11, 4},
 }
 
 const N = 1000
@@ -47,18 +47,31 @@ func check(t *testing.T, example [base]byte) {
 	t.Helper()
 
 	copying := CodeCopy(example)
+	bit := CodeCopyBit(example)
 	counting := CodeCount(example)
 	table := CodeTable(example)
 	table2 := CodeTable2(example)
 
-	if copying != counting || copying != table || copying != table2 {
-		t.Errorf("%v: copying %v, counting %v, table %v", example, copying, counting, table)
+	if copying != bit || copying != counting || copying != table || copying != table2 {
+		t.Errorf("%v: copying %v, bit %v, counting %v, table %v", example, copying, bit, counting, table)
 	}
 }
 
 func BenchmarkCopy(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = CodeCopy(randomized[i%N])
+	}
+}
+
+func BenchmarkCopyBit(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = CodeCopyBit(randomized[i%N])
+	}
+}
+
+func BenchmarkCopyBitNonstandard(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = CodeCopyBitNonstandard(randomized[i%N])
 	}
 }
 
@@ -95,6 +108,12 @@ func BenchmarkPackNybbleUnroll(b *testing.B) {
 func BenchmarkPackNybbleUnroll2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = PackNybbleUnroll2(randomized[i%N])
+	}
+}
+
+func BenchmarkPackNybbleUnroll3(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = PackNybbleUnroll3(randomized[i%N])
 	}
 }
 
