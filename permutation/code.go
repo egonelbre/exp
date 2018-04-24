@@ -118,6 +118,13 @@ func PackNybbleUnroll(perm [base]byte) int {
 		int(perm[11])<<(4*11)
 }
 
+func PackNybbleUnroll2(perm [base]byte) int {
+	i0 := int(perm[0]) | int(perm[1])<<8 | int(perm[2])<<16 | int(perm[3])<<24
+	i1 := int(perm[4]) | int(perm[5])<<8 | int(perm[6])<<16 | int(perm[7])<<24
+	i2 := int(perm[8]) | int(perm[9])<<8 | int(perm[10])<<16 | int(perm[11])<<24
+	return i0 | i1<<4 | i2<<32
+}
+
 const (
 	b12_0  = 1
 	b12_1  = b12_0 * 12
