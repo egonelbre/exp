@@ -1,14 +1,13 @@
 package queue
 
 import (
-	"runtime"
-	"sync/atomic"
+	"sync"
 )
 
 // implementation based on MCRingBuffer
 // http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.577.960&rep=rep1&type=pdf
 
-type SPSC struct {
+type SPSC2 struct {
 	_ [8]uint64
 	// volatile
 	read  int64
@@ -25,30 +24,25 @@ type SPSC struct {
 	writeBatch int64
 	_          [8 - 3]uint64
 	// constant
-	blocking  bool
+	mu        sync.Mutex
+	reader    sync.Cond
+	writer    sync.Cond
 	batchSize int64
-	buffer    []SPSCValue
+	buffer    []SPSC2Value
 }
 
-type SPSCValue = int64
+type SPSC2Value = int64
 
-func NewSPSC(size, batchSize int) *SPSC {
-	q := &SPSC{}
-	q.blocking = true
+func NewSPSC2(size, batchSize int) *SPSC2 {
+	q := &SPSC2{}
+	q.reader.L = &q.mu
+	q.writer.L = &q.mu
 	q.batchSize = int64(batchSize)
 	q.buffer = make([]SPSCValue, ceil(size, batchSize))
 	return q
 }
 
-func (q *SPSC) SetBlocking(blocking bool) {
-	q.blocking = blocking
-}
-
-func (q *SPSC) yield() {
-	runtime.Gosched()
-}
-
-func (q *SPSC) next(i int64) int64 {
+func (q *SPSC2) next(i int64) int64 {
 	r := i + 1
 	if r >= int64(len(q.buffer)) {
 		r = 0
@@ -56,16 +50,15 @@ func (q *SPSC) next(i int64) int64 {
 	return r
 }
 
-func (q *SPSC) Send(v SPSCValue) bool {
+func (q *SPSC2) Send(v SPSCValue) bool {
 	afterNextWrite := q.next(q.nextWrite)
 	if afterNextWrite == q.localRead {
-		for afterNextWrite == atomic.LoadInt64(&q.read) {
-			if !q.blocking {
-				return false
-			}
-			q.yield()
+		q.mu.Lock()
+		if afterNextWrite == q.read {
+			q.writer.Wait()
 		}
-		q.localRead = atomic.LoadInt64(&q.read)
+		q.localRead = q.read
+		q.mu.Unlock()
 	}
 
 	q.buffer[q.nextWrite] = v
@@ -77,20 +70,22 @@ func (q *SPSC) Send(v SPSCValue) bool {
 	return true
 }
 
-func (q *SPSC) FlushSend() {
-	atomic.StoreInt64(&q.write, q.nextWrite)
+func (q *SPSC2) FlushSend() {
+	q.mu.Lock()
+	q.write = q.nextWrite
 	q.writeBatch = 0
+	q.mu.Unlock()
+	q.reader.Signal()
 }
 
-func (q *SPSC) Recv(v *SPSCValue) bool {
+func (q *SPSC2) Recv(v *SPSCValue) bool {
 	if q.nextRead == q.localWrite {
-		for q.nextRead == atomic.LoadInt64(&q.write) {
-			if !q.blocking {
-				return false
-			}
-			q.yield()
+		q.mu.Lock()
+		if q.nextRead == q.write {
+			q.reader.Wait()
 		}
-		q.localWrite = atomic.LoadInt64(&q.write)
+		q.localWrite = q.write
+		q.mu.Unlock()
 	}
 
 	*v = q.buffer[q.nextRead]
@@ -99,8 +94,11 @@ func (q *SPSC) Recv(v *SPSCValue) bool {
 	q.nextRead = q.next(q.nextRead)
 	q.readBatch++
 	if q.readBatch >= q.batchSize {
-		atomic.StoreInt64(&q.read, q.nextRead)
+		q.mu.Lock()
+		q.read = q.nextRead
 		q.readBatch = 0
+		q.mu.Unlock()
+		q.writer.Signal()
 	}
 
 	return true

@@ -8,10 +8,9 @@ import (
 	"github.com/egonelbre/exp/queue"
 )
 
-func TestSPSCBasic(t *testing.T) {
+func TestSPSC2Basic(t *testing.T) {
 	const N = 100
-	q := queue.NewSPSC(N*2, 7)
-	q.SetBlocking(false)
+	q := queue.NewSPSC2(N*2, 7)
 	for i := int64(0); i < N; i++ {
 		if !q.Send(i) {
 			t.Fatalf("failed to send: %v", i)
@@ -29,7 +28,7 @@ func TestSPSCBasic(t *testing.T) {
 		}
 	}
 }
-func BenchmarkSPSCProdCons(b *testing.B) {
+func BenchmarkSPSC2ProdCons(b *testing.B) {
 	for _, chanSize := range []int{1, 10, 100} {
 		for _, batchSize := range []int{1, 4, 8, 16, 32} {
 			name := strconv.Itoa(chanSize) + ":b" + strconv.Itoa(batchSize)
@@ -48,12 +47,12 @@ func BenchmarkSPSCProdCons(b *testing.B) {
 	}
 }
 
-func benchmarkSPSCProdCons(b *testing.B, batchSize, chanSize, localWork int) {
+func benchmarkSPSC2ProdCons(b *testing.B, batchSize, chanSize, localWork int) {
 	const CallsPerSched = 1000
 	procs := runtime.GOMAXPROCS(-1)
 	N := int64(b.N / CallsPerSched)
 
-	q := queue.NewSPSC(2*procs, batchSize)
+	q := queue.NewSPSC2(2*procs, batchSize)
 	go func() {
 		for i := int64(0); i < N; i++ {
 			foo := 0
