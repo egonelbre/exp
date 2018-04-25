@@ -11,17 +11,35 @@ const (
 	maskstarts = 1<<(4*0) | 1<<(4*1) | 1<<(4*2) | 1<<(4*3) | 1<<(4*4) | 1<<(4*5) | 1<<(4*6) | 1<<(4*7) | 1<<(4*8) | 1<<(4*9) | 1<<(4*10) | 1<<(4*11)
 )
 
-var fact [base]int
-var masks [base]uint64
+var (
+	fact = [base]int{
+		39916800,
+		3628800,
+		362880,
+		40320,
+		5040,
+		720,
+		120,
+		24,
+		6,
+		2,
+		1,
+		1,
+	}
+
+	masks [base]uint64
+)
 
 func init() {
-	fact[0] = 1
-	for i := 1; i < base; i++ {
-		fact[i] = fact[i-1] * i
-	}
-	for i := 0; i < base/2; i++ {
-		fact[i], fact[base-i-1] = fact[base-i-1], fact[i]
-	}
+	/*
+		fact[0] = 1
+		for i := 1; i < base; i++ {
+			fact[i] = fact[i-1] * i
+		}
+		for i := 0; i < base/2; i++ {
+			fact[i], fact[base-i-1] = fact[base-i-1], fact[i]
+		}
+	*/
 
 	for min := 0; min < base; min++ {
 		v := min
@@ -130,21 +148,15 @@ func CodeTable2(perm [base]byte) int {
 }
 
 func CodeShuffle(perm [base]byte) int {
-	// #define SQ_COUNT 25
-	// #define PC_COUNT 12
-	var state = [25]byte{
-		0, 1, 2, 3, 4,
-		5, 6, 7, 8, 9,
-		10, 11, 12, 13, 14,
-		15, 16, 17, 18, 19,
-		20, 21, 22, 23, 24,
+	var state = [base]byte{
+		0, 1, 2, 3,
+		4, 5, 6, 7,
+		8, 9, 10, 11,
 	}
-	var inverse = [25]byte{
-		0, 1, 2, 3, 4,
-		5, 6, 7, 8, 9,
-		10, 11, 12, 13, 14,
-		15, 16, 17, 18, 19,
-		20, 21, 22, 23, 24,
+	var inverse = [base]byte{
+		0, 1, 2, 3,
+		4, 5, 6, 7,
+		8, 9, 10, 11,
 	}
 	for i := range perm {
 		/*
@@ -176,13 +188,72 @@ func CodeShuffle(perm [base]byte) int {
 	return total
 }
 
+func CodeShuffleUnroll(perm [base]byte) int {
+	var state = [base]byte{
+		0, 1, 2, 3,
+		4, 5, 6, 7,
+		8, 9, 10, 11,
+	}
+	var inverse = [base]byte{
+		0, 1, 2, 3,
+		4, 5, 6, 7,
+		8, 9, 10, 11,
+	}
+
+	total := 0
+
+	j0 := inverse[perm[0]]
+	inverse[state[0]], state[j0] = j0, state[0]
+	total += int(j0-0) * 39916800
+
+	j1 := inverse[perm[1]]
+	inverse[state[1]], state[j1] = j1, state[1]
+	total += int(j1-1) * 3628800
+
+	j2 := inverse[perm[2]]
+	inverse[state[2]], state[j2] = j2, state[2]
+	total += int(j2-2) * 362880
+
+	j3 := inverse[perm[3]]
+	inverse[state[3]], state[j3] = j3, state[3]
+	total += int(j3-3) * 40320
+
+	j4 := inverse[perm[4]]
+	inverse[state[4]], state[j4] = j4, state[4]
+	total += int(j4-4) * 5040
+
+	j5 := inverse[perm[5]]
+	inverse[state[5]], state[j5] = j5, state[5]
+	total += int(j5-5) * 720
+
+	j6 := inverse[perm[6]]
+	inverse[state[6]], state[j6] = j6, state[6]
+	total += int(j6-6) * 120
+
+	j7 := inverse[perm[7]]
+	inverse[state[7]], state[j7] = j7, state[7]
+	total += int(j7-7) * 24
+
+	j8 := inverse[perm[8]]
+	inverse[state[8]], state[j8] = j8, state[8]
+	total += int(j8-8) * 6
+
+	j9 := inverse[perm[9]]
+	inverse[state[9]], state[j9] = j9, state[9]
+	total += int(j9-9) * 2
+
+	j10 := inverse[perm[10]]
+	inverse[state[10]], state[j10] = j10, state[10]
+	total += int(j10-10) * 1
+
+	return total
+}
+
 func DecodeShuffle(v int) [base]byte {
-	var state = [25]byte{
-		0, 1, 2, 3, 4,
-		5, 6, 7, 8, 9,
-		10, 11, 12, 13, 14,
-		15, 16, 17, 18, 19,
-		20, 21, 22, 23, 24,
+	var state = [base]byte{
+		0, 1, 2, 3,
+		4, 5, 6, 7,
+		8, 9, 10, 11,
 	}
 
 	var perm [base]byte

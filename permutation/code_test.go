@@ -72,9 +72,14 @@ func TestShuffleRandom(t *testing.T) {
 		}
 
 		encoded := CodeShuffle(perm)
+		unroll := CodeShuffleUnroll(perm)
 		if encoded > maxAllowed {
 			t.Fatalf("%v: encoded value too large %v >= %v", perm, encoded, maxAllowed)
 		}
+		if encoded != unroll {
+			t.Fatalf("%v: encoded %v, unroll %v", perm, encoded, unroll)
+		}
+
 		decoded := DecodeShuffle(encoded)
 		if !bytes.Equal(perm[:], decoded[:]) {
 			t.Fatalf("%v: got %v, decoded %v", perm, encoded, decoded)
@@ -115,6 +120,12 @@ func BenchmarkTable(b *testing.B) {
 func BenchmarkShuffle(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = CodeShuffle(randomized[i%N])
+	}
+}
+
+func BenchmarkShuffleUnroll(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = CodeShuffleUnroll(randomized[i%N])
 	}
 }
 
