@@ -14,6 +14,7 @@ var examples = [][base]byte{
 }
 
 const N = 1000
+const maxAllowed = 12 * 11 * 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1
 
 var randomized = [N][base]byte{}
 
@@ -53,6 +54,10 @@ func check(t *testing.T, example [base]byte) {
 	table := CodeTable(example)
 	table2 := CodeTable2(example)
 
+	if copying > maxAllowed {
+		t.Fatalf("%v: encoded value too large %v", example, copying)
+	}
+
 	if copying != bit || copying != counting ||
 		copying != table || copying != table2 {
 		t.Errorf("%v: copying %v, bit %v, counting %v, table %v/%v", example, copying, bit, counting, table, table2)
@@ -67,6 +72,9 @@ func TestShuffleRandom(t *testing.T) {
 		}
 
 		encoded := CodeShuffle(perm)
+		if encoded > maxAllowed {
+			t.Fatalf("%v: encoded value too large %v >= %v", perm, encoded, maxAllowed)
+		}
 		decoded := DecodeShuffle(encoded)
 		if !bytes.Equal(perm[:], decoded[:]) {
 			t.Fatalf("%v: got %v, decoded %v", perm, encoded, decoded)

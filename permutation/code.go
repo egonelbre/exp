@@ -167,7 +167,13 @@ func CodeShuffle(perm [base]byte) int {
 		state[j] = state[i]
 		perm[i] = j - byte(i)
 	}
-	return PackNybbleUnroll(perm)
+
+	total := 0
+	for i, v := range perm {
+		total += int(v) * fact[i]
+	}
+
+	return total
 }
 
 func DecodeShuffle(v int) [base]byte {
@@ -178,7 +184,13 @@ func DecodeShuffle(v int) [base]byte {
 		15, 16, 17, 18, 19,
 		20, 21, 22, 23, 24,
 	}
-	perm := UnpackNybbleUnroll(v)
+
+	var perm [base]byte
+	for i := range perm {
+		perm[i] = byte(v / fact[i])
+		v = v % fact[i]
+	}
+
 	for i := byte(0); i < base; i++ {
 		j := i + perm[i]
 		perm[i] = state[j]
