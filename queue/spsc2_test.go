@@ -30,7 +30,10 @@ func TestSPSC2Basic(t *testing.T) {
 }
 func BenchmarkSPSC2ProdCons(b *testing.B) {
 	for _, chanSize := range []int{1, 10, 100} {
-		for _, batchSize := range []int{1, 4, 8, 16, 32} {
+		for _, batchSize := range []int{1, 8, 32, 64} {
+			if batchSize > chanSize {
+				continue
+			}
 			name := strconv.Itoa(chanSize) + ":b" + strconv.Itoa(batchSize)
 			b.Run(name, func(b *testing.B) {
 				benchmarkSPSCProdCons(b, batchSize, chanSize, 0)
@@ -38,7 +41,10 @@ func BenchmarkSPSC2ProdCons(b *testing.B) {
 		}
 	}
 	for _, chanSize := range []int{1, 10, 100} {
-		for _, batchSize := range []int{1, 4, 8} {
+		for _, batchSize := range []int{1, 8, 32, 64} {
+			if batchSize > chanSize {
+				continue
+			}
 			name := strconv.Itoa(chanSize) + ":b" + strconv.Itoa(batchSize)
 			b.Run("Work"+name, func(b *testing.B) {
 				benchmarkSPSCProdCons(b, batchSize, chanSize, 0)
