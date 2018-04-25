@@ -129,6 +129,64 @@ func CodeTable2(perm [base]byte) int {
 	return r
 }
 
+func CodeShuffle(perm [base]byte) int {
+	// #define SQ_COUNT 25
+	// #define PC_COUNT 12
+	var state = [25]byte{
+		0, 1, 2, 3, 4,
+		5, 6, 7, 8, 9,
+		10, 11, 12, 13, 14,
+		15, 16, 17, 18, 19,
+		20, 21, 22, 23, 24,
+	}
+	var inverse = [25]byte{
+		0, 1, 2, 3, 4,
+		5, 6, 7, 8, 9,
+		10, 11, 12, 13, 14,
+		15, 16, 17, 18, 19,
+		20, 21, 22, 23, 24,
+	}
+	for i := range perm {
+		/*
+		 * this cryptic looking code is an optimized version of
+		 * this pseudocode:
+		 *
+		 *     j = inverse[perm[i]]
+		 *     swap entries state[i] and state[j] in inverse
+		 *     swap entries i and j in state
+		 *     perm[i] = j - i
+		 *
+		 * two optimizations are performed:
+		 *  - inverse[state[k]] == k and state[inverse[k]] == k
+		 *  - after iteration i, inverse[perm[i]] and state[i]
+		 *    are never read again, so we can omit assigning to
+		 *    them.
+		 */
+		j := inverse[perm[i]]
+		inverse[state[i]] = j
+		state[j] = state[i]
+		perm[i] = j - byte(i)
+	}
+	return PackNybbleUnroll(perm)
+}
+
+func DecodeShuffle(v int) [base]byte {
+	var state = [25]byte{
+		0, 1, 2, 3, 4,
+		5, 6, 7, 8, 9,
+		10, 11, 12, 13, 14,
+		15, 16, 17, 18, 19,
+		20, 21, 22, 23, 24,
+	}
+	perm := UnpackNybbleUnroll(v)
+	for i := byte(0); i < base; i++ {
+		j := i + perm[i]
+		perm[i] = state[j]
+		state[j] = state[i]
+	}
+	return perm
+}
+
 func PackNybble(perm [base]byte) int {
 	r := 0
 	for _, v := range perm {
@@ -158,6 +216,24 @@ func PackNybbleUnroll(perm [base]byte) int {
 		int(perm[9])<<(4*9) |
 		int(perm[10])<<(4*10) |
 		int(perm[11])<<(4*11)
+}
+
+func UnpackNybbleUnroll(v int) [base]byte {
+	const mask = 1<<4 - 1
+	return [base]byte{
+		byte((v >> (4 * 0)) & mask),
+		byte((v >> (4 * 1)) & mask),
+		byte((v >> (4 * 2)) & mask),
+		byte((v >> (4 * 3)) & mask),
+		byte((v >> (4 * 4)) & mask),
+		byte((v >> (4 * 5)) & mask),
+		byte((v >> (4 * 6)) & mask),
+		byte((v >> (4 * 7)) & mask),
+		byte((v >> (4 * 8)) & mask),
+		byte((v >> (4 * 9)) & mask),
+		byte((v >> (4 * 10)) & mask),
+		byte((v >> (4 * 11)) & mask),
+	}
 }
 
 func PackNybbleUnrollReverse(perm [base]byte) int {

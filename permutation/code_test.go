@@ -1,6 +1,7 @@
 package permutation
 
 import (
+	"bytes"
 	"math/rand"
 	"testing"
 )
@@ -52,8 +53,24 @@ func check(t *testing.T, example [base]byte) {
 	table := CodeTable(example)
 	table2 := CodeTable2(example)
 
-	if copying != bit || copying != counting || copying != table || copying != table2 {
-		t.Errorf("%v: copying %v, bit %v, counting %v, table %v", example, copying, bit, counting, table)
+	if copying != bit || copying != counting ||
+		copying != table || copying != table2 {
+		t.Errorf("%v: copying %v, bit %v, counting %v, table %v/%v", example, copying, bit, counting, table, table2)
+	}
+}
+
+func TestShuffleRandom(t *testing.T) {
+	for i := 0; i < 100; i++ {
+		var perm [base]byte
+		for k, v := range rand.Perm(base) {
+			perm[k] = byte(v)
+		}
+
+		encoded := CodeShuffle(perm)
+		decoded := DecodeShuffle(encoded)
+		if !bytes.Equal(perm[:], decoded[:]) {
+			t.Fatalf("%v: got %v, decoded %v", perm, encoded, decoded)
+		}
 	}
 }
 
@@ -84,6 +101,12 @@ func BenchmarkCount(b *testing.B) {
 func BenchmarkTable(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = CodeTable(randomized[i%N])
+	}
+}
+
+func BenchmarkShuffle(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = CodeShuffle(randomized[i%N])
 	}
 }
 
