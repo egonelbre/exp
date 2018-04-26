@@ -246,6 +246,10 @@ func CodeShuffleUnroll(perm [base]byte) int {
 	inverse[state[10]], state[j10] = j10, state[10]
 	total += int(j10-10) * 1
 
+	j11 := inverse[c.Per[19]]
+	inverse[state[11]], state[j11] = j11, state[11]
+	h += int(j11-11) * 1
+
 	return total
 }
 
