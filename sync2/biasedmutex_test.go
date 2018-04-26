@@ -8,13 +8,13 @@ import (
 	"testing"
 )
 
-func TestUnfairMutexProgress(t *testing.T) {
+func TestBiasedMutexProgress(t *testing.T) {
 	for _, rt := range []int{0, 1, 2, 4, 8} {
 		for _, wt := range []int{0, 1, 2, 4, 8} {
 			name := fmt.Sprintf("r%vw%v", rt, wt)
 
 			t.Run(name, func(t *testing.T) {
-				m := NewUnfairMutex()
+				m := NewBiasedMutex()
 				m.SetReaderThreshold(rt)
 				m.SetWriterThreshold(wt)
 

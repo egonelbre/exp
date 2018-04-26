@@ -4,7 +4,7 @@ import (
 	"sync"
 )
 
-type UnfairMutex struct {
+type BiasedMutex struct {
 	readerThreshold int32
 	writerThreshold int32
 
@@ -20,8 +20,8 @@ type UnfairMutex struct {
 	writeCount int32
 }
 
-func NewUnfairMutex() *UnfairMutex {
-	m := &UnfairMutex{}
+func NewBiasedMutex() *BiasedMutex {
+	m := &BiasedMutex{}
 	m.readers.L = &m.mu
 	m.writers.L = &m.mu
 
@@ -31,10 +31,10 @@ func NewUnfairMutex() *UnfairMutex {
 	return m
 }
 
-func (m *UnfairMutex) SetReaderThreshold(x int) { m.readerThreshold = int32(x) }
-func (m *UnfairMutex) SetWriterThreshold(x int) { m.writerThreshold = int32(x) }
+func (m *BiasedMutex) SetReaderThreshold(x int) { m.readerThreshold = int32(x) }
+func (m *BiasedMutex) SetWriterThreshold(x int) { m.writerThreshold = int32(x) }
 
-func (m *UnfairMutex) RLock() {
+func (m *BiasedMutex) RLock() {
 	m.mu.Lock()
 	m.readCount++
 	for m.writing+m.writersWaiting > 0 {
@@ -47,7 +47,7 @@ func (m *UnfairMutex) RLock() {
 	m.mu.Unlock()
 }
 
-func (m *UnfairMutex) RUnlock() {
+func (m *BiasedMutex) RUnlock() {
 	m.mu.Lock()
 	m.reading--
 	if m.reading == 0 && m.writersWaiting > 0 {
@@ -56,7 +56,7 @@ func (m *UnfairMutex) RUnlock() {
 	m.mu.Unlock()
 }
 
-func (m *UnfairMutex) Lock() {
+func (m *BiasedMutex) Lock() {
 	m.mu.Lock()
 	m.writersWaiting++
 	// wait for other readers or writers to finish
@@ -69,18 +69,19 @@ func (m *UnfairMutex) Lock() {
 	m.mu.Unlock()
 }
 
-func (m *UnfairMutex) Unlock() {
+func (m *BiasedMutex) Unlock() {
 	m.mu.Lock()
-	m.readCount = 0
 	m.writing--
 	m.writeCount++
 	if m.writeCount >= m.writerThreshold {
 		m.readers.Broadcast()
+		m.readCount = 0
 		m.writeCount = 0
 	}
 	if m.writersWaiting > 0 {
 		m.writers.Signal()
 	} else {
+		m.readCount = 0
 		m.readers.Broadcast()
 	}
 	m.mu.Unlock()
