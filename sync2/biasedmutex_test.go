@@ -9,8 +9,8 @@ import (
 )
 
 func TestBiasedMutexProgress(t *testing.T) {
-	for _, rt := range []int{0, 1, 2, 4, 8} {
-		for _, wt := range []int{0, 1, 2, 4, 8} {
+	for _, rt := range []int{1, 2, 4, 8} {
+		for _, wt := range []int{1, 2, 4, 8} {
 			name := fmt.Sprintf("r%vw%v", rt, wt)
 
 			t.Run(name, func(t *testing.T) {
@@ -59,14 +59,24 @@ func testProgress(t *testing.T, m RWMutex) {
 		atomic.AddInt64(&totalProgress, STEPS)
 	}
 
+	order := make([]byte, STEPS)
+
 	wg.Add(R)
 	for i := 0; i < R; i++ {
 		go func() {
 			defer wg.Done()
 
 			localTotal := 0
-			for atomic.AddInt64(&totalProgress, 1) < STEPS {
+			for {
 				m.RLock()
+
+				orderx := atomic.AddInt64(&totalProgress, 1)
+				if orderx >= STEPS {
+					m.RUnlock()
+					break
+				}
+				order[orderx-1] = 'R'
+
 				atomic.AddInt64(&activeReaders, 1)
 				if atomic.LoadInt64(&activeWriters) > 0 {
 					fatal("writer active during reading")
@@ -88,8 +98,16 @@ func testProgress(t *testing.T, m RWMutex) {
 			defer wg.Done()
 
 			step := 0
-			for atomic.AddInt64(&totalProgress, 1) < STEPS {
+			for {
 				m.Lock()
+
+				orderx := atomic.AddInt64(&totalProgress, 1)
+				if orderx >= STEPS {
+					m.Unlock()
+					break
+				}
+				order[orderx-1] = 'W'
+
 				if atomic.AddInt64(&activeWriters, 1) > 1 {
 					fatal("more than one writer")
 					atomic.AddInt64(&activeWriters, -1)
@@ -118,7 +136,11 @@ func testProgress(t *testing.T, m RWMutex) {
 	}
 
 	if readerProgress == 0 || writerProgress == 0 {
-		t.Fatalf("No progress reader:%v writer:%v", readerProgress, writerProgress)
+		t.Fatalf("no progress reader:%v writer:%v", readerProgress, writerProgress)
 	}
-	t.Logf("Progress reader:%v writer:%v", readerProgress, writerProgress)
+	x := STEPS
+	if x > 500 {
+		x = 500
+	}
+	t.Logf("reader:%v writer:%v\n%v", readerProgress, writerProgress, string(order[:x]))
 }

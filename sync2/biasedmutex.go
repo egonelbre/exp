@@ -45,13 +45,13 @@ func (m *BiasedMutex) SetWriterThreshold(x int) { m.writerThreshold = int32(x) }
 
 func (m *BiasedMutex) RLock() {
 	m.mu.Lock()
-	m.readCount++
 	for m.writing+m.writersWaiting > 0 {
 		if m.writing == 0 && m.readCount < m.readerThreshold {
 			break
 		}
 		m.readers.Wait()
 	}
+	m.readCount++
 	m.reading++
 	m.mu.Unlock()
 }
