@@ -4,6 +4,15 @@ import (
 	"sync"
 )
 
+// BiasedMutex is a RWMutex that allows tuning progress making on both
+// writing and reading side. Tries to let through multiple readers and then
+// multiple writers.
+//
+// BiasedMutex controls the flow by keeping track on how many reads / writes
+// there have been. Once there have been RLock()-s called over `ReaderThreshold`,
+// then RLock will wait in cased there are any writes pending.
+// BiasedMutex will continue letting through at most `WriterThreshold` writers.
+// Once writers have been exhausted the variables are reset.
 type BiasedMutex struct {
 	readerThreshold int32
 	writerThreshold int32
