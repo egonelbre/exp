@@ -8,8 +8,9 @@ type MPSC2 struct {
 	_ [8]uint64
 	// volatile
 	read  int64
+	_     [8 - 1]uint64
 	write int64
-	_     [8 - 2]uint64
+	_     [8 - 1]uint64
 	// consumer
 	localWrite int64
 	nextRead   int64
