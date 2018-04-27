@@ -61,6 +61,25 @@ func benchmarkChanMPSCProdCons(b *testing.B, chanSize, localWork int) {
 	}
 }
 
+func BenchmarkChanSendParallel(b *testing.B) {
+	q := make(chan int, b.N)
+	b.ResetTimer()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			q <- 0
+		}
+	})
+}
+
+func BenchmarkChanSend(b *testing.B) {
+	q := make(chan int, b.N)
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		q <- 0
+	}
+}
+
 func BenchmarkChanMPSCBasic(b *testing.B) {
 	const procs = 4
 	q := make(chan int64, 8192)

@@ -145,7 +145,23 @@ func BenchmarkMPMCUncontended(b *testing.B) {
 		}
 	})
 }
+func BenchmarkMPMCSendParallel(b *testing.B) {
+	q := queue.NewMPMC(b.N)
+	b.ResetTimer()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			q.Send(0)
+		}
+	})
+}
 
+func BenchmarkMPMCSend(b *testing.B) {
+	q := queue.NewMPMC(b.N)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		q.Send(0)
+	}
+}
 func BenchmarkMPMCTryRecv(b *testing.B) {
 	const C = 100
 	myc := queue.NewMPMC(C * runtime.GOMAXPROCS(0))

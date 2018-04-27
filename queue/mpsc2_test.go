@@ -73,6 +73,25 @@ func benchmarkMPSC2ProdCons(b *testing.B, batchSize, chanSize, localWork int) {
 	//	b.Fatalf("incorrect total %v, expected %v", total, expected)
 	//}
 }
+
+func BenchmarkMPSC2SendParallel(b *testing.B) {
+	q := queue.NewMPSC2(64, b.N)
+	b.ResetTimer()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			q.Send(0)
+		}
+	})
+}
+
+func BenchmarkMPSC2Send(b *testing.B) {
+	q := queue.NewMPSC2(64, b.N)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		q.Send(0)
+	}
+}
+
 func BenchmarkMPSC2Basic(b *testing.B) {
 	const procs = 4
 	var q queue.MPSC2

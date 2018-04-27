@@ -43,7 +43,7 @@ func (q *SPSC2) Init(size, batchSize int) {
 	q.reader.L = &q.mu
 	q.writer.L = &q.mu
 	q.batchSize = int64(batchSize)
-	q.buffer = make([]SPSCValue, ceil(size, batchSize))
+	q.buffer = make([]SPSCValue, ceil(size+1, batchSize))
 }
 
 func (q *SPSC2) next(i int64) int64 {

@@ -38,7 +38,7 @@ func (q *MPSC2) Init(batchSize, size int) {
 	q.reader.L = &q.mu
 	q.writer.L = &q.mu
 	q.batchSize = int64(batchSize)
-	q.buffer = make([]MPSC2Value, ceil(size, batchSize))
+	q.buffer = make([]MPSC2Value, ceil(size+1, batchSize))
 }
 
 func (q *MPSC2) next(i int64) int64 {

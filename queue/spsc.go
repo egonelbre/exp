@@ -41,7 +41,7 @@ func NewSPSC(batchSize, size int) *SPSC {
 func (q *SPSC) Init(batchSize, size int) {
 	q.blocking = true
 	q.batchSize = int64(batchSize)
-	q.buffer = make([]SPSCValue, ceil(size, batchSize))
+	q.buffer = make([]SPSCValue, ceil(size+1, batchSize))
 }
 
 func (q *SPSC) SetBlocking(blocking bool) {

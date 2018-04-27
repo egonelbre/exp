@@ -101,6 +101,14 @@ func benchmarkSPSCProdCons(b *testing.B, batchSize, chanSize, localWork int) {
 	}
 }
 
+func BenchmarkSPSCSend(b *testing.B) {
+	var q queue.SPSC
+	q.Init(64, b.N)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		q.Send(0)
+	}
+}
 func BenchmarkSPSCBasic(b *testing.B) {
 	var q queue.SPSC
 	q.Init(64, 8192)
