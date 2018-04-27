@@ -11,7 +11,7 @@ import (
 
 func TestSPSCBasic(t *testing.T) {
 	const N = 100
-	q := queue.NewSPSC(N*2, 7)
+	q := queue.NewSPSC(7, N*2)
 	q.SetBlocking(false)
 	for i := int64(0); i < N; i++ {
 		if !q.Send(i) {
@@ -60,7 +60,7 @@ func benchmarkSPSCProdCons(b *testing.B, batchSize, chanSize, localWork int) {
 	procs := runtime.GOMAXPROCS(-1)
 	N := int64(b.N / CallsPerSched)
 
-	q := queue.NewSPSC(2*procs, batchSize)
+	q := queue.NewSPSC(batchSize, 2*procs)
 	go func() {
 		for i := int64(0); i < N; i++ {
 			foo := 0

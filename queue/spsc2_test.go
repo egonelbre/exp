@@ -11,7 +11,7 @@ import (
 
 func TestSPSC2Basic(t *testing.T) {
 	const N = 100
-	q := queue.NewSPSC2(N*2, 7)
+	q := queue.NewSPSC2(7, N*2)
 	for i := int64(0); i < N; i++ {
 		if !q.Send(i) {
 			t.Fatalf("failed to send: %v", i)
@@ -59,7 +59,7 @@ func benchmarkSPSC2ProdCons(b *testing.B, batchSize, chanSize, localWork int) {
 	procs := runtime.GOMAXPROCS(-1)
 	N := int64(b.N / CallsPerSched)
 
-	q := queue.NewSPSC2(2*procs, batchSize)
+	q := queue.NewSPSC2(batchSize, 2*procs)
 	go func() {
 		for i := int64(0); i < N; i++ {
 			foo := 0

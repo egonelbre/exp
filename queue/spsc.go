@@ -32,13 +32,13 @@ type SPSC struct {
 
 type SPSCValue = int64
 
-func NewSPSC(size, batchSize int) *SPSC {
+func NewSPSC(batchSize, size int) *SPSC {
 	q := &SPSC{}
-	q.Init(size, batchSize)
+	q.Init(batchSize, size)
 	return q
 }
 
-func (q *SPSC) Init(size, batchSize int) {
+func (q *SPSC) Init(batchSize, size int) {
 	q.blocking = true
 	q.batchSize = int64(batchSize)
 	q.buffer = make([]SPSCValue, ceil(size, batchSize))
