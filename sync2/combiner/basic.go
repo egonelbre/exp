@@ -1,7 +1,6 @@
 package combiner
 
 import (
-	"runtime"
 	"sync/atomic"
 	"unsafe"
 )
@@ -61,15 +60,8 @@ func (c *Basic) Do(v int64) {
 	if cmp != 0 {
 		// 2. If we are not the combiner, wait for arg.next to become nil
 		// (which means the operation is finished).
-
-		const maxspin = 256
-		spin := 0
-		for atomic.LoadUintptr(&arg.next) != 0 {
-			spin++
-			if spin >= maxspin {
-				runtime.Gosched()
-				spin = 0
-			}
+		var s spinner
+		for atomic.LoadUintptr(&arg.next) != 0 && s.spin() {
 		}
 	} else {
 		// 3. We are the combiner.
