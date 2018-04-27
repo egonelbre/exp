@@ -24,9 +24,9 @@ func NewBasic(exe Executor) *Basic {
 	}
 }
 
-var lockedElem = basicArg{}
-var lockedArg = &lockedElem
-var locked = (unsafe.Pointer)(lockedArg)
+var basicLockedElem = basicArg{}
+var basicLockedArg = &basicLockedElem
+var basicLocked = (unsafe.Pointer)(basicLockedArg)
 
 func (c *Basic) Do(v int64) {
 	arg := &basicArg{value: v}
@@ -48,7 +48,7 @@ func (c *Basic) Do(v int64) {
 	var cmp unsafe.Pointer
 	for {
 		cmp = atomic.LoadPointer(&c.head)
-		xchg := locked
+		xchg := basicLocked
 		if cmp != nil {
 			// There is already a combiner, enqueue itself.
 			xchg = (unsafe.Pointer)(arg)
@@ -90,8 +90,8 @@ func (c *Basic) Do(v int64) {
 				// grab the list and replace with LOCKED.
 				// Otherwise, exchange to nil.
 				var xchg unsafe.Pointer = nil
-				if cmp != locked {
-					xchg = locked
+				if cmp != basicLocked {
+					xchg = basicLocked
 				}
 
 				if atomic.CompareAndSwapPointer(&c.head, cmp, xchg) {
@@ -100,13 +100,13 @@ func (c *Basic) Do(v int64) {
 			}
 
 			// No more operations to combine, return.
-			if cmp == locked {
+			if cmp == basicLocked {
 				break
 			}
 
 			arg = (*basicArg)(cmp)
 			// Execute the list of operations.
-			for arg != lockedArg {
+			for arg != basicLockedArg {
 				next := (*basicArg)(arg.next)
 				c.exe.Include(arg.value)
 				// Mark completion.

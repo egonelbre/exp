@@ -78,8 +78,8 @@ func testSumming(t *testing.T, create func(Executor) Combiner) {
 }
 
 func testLatencies(t *testing.T, create func(Executor) Combiner) {
-	const N = 500
-	const K = 50
+	const N = 300
+	const K = 30
 	for _, procs := range []int{4, 8, 16, 32, 64, 128, 256} {
 		t.Run("p"+strconv.Itoa(procs), func(t *testing.T) {
 			hrs := make([]*hrtime.Benchmark, procs)
