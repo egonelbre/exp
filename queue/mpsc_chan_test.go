@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"sync"
 	"testing"
+
+	"github.com/egonelbre/exp/queue"
 )
 
 func BenchmarkChanMPSCProdCons(b *testing.B) {
@@ -83,6 +85,38 @@ func BenchmarkChanMPSCBasic(b *testing.B) {
 		runtime.LockOSThread()
 		for i := 0; i < n; i++ {
 			<-q
+		}
+		wg.Done()
+	}(b.N)
+
+	wg.Wait()
+}
+
+func BenchmarkMPMCasMPSCBasic(b *testing.B) {
+	const procs = 4
+	q := queue.NewMPMC(8192)
+
+	var wg sync.WaitGroup
+	wg.Add(procs + 1)
+
+	total := b.N
+	for i := 0; i < procs; i++ {
+		chunk := total / (procs - i)
+		go func(n int) {
+			runtime.LockOSThread()
+			for i := 0; i < n; i++ {
+				q.Send(i)
+			}
+			wg.Done()
+		}(chunk)
+		total -= chunk
+	}
+
+	go func(n int) {
+		runtime.LockOSThread()
+		for i := 0; i < n; i++ {
+			var v int
+			q.Recv(&v)
 		}
 		wg.Done()
 	}(b.N)
