@@ -40,6 +40,9 @@ func test(t *testing.T, create func(Executor) Combiner) {
 	t.Run("Summing", func(t *testing.T) {
 		testSumming(t, create)
 	})
+	t.Run("SummingSequence", func(t *testing.T) {
+		testSummingSequence(t, create)
+	})
 	t.Run("Latencies", func(t *testing.T) {
 		testLatencies(t, create)
 	})
@@ -73,6 +76,32 @@ func testSumming(t *testing.T, create func(Executor) Combiner) {
 
 	wg.Wait()
 	if total.total != N*int64(procs) {
+		t.Fatalf("got %v expected %v", total.total, N*procs)
+	}
+}
+
+func testSummingSequence(t *testing.T, create func(Executor) Combiner) {
+	const N = 100
+
+	var total Total
+	combiner := create(&total)
+
+	var wg sync.WaitGroup
+
+	procs := runtime.GOMAXPROCS(-1) * 8
+	wg.Add(procs)
+
+	for proc := 0; proc < procs; proc++ {
+		go func() {
+			for i := int64(0); i < N; i++ {
+				combiner.Do(i)
+			}
+			wg.Done()
+		}()
+	}
+
+	wg.Wait()
+	if total.total != int64(procs)*N*(N-1)/2 {
 		t.Fatalf("got %v expected %v", total.total, N*procs)
 	}
 }

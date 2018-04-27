@@ -67,9 +67,6 @@ func (c *BoundedU) Do(v int64) {
 				break
 			}
 		}
-		if !handoff {
-			return
-		}
 	}
 
 	// 3. We are the combiner.
@@ -77,11 +74,8 @@ func (c *BoundedU) Do(v int64) {
 	// First, execute own operation.
 	c.exe.Start()
 	defer c.exe.Finish()
-
-	if !handoff {
-		c.exe.Include(arg.value)
-		count++
-	}
+	c.exe.Include(arg.value)
+	count++
 
 	// Then, look for combining opportunities.
 	for {
