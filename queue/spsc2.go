@@ -35,11 +35,15 @@ type SPSC2Value = int64
 
 func NewSPSC2(size, batchSize int) *SPSC2 {
 	q := &SPSC2{}
+	q.Init(size, batchSize)
+	return q
+}
+
+func (q *SPSC2) Init(size, batchSize int) {
 	q.reader.L = &q.mu
 	q.writer.L = &q.mu
 	q.batchSize = int64(batchSize)
 	q.buffer = make([]SPSCValue, ceil(size, batchSize))
-	return q
 }
 
 func (q *SPSC2) next(i int64) int64 {

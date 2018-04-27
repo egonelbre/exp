@@ -34,10 +34,14 @@ type SPSCValue = int64
 
 func NewSPSC(size, batchSize int) *SPSC {
 	q := &SPSC{}
+	q.Init(size, batchSize)
+	return q
+}
+
+func (q *SPSC) Init(size, batchSize int) {
 	q.blocking = true
 	q.batchSize = int64(batchSize)
 	q.buffer = make([]SPSCValue, ceil(size, batchSize))
-	return q
 }
 
 func (q *SPSC) SetBlocking(blocking bool) {

@@ -3,6 +3,7 @@ package queue_test
 import (
 	"runtime"
 	"strconv"
+	"sync"
 	"testing"
 )
 
@@ -58,4 +59,29 @@ func benchmarkChanSPSCProdCons(b *testing.B, chanSize, localWork int) {
 	if total != expected {
 		b.Fatalf("incorrect total %v, expected %v", total, expected)
 	}
+}
+
+func BenchmarkChanBasic(b *testing.B) {
+	q := make(chan int64, 8192)
+
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func(n int) {
+		runtime.LockOSThread()
+		for i := 0; i < n; i++ {
+			q <- int64(i)
+		}
+		wg.Done()
+	}(b.N)
+
+	go func(n int) {
+		runtime.LockOSThread()
+		for i := 0; i < n; i++ {
+			<-q
+		}
+		wg.Done()
+	}(b.N)
+
+	wg.Wait()
 }

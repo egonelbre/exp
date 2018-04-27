@@ -3,6 +3,7 @@ package queue_test
 import (
 	"runtime"
 	"strconv"
+	"sync"
 	"testing"
 
 	"github.com/egonelbre/exp/queue"
@@ -97,4 +98,32 @@ func benchmarkSPSC2ProdCons(b *testing.B, batchSize, chanSize, localWork int) {
 	if total != expected {
 		b.Fatalf("incorrect total %v, expected %v", total, expected)
 	}
+}
+
+func BenchmarkSPSC2Basic(b *testing.B) {
+	var q queue.SPSC2
+	q.Init(64, 8192)
+
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func(n int) {
+		runtime.LockOSThread()
+		for i := 0; i < n; i++ {
+			q.Send(int64(i))
+		}
+		q.FlushSend()
+		wg.Done()
+	}(b.N)
+
+	go func(n int) {
+		runtime.LockOSThread()
+		for i := 0; i < n; i++ {
+			var v int64
+			q.Recv(&v)
+		}
+		wg.Done()
+	}(b.N)
+
+	wg.Wait()
 }
