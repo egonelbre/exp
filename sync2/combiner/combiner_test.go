@@ -43,7 +43,7 @@ func test(t *testing.T, create func(Executor) Combiner) {
 	t.Run("SummingSequence", func(t *testing.T) {
 		testSummingSequence(t, create)
 	})
-	t.Run("Latencies", func(t *testing.T) {
+	t.Run("Latency", func(t *testing.T) {
 		testLatencies(t, create)
 	})
 }
