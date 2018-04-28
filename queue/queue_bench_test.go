@@ -1,18 +1,19 @@
 package queue
 
 import (
+	"strconv"
 	"sync"
 	"testing"
 )
 
-const (
-	BenchSize = 1024
-	BenchWork = 100
-)
+const BenchSize = 1024
 
-func localwork() {
+//var BenchWork = []int{0, 100}
+var BenchWork = []int{0}
+
+func localwork(amount int) {
 	foo := 1
-	for i := 0; i < BenchWork; i++ {
+	for i := 0; i < amount; i++ {
 		foo *= 2
 		foo /= 2
 	}
@@ -83,10 +84,10 @@ func benchSPSC(b *testing.B, ctor func(int) SPSC) {
 		})
 	})
 
-	for _, work := range []bool{false, true} {
+	for _, work := range BenchWork {
 		suffix := ""
-		if work {
-			suffix = "/work"
+		if work > 0 {
+			suffix = "/w" + strconv.Itoa(work)
 		}
 		b.Run("ProducerConsumer"+suffix, func(b *testing.B) {
 			q := ctor(BenchSize)
@@ -97,9 +98,7 @@ func benchSPSC(b *testing.B, ctor func(int) SPSC) {
 				for i := 0; i < b.N; i++ {
 					var v Value
 					q.Send(v)
-					if work {
-						localwork()
-					}
+					localwork(work)
 				}
 				wg.Done()
 			}()
@@ -107,9 +106,7 @@ func benchSPSC(b *testing.B, ctor func(int) SPSC) {
 				for i := 0; i < b.N; i++ {
 					var v Value
 					q.Recv(&v)
-					if work {
-						localwork()
-					}
+					localwork(work)
 				}
 				wg.Done()
 			}()
@@ -118,10 +115,10 @@ func benchSPSC(b *testing.B, ctor func(int) SPSC) {
 	}
 }
 func benchMPSC(b *testing.B, ctor func(int) MPSC) {
-	for _, work := range []bool{false, true} {
+	for _, work := range BenchWork {
 		suffix := ""
-		if work {
-			suffix = "/work"
+		if work > 0 {
+			suffix = "/w" + strconv.Itoa(work)
 		}
 		b.Run("ProducerConsumer/x100"+suffix, func(b *testing.B) {
 			q := ctor(BenchSize)
@@ -134,9 +131,7 @@ func benchMPSC(b *testing.B, ctor func(int) MPSC) {
 					for pb.Next() {
 						for i := 0; i < 100; i++ {
 							q.Send(0)
-							if work {
-								localwork()
-							}
+							localwork(work)
 						}
 					}
 				})
@@ -148,9 +143,7 @@ func benchMPSC(b *testing.B, ctor func(int) MPSC) {
 					for i := 0; i < 100; i++ {
 						var v Value
 						q.Recv(&v)
-						if work {
-							localwork()
-						}
+						localwork(work)
 					}
 				}
 				wg.Done()
@@ -160,10 +153,10 @@ func benchMPSC(b *testing.B, ctor func(int) MPSC) {
 	}
 }
 func benchSPMC(b *testing.B, ctor func(int) SPMC) {
-	for _, work := range []bool{false, true} {
+	for _, work := range BenchWork {
 		suffix := ""
-		if work {
-			suffix = "/work"
+		if work > 0 {
+			suffix = "/w" + strconv.Itoa(work)
 		}
 		b.Run("ProducerConsumer/x100"+suffix, func(b *testing.B) {
 			q := ctor(BenchSize)
@@ -175,9 +168,7 @@ func benchSPMC(b *testing.B, ctor func(int) SPMC) {
 				for i := 0; i < b.N; i++ {
 					for i := 0; i < 100; i++ {
 						q.Send(0)
-						if work {
-							localwork()
-						}
+						localwork(work)
 					}
 				}
 				wg.Done()
@@ -213,10 +204,10 @@ func benchMPMC(b *testing.B, ctor func(int) MPMC) {
 		})
 	})
 
-	for _, work := range []bool{false, true} {
+	for _, work := range BenchWork {
 		suffix := ""
-		if work {
-			suffix = "/work"
+		if work > 0 {
+			suffix = "/w" + strconv.Itoa(work)
 		}
 		b.Run("ProducerConsumer/x100"+suffix, func(b *testing.B) {
 			q := ctor(BenchSize)
@@ -229,9 +220,7 @@ func benchMPMC(b *testing.B, ctor func(int) MPMC) {
 					for pb.Next() {
 						for i := 0; i < 100; i++ {
 							q.Send(0)
-							if work {
-								localwork()
-							}
+							localwork(work)
 						}
 					}
 				})
@@ -244,9 +233,7 @@ func benchMPMC(b *testing.B, ctor func(int) MPMC) {
 						for i := 0; i < 100; i++ {
 							var v Value
 							q.Recv(&v)
-							if work {
-								localwork()
-							}
+							localwork(work)
 						}
 					}
 				})
