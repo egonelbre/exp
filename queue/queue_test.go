@@ -3,7 +3,9 @@ package queue
 import (
 	"fmt"
 	"runtime"
+	"sync/atomic"
 	"testing"
+	"time"
 
 	"github.com/egonelbre/async"
 )
@@ -30,7 +32,6 @@ func mustSend(q NonblockingSPSC, v Value) bool {
 		}
 		runtime.Gosched()
 	}
-	return false
 }
 
 func mustRecv(q NonblockingSPSC, v *Value) bool {
@@ -40,7 +41,6 @@ func mustRecv(q NonblockingSPSC, v *Value) bool {
 		}
 		runtime.Gosched()
 	}
-	return false
 }
 
 func test(t *testing.T, ctor Ctor) {
@@ -101,6 +101,38 @@ func testBlockingSPSC(t *testing.T, ctor func(int) BlockingSPSC) {
 
 			if errs := result.Wait(); errs != nil {
 				t.Fatal(errs)
+			}
+		}
+	})
+
+	t.Run("BlockOnFull", func(t *testing.T) {
+		for _, size := range TestSizes {
+			q := ctor(size)
+			capacity := q.Cap()
+			for i := 0; i < capacity; i++ {
+				q.Send(0)
+			}
+			flush(q)
+			sent := uint32(0)
+			go func() {
+				q.Send(0)
+				flush(q)
+				atomic.StoreUint32(&sent, 1)
+			}()
+			runtime.Gosched()
+			time.Sleep(time.Millisecond)
+			if atomic.LoadUint32(&sent) != 0 {
+				t.Fatalf("send to full chan")
+			}
+
+			var v Value
+			q.Recv(&v)
+			runtime.Gosched()
+			if atomic.LoadUint32(&sent) != 1 {
+				time.Sleep(time.Millisecond)
+				if atomic.LoadUint32(&sent) != 1 {
+					t.Fatalf("did not unblock")
+				}
 			}
 		}
 	})

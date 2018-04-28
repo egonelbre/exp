@@ -8,6 +8,8 @@ func NewChan(size int) *Chan {
 	return &Chan{make(chan Value, size)}
 }
 
+func (q *Chan) Cap() int { return cap(q.ch) }
+
 func (q *Chan) MultipleProducers() {}
 func (q *Chan) MultipleConsumers() {}
 

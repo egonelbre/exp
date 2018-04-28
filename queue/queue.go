@@ -5,9 +5,11 @@ type Value = int64
 type Queue interface {
 	// BlockingSPSC and/or NonblockingSPSC
 	// Closer?
+	Cap() int
 }
 
 type BlockingSPSC interface {
+	Queue
 	// Send puts a value to a queue,
 	// returns false when the queue has been closed
 	Send(v Value) bool
@@ -17,6 +19,7 @@ type BlockingSPSC interface {
 }
 
 type NonblockingSPSC interface {
+	Queue
 	// TrySend tries to put a value to a queue
 	// returns false when the queue if full or closed
 	TrySend(v Value) bool
