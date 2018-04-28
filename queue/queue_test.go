@@ -110,11 +110,11 @@ func testSPSC(t *testing.T, ctor func(int) SPSC) {
 		}
 	})
 
-	if _, isCapped := ctor(1).(Capped); isCapped {
+	if _, isBounded := ctor(1).(Bounded); isBounded {
 		t.Run("BlockOnFull", func(t *testing.T) {
 			for _, size := range TestSizes {
 				q := ctor(size)
-				capacity := q.(Capped).Cap()
+				capacity := q.(Bounded).Cap()
 				for i := 0; i < capacity; i++ {
 					if !q.Send(0) {
 						t.Fatal("failed to send")
@@ -304,11 +304,11 @@ func testNonblockingSPSC(t *testing.T, ctor func(int) NonblockingSPSC) {
 		}
 	})
 
-	if _, isCapped := ctor(1).(Capped); isCapped {
+	if _, isBounded := ctor(1).(Bounded); isBounded {
 		t.Run("NonblockOnFull", func(t *testing.T) {
 			for _, size := range TestSizes {
 				q := ctor(size)
-				capacity := q.(Capped).Cap()
+				capacity := q.(Bounded).Cap()
 				for i := 0; i < capacity; i++ {
 					if !q.TrySend(0) {
 						t.Fatal("failed to send")

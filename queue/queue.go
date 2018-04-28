@@ -29,7 +29,7 @@ type NonblockingSPSC interface {
 	TryRecv(v *Value) bool
 }
 
-type Capped interface {
+type Bounded interface {
 	Cap() int
 }
 
