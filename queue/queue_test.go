@@ -110,12 +110,16 @@ func testBlockingSPSC(t *testing.T, ctor func(int) BlockingSPSC) {
 			q := ctor(size)
 			capacity := q.Cap()
 			for i := 0; i < capacity; i++ {
-				q.Send(0)
+				if !q.Send(0) {
+					t.Fatal("failed to send")
+				}
 			}
 			flush(q)
 			sent := uint32(0)
 			go func() {
-				q.Send(0)
+				if !q.Send(0) {
+					t.Fatal("failed to send")
+				}
 				flush(q)
 				atomic.StoreUint32(&sent, 1)
 			}()
@@ -126,7 +130,9 @@ func testBlockingSPSC(t *testing.T, ctor func(int) BlockingSPSC) {
 			}
 
 			var v Value
-			q.Recv(&v)
+			if !q.Recv(&v) {
+				t.Fatal("failed to recv")
+			}
 			runtime.Gosched()
 			if atomic.LoadUint32(&sent) != 1 {
 				time.Sleep(time.Millisecond)
@@ -286,6 +292,21 @@ func testNonblockingSPSC(t *testing.T, ctor func(int) NonblockingSPSC) {
 			if errs := result.Wait(); errs != nil {
 				t.Fatal(errs)
 			}
+		}
+	})
+	t.Run("NonblockOnFull", func(t *testing.T) {
+		for _, size := range TestSizes {
+			q := ctor(size)
+			capacity := q.Cap()
+			for i := 0; i < capacity; i++ {
+				if !q.TrySend(0) {
+					t.Fatal("failed to send")
+				}
+			}
+			if q.TrySend(0) {
+				t.Fatal("send succeeded")
+			}
+			flush(q)
 		}
 	})
 }
