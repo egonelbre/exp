@@ -62,7 +62,6 @@ func (q *LinkedSPSC) TryRecv(value *Value) bool {
 	next := atomic.LoadPointer(&tail.next)
 	if next == nil {
 		return false
-
 	}
 	q.tail = next
 	*value = (*linkedSPSC)(next).value

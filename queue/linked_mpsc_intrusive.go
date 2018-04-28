@@ -41,7 +41,7 @@ func (q *LinkedMPSCi) Send(value Value) bool {
 
 func (q *LinkedMPSCi) send(n *linkedMPSCi) {
 	n.next = nil
-	prev := exchangePointer(&q.head, unsafe.Pointer(n))
+	prev := atomic.SwapPointer(&q.head, unsafe.Pointer(n))
 	prevn := (*linkedMPSCi)(prev)
 	atomic.StorePointer(&prevn.next, unsafe.Pointer(n))
 }

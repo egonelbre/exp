@@ -36,7 +36,7 @@ func (q *LinkedMPSC) MultipleProducers() {}
 
 func (q *LinkedMPSC) Send(value Value) bool {
 	n := &linkedMPSC{value: value}
-	prev := exchangePointer(&q.head, unsafe.Pointer(n))
+	prev := atomic.SwapPointer(&q.head, unsafe.Pointer(n))
 	prevn := (*linkedMPSC)(prev)
 	atomic.StorePointer(&prevn.next, unsafe.Pointer(n))
 	return true
