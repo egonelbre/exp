@@ -485,7 +485,7 @@ func benchBlockingSPSC(b *testing.B, ctor func(int) BlockingSPSC) {
 			q.Recv(&v)
 		}
 	})
-	b.Run("Parallel100", func(b *testing.B) {
+	b.Run("Uncontended100", func(b *testing.B) {
 		b.RunParallel(func(pb *testing.PB) {
 			q := ctor(TestSize)
 			for pb.Next() {
@@ -497,7 +497,7 @@ func benchBlockingSPSC(b *testing.B, ctor func(int) BlockingSPSC) {
 			}
 		})
 	})
-	b.Run("Uncontended", func(b *testing.B) {
+	b.Run("ProducerConsumer", func(b *testing.B) {
 		q := ctor(TestSize)
 		b.ResetTimer()
 		var wg sync.WaitGroup
@@ -522,7 +522,20 @@ func benchBlockingSPSC(b *testing.B, ctor func(int) BlockingSPSC) {
 }
 func benchBlockingMPSC(b *testing.B, ctor func(int) BlockingMPSC) { b.Skip("todo") }
 func benchBlockingSPMC(b *testing.B, ctor func(int) BlockingSPMC) { b.Skip("todo") }
-func benchBlockingMPMC(b *testing.B, ctor func(int) BlockingMPMC) { b.Skip("todo") }
+func benchBlockingMPMC(b *testing.B, ctor func(int) BlockingMPMC) {
+	b.Run("Contended100", func(b *testing.B) {
+		q := ctor(TestSize)
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				var v Value
+				for i := 0; i < 100; i++ {
+					q.Send(v)
+					q.Recv(&v)
+				}
+			}
+		})
+	})
+}
 func benchNonblockingSPSC(b *testing.B, ctor func(int) NonblockingSPSC) {
 	b.Run("Single", func(b *testing.B) {
 		q := ctor(TestSize)
@@ -533,17 +546,32 @@ func benchNonblockingSPSC(b *testing.B, ctor func(int) NonblockingSPSC) {
 			q.TryRecv(&v)
 		}
 	})
-	b.Run("Parallel", func(b *testing.B) {
+	b.Run("Uncontended100", func(b *testing.B) {
 		b.RunParallel(func(pb *testing.PB) {
 			q := ctor(TestSize)
 			for pb.Next() {
 				var v Value
-				q.TrySend(v)
-				q.TryRecv(&v)
+				for i := 0; i < 100; i++ {
+					q.TrySend(v)
+					q.TryRecv(&v)
+				}
 			}
 		})
 	})
 }
 func benchNonblockingMPSC(b *testing.B, ctor func(int) NonblockingMPSC) { b.Skip("todo") }
 func benchNonblockingSPMC(b *testing.B, ctor func(int) NonblockingSPMC) { b.Skip("todo") }
-func benchNonblockingMPMC(b *testing.B, ctor func(int) NonblockingMPMC) { b.Skip("todo") }
+func benchNonblockingMPMC(b *testing.B, ctor func(int) NonblockingMPMC) {
+	b.Run("Contended100", func(b *testing.B) {
+		q := ctor(TestSize)
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				var v Value
+				for i := 0; i < 100; i++ {
+					q.TrySend(v)
+					q.TryRecv(&v)
+				}
+			}
+		})
+	})
+}
