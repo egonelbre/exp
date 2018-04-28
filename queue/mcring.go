@@ -7,7 +7,10 @@ import (
 // implementation based on MCRingBuffer
 // http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.577.960&rep=rep1&type=pdf
 
-type SPSC2 struct {
+var _ BlockingSPSC = (*MCRing)(nil)
+
+// MCRing is a SPSC queue
+type MCRing struct {
 	_ [8]uint64
 	// volatile
 	read  int64
@@ -28,25 +31,25 @@ type SPSC2 struct {
 	reader    sync.Cond
 	writer    sync.Cond
 	batchSize int64
-	buffer    []SPSC2Value
+	buffer    []Value
 }
 
-type SPSC2Value = int64
-
-func NewSPSC2(size, batchSize int) *SPSC2 {
-	q := &SPSC2{}
+func NewMCRing(size, batchSize int) *MCRing {
+	q := &MCRing{}
 	q.Init(size, batchSize)
 	return q
 }
 
-func (q *SPSC2) Init(size, batchSize int) {
+func (q *MCRing) Cap() int { return len(q.buffer) - 1 }
+
+func (q *MCRing) Init(size, batchSize int) {
 	q.reader.L = &q.mu
 	q.writer.L = &q.mu
 	q.batchSize = int64(batchSize)
-	q.buffer = make([]SPSCValue, ceil(size+1, batchSize))
+	q.buffer = make([]Value, ceil(size+1, batchSize))
 }
 
-func (q *SPSC2) next(i int64) int64 {
+func (q *MCRing) next(i int64) int64 {
 	r := i + 1
 	if r >= int64(len(q.buffer)) {
 		r = 0
@@ -54,7 +57,7 @@ func (q *SPSC2) next(i int64) int64 {
 	return r
 }
 
-func (q *SPSC2) Send(v SPSCValue) bool {
+func (q *MCRing) Send(v Value) bool {
 	afterNextWrite := q.next(q.nextWrite)
 	if afterNextWrite == q.localRead {
 		q.mu.Lock()
@@ -74,7 +77,7 @@ func (q *SPSC2) Send(v SPSCValue) bool {
 	return true
 }
 
-func (q *SPSC2) FlushSend() {
+func (q *MCRing) FlushSend() {
 	q.mu.Lock()
 	q.write = q.nextWrite
 	q.writeBatch = 0
@@ -82,7 +85,7 @@ func (q *SPSC2) FlushSend() {
 	q.reader.Signal()
 }
 
-func (q *SPSC2) Recv(v *SPSCValue) bool {
+func (q *MCRing) Recv(v *Value) bool {
 	if q.nextRead == q.localWrite {
 		q.mu.Lock()
 		if q.nextRead == q.write {

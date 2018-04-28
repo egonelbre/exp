@@ -280,8 +280,8 @@ func benchNonblockingSPSC(b *testing.B, ctor func(int) NonblockingSPSC) {
 	})
 }
 
-// func benchNonblockingMPSC(b *testing.B, ctor func(int) NonblockingMPSC) { b.Skip("todo") }
-// func benchNonblockingSPMC(b *testing.B, ctor func(int) NonblockingSPMC) { b.Skip("todo") }
+func benchNonblockingMPSC(b *testing.B, ctor func(int) NonblockingMPSC) { b.Skip("todo") }
+func benchNonblockingSPMC(b *testing.B, ctor func(int) NonblockingSPMC) { b.Skip("todo") }
 
 func benchNonblockingMPMC(b *testing.B, ctor func(int) NonblockingMPMC) {
 	b.Run("Contended/x100", func(b *testing.B) {

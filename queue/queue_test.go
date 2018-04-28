@@ -12,6 +12,7 @@ import (
 
 const TestProcs = 4
 
+var BatchSizes = [...]int{1, 8, 32, 64}
 var TestSizes = [...]int{1, 2, 3, 7, 8, 9, 15, 127, 128, 129}
 
 func flush(q Queue) {
@@ -130,6 +131,7 @@ func testBlockingSPSC(t *testing.T, ctor func(int) BlockingSPSC) {
 			}
 			runtime.Gosched()
 			if atomic.LoadUint32(&sent) != 1 {
+				runtime.Gosched()
 				time.Sleep(time.Millisecond)
 				if atomic.LoadUint32(&sent) != 1 {
 					t.Fatalf("did not unblock")

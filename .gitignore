@@ -8,3 +8,4 @@
 *.prof
 
 *.sublime-workspace
+.vscode

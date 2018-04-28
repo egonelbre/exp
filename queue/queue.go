@@ -5,6 +5,8 @@ type Value = int64
 type Queue interface {
 	// BlockingSPSC and/or NonblockingSPSC
 	// Closer?
+
+	// Cap should return number of elements that can be sent, before it blocks or fails
 	Cap() int
 }
 
