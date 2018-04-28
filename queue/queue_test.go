@@ -29,7 +29,7 @@ func flushrecv(q Queue) {
 }
 
 func mustSend(q NonblockingSPSC, v Value) bool {
-	var s spin.L128_1024
+	var s spin.Second
 	for s.Spin() {
 		if q.TrySend(v) {
 			return true
@@ -39,7 +39,7 @@ func mustSend(q NonblockingSPSC, v Value) bool {
 }
 
 func mustRecv(q NonblockingSPSC, v *Value) bool {
-	var s spin.L128_1024
+	var s spin.Second
 	for s.Spin() {
 		if q.TryRecv(v) {
 			return true

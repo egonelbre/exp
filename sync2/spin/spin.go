@@ -1,6 +1,9 @@
 package spin
 
-import "runtime"
+import (
+	"runtime"
+	"time"
+)
 
 // Default spintter
 type T = T256
@@ -54,6 +57,27 @@ func (s *L128_1024) Spin() bool {
 	}
 	if s.total > 1024 {
 		return false
+	}
+	return true
+}
+
+// Limited spinner upto 1 second
+type Second struct {
+	start time.Time
+	count int
+}
+
+func (s *Second) Spin() bool {
+	if s.count == 0 {
+		s.start = time.Now()
+	}
+	s.count++
+	runtime.Gosched()
+	if s.count > 512 {
+		if time.Since(s.start) > time.Second {
+			return false
+		}
+		s.count = 1
 	}
 	return true
 }
