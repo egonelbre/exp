@@ -2,6 +2,7 @@ package queue
 
 import (
 	"fmt"
+	"runtime"
 	"testing"
 
 	"github.com/egonelbre/async"
@@ -20,6 +21,26 @@ func flush(q Queue) {
 	if qf, ok := q.(Flusher); ok {
 		qf.FlushSend()
 	}
+}
+
+func mustSend(q NonblockingSPSC, v Value) bool {
+	for {
+		if q.TrySend(v) {
+			return true
+		}
+		runtime.Gosched()
+	}
+	return false
+}
+
+func mustRecv(q NonblockingSPSC, v *Value) bool {
+	for {
+		if q.TryRecv(v) {
+			return true
+		}
+		runtime.Gosched()
+	}
+	return false
 }
 
 func test(t *testing.T, ctor Ctor) {
@@ -207,16 +228,155 @@ func testBlockingMPMC(t *testing.T, ctor func(int) BlockingMPMC) {
 }
 
 func testNonblockingSPSC(t *testing.T, ctor func(int) NonblockingSPSC) {
+	t.Run("Basic", func(t *testing.T) {
+		for _, size := range TestSizes {
+			q := ctor(size)
+			count := Value(size/2) + 1
 
+			result := async.All(func() error {
+				for i := Value(0); i < count; i++ {
+					if !mustSend(q, i) {
+						return fmt.Errorf("%v: failed to send %v", size, i)
+					}
+				}
+				flush(q)
+				return nil
+			}, func() error {
+				for exp := Value(0); exp < Value(exp); exp++ {
+					var got Value
+					if !mustRecv(q, &got) || got != exp {
+						return fmt.Errorf("%v: invalid value got %v, expected %v", size, got, exp)
+					}
+				}
+				return nil
+			})
+
+			if errs := result.Wait(); errs != nil {
+				t.Fatal(errs)
+			}
+		}
+	})
 }
 func testNonblockingMPSC(t *testing.T, ctor func(int) NonblockingMPSC) {
+	t.Run("Basic", func(t *testing.T) {
+		for _, size := range TestSizes {
+			q := ctor(size)
+			count := Value(size/2) + 1
 
+			result := async.All(func() error {
+				return async.SpawnWithResult(TestProcs, func(id int) error {
+					for i := Value(0); i < count; i++ {
+						if !mustSend(q, Value(id)<<32|i) {
+							return fmt.Errorf("%v: failed to send %v", size, i)
+						}
+					}
+					flush(q)
+					return nil
+				}).WaitError()
+			}, func() error {
+				var exps [TestProcs]Value
+				for i := Value(0); i < count*TestProcs; i++ {
+					var val Value
+					if !mustRecv(q, &val) {
+						return fmt.Errorf("%v: failed to get", size)
+					}
+					id, got := val>>32, val&0xFFFFFFFF
+					exp := exps[id]
+					exps[id]++
+					if exp != got {
+						return fmt.Errorf("%v: invalid order got %v, expected %v", size, got, exp)
+					}
+				}
+				return nil
+			})
+
+			if errs := result.Wait(); errs != nil {
+				t.Fatal(errs)
+			}
+		}
+	})
 }
 func testNonblockingSPMC(t *testing.T, ctor func(int) NonblockingSPMC) {
+	t.Run("Basic", func(t *testing.T) {
+		for _, size := range TestSizes {
+			q := ctor(size)
+			count := Value(size/2) + 1
 
+			result := async.All(func() error {
+				for i := Value(0); i < count*TestProcs; i++ {
+					if !mustSend(q, i) {
+						return fmt.Errorf("%v: failed to send %v", size, i)
+					}
+				}
+				flush(q)
+				return nil
+			}, func() error {
+				return async.SpawnWithResult(TestProcs, func(int) error {
+					var lastexp Value = -1
+					for i := Value(0); i < count; i++ {
+						var got Value
+						if !mustRecv(q, &got) {
+							return fmt.Errorf("%v: failed to get", size)
+						}
+						exp := lastexp
+						lastexp = got
+						if got <= exp {
+							return fmt.Errorf("%v: invalid order got %v, expected %v", size, got, exp)
+						}
+					}
+					return nil
+				}).WaitError()
+			})
+
+			if errs := result.Wait(); errs != nil {
+				t.Fatal(errs)
+			}
+		}
+	})
 }
 func testNonblockingMPMC(t *testing.T, ctor func(int) NonblockingMPMC) {
+	t.Run("Basic", func(t *testing.T) {
+		for _, size := range TestSizes {
+			q := ctor(size)
+			count := Value(size/2) + 1
 
+			result := async.All(func() error {
+				return async.SpawnWithResult(TestProcs, func(id int) error {
+					for i := Value(0); i < count; i++ {
+						if !mustSend(q, Value(id)<<32|i) {
+							return fmt.Errorf("%v: failed to send %v", size, i)
+						}
+					}
+					flush(q)
+					return nil
+				}).WaitError()
+			}, func() error {
+				return async.SpawnWithResult(TestProcs, func(int) error {
+					var exps [TestProcs]Value
+					for i := range exps {
+						exps[i] = -1
+					}
+					for i := Value(0); i < count; i++ {
+						var val Value
+						if !mustRecv(q, &val) {
+							return fmt.Errorf("%v: failed to get", size)
+						}
+						id, got := val>>32, val&0xFFFFFFFF
+						exp := exps[id]
+						exps[id] = got
+						if got <= exp {
+							return fmt.Errorf("%v: invalid order got %v, expected %v", size, got, exp)
+						}
+					}
+					return nil
+				}).WaitError()
+			})
+
+			if errs := result.Wait(); errs != nil {
+				t.Fatal(errs)
+			}
+		}
+	})
 }
 
 func bench(b *testing.B, ctor Ctor) {
