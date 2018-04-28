@@ -1,4 +1,4 @@
-package queue_test
+package queue
 
 import (
 	"runtime"
@@ -8,8 +8,6 @@ import (
 	"time"
 
 	"github.com/egonelbre/async"
-
-	"github.com/egonelbre/exp/queue"
 )
 
 func TestMPMC(t *testing.T) {
@@ -22,7 +20,7 @@ func TestMPMC(t *testing.T) {
 		t.Run("Cap"+strconv.Itoa(chanCap), func(t *testing.T) {
 			t.Run("RecvOnEmpty", func(t *testing.T) {
 				// Ensure that receive from empty chan blocks.
-				c := queue.NewMPMC(chanCap)
+				c := NewMPMC(chanCap)
 				recv1 := false
 				go func() {
 					_, _ = c.RecvValue()
@@ -39,9 +37,9 @@ func TestMPMC(t *testing.T) {
 
 			t.Run("BlockOnSendFull", func(t *testing.T) {
 				// Ensure that send to full chan blocks.
-				c := queue.NewMPMC(chanCap)
+				c := NewMPMC(chanCap)
 				for i := 0; i < chanCap; i++ {
-					c.Send(i)
+					c.Send(Value(i))
 				}
 				sent := uint32(0)
 				go func() {
@@ -58,12 +56,12 @@ func TestMPMC(t *testing.T) {
 			t.Run("Long", func(t *testing.T) {
 				// Send 100 integers,
 				// ensure that we receive them non-corrupted in FIFO order.
-				c := queue.NewMPMC(chanCap)
+				c := NewMPMC(chanCap)
 
 				t.Run("Send100", func(t *testing.T) {
 					go func() {
 						for i := 0; i < 100; i++ {
-							c.Send(i)
+							c.Send(Value(i))
 						}
 					}()
 					for i := 0; i < 100; i++ {
@@ -71,7 +69,7 @@ func TestMPMC(t *testing.T) {
 						if !ok {
 							t.Fatalf("receive failed, expected %v", i)
 						}
-						if v != i {
+						if v != Value(i) {
 							t.Fatalf("received %v, expected %v", v, i)
 						}
 					}
@@ -85,15 +83,15 @@ func TestMPMC(t *testing.T) {
 					for p := 0; p < P; p++ {
 						go func() {
 							for i := 0; i < L; i++ {
-								c.Send(i)
+								c.Send(Value(i))
 							}
 						}()
 					}
 
-					done := make(chan map[int]int)
+					done := make(chan map[Value]int)
 					for p := 0; p < P; p++ {
 						go func() {
-							recv := make(map[int]int)
+							recv := make(map[Value]int)
 							for i := 0; i < L; i++ {
 								v, _ := c.RecvValue()
 								recv[v] = recv[v] + 1
@@ -101,7 +99,7 @@ func TestMPMC(t *testing.T) {
 							done <- recv
 						}()
 					}
-					recv := make(map[int]int)
+					recv := make(map[Value]int)
 					for p := 0; p < P; p++ {
 						for k, v := range <-done {
 							recv[k] = recv[k] + v
@@ -123,9 +121,9 @@ func TestMPMC(t *testing.T) {
 
 func BenchmarkNewMPMC(b *testing.B) {
 	b.Run("Int", func(b *testing.B) {
-		var x *queue.MPMC
+		var x *MPMC
 		for i := 0; i < b.N; i++ {
-			x = queue.NewMPMC(8)
+			x = NewMPMC(8)
 		}
 		_ = x
 	})
@@ -134,7 +132,7 @@ func BenchmarkNewMPMC(b *testing.B) {
 func BenchmarkMPMCUncontended(b *testing.B) {
 	const C = 100
 	b.RunParallel(func(pb *testing.PB) {
-		myc := queue.NewMPMC(C)
+		myc := NewMPMC(C)
 		for pb.Next() {
 			for i := 0; i < C; i++ {
 				myc.Send(0)
@@ -146,7 +144,7 @@ func BenchmarkMPMCUncontended(b *testing.B) {
 	})
 }
 func BenchmarkMPMCSendParallel(b *testing.B) {
-	q := queue.NewMPMC(b.N)
+	q := NewMPMC(b.N)
 	b.ResetTimer()
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
@@ -156,7 +154,7 @@ func BenchmarkMPMCSendParallel(b *testing.B) {
 }
 
 func BenchmarkMPMCSend(b *testing.B) {
-	q := queue.NewMPMC(b.N)
+	q := NewMPMC(b.N)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		q.Send(0)
@@ -164,9 +162,9 @@ func BenchmarkMPMCSend(b *testing.B) {
 }
 func BenchmarkMPMCTryRecv(b *testing.B) {
 	const C = 100
-	myc := queue.NewMPMC(C * runtime.GOMAXPROCS(0))
+	myc := NewMPMC(C * runtime.GOMAXPROCS(0))
 	b.RunParallel(func(pb *testing.PB) {
-		var value int
+		var value Value
 		for pb.Next() {
 			myc.TrySend(value)
 			myc.TryRecv(&value)
@@ -176,7 +174,7 @@ func BenchmarkMPMCTryRecv(b *testing.B) {
 
 func BenchmarkMPMCContended(b *testing.B) {
 	const C = 100
-	myc := queue.NewMPMC(C * runtime.GOMAXPROCS(0))
+	myc := NewMPMC(C * runtime.GOMAXPROCS(0))
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			for i := 0; i < C; i++ {
@@ -193,11 +191,11 @@ func benchmarkMPMCProdCons(b *testing.B, chanSize, localWork int) {
 	const CallsPerSched = 1000
 	procs := runtime.GOMAXPROCS(-1)
 	N := int32(b.N / CallsPerSched)
-	c := queue.NewMPMC(2 * procs)
-	myc := queue.NewMPMC(chanSize)
+	c := NewMPMC(2 * procs)
+	myc := NewMPMC(chanSize)
 	for p := 0; p < procs; p++ {
 		go func() {
-			foo := 0
+			foo := Value(0)
 			for atomic.AddInt32(&N, -1) >= 0 {
 				for g := 0; g < CallsPerSched; g++ {
 					for i := 0; i < localWork; i++ {
@@ -211,7 +209,7 @@ func benchmarkMPMCProdCons(b *testing.B, chanSize, localWork int) {
 			c.Send(foo)
 		}()
 		go func() {
-			foo := 0
+			foo := Value(0)
 			for {
 				v, _ := c.RecvValue()
 				if v == 0 {
@@ -249,10 +247,10 @@ func BenchmarkMPMCAsymmetric(b *testing.B) {
 	const C = 5
 	const N = 200
 	for k := 0; k < b.N; k++ {
-		q := queue.NewMPMC(N * C)
+		q := NewMPMC(N * C)
 		async.Spawn(C, func(int) {
 			for i := 0; i < N; i++ {
-				q.Send(i)
+				q.Send(Value(i))
 			}
 		})
 

@@ -7,8 +7,6 @@ import (
 
 // Based on https://docs.google.com/document/d/1yIAYmbvL3JxOKOjuCyon7JhW4cSv1wy5hC0ApeGMV9s/pub
 
-type Value = int
-
 type MPMC struct {
 	sendx  uint64
 	recvx  uint64
@@ -68,7 +66,6 @@ func (q *MPMC) Send(value Value) bool {
 			q.mu.Unlock()
 		}
 	}
-	return false
 }
 
 func (q *MPMC) RecvValue() (Value, bool) {
@@ -96,7 +93,6 @@ func (q *MPMC) Recv(value *Value) bool {
 			q.mu.Unlock()
 		}
 	}
-	return false
 }
 
 func (q *MPMC) TrySend(value Value) bool {

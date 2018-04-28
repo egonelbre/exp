@@ -1,10 +1,13 @@
-// +build ignore
-
 package queue
 
 type Value = int64
 
 type Queue interface {
+	// BlockingSPSC and/or NonblockingSPSC
+	// Closer?
+}
+
+type BlockingSPSC interface {
 	// Send puts a value to a queue,
 	// returns false when the queue has been closed
 	Send(v Value) bool
@@ -13,7 +16,7 @@ type Queue interface {
 	Recv(v *Value) bool
 }
 
-type Nonblocking interface {
+type NonblockingSPSC interface {
 	// TrySend tries to put a value to a queue
 	// returns false when the queue if full or closed
 	TrySend(v Value) bool
@@ -22,32 +25,41 @@ type Nonblocking interface {
 	TryRecv(v *Value) bool
 }
 
+type Flusher interface {
+	FlushSend()
+}
+
 type Closer interface {
 	Close()
 }
 
-type MPSC interface {
-	Queue
+type BlockingMPSC interface {
+	BlockingSPSC
 	MultipleProducers()
 }
-type SPMC interface {
-	Queue
+
+type BlockingSPMC interface {
+	BlockingSPSC
 	MultipleConsumers()
 }
-type MPMC interface {
-	MPSC
-	SPMC
+
+type BlockingMPMC interface {
+	BlockingSPSC
+	MultipleProducers()
+	MultipleConsumers()
 }
 
 type NonblockingMPSC interface {
-	Nonblocking
+	NonblockingSPSC
 	MultipleProducers()
 }
 type NonblockingSPMC interface {
-	Nonblocking
+	NonblockingSPSC
 	MultipleConsumers()
 }
+
 type NonblockingMPMC interface {
-	NonblockingMPSC
-	NonblockingSPMC
+	NonblockingSPSC
+	MultipleProducers()
+	MultipleConsumers()
 }
