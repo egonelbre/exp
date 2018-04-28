@@ -9,7 +9,7 @@ import (
 
 var _ BlockingSPSC = (*MCRing)(nil)
 
-// MCRing is a SPSC queue
+// MCRing is a SPSC queue based on MCRingBuffer
 type MCRing struct {
 	_ [8]uint64
 	// volatile

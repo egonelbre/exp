@@ -11,7 +11,7 @@ import (
 
 var _ BlockingSPSC = (*MCRingSpinning)(nil)
 
-// MCRingSpinning is a SPSC queue
+// MCRingSpinning is a SPSC queue based on MCRingBuffer
 type MCRingSpinning struct {
 	_ [8]uint64
 	// volatile

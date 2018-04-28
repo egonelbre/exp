@@ -4,7 +4,8 @@ import (
 	"sync"
 )
 
-type MPSC2 struct {
+// MPRing is a MPSC queue based on MCRingBuffer
+type MPRing struct {
 	_ [8]uint64
 	// volatile
 	read  int64
@@ -23,25 +24,27 @@ type MPSC2 struct {
 	reader    sync.Cond
 	writer    sync.Cond
 	batchSize int64
-	buffer    []MPSC2Value
+	buffer    []Value
 }
 
-type MPSC2Value = int64
-
-func NewMPSC2(batchSize, size int) *MPSC2 {
-	q := &MPSC2{}
+func NewMPRing(batchSize, size int) *MPRing {
+	q := &MPRing{}
 	q.Init(batchSize, size)
 	return q
 }
 
-func (q *MPSC2) Init(batchSize, size int) {
+func (q *MPRing) Cap() int { return len(q.buffer) - 1 }
+
+func (q *MPRing) MultipleProducers() {}
+
+func (q *MPRing) Init(batchSize, size int) {
 	q.reader.L = &q.mu
 	q.writer.L = &q.mu
 	q.batchSize = int64(batchSize)
-	q.buffer = make([]MPSC2Value, ceil(size+1, batchSize))
+	q.buffer = make([]Value, ceil(size+1, batchSize))
 }
 
-func (q *MPSC2) next(i int64) int64 {
+func (q *MPRing) next(i int64) int64 {
 	r := i + 1
 	if r >= int64(len(q.buffer)) {
 		r = 0
@@ -49,7 +52,7 @@ func (q *MPSC2) next(i int64) int64 {
 	return r
 }
 
-func (q *MPSC2) Send(v MPSC2Value) bool {
+func (q *MPRing) Send(v Value) bool {
 	q.mu.Lock()
 	nextWrite := q.next(q.write)
 	for nextWrite == q.localRead {
@@ -68,7 +71,7 @@ func (q *MPSC2) Send(v MPSC2Value) bool {
 	return true
 }
 
-func (q *MPSC2) Recv(v *MPSC2Value) bool {
+func (q *MPRing) Recv(v *Value) bool {
 	if q.nextRead == q.localWrite {
 		q.mu.Lock()
 		if q.nextRead == q.write {
