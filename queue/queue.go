@@ -32,6 +32,7 @@ type NonblockingSPSC interface {
 
 type Flusher interface {
 	FlushSend()
+	FlushRecv()
 }
 
 type Closer interface {

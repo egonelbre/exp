@@ -90,12 +90,16 @@ func (q *MPRingSpinning) Recv(v *Value) bool {
 	q.nextRead = q.next(q.nextRead)
 	q.readBatch++
 	if q.readBatch >= q.batchSize {
-		q.mu.Lock()
-		q.read = q.nextRead
-		q.readBatch = 0
-		q.writer.Broadcast()
-		q.mu.Unlock()
+		q.FlushRecv()
 	}
 
 	return true
+}
+
+func (q *MPRingSpinning) FlushRecv() {
+	q.mu.Lock()
+	q.read = q.nextRead
+	q.readBatch = 0
+	q.mu.Unlock()
+	q.writer.Signal()
 }

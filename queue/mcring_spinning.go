@@ -103,9 +103,13 @@ func (q *MCRingSpinning) Recv(v *Value) bool {
 	q.nextRead = q.next(q.nextRead)
 	q.readBatch++
 	if q.readBatch >= q.batchSize {
-		atomic.StoreInt64(&q.read, q.nextRead)
-		q.readBatch = 0
+		q.FlushRecv()
 	}
 
 	return true
+}
+
+func (q *MCRingSpinning) FlushRecv() {
+	atomic.StoreInt64(&q.read, q.nextRead)
+	q.readBatch = 0
 }

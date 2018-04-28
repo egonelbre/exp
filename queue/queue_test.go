@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/egonelbre/async"
+	"github.com/egonelbre/exp/sync2/spin"
 )
 
 const TestProcs = 4
@@ -15,28 +16,36 @@ const TestProcs = 4
 var BatchSizes = [...]int{1, 8, 32, 64}
 var TestSizes = [...]int{1, 2, 3, 7, 8, 9, 15, 127, 128, 129}
 
-func flush(q Queue) {
+func flushsend(q Queue) {
 	if qf, ok := q.(Flusher); ok {
 		qf.FlushSend()
 	}
 }
 
-func mustSend(q NonblockingSPSC, v Value) bool {
-	for {
-		if q.TrySend(v) {
-			return true
-		}
-		runtime.Gosched()
+func flushrecv(q Queue) {
+	if qf, ok := q.(Flusher); ok {
+		qf.FlushRecv()
 	}
 }
 
+func mustSend(q NonblockingSPSC, v Value) bool {
+	var s spin.L128_1024
+	for s.Spin() {
+		if q.TrySend(v) {
+			return true
+		}
+	}
+	return false
+}
+
 func mustRecv(q NonblockingSPSC, v *Value) bool {
-	for {
+	var s spin.L128_1024
+	for s.Spin() {
 		if q.TryRecv(v) {
 			return true
 		}
-		runtime.Gosched()
 	}
+	return false
 }
 
 func test(t *testing.T, ctor Ctor) {
@@ -83,7 +92,7 @@ func testBlockingSPSC(t *testing.T, ctor func(int) BlockingSPSC) {
 						return fmt.Errorf("%v: failed to send %v", size, i)
 					}
 				}
-				flush(q)
+				flushsend(q)
 				return nil
 			}, func() error {
 				for exp := Value(0); exp < Value(exp); exp++ {
@@ -102,8 +111,6 @@ func testBlockingSPSC(t *testing.T, ctor func(int) BlockingSPSC) {
 	})
 
 	t.Run("BlockOnFull", func(t *testing.T) {
-		t.Skip("flaky")
-
 		for _, size := range TestSizes {
 			q := ctor(size)
 			capacity := q.Cap()
@@ -112,13 +119,13 @@ func testBlockingSPSC(t *testing.T, ctor func(int) BlockingSPSC) {
 					t.Fatal("failed to send")
 				}
 			}
-			flush(q)
+			flushsend(q)
 			sent := uint32(0)
 			go func() {
 				if !q.Send(0) {
 					t.Fatal("failed to send")
 				}
-				flush(q)
+				flushsend(q)
 				atomic.StoreUint32(&sent, 1)
 			}()
 			runtime.Gosched()
@@ -131,6 +138,7 @@ func testBlockingSPSC(t *testing.T, ctor func(int) BlockingSPSC) {
 			if !q.Recv(&v) {
 				t.Fatal("failed to recv")
 			}
+			flushrecv(q)
 			runtime.Gosched()
 			if atomic.LoadUint32(&sent) != 1 {
 				runtime.Gosched()
@@ -155,7 +163,7 @@ func testBlockingMPSC(t *testing.T, ctor func(int) BlockingMPSC) {
 							return fmt.Errorf("%v: failed to send %v", size, i)
 						}
 					}
-					flush(q)
+					flushsend(q)
 					return nil
 				}).WaitError()
 			}, func() error {
@@ -193,7 +201,7 @@ func testBlockingSPMC(t *testing.T, ctor func(int) BlockingSPMC) {
 						return fmt.Errorf("%v: failed to send %v", size, i)
 					}
 				}
-				flush(q)
+				flushsend(q)
 				return nil
 			}, func() error {
 				return async.SpawnWithResult(TestProcs, func(int) error {
@@ -232,7 +240,7 @@ func testBlockingMPMC(t *testing.T, ctor func(int) BlockingMPMC) {
 							return fmt.Errorf("%v: failed to send %v", size, i)
 						}
 					}
-					flush(q)
+					flushsend(q)
 					return nil
 				}).WaitError()
 			}, func() error {
@@ -276,7 +284,7 @@ func testNonblockingSPSC(t *testing.T, ctor func(int) NonblockingSPSC) {
 						return fmt.Errorf("%v: failed to send %v", size, i)
 					}
 				}
-				flush(q)
+				flushsend(q)
 				return nil
 			}, func() error {
 				for exp := Value(0); exp < Value(exp); exp++ {
@@ -302,10 +310,11 @@ func testNonblockingSPSC(t *testing.T, ctor func(int) NonblockingSPSC) {
 					t.Fatal("failed to send")
 				}
 			}
+			flushsend(q)
 			if q.TrySend(0) {
 				t.Fatal("send succeeded")
 			}
-			flush(q)
+			flushsend(q)
 		}
 	})
 }
@@ -322,7 +331,7 @@ func testNonblockingMPSC(t *testing.T, ctor func(int) NonblockingMPSC) {
 							return fmt.Errorf("%v: failed to send %v", size, i)
 						}
 					}
-					flush(q)
+					flushsend(q)
 					return nil
 				}).WaitError()
 			}, func() error {
@@ -335,7 +344,7 @@ func testNonblockingMPSC(t *testing.T, ctor func(int) NonblockingMPSC) {
 					id, got := val>>32, val&0xFFFFFFFF
 					exp := exps[id]
 					exps[id]++
-					if exp != got {
+					if got != exp {
 						return fmt.Errorf("%v: invalid order got %v, expected %v", size, got, exp)
 					}
 				}
@@ -360,7 +369,7 @@ func testNonblockingSPMC(t *testing.T, ctor func(int) NonblockingSPMC) {
 						return fmt.Errorf("%v: failed to send %v", size, i)
 					}
 				}
-				flush(q)
+				flushsend(q)
 				return nil
 			}, func() error {
 				return async.SpawnWithResult(TestProcs, func(int) error {
@@ -399,7 +408,7 @@ func testNonblockingMPMC(t *testing.T, ctor func(int) NonblockingMPMC) {
 							return fmt.Errorf("%v: failed to send %v", size, i)
 						}
 					}
-					flush(q)
+					flushsend(q)
 					return nil
 				}).WaitError()
 			}, func() error {

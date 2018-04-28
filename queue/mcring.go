@@ -101,12 +101,16 @@ func (q *MCRing) Recv(v *Value) bool {
 	q.nextRead = q.next(q.nextRead)
 	q.readBatch++
 	if q.readBatch >= q.batchSize {
-		q.mu.Lock()
-		q.read = q.nextRead
-		q.readBatch = 0
-		q.mu.Unlock()
-		q.writer.Signal()
+		q.FlushRecv()
 	}
 
 	return true
+}
+
+func (q *MCRing) FlushRecv() {
+	q.mu.Lock()
+	q.read = q.nextRead
+	q.readBatch = 0
+	q.mu.Unlock()
+	q.writer.Signal()
 }
