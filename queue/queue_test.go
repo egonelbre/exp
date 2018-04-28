@@ -14,6 +14,7 @@ import (
 const (
 	TestSize  = 1024
 	TestProcs = 4
+	TestWork  = 100
 )
 
 var (
@@ -23,6 +24,14 @@ var (
 func flush(q Queue) {
 	if qf, ok := q.(Flusher); ok {
 		qf.FlushSend()
+	}
+}
+
+func localwork() {
+	foo := 1
+	for i := 0; i < TestWork; i++ {
+		foo *= 2
+		foo /= 2
 	}
 }
 
@@ -485,7 +494,7 @@ func benchBlockingSPSC(b *testing.B, ctor func(int) BlockingSPSC) {
 			q.Recv(&v)
 		}
 	})
-	b.Run("Uncontended100", func(b *testing.B) {
+	b.Run("Uncontended/x100", func(b *testing.B) {
 		b.RunParallel(func(pb *testing.PB) {
 			q := ctor(TestSize)
 			for pb.Next() {
@@ -497,33 +506,125 @@ func benchBlockingSPSC(b *testing.B, ctor func(int) BlockingSPSC) {
 			}
 		})
 	})
-	b.Run("ProducerConsumer", func(b *testing.B) {
-		q := ctor(TestSize)
-		b.ResetTimer()
-		var wg sync.WaitGroup
-		wg.Add(2)
-		go func() {
-			for i := 0; i < b.N; i++ {
-				var v Value
-				q.Send(v)
-			}
-			wg.Done()
-		}()
-		go func() {
-			for i := 0; i < b.N; i++ {
-				var v Value
-				q.Recv(&v)
-			}
-			wg.Done()
-		}()
-		wg.Wait()
-	})
 
+	for _, work := range []bool{false, true} {
+		suffix := ""
+		if work {
+			suffix = "/work"
+		}
+		b.Run("ProducerConsumer"+suffix, func(b *testing.B) {
+			q := ctor(TestSize)
+			b.ResetTimer()
+			var wg sync.WaitGroup
+			wg.Add(2)
+			go func() {
+				for i := 0; i < b.N; i++ {
+					var v Value
+					q.Send(v)
+					if work {
+						localwork()
+					}
+				}
+				wg.Done()
+			}()
+			go func() {
+				for i := 0; i < b.N; i++ {
+					var v Value
+					q.Recv(&v)
+					if work {
+						localwork()
+					}
+				}
+				wg.Done()
+			}()
+			wg.Wait()
+		})
+	}
 }
-func benchBlockingMPSC(b *testing.B, ctor func(int) BlockingMPSC) { b.Skip("todo") }
-func benchBlockingSPMC(b *testing.B, ctor func(int) BlockingSPMC) { b.Skip("todo") }
+func benchBlockingMPSC(b *testing.B, ctor func(int) BlockingMPSC) {
+	for _, work := range []bool{false, true} {
+		suffix := ""
+		if work {
+			suffix = "/work"
+		}
+		b.Run("ProducerConsumer/x100"+suffix, func(b *testing.B) {
+			q := ctor(TestSize)
+			b.ResetTimer()
+			var wg sync.WaitGroup
+			wg.Add(2)
+
+			go func() {
+				b.RunParallel(func(pb *testing.PB) {
+					for pb.Next() {
+						for i := 0; i < 100; i++ {
+							q.Send(0)
+							if work {
+								localwork()
+							}
+						}
+					}
+				})
+				wg.Done()
+			}()
+
+			go func() {
+				for i := 0; i < b.N; i++ {
+					for i := 0; i < 100; i++ {
+						var v Value
+						q.Recv(&v)
+						if work {
+							localwork()
+						}
+					}
+				}
+				wg.Done()
+			}()
+			wg.Wait()
+		})
+	}
+}
+func benchBlockingSPMC(b *testing.B, ctor func(int) BlockingSPMC) {
+	for _, work := range []bool{false, true} {
+		suffix := ""
+		if work {
+			suffix = "/work"
+		}
+		b.Run("ProducerConsumer/x100"+suffix, func(b *testing.B) {
+			q := ctor(TestSize)
+			b.ResetTimer()
+			var wg sync.WaitGroup
+			wg.Add(2)
+
+			go func() {
+				for i := 0; i < b.N; i++ {
+					for i := 0; i < 100; i++ {
+						q.Send(0)
+						if work {
+							localwork()
+						}
+					}
+				}
+				wg.Done()
+			}()
+
+			go func() {
+				b.RunParallel(func(pb *testing.PB) {
+					for pb.Next() {
+						for i := 0; i < 100; i++ {
+							var v Value
+							q.Recv(&v)
+						}
+					}
+				})
+				wg.Done()
+			}()
+			wg.Wait()
+		})
+	}
+}
+
 func benchBlockingMPMC(b *testing.B, ctor func(int) BlockingMPMC) {
-	b.Run("Contended100", func(b *testing.B) {
+	b.Run("Contended/x100", func(b *testing.B) {
 		q := ctor(TestSize)
 		b.RunParallel(func(pb *testing.PB) {
 			for pb.Next() {
@@ -535,6 +636,49 @@ func benchBlockingMPMC(b *testing.B, ctor func(int) BlockingMPMC) {
 			}
 		})
 	})
+
+	for _, work := range []bool{false, true} {
+		suffix := ""
+		if work {
+			suffix = "/work"
+		}
+		b.Run("ProducerConsumer/x100"+suffix, func(b *testing.B) {
+			q := ctor(TestSize)
+			b.ResetTimer()
+			var wg sync.WaitGroup
+			wg.Add(2)
+
+			go func() {
+				b.RunParallel(func(pb *testing.PB) {
+					for pb.Next() {
+						for i := 0; i < 100; i++ {
+							q.Send(0)
+							if work {
+								localwork()
+							}
+						}
+					}
+				})
+				wg.Done()
+			}()
+
+			go func() {
+				b.RunParallel(func(pb *testing.PB) {
+					for pb.Next() {
+						for i := 0; i < 100; i++ {
+							var v Value
+							q.Recv(&v)
+							if work {
+								localwork()
+							}
+						}
+					}
+				})
+				wg.Done()
+			}()
+			wg.Wait()
+		})
+	}
 }
 func benchNonblockingSPSC(b *testing.B, ctor func(int) NonblockingSPSC) {
 	b.Run("Single", func(b *testing.B) {
@@ -546,7 +690,7 @@ func benchNonblockingSPSC(b *testing.B, ctor func(int) NonblockingSPSC) {
 			q.TryRecv(&v)
 		}
 	})
-	b.Run("Uncontended100", func(b *testing.B) {
+	b.Run("Uncontended/x100", func(b *testing.B) {
 		b.RunParallel(func(pb *testing.PB) {
 			q := ctor(TestSize)
 			for pb.Next() {
@@ -562,7 +706,7 @@ func benchNonblockingSPSC(b *testing.B, ctor func(int) NonblockingSPSC) {
 func benchNonblockingMPSC(b *testing.B, ctor func(int) NonblockingMPSC) { b.Skip("todo") }
 func benchNonblockingSPMC(b *testing.B, ctor func(int) NonblockingSPMC) { b.Skip("todo") }
 func benchNonblockingMPMC(b *testing.B, ctor func(int) NonblockingMPMC) {
-	b.Run("Contended100", func(b *testing.B) {
+	b.Run("Contended/x100", func(b *testing.B) {
 		q := ctor(TestSize)
 		b.RunParallel(func(pb *testing.PB) {
 			for pb.Next() {
