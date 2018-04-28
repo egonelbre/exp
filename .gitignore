@@ -7,5 +7,7 @@
 ~*
 *.prof
 
+x.*.go
+
 *.sublime-workspace
 .vscode
