@@ -7,14 +7,12 @@ import (
 	"github.com/egonelbre/exp/sync2/spin"
 )
 
-var linkedStub linkedNode
-
 var _ MPSC = (*LinkedMPSC)(nil)
 
 // LinkedMPSC is a MPSC queue based on http://www.1024cores.net/home/lock-free-algorithms/queues/non-intrusive-mpsc-node-based-queue
 type LinkedMPSC struct {
 	_    [8]uint64
-	stub linkedNode
+	stub linkedMPSC
 	_    [7]uint64
 	head unsafe.Pointer
 	_    [7]uint64
@@ -22,8 +20,8 @@ type LinkedMPSC struct {
 	_    [7]uint64
 }
 
-type linkedNode struct {
-	next  unsafe.Pointer // *linkedNode
+type linkedMPSC struct {
+	next  unsafe.Pointer // *linkedMPSC
 	value Value
 }
 
@@ -37,16 +35,10 @@ func NewLinkedMPSC() *LinkedMPSC {
 func (q *LinkedMPSC) MultipleProducers() {}
 
 func (q *LinkedMPSC) Send(value Value) bool {
-	n := &linkedNode{value: value}
-	var prev unsafe.Pointer
-	for {
-		prev = atomic.LoadPointer(&q.head)
-		if atomic.CompareAndSwapPointer(&q.head, prev, unsafe.Pointer(n)) {
-			break
-		}
-	}
-	prevn := (*linkedNode)(prev)
-	prevn.next = unsafe.Pointer(n)
+	n := &linkedMPSC{value: value}
+	prev := exchangePointer(&q.head, unsafe.Pointer(n))
+	prevn := (*linkedMPSCi)(prev)
+	atomic.StorePointer(&prevn.next, unsafe.Pointer(n))
 	return true
 }
 
@@ -61,13 +53,13 @@ func (q *LinkedMPSC) Recv(value *Value) bool {
 }
 
 func (q *LinkedMPSC) TryRecv(value *Value) bool {
-	tail := (*linkedNode)(q.tail)
-	next := tail.next
+	tail := (*linkedMPSC)(q.tail)
+	next := atomic.LoadPointer(&tail.next)
 	if next == nil {
 		return false
 
 	}
 	q.tail = next
-	*value = (*linkedNode)(next).value
+	*value = (*linkedMPSC)(next).value
 	return true
 }

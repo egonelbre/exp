@@ -141,6 +141,7 @@ func (q *Lapped) trySend(value *Value) bool {
 		}
 	}
 }
+
 func (q *Lapped) tryRecv(result *Value) bool {
 	var empty Value
 	for {
