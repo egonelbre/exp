@@ -2,35 +2,35 @@ package queue
 
 type Ctor func(size int) Queue
 
-func (ctor Ctor) BlockingSPSC() func(size int) BlockingSPSC {
-	if _, ok := ctor(1).(BlockingSPSC); ok {
-		return func(size int) BlockingSPSC { return ctor(size).(BlockingSPSC) }
+func (ctor Ctor) SPSC() func(size int) SPSC {
+	if _, ok := ctor(1).(SPSC); ok {
+		return func(size int) SPSC { return ctor(size).(SPSC) }
 	}
 	return nil
 }
 
-func (ctor Ctor) BlockingSPMC() func(size int) BlockingSPMC {
-	if _, ok := ctor(1).(BlockingSPMC); ok {
-		return func(size int) BlockingSPMC {
-			return ctor(size).(BlockingSPMC)
+func (ctor Ctor) SPMC() func(size int) SPMC {
+	if _, ok := ctor(1).(SPMC); ok {
+		return func(size int) SPMC {
+			return ctor(size).(SPMC)
 		}
 	}
 	return nil
 }
 
-func (ctor Ctor) BlockingMPSC() func(size int) BlockingMPSC {
-	if _, ok := ctor(1).(BlockingMPSC); ok {
-		return func(size int) BlockingMPSC {
-			return ctor(size).(BlockingMPSC)
+func (ctor Ctor) MPSC() func(size int) MPSC {
+	if _, ok := ctor(1).(MPSC); ok {
+		return func(size int) MPSC {
+			return ctor(size).(MPSC)
 		}
 	}
 	return nil
 }
 
-func (ctor Ctor) BlockingMPMC() func(size int) BlockingMPMC {
-	if _, ok := ctor(1).(BlockingMPMC); ok {
-		return func(size int) BlockingMPMC {
-			return ctor(size).(BlockingMPMC)
+func (ctor Ctor) MPMC() func(size int) MPMC {
+	if _, ok := ctor(1).(MPMC); ok {
+		return func(size int) MPMC {
+			return ctor(size).(MPMC)
 		}
 	}
 	return nil

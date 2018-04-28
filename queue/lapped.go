@@ -7,7 +7,7 @@ import (
 
 // Based on https://docs.google.com/document/d/1yIAYmbvL3JxOKOjuCyon7JhW4cSv1wy5hC0ApeGMV9s/pub
 
-var _ BlockingMPMC = (*Lapped)(nil)
+var _ MPMC = (*Lapped)(nil)
 var _ NonblockingMPMC = (*Lapped)(nil)
 
 // Lapped is an lock-free MPMC based on Dvyukov lock-free channel design

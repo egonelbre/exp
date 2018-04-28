@@ -7,7 +7,7 @@ import (
 // implementation based on MCRingBuffer
 // http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.577.960&rep=rep1&type=pdf
 
-var _ BlockingSPSC = (*MCRing)(nil)
+var _ SPSC = (*MCRing)(nil)
 
 // MCRing is a SPSC queue based on MCRingBuffer
 type MCRing struct {

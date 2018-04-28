@@ -50,17 +50,17 @@ func mustRecv(q NonblockingSPSC, v *Value) bool {
 
 func test(t *testing.T, ctor Ctor) {
 	t.Run("b", func(t *testing.T) {
-		if ctor := ctor.BlockingSPSC(); ctor != nil {
-			t.Run("SPSC", func(t *testing.T) { testBlockingSPSC(t, ctor) })
+		if ctor := ctor.SPSC(); ctor != nil {
+			t.Run("SPSC", func(t *testing.T) { testSPSC(t, ctor) })
 		}
-		if ctor := ctor.BlockingSPMC(); ctor != nil {
-			t.Run("SPMC", func(t *testing.T) { testBlockingSPMC(t, ctor) })
+		if ctor := ctor.SPMC(); ctor != nil {
+			t.Run("SPMC", func(t *testing.T) { testSPMC(t, ctor) })
 		}
-		if ctor := ctor.BlockingMPSC(); ctor != nil {
-			t.Run("MPSC", func(t *testing.T) { testBlockingMPSC(t, ctor) })
+		if ctor := ctor.MPSC(); ctor != nil {
+			t.Run("MPSC", func(t *testing.T) { testMPSC(t, ctor) })
 		}
-		if ctor := ctor.BlockingMPMC(); ctor != nil {
-			t.Run("MPMC", func(t *testing.T) { testBlockingMPMC(t, ctor) })
+		if ctor := ctor.MPMC(); ctor != nil {
+			t.Run("MPMC", func(t *testing.T) { testMPMC(t, ctor) })
 		}
 	})
 
@@ -80,7 +80,7 @@ func test(t *testing.T, ctor Ctor) {
 	})
 }
 
-func testBlockingSPSC(t *testing.T, ctor func(int) BlockingSPSC) {
+func testSPSC(t *testing.T, ctor func(int) SPSC) {
 	t.Run("Basic", func(t *testing.T) {
 		for _, size := range TestSizes {
 			q := ctor(size)
@@ -110,47 +110,49 @@ func testBlockingSPSC(t *testing.T, ctor func(int) BlockingSPSC) {
 		}
 	})
 
-	t.Run("BlockOnFull", func(t *testing.T) {
-		for _, size := range TestSizes {
-			q := ctor(size)
-			capacity := q.Cap()
-			for i := 0; i < capacity; i++ {
-				if !q.Send(0) {
-					t.Fatal("failed to send")
-				}
-			}
-			flushsend(q)
-			sent := uint32(0)
-			go func() {
-				if !q.Send(0) {
-					t.Fatal("failed to send")
+	if _, isCapped := ctor(1).(Capped); isCapped {
+		t.Run("BlockOnFull", func(t *testing.T) {
+			for _, size := range TestSizes {
+				q := ctor(size)
+				capacity := q.(Capped).Cap()
+				for i := 0; i < capacity; i++ {
+					if !q.Send(0) {
+						t.Fatal("failed to send")
+					}
 				}
 				flushsend(q)
-				atomic.StoreUint32(&sent, 1)
-			}()
-			runtime.Gosched()
-			time.Sleep(time.Millisecond)
-			if atomic.LoadUint32(&sent) != 0 {
-				t.Fatalf("send to full chan")
-			}
-
-			var v Value
-			if !q.Recv(&v) {
-				t.Fatal("failed to recv")
-			}
-			flushrecv(q)
-			runtime.Gosched()
-			if atomic.LoadUint32(&sent) != 1 {
+				sent := uint32(0)
+				go func() {
+					if !q.Send(0) {
+						t.Fatal("failed to send")
+					}
+					flushsend(q)
+					atomic.StoreUint32(&sent, 1)
+				}()
 				runtime.Gosched()
 				time.Sleep(time.Millisecond)
+				if atomic.LoadUint32(&sent) != 0 {
+					t.Fatalf("send to full chan")
+				}
+
+				var v Value
+				if !q.Recv(&v) {
+					t.Fatal("failed to recv")
+				}
+				flushrecv(q)
+				runtime.Gosched()
 				if atomic.LoadUint32(&sent) != 1 {
-					t.Fatalf("did not unblock")
+					runtime.Gosched()
+					time.Sleep(time.Millisecond)
+					if atomic.LoadUint32(&sent) != 1 {
+						t.Fatalf("did not unblock")
+					}
 				}
 			}
-		}
-	})
+		})
+	}
 }
-func testBlockingMPSC(t *testing.T, ctor func(int) BlockingMPSC) {
+func testMPSC(t *testing.T, ctor func(int) MPSC) {
 	t.Run("Basic", func(t *testing.T) {
 		for _, size := range TestSizes {
 			q := ctor(size)
@@ -189,7 +191,7 @@ func testBlockingMPSC(t *testing.T, ctor func(int) BlockingMPSC) {
 		}
 	})
 }
-func testBlockingSPMC(t *testing.T, ctor func(int) BlockingSPMC) {
+func testSPMC(t *testing.T, ctor func(int) SPMC) {
 	t.Run("Basic", func(t *testing.T) {
 		for _, size := range TestSizes {
 			q := ctor(size)
@@ -227,7 +229,7 @@ func testBlockingSPMC(t *testing.T, ctor func(int) BlockingSPMC) {
 		}
 	})
 }
-func testBlockingMPMC(t *testing.T, ctor func(int) BlockingMPMC) {
+func testMPMC(t *testing.T, ctor func(int) MPMC) {
 	t.Run("Basic", func(t *testing.T) {
 		for _, size := range TestSizes {
 			q := ctor(size)
@@ -301,22 +303,25 @@ func testNonblockingSPSC(t *testing.T, ctor func(int) NonblockingSPSC) {
 			}
 		}
 	})
-	t.Run("NonblockOnFull", func(t *testing.T) {
-		for _, size := range TestSizes {
-			q := ctor(size)
-			capacity := q.Cap()
-			for i := 0; i < capacity; i++ {
-				if !q.TrySend(0) {
-					t.Fatal("failed to send")
+
+	if _, isCapped := ctor(1).(Capped); isCapped {
+		t.Run("NonblockOnFull", func(t *testing.T) {
+			for _, size := range TestSizes {
+				q := ctor(size)
+				capacity := q.(Capped).Cap()
+				for i := 0; i < capacity; i++ {
+					if !q.TrySend(0) {
+						t.Fatal("failed to send")
+					}
 				}
+				flushsend(q)
+				if q.TrySend(0) {
+					t.Fatal("send succeeded")
+				}
+				flushsend(q)
 			}
-			flushsend(q)
-			if q.TrySend(0) {
-				t.Fatal("send succeeded")
-			}
-			flushsend(q)
-		}
-	})
+		})
+	}
 }
 func testNonblockingMPSC(t *testing.T, ctor func(int) NonblockingMPSC) {
 	t.Run("Basic", func(t *testing.T) {

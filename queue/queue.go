@@ -3,14 +3,13 @@ package queue
 type Value = int64
 
 type Queue interface {
-	// BlockingSPSC and/or NonblockingSPSC
+	// SPSC and/or NonblockingSPSC
 	// Closer?
-
-	// Cap should return number of elements that can be sent, before it blocks or fails
-	Cap() int
+	// Flusher?
+	// Capped?
 }
 
-type BlockingSPSC interface {
+type SPSC interface {
 	Queue
 	// Send puts a value to a queue,
 	// returns false when the queue has been closed
@@ -30,6 +29,10 @@ type NonblockingSPSC interface {
 	TryRecv(v *Value) bool
 }
 
+type Capped interface {
+	Cap() int
+}
+
 type Flusher interface {
 	FlushSend()
 	FlushRecv()
@@ -39,18 +42,18 @@ type Closer interface {
 	Close()
 }
 
-type BlockingMPSC interface {
-	BlockingSPSC
+type MPSC interface {
+	SPSC
 	MultipleProducers()
 }
 
-type BlockingSPMC interface {
-	BlockingSPSC
+type SPMC interface {
+	SPSC
 	MultipleConsumers()
 }
 
-type BlockingMPMC interface {
-	BlockingSPSC
+type MPMC interface {
+	SPSC
 	MultipleProducers()
 	MultipleConsumers()
 }

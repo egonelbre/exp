@@ -22,17 +22,17 @@ func bench(b *testing.B, ctor Ctor) {
 	benchCommon(b, ctor)
 
 	b.Run("b", func(b *testing.B) {
-		if ctor := ctor.BlockingSPSC(); ctor != nil {
-			b.Run("SPSC", func(b *testing.B) { benchBlockingSPSC(b, ctor) })
+		if ctor := ctor.SPSC(); ctor != nil {
+			b.Run("SPSC", func(b *testing.B) { benchSPSC(b, ctor) })
 		}
-		if ctor := ctor.BlockingSPMC(); ctor != nil {
-			b.Run("SPMC", func(b *testing.B) { benchBlockingSPMC(b, ctor) })
+		if ctor := ctor.SPMC(); ctor != nil {
+			b.Run("SPMC", func(b *testing.B) { benchSPMC(b, ctor) })
 		}
-		if ctor := ctor.BlockingMPSC(); ctor != nil {
-			b.Run("MPSC", func(b *testing.B) { benchBlockingMPSC(b, ctor) })
+		if ctor := ctor.MPSC(); ctor != nil {
+			b.Run("MPSC", func(b *testing.B) { benchMPSC(b, ctor) })
 		}
-		if ctor := ctor.BlockingMPMC(); ctor != nil {
-			b.Run("MPMC", func(b *testing.B) { benchBlockingMPMC(b, ctor) })
+		if ctor := ctor.MPMC(); ctor != nil {
+			b.Run("MPMC", func(b *testing.B) { benchMPMC(b, ctor) })
 		}
 	})
 
@@ -60,7 +60,7 @@ func benchCommon(b *testing.B, ctor func(int) Queue) {
 	})
 }
 
-func benchBlockingSPSC(b *testing.B, ctor func(int) BlockingSPSC) {
+func benchSPSC(b *testing.B, ctor func(int) SPSC) {
 	b.Run("Single", func(b *testing.B) {
 		q := ctor(BenchSize)
 		b.ResetTimer()
@@ -117,7 +117,7 @@ func benchBlockingSPSC(b *testing.B, ctor func(int) BlockingSPSC) {
 		})
 	}
 }
-func benchBlockingMPSC(b *testing.B, ctor func(int) BlockingMPSC) {
+func benchMPSC(b *testing.B, ctor func(int) MPSC) {
 	for _, work := range []bool{false, true} {
 		suffix := ""
 		if work {
@@ -159,7 +159,7 @@ func benchBlockingMPSC(b *testing.B, ctor func(int) BlockingMPSC) {
 		})
 	}
 }
-func benchBlockingSPMC(b *testing.B, ctor func(int) BlockingSPMC) {
+func benchSPMC(b *testing.B, ctor func(int) SPMC) {
 	for _, work := range []bool{false, true} {
 		suffix := ""
 		if work {
@@ -199,7 +199,7 @@ func benchBlockingSPMC(b *testing.B, ctor func(int) BlockingSPMC) {
 	}
 }
 
-func benchBlockingMPMC(b *testing.B, ctor func(int) BlockingMPMC) {
+func benchMPMC(b *testing.B, ctor func(int) MPMC) {
 	b.Run("Contended/x100", func(b *testing.B) {
 		q := ctor(BenchSize)
 		b.RunParallel(func(pb *testing.PB) {
