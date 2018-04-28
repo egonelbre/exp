@@ -11,7 +11,7 @@ import (
 	"github.com/egonelbre/exp/sync2/spin"
 )
 
-const TestProcs = 4
+const TestProcs = 16
 
 var BatchSizes = [...]int{1, 8, 32, 64}
 var TestSizes = [...]int{1, 2, 3, 7, 8, 9, 15, 127, 128, 129}
@@ -216,7 +216,7 @@ func testSPMC(t *testing.T, ctor func(int) SPMC) {
 						exp := lastexp
 						lastexp = got
 						if got <= exp {
-							return fmt.Errorf("%v: invalid order got %v, expected %v", size, got, exp)
+							return fmt.Errorf("%v: invalid order got %v, expected at least %v", size, got, exp)
 						}
 					}
 					return nil
