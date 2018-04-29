@@ -6,13 +6,13 @@ import (
 	"github.com/egonelbre/exp/sync2/spin"
 )
 
-var _ SPMC = (*SeqSPMCSpinning)(nil)
+var _ SPMC = (*SPMCqs_dv)(nil)
 
-// SeqSPMCSpinning is a MPMC queue based on http://www.1024cores.net/home/lock-free-algorithms/queues/bounded-mpmc-queue
-type SeqSPMCSpinning struct {
+// SPMCqs_dv is a MPMC queue based on http://www.1024cores.net/home/lock-free-algorithms/queues/bounded-mpmc-queue
+type SPMCqs_dv struct {
 	_ [8]int64
 
-	buffer []seqSPMCSpinning
+	buffer []seqValue
 	mask   int64
 	_      [4]int64
 
@@ -23,19 +23,14 @@ type SeqSPMCSpinning struct {
 	_     [7]int64
 }
 
-type seqSPMCSpinning struct {
-	sequence int64
-	value    Value
-}
-
-func NewSeqSPMCSpinning(size int) *SeqSPMCSpinning {
+func NewSPMCqs_dv(size int) *SPMCqs_dv {
 	if size <= 1 {
 		size = 2
 	}
 	size = int(nextPowerOfTwo(uint32(size)))
 
-	q := &SeqSPMCSpinning{}
-	q.buffer = make([]seqSPMCSpinning, size)
+	q := &SPMCqs_dv{}
+	q.buffer = make([]seqValue, size)
 	q.mask = int64(size) - 1
 	for i := range q.buffer {
 		q.buffer[i].sequence = int64(i)
@@ -44,11 +39,11 @@ func NewSeqSPMCSpinning(size int) *SeqSPMCSpinning {
 	return q
 }
 
-func (q *SeqSPMCSpinning) Cap() int { return len(q.buffer) }
+func (q *SPMCqs_dv) Cap() int { return len(q.buffer) }
 
-func (q *SeqSPMCSpinning) MultipleConsumers() {}
+func (q *SPMCqs_dv) MultipleConsumers() {}
 
-func (q *SeqSPMCSpinning) Send(v Value) bool {
+func (q *SPMCqs_dv) Send(v Value) bool {
 	var s spin.T256
 	for s.Spin() {
 		if q.TrySend(v) {
@@ -58,8 +53,8 @@ func (q *SeqSPMCSpinning) Send(v Value) bool {
 	return false
 }
 
-func (q *SeqSPMCSpinning) TrySend(v Value) bool {
-	var cell *seqSPMCSpinning
+func (q *SPMCqs_dv) TrySend(v Value) bool {
+	var cell *seqValue
 	pos := q.sendx
 	for {
 		cell = &q.buffer[pos&q.mask]
@@ -79,7 +74,7 @@ func (q *SeqSPMCSpinning) TrySend(v Value) bool {
 	return true
 }
 
-func (q *SeqSPMCSpinning) Recv(v *Value) bool {
+func (q *SPMCqs_dv) Recv(v *Value) bool {
 	var s spin.T256
 	for s.Spin() {
 		if q.TryRecv(v) {
@@ -89,8 +84,8 @@ func (q *SeqSPMCSpinning) Recv(v *Value) bool {
 	return false
 }
 
-func (q *SeqSPMCSpinning) TryRecv(v *Value) bool {
-	var cell *seqSPMCSpinning
+func (q *SPMCqs_dv) TryRecv(v *Value) bool {
+	var cell *seqValue
 	pos := atomic.LoadInt64(&q.recvx)
 	for {
 		cell = &q.buffer[pos&q.mask]

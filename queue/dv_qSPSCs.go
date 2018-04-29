@@ -6,13 +6,13 @@ import (
 	"github.com/egonelbre/exp/sync2/spin"
 )
 
-var _ SPMC = (*SeqwSPMCSpinning)(nil)
+var _ SPSC = (*SPSCqs_dv)(nil)
 
-// SeqwSPMCSpinning is a MPMC queue based on http://www.1024cores.net/home/lock-free-algorithms/queues/bounded-mpmc-queue
-type SeqwSPMCSpinning struct {
+// SPSCqs_dv is a MPMC queue based on http://www.1024cores.net/home/lock-free-algorithms/queues/bounded-mpmc-queue
+type SPSCqs_dv struct {
 	_ [8]int64
 
-	buffer []seqwSPMCSpinning
+	buffer []seqValue
 	mask   int64
 	_      [4]int64
 
@@ -23,19 +23,14 @@ type SeqwSPMCSpinning struct {
 	_     [7]int64
 }
 
-type seqwSPMCSpinning struct {
-	sequence int64
-	value    Value
-}
-
-func NewSeqwSPMCSpinning(size int) *SeqwSPMCSpinning {
+func NewSPSCqs_dv(size int) *SPSCqs_dv {
 	if size <= 1 {
 		size = 2
 	}
 	size = int(nextPowerOfTwo(uint32(size)))
 
-	q := &SeqwSPMCSpinning{}
-	q.buffer = make([]seqwSPMCSpinning, size)
+	q := &SPSCqs_dv{}
+	q.buffer = make([]seqValue, size)
 	q.mask = int64(size) - 1
 	for i := range q.buffer {
 		q.buffer[i].sequence = int64(i)
@@ -44,11 +39,9 @@ func NewSeqwSPMCSpinning(size int) *SeqwSPMCSpinning {
 	return q
 }
 
-func (q *SeqwSPMCSpinning) Cap() int { return len(q.buffer) }
+func (q *SPSCqs_dv) Cap() int { return len(q.buffer) }
 
-func (q *SeqwSPMCSpinning) MultipleConsumers() {}
-
-func (q *SeqwSPMCSpinning) Send(v Value) bool {
+func (q *SPSCqs_dv) Send(v Value) bool {
 	var s spin.T256
 	for s.Spin() {
 		if q.TrySend(v) {
@@ -58,8 +51,8 @@ func (q *SeqwSPMCSpinning) Send(v Value) bool {
 	return false
 }
 
-func (q *SeqwSPMCSpinning) TrySend(v Value) bool {
-	var cell *seqwSPMCSpinning
+func (q *SPSCqs_dv) TrySend(v Value) bool {
+	var cell *seqValue
 	pos := q.sendx
 	for {
 		cell = &q.buffer[pos&q.mask]
@@ -79,7 +72,7 @@ func (q *SeqwSPMCSpinning) TrySend(v Value) bool {
 	return true
 }
 
-func (q *SeqwSPMCSpinning) Recv(v *Value) bool {
+func (q *SPSCqs_dv) Recv(v *Value) bool {
 	var s spin.T256
 	for s.Spin() {
 		if q.TryRecv(v) {
@@ -89,22 +82,19 @@ func (q *SeqwSPMCSpinning) Recv(v *Value) bool {
 	return false
 }
 
-func (q *SeqwSPMCSpinning) TryRecv(v *Value) bool {
-	var cell *seqwSPMCSpinning
-	pos := atomic.LoadInt64(&q.recvx)
+func (q *SPSCqs_dv) TryRecv(v *Value) bool {
+	var cell *seqValue
+	pos := q.recvx
 	for {
 		cell = &q.buffer[pos&q.mask]
 		seq := atomic.LoadInt64(&cell.sequence)
 		df := seq - (pos + 1)
 		if df == 0 {
-			if atomic.CompareAndSwapInt64(&q.recvx, pos, pos+1) {
-				break
-			}
+			q.recvx = pos + 1
+			break
 		} else if df < 0 {
 			// empty
 			return false
-		} else {
-			pos = atomic.LoadInt64(&q.recvx)
 		}
 	}
 

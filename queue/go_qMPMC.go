@@ -7,45 +7,45 @@ import (
 
 // Based on https://docs.google.com/document/d/1yIAYmbvL3JxOKOjuCyon7JhW4cSv1wy5hC0ApeGMV9s/pub
 
-var _ MPMC = (*Lapped)(nil)
-var _ NonblockingMPMC = (*Lapped)(nil)
+var _ MPMC = (*MPMCq_go)(nil)
+var _ NonblockingMPMC = (*MPMCq_go)(nil)
 
-// Lapped is an lock-free MPMC based on Dvyukov lock-free channel design
-type Lapped struct {
+// MPMCq_go is an lock-free MPMC based on Dvyukov lock-free channel design
+type MPMCq_go struct {
 	sendx  uint64
 	recvx  uint64
-	buffer []lapelem
-
+	buffer []struct {
+		lap uint32
+		val Value
+	}
 	mu    sync.Mutex
 	sendq sync.Cond
 	recvq sync.Cond
 }
 
-func NewLapped(size int) *Lapped {
-	q := &Lapped{
-		sendx:  0,
-		recvx:  1 << 32,
-		buffer: make([]lapelem, size, size),
+func NewMPMCq_go(size int) *MPMCq_go {
+	q := &MPMCq_go{
+		sendx: 0,
+		recvx: 1 << 32,
+		buffer: make([]struct {
+			lap uint32
+			val Value
+		}, size, size),
 	}
 	q.sendq.L = &q.mu
 	q.recvq.L = &q.mu
 	return q
 }
 
-type lapelem struct {
-	lap uint32
-	val Value
-}
+func (q *MPMCq_go) Cap() int           { return int(q.cap()) }
+func (q *MPMCq_go) MultipleConsumers() {}
+func (q *MPMCq_go) MultipleProducers() {}
 
-func (q *Lapped) Cap() int           { return int(q.cap()) }
-func (q *Lapped) MultipleConsumers() {}
-func (q *Lapped) MultipleProducers() {}
-
-func (q *Lapped) cap() uint32 {
+func (q *MPMCq_go) cap() uint32 {
 	return uint32(len(q.buffer))
 }
 
-func (q *Lapped) full() bool {
+func (q *MPMCq_go) full() bool {
 	x := atomic.LoadUint64(&q.sendx)
 	lap, pos := uint32(x>>32), uint32(x)
 	e := &q.buffer[pos]
@@ -53,7 +53,7 @@ func (q *Lapped) full() bool {
 	return int32(lap-elap) > 0
 }
 
-func (q *Lapped) empty() bool {
+func (q *MPMCq_go) empty() bool {
 	x := atomic.LoadUint64(&q.recvx)
 	lap, pos := uint32(x>>32), uint32(x)
 	e := &q.buffer[pos]
@@ -61,7 +61,7 @@ func (q *Lapped) empty() bool {
 	return int32(lap-elap) > 0
 }
 
-func (q *Lapped) Send(value Value) bool {
+func (q *MPMCq_go) Send(value Value) bool {
 	for {
 		if q.trySend(&value) {
 			q.recvq.Signal()
@@ -76,7 +76,7 @@ func (q *Lapped) Send(value Value) bool {
 	}
 }
 
-func (q *Lapped) Recv(value *Value) bool {
+func (q *MPMCq_go) Recv(value *Value) bool {
 	for {
 		if q.tryRecv(value) {
 			q.sendq.Signal()
@@ -91,19 +91,19 @@ func (q *Lapped) Recv(value *Value) bool {
 	}
 }
 
-func (q *Lapped) TrySend(value Value) bool {
+func (q *MPMCq_go) TrySend(value Value) bool {
 	ok := q.trySend(&value)
 	q.recvq.Signal()
 	return ok
 }
 
-func (q *Lapped) TryRecv(value *Value) bool {
+func (q *MPMCq_go) TryRecv(value *Value) bool {
 	ok := q.tryRecv(value)
 	q.sendq.Signal()
 	return ok
 }
 
-func (q *Lapped) trySend(value *Value) bool {
+func (q *MPMCq_go) trySend(value *Value) bool {
 	for {
 		x := atomic.LoadUint64(&q.sendx)
 		lap, pos := uint32(x>>32), uint32(x)
@@ -142,7 +142,7 @@ func (q *Lapped) trySend(value *Value) bool {
 	}
 }
 
-func (q *Lapped) tryRecv(result *Value) bool {
+func (q *MPMCq_go) tryRecv(result *Value) bool {
 	var empty Value
 	for {
 		x := atomic.LoadUint64(&q.recvx)

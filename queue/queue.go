@@ -1,7 +1,5 @@
 package queue
 
-type Value = int64
-
 type Queue interface {
 	// SPSC and/or NonblockingSPSC
 	// Closer?

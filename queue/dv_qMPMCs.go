@@ -6,13 +6,13 @@ import (
 	"github.com/egonelbre/exp/sync2/spin"
 )
 
-var _ MPMC = (*SeqwSpinning)(nil)
+var _ MPMC = (*MPMCqs_dv)(nil)
 
-// SeqwSpinning is a MPMC queue based on http://www.1024cores.net/home/lock-free-algorithms/queues/bounded-mpmc-queue
-type SeqwSpinning struct {
+// MPMCqs_dv is a MPMC queue based on http://www.1024cores.net/home/lock-free-algorithms/queues/bounded-mpmc-queue
+type MPMCqs_dv struct {
 	_ [8]int64
 
-	buffer []seqwSpinning
+	buffer []seqValue
 	mask   int64
 	_      [4]int64
 
@@ -23,20 +23,14 @@ type SeqwSpinning struct {
 	_     [7]int64
 }
 
-type seqwSpinning struct {
-	sequence int64
-	value    Value
-	_        [6]int64
-}
-
-func NewSeqwSpinning(size int) *SeqwSpinning {
+func NewMPMCqs_dv(size int) *MPMCqs_dv {
 	if size <= 1 {
 		size = 2
 	}
 	size = int(nextPowerOfTwo(uint32(size)))
 
-	q := &SeqwSpinning{}
-	q.buffer = make([]seqwSpinning, size)
+	q := &MPMCqs_dv{}
+	q.buffer = make([]seqValue, size)
 	q.mask = int64(size) - 1
 	for i := range q.buffer {
 		q.buffer[i].sequence = int64(i)
@@ -45,12 +39,12 @@ func NewSeqwSpinning(size int) *SeqwSpinning {
 	return q
 }
 
-func (q *SeqwSpinning) Cap() int { return len(q.buffer) }
+func (q *MPMCqs_dv) Cap() int { return len(q.buffer) }
 
-func (q *SeqwSpinning) MultipleConsumers() {}
-func (q *SeqwSpinning) MultipleProducers() {}
+func (q *MPMCqs_dv) MultipleConsumers() {}
+func (q *MPMCqs_dv) MultipleProducers() {}
 
-func (q *SeqwSpinning) Send(v Value) bool {
+func (q *MPMCqs_dv) Send(v Value) bool {
 	var s spin.T256
 	for s.Spin() {
 		if q.TrySend(v) {
@@ -60,8 +54,8 @@ func (q *SeqwSpinning) Send(v Value) bool {
 	return false
 }
 
-func (q *SeqwSpinning) TrySend(v Value) bool {
-	var cell *seqwSpinning
+func (q *MPMCqs_dv) TrySend(v Value) bool {
+	var cell *seqValue
 	pos := atomic.LoadInt64(&q.sendx)
 	for {
 		cell = &q.buffer[pos&q.mask]
@@ -84,7 +78,7 @@ func (q *SeqwSpinning) TrySend(v Value) bool {
 	return true
 }
 
-func (q *SeqwSpinning) Recv(v *Value) bool {
+func (q *MPMCqs_dv) Recv(v *Value) bool {
 	var s spin.T256
 	for s.Spin() {
 		if q.TryRecv(v) {
@@ -94,8 +88,8 @@ func (q *SeqwSpinning) Recv(v *Value) bool {
 	return false
 }
 
-func (q *SeqwSpinning) TryRecv(v *Value) bool {
-	var cell *seqwSpinning
+func (q *MPMCqs_dv) TryRecv(v *Value) bool {
+	var cell *seqValue
 	pos := atomic.LoadInt64(&q.recvx)
 	for {
 		cell = &q.buffer[pos&q.mask]

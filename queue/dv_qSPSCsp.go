@@ -6,13 +6,13 @@ import (
 	"github.com/egonelbre/exp/sync2/spin"
 )
 
-var _ SPSC = (*SeqwSPSCSpinning)(nil)
+var _ SPSC = (*SPSCqsp_dv)(nil)
 
-// SeqwSPSCSpinning is a MPMC queue based on http://www.1024cores.net/home/lock-free-algorithms/queues/bounded-mpmc-queue
-type SeqwSPSCSpinning struct {
+// SPSCqsp_dv is a MPMC queue based on http://www.1024cores.net/home/lock-free-algorithms/queues/bounded-mpmc-queue
+type SPSCqsp_dv struct {
 	_ [8]int64
 
-	buffer []seqwSPSCSpinning
+	buffer []seqPaddedValue
 	mask   int64
 	_      [4]int64
 
@@ -23,20 +23,14 @@ type SeqwSPSCSpinning struct {
 	_     [7]int64
 }
 
-type seqwSPSCSpinning struct {
-	sequence int64
-	value    Value
-	_        [6]int64
-}
-
-func NewSeqwSPSCSpinning(size int) *SeqwSPSCSpinning {
+func NewSPSCqsp_dv(size int) *SPSCqsp_dv {
 	if size <= 1 {
 		size = 2
 	}
 	size = int(nextPowerOfTwo(uint32(size)))
 
-	q := &SeqwSPSCSpinning{}
-	q.buffer = make([]seqwSPSCSpinning, size)
+	q := &SPSCqsp_dv{}
+	q.buffer = make([]seqPaddedValue, size)
 	q.mask = int64(size) - 1
 	for i := range q.buffer {
 		q.buffer[i].sequence = int64(i)
@@ -45,9 +39,9 @@ func NewSeqwSPSCSpinning(size int) *SeqwSPSCSpinning {
 	return q
 }
 
-func (q *SeqwSPSCSpinning) Cap() int { return len(q.buffer) }
+func (q *SPSCqsp_dv) Cap() int { return len(q.buffer) }
 
-func (q *SeqwSPSCSpinning) Send(v Value) bool {
+func (q *SPSCqsp_dv) Send(v Value) bool {
 	var s spin.T256
 	for s.Spin() {
 		if q.TrySend(v) {
@@ -57,8 +51,8 @@ func (q *SeqwSPSCSpinning) Send(v Value) bool {
 	return false
 }
 
-func (q *SeqwSPSCSpinning) TrySend(v Value) bool {
-	var cell *seqwSPSCSpinning
+func (q *SPSCqsp_dv) TrySend(v Value) bool {
+	var cell *seqPaddedValue
 	pos := q.sendx
 	for {
 		cell = &q.buffer[pos&q.mask]
@@ -78,7 +72,7 @@ func (q *SeqwSPSCSpinning) TrySend(v Value) bool {
 	return true
 }
 
-func (q *SeqwSPSCSpinning) Recv(v *Value) bool {
+func (q *SPSCqsp_dv) Recv(v *Value) bool {
 	var s spin.T256
 	for s.Spin() {
 		if q.TryRecv(v) {
@@ -88,8 +82,8 @@ func (q *SeqwSPSCSpinning) Recv(v *Value) bool {
 	return false
 }
 
-func (q *SeqwSPSCSpinning) TryRecv(v *Value) bool {
-	var cell *seqwSPSCSpinning
+func (q *SPSCqsp_dv) TryRecv(v *Value) bool {
+	var cell *seqPaddedValue
 	pos := q.recvx
 	for {
 		cell = &q.buffer[pos&q.mask]
