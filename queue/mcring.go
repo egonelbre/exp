@@ -34,7 +34,7 @@ type MCRing struct {
 	buffer    []Value
 }
 
-func NewMCRing(size, batchSize int) *MCRing {
+func NewMCRing(batchSize, size int) *MCRing {
 	q := &MCRing{}
 	q.Init(size, batchSize)
 	return q
