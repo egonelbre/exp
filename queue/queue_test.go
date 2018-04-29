@@ -28,6 +28,12 @@ func flushrecv(q Queue) {
 	}
 }
 
+func tryclose(q Queue) {
+	if qf, ok := q.(Closer); ok {
+		qf.Close()
+	}
+}
+
 func mustSend(q NonblockingSPSC, v Value) bool {
 	var s spin.Second
 	for s.Spin() {
@@ -110,6 +116,51 @@ func testSPSC(t *testing.T, ctor func(int) SPSC) {
 		}
 	})
 
+	if _, isBatchReceiver := ctor(1).(BatchReceiver); isBatchReceiver {
+		t.Run("Batch", func(t *testing.T) {
+			for _, size := range TestSizes {
+				q := ctor(size)
+				count := Value(size/2) + 1
+
+				result := async.All(func() error {
+					for i := Value(0); i < count; i++ {
+						if !q.Send(i) {
+							return fmt.Errorf("%v: failed to send %v", size, i)
+						}
+					}
+					flushsend(q)
+					return nil
+				}, func() error {
+					br := q.(BatchReceiver)
+					var err error
+					exp := Value(0)
+					for exp < count {
+						br.BatchRecv(func(got Value) {
+							if got != exp {
+								if err == nil {
+									err = fmt.Errorf("%v: invalid value got %v, expected %v", size, got, exp)
+								}
+								tryclose(br)
+								return
+							}
+							exp++
+							if exp >= count {
+								tryclose(br)
+							}
+						})
+						if err != nil {
+							return err
+						}
+					}
+					return nil
+				})
+				if errs := result.Wait(); errs != nil {
+					t.Fatal(errs)
+				}
+			}
+		})
+	}
+
 	if _, isBounded := ctor(1).(Bounded); isBounded {
 		t.Run("BlockOnFull", func(t *testing.T) {
 			for _, size := range TestSizes {
@@ -190,6 +241,64 @@ func testMPSC(t *testing.T, ctor func(int) MPSC) {
 			}
 		}
 	})
+
+	if _, isBatchReceiver := ctor(1).(BatchReceiver); isBatchReceiver {
+		t.Run("Batch", func(t *testing.T) {
+			for _, size := range TestSizes {
+				q := ctor(size)
+				count := Value(size/2) + 1
+
+				result := async.All(func() error {
+					return async.SpawnWithResult(TestProcs, func(id int) error {
+						for i := Value(0); i < count; i++ {
+							if !q.Send(Value(id)<<32 | i) {
+								return fmt.Errorf("%v: failed to send %v", size, i)
+							}
+						}
+						flushsend(q)
+						return nil
+					}).WaitError()
+				}, func() error {
+					br := q.(BatchReceiver)
+					var err error
+					var exps [TestProcs]Value
+					total := count * TestProcs
+					for total > 0 {
+						br.BatchRecv(func(val Value) {
+							id, got := val>>32, val&0xFFFFFFFF
+							exp := exps[id]
+							exps[id]++
+
+							if got != exp {
+								if err == nil {
+									err = fmt.Errorf("%v: invalid value got %v, expected %v", size, got, exp)
+								}
+								tryclose(br)
+								return
+							}
+
+							total--
+							if total == 0 {
+								tryclose(br)
+							} else if total < 0 {
+								if err == nil {
+									err = fmt.Errorf("%v: invalid value got %v, expected %v", size, got, exp)
+								}
+								tryclose(br)
+							}
+						})
+						if err != nil {
+							return err
+						}
+					}
+					return nil
+				})
+				if errs := result.Wait(); errs != nil {
+					t.Fatal(errs)
+				}
+			}
+		})
+	}
 }
 func testSPMC(t *testing.T, ctor func(int) SPMC) {
 	t.Run("Basic", func(t *testing.T) {
@@ -228,6 +337,7 @@ func testSPMC(t *testing.T, ctor func(int) SPMC) {
 			}
 		}
 	})
+	// TODO: Batch
 }
 func testMPMC(t *testing.T, ctor func(int) MPMC) {
 	t.Run("Basic", func(t *testing.T) {
@@ -272,6 +382,63 @@ func testMPMC(t *testing.T, ctor func(int) MPMC) {
 			}
 		}
 	})
+
+	if _, isBatchReceiver := ctor(1).(BatchReceiver); isBatchReceiver {
+		t.Run("Batch", func(t *testing.T) {
+			for _, size := range TestSizes {
+				q := ctor(size)
+				count := Value(size/2) + 1
+
+				result := async.All(func() error {
+					return async.SpawnWithResult(TestProcs, func(id int) error {
+						for i := Value(0); i < count; i++ {
+							if !q.Send(Value(id)<<32 | i) {
+								return fmt.Errorf("%v: failed to send %v", size, i)
+							}
+						}
+						flushsend(q)
+						return nil
+					}).WaitError()
+				}, func() error {
+					br := q.(BatchReceiver)
+					var err error
+					var exps [TestProcs]Value
+					total := count * TestProcs
+					for total > 0 {
+						br.BatchRecv(func(val Value) {
+							id, got := val>>32, val&0xFFFFFFFF
+							exp := exps[id]
+							exps[id] = got
+							if got <= exp {
+								if err == nil {
+									err = fmt.Errorf("%v: invalid value got %v, expected %v", size, got, exp)
+								}
+								tryclose(br)
+								return
+							}
+
+							total--
+							if total == 0 {
+								tryclose(br)
+							} else if total < 0 {
+								if err == nil {
+									err = fmt.Errorf("%v: invalid value got %v, expected %v", size, got, exp)
+								}
+								tryclose(br)
+							}
+						})
+						if err != nil {
+							return err
+						}
+					}
+					return nil
+				})
+				if errs := result.Wait(); errs != nil {
+					t.Fatal(errs)
+				}
+			}
+		})
+	}
 }
 
 func testNonblockingSPSC(t *testing.T, ctor func(int) NonblockingSPSC) {

@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-const BenchSize = 1024
+const BenchSize = 8192
 
 //var BenchWork = []int{0, 100}
 var BenchWork = []int{0}

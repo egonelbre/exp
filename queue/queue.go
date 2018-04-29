@@ -19,6 +19,11 @@ type SPSC interface {
 	Recv(v *Value) bool
 }
 
+type BatchReceiver interface {
+	// BatchRecv receives a batch
+	BatchRecv(func(v Value)) bool
+}
+
 type NonblockingSPSC interface {
 	Queue
 	// TrySend tries to put a value to a queue
