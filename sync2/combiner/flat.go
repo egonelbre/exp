@@ -4,6 +4,8 @@ import (
 	"runtime"
 	"sync/atomic"
 	"unsafe"
+
+	"github.com/egonelbre/exp/sync2/runtime2"
 )
 
 const (
@@ -30,7 +32,7 @@ type flatNode struct {
 }
 
 func (q *FlatCombiner) Do(request func()) {
-	pin := runtime_pid()
+	pin := runtime2.ProcessorHint()
 	nextNode := &q.threadlocal[pin].root
 	nextNode.complete = 0
 	atomic.StoreInt64(&nextNode.wait, 1)

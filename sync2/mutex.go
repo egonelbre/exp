@@ -3,6 +3,8 @@ package sync2
 import (
 	"sync"
 	"sync/atomic"
+
+	"github.com/egonelbre/exp/sync2/runtime2"
 )
 
 type Mutex struct {
@@ -12,7 +14,7 @@ type Mutex struct {
 
 func (mu *Mutex) Lock() {
 	mu.mu.Lock()
-	atomic.StoreInt64(&mu.owner, goid())
+	atomic.StoreInt64(&mu.owner, runtime2.GOID())
 }
 
 func (mu *Mutex) Unlock() {
@@ -22,12 +24,12 @@ func (mu *Mutex) Unlock() {
 }
 
 func (mu *Mutex) Own() bool {
-	return atomic.LoadInt64(&mu.owner) == goid()
+	return atomic.LoadInt64(&mu.owner) == runtime2.GOID()
 }
 
 func (mu *Mutex) MustOwn() {
 	owner := atomic.LoadInt64(&mu.owner)
-	if owner != goid() {
+	if owner != runtime2.GOID() {
 		if owner == 0 {
 			panic("mutex was not locked")
 		} else {

@@ -1,6 +1,8 @@
-package queue
+package runtime2
 
 import _ "unsafe"
+
+func ProcessorHint() int { return int(asm_pid()) }
 
 // func pid() uint32 {
 // 	return getg().m.p.ptr().id
@@ -19,6 +21,8 @@ func runtime_pid() int {
 	procUnpin()
 	return pid
 }
+
+func asm_pid() uint32
 
 func rdtscp_pid() int
 func rdpid_pid() int

@@ -1,10 +1,28 @@
-package queue
+package runtime2
 
-import "testing"
+import (
+	"runtime"
+	"testing"
+)
 
 func BenchmarkRuntimePID(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = runtime_pid()
+	}
+}
+
+func TestAsmPID(t *testing.T) {
+	for i := 0; i < 100; i++ {
+		if int(asm_pid()) != runtime_pid() {
+			t.Fatalf("%v %v", int(asm_pid()), runtime_pid())
+		}
+		runtime.Gosched()
+	}
+}
+
+func BenchmarkAsmPID(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = asm_pid()
 	}
 }
 
