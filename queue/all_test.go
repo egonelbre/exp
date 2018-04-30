@@ -289,18 +289,16 @@ func BenchmarkMPSCrs_one(b *testing.B) {
 	})
 }
 
-var _ MPMC = (*MPMCnw_fl)(nil)
+var _ MPSC = (*MPSCnw_fl)(nil)
 
-func TestMPMCnw_fl(t *testing.T) {
-	broken(t)
+func TestMPSCnw_fl(t *testing.T) {
 	t.Run("0", func(t *testing.T) {
-		test(t, func(size int) Queue { return NewMPMCnw_fl() })
+		test(t, func(size int) Queue { return NewMPSCnw_fl() })
 	})
 }
 
-func BenchmarkMPMCnw_fl(b *testing.B) {
-	b.Skip("broken")
+func BenchmarkMPSCnw_fl(b *testing.B) {
 	b.Run("0", func(b *testing.B) {
-		bench(b, func(size int) Queue { return NewMPMCnw_fl() })
+		bench(b, func(size int) Queue { return NewMPSCnw_fl() })
 	})
 }

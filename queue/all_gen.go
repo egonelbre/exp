@@ -38,7 +38,7 @@ var Impls = []Impl{
 	{"MPSCrs_one", Blocking},
 
 	// fastlane implementation
-	{"MPMCnw_fl", Broken | Blocking | Unbounded},
+	{"MPSCnw_fl", Blocking | Unbounded},
 }
 
 type Flag int
