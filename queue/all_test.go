@@ -5,11 +5,20 @@ package queue
 //go:generate go run all_gen.go -out all_test.go
 
 import (
+	"flag"
 	"strconv"
 	"testing"
 )
 
 var _ = strconv.Itoa
+var runbroken = flag.Bool("broken", false, "run only broken implementations")
+
+func broken(t *testing.T) {
+	t.Helper()
+	if !*runbroken {
+		t.Skip("broken")
+	}
+}
 
 var _ MPMC = (*MPMCc_go)(nil)
 var _ NonblockingMPMC = (*MPMCc_go)(nil)
@@ -30,7 +39,7 @@ var _ MPMC = (*MPMCq_go)(nil)
 var _ NonblockingMPMC = (*MPMCq_go)(nil)
 
 func TestMPMCq_go(t *testing.T) {
-	t.Skip("broken")
+	broken(t)
 	t.Run("0", func(t *testing.T) {
 		test(t, func(size int) Queue { return NewMPMCq_go(size) })
 	})
@@ -46,7 +55,7 @@ func BenchmarkMPMCq_go(b *testing.B) {
 var _ SPSC = (*SPSCr_mc)(nil)
 
 func TestSPSCr_mc(t *testing.T) {
-	t.Skip("broken")
+	broken(t)
 	for _, batchSize := range BatchSizes {
 		t.Run(strconv.Itoa(batchSize), func(t *testing.T) {
 			test(t, func(size int) Queue { return NewSPSCr_mc(batchSize, size) })
@@ -66,7 +75,7 @@ func BenchmarkSPSCr_mc(b *testing.B) {
 var _ SPSC = (*SPSCrs_mc)(nil)
 
 func TestSPSCrs_mc(t *testing.T) {
-	t.Skip("broken")
+	broken(t)
 	for _, batchSize := range BatchSizes {
 		t.Run(strconv.Itoa(batchSize), func(t *testing.T) {
 			test(t, func(size int) Queue { return NewSPSCrs_mc(batchSize, size) })
@@ -86,7 +95,7 @@ func BenchmarkSPSCrs_mc(b *testing.B) {
 var _ MPSC = (*MPSCr_mc)(nil)
 
 func TestMPSCr_mc(t *testing.T) {
-	t.Skip("broken")
+	broken(t)
 	for _, batchSize := range BatchSizes {
 		t.Run(strconv.Itoa(batchSize), func(t *testing.T) {
 			test(t, func(size int) Queue { return NewMPSCr_mc(batchSize, size) })
@@ -277,5 +286,21 @@ func TestMPSCrs_one(t *testing.T) {
 func BenchmarkMPSCrs_one(b *testing.B) {
 	b.Run("0", func(b *testing.B) {
 		bench(b, func(size int) Queue { return NewMPSCrs_one(size) })
+	})
+}
+
+var _ MPMC = (*MPMCnw_fl)(nil)
+
+func TestMPMCnw_fl(t *testing.T) {
+	broken(t)
+	t.Run("0", func(t *testing.T) {
+		test(t, func(size int) Queue { return NewMPMCnw_fl() })
+	})
+}
+
+func BenchmarkMPMCnw_fl(b *testing.B) {
+	b.Skip("broken")
+	b.Run("0", func(b *testing.B) {
+		bench(b, func(size int) Queue { return NewMPMCnw_fl() })
 	})
 }

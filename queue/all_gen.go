@@ -32,9 +32,13 @@ var Impls = []Impl{
 	{"SPSCqs_dv", Blocking | Nonblocking},
 	{"SPSCqsp_dv", Blocking | Nonblocking},
 
+	// onering implementations
 	{"SPSCrs_one", Blocking},
 	{"SPMCrs_one", Blocking},
 	{"MPSCrs_one", Blocking},
+
+	// fastlane implementation
+	{"MPMCnw_fl", Broken | Blocking | Unbounded},
 }
 
 type Flag int
@@ -114,9 +118,18 @@ const T = `package queue
 import (
 	"testing"
 	"strconv"
+	"flag"
 )
 
 var _ = strconv.Itoa
+var runbroken = flag.Bool("broken", false, "run only broken implementations")
+
+func broken(t *testing.T) {
+	t.Helper()
+	if !*runbroken {
+		t.Skip("broken")
+	}
+}
 
 {{ range . }}
 {{ $impl := . }}
@@ -126,7 +139,7 @@ var _ {{ . }} = (*{{$impl.Name}})(nil)
 {{ end }}
 
 func Test{{.Name}}(t *testing.T) {
-	{{- if .Broken -}} t.Skip("broken"); {{- end -}}
+	{{- if .Broken -}} broken(t); {{- end -}}
 	{{- if .Batched -}}
 	for _, batchSize := range BatchSizes {
 		t.Run(strconv.Itoa(batchSize), func(t *testing.T){
