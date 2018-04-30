@@ -237,3 +237,45 @@ func BenchmarkSPSCqsp_dv(b *testing.B) {
 		bench(b, func(size int) Queue { return NewSPSCqsp_dv(size) })
 	})
 }
+
+var _ SPSC = (*SPSCrs_one)(nil)
+
+func TestSPSCrs_one(t *testing.T) {
+	t.Run("0", func(t *testing.T) {
+		test(t, func(size int) Queue { return NewSPSCrs_one(size) })
+	})
+}
+
+func BenchmarkSPSCrs_one(b *testing.B) {
+	b.Run("0", func(b *testing.B) {
+		bench(b, func(size int) Queue { return NewSPSCrs_one(size) })
+	})
+}
+
+var _ SPMC = (*SPMCrs_one)(nil)
+
+func TestSPMCrs_one(t *testing.T) {
+	t.Run("0", func(t *testing.T) {
+		test(t, func(size int) Queue { return NewSPMCrs_one(size) })
+	})
+}
+
+func BenchmarkSPMCrs_one(b *testing.B) {
+	b.Run("0", func(b *testing.B) {
+		bench(b, func(size int) Queue { return NewSPMCrs_one(size) })
+	})
+}
+
+var _ MPSC = (*MPSCrs_one)(nil)
+
+func TestMPSCrs_one(t *testing.T) {
+	t.Run("0", func(t *testing.T) {
+		test(t, func(size int) Queue { return NewMPSCrs_one(size) })
+	})
+}
+
+func BenchmarkMPSCrs_one(b *testing.B) {
+	b.Run("0", func(b *testing.B) {
+		bench(b, func(size int) Queue { return NewMPSCrs_one(size) })
+	})
+}

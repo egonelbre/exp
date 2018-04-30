@@ -31,6 +31,10 @@ var Impls = []Impl{
 	{"SPMCqsp_dv", Blocking | Nonblocking},
 	{"SPSCqs_dv", Blocking | Nonblocking},
 	{"SPSCqsp_dv", Blocking | Nonblocking},
+
+	{"SPSCrs_one", Blocking},
+	{"SPMCrs_one", Blocking},
+	{"MPSCrs_one", Blocking},
 }
 
 type Flag int

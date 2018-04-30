@@ -22,6 +22,7 @@ func localwork(amount int) {
 func bench(b *testing.B, ctor Ctor) {
 	benchCommon(b, ctor)
 
+	// blocking interface tests
 	b.Run("b", func(b *testing.B) {
 		if ctor := ctor.SPSC(); ctor != nil {
 			b.Run("SPSC", func(b *testing.B) { benchSPSC(b, ctor) })
@@ -37,6 +38,7 @@ func bench(b *testing.B, ctor Ctor) {
 		}
 	})
 
+	// non-blocking interface tests
 	b.Run("n", func(b *testing.B) {
 		if ctor := ctor.NonblockingSPSC(); ctor != nil {
 			b.Run("SPSC", func(b *testing.B) { benchNonblockingSPSC(b, ctor) })
