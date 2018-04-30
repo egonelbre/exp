@@ -39,16 +39,29 @@ var _ MPMC = (*MPMCq_go)(nil)
 var _ NonblockingMPMC = (*MPMCq_go)(nil)
 
 func TestMPMCq_go(t *testing.T) {
-	broken(t)
 	t.Run("0", func(t *testing.T) {
 		test(t, func(size int) Queue { return NewMPMCq_go(size) })
 	})
 }
 
 func BenchmarkMPMCq_go(b *testing.B) {
-	b.Skip("broken")
 	b.Run("0", func(b *testing.B) {
 		bench(b, func(size int) Queue { return NewMPMCq_go(size) })
+	})
+}
+
+var _ MPMC = (*MPMCqp_go)(nil)
+var _ NonblockingMPMC = (*MPMCqp_go)(nil)
+
+func TestMPMCqp_go(t *testing.T) {
+	t.Run("0", func(t *testing.T) {
+		test(t, func(size int) Queue { return NewMPMCqp_go(size) })
+	})
+}
+
+func BenchmarkMPMCqp_go(b *testing.B) {
+	b.Run("0", func(b *testing.B) {
+		bench(b, func(size int) Queue { return NewMPMCqp_go(size) })
 	})
 }
 

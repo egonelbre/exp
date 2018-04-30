@@ -24,3 +24,14 @@ type seqPaddedValue struct {
 	value    Value
 	_        [8 - 2]int64
 }
+
+type seqValue32 struct {
+	sequence uint32
+	value    Value
+}
+
+type seqPaddedValue32 struct {
+	sequence uint32
+	value    Value
+	_        [16 - 2 - 1]int32
+}

@@ -7,49 +7,46 @@ import (
 
 // Based on https://docs.google.com/document/d/1yIAYmbvL3JxOKOjuCyon7JhW4cSv1wy5hC0ApeGMV9s/pub
 
-var _ MPMC = (*MPMCq_go)(nil)
-var _ NonblockingMPMC = (*MPMCq_go)(nil)
-
-// MPMCq_go is an lock-free MPMC based on Dvyukov lock-free channel design
-type MPMCq_go struct {
+// MPMCqp_go is an lock-free MPMC based on Dvyukov lock-free channel design
+type MPMCqp_go struct {
 	sendx  uint64
 	_      [7]uint64
 	recvx  uint64
 	_      [7]uint64
-	buffer []seqValue32
+	buffer []seqPaddedValue32
 
 	mu    sync.Mutex
 	sendq sync.Cond
 	recvq sync.Cond
 }
 
-func NewMPMCq_go(size int) *MPMCq_go {
+func NewMPMCqp_go(size int) *MPMCqp_go {
 	if size < 2 {
 		size = 2
 	}
-	q := &MPMCq_go{
+	q := &MPMCqp_go{
 		sendx:  0,
 		recvx:  0,
-		buffer: make([]seqValue32, size, size),
+		buffer: make([]seqPaddedValue32, size, size),
 	}
 	q.sendq.L = &q.mu
 	q.recvq.L = &q.mu
 	return q
 }
 
-func (q *MPMCq_go) Cap() int           { return len(q.buffer) }
-func (q *MPMCq_go) MultipleConsumers() {}
-func (q *MPMCq_go) MultipleProducers() {}
+func (q *MPMCqp_go) Cap() int           { return len(q.buffer) }
+func (q *MPMCqp_go) MultipleConsumers() {}
+func (q *MPMCqp_go) MultipleProducers() {}
 
-func (q *MPMCq_go) cap() uint32 { return uint32(len(q.buffer)) }
+func (q *MPMCqp_go) cap() uint32 { return uint32(len(q.buffer)) }
 
-func (q *MPMCq_go) Send(value Value) bool    { return q.trySend(&value, true) }
-func (q *MPMCq_go) TrySend(value Value) bool { return q.trySend(&value, false) }
+func (q *MPMCqp_go) Send(value Value) bool    { return q.trySend(&value, true) }
+func (q *MPMCqp_go) TrySend(value Value) bool { return q.trySend(&value, false) }
 
-func (q *MPMCq_go) Recv(value *Value) bool    { return q.tryRecv(value, true) }
-func (q *MPMCq_go) TryRecv(value *Value) bool { return q.tryRecv(value, false) }
+func (q *MPMCqp_go) Recv(value *Value) bool    { return q.tryRecv(value, true) }
+func (q *MPMCqp_go) TryRecv(value *Value) bool { return q.tryRecv(value, false) }
 
-func (q *MPMCq_go) trySend(value *Value, block bool) bool {
+func (q *MPMCqp_go) trySend(value *Value, block bool) bool {
 	for loopCount := 0; ; backoff(&loopCount) {
 		x := atomic.LoadUint64(&q.sendx)
 		seq, pos := uint32(x>>32), uint32(x)
@@ -73,7 +70,6 @@ func (q *MPMCq_go) trySend(value *Value, block bool) bool {
 				atomic.StoreUint32(&elem.sequence, eseq+1)
 
 				// try to release a receiver
-				// TODO: avoid lock when noone is waiting
 				q.mu.Lock()
 				q.recvq.Signal()
 				q.mu.Unlock()
@@ -110,7 +106,7 @@ func (q *MPMCq_go) trySend(value *Value, block bool) bool {
 	}
 }
 
-func (q *MPMCq_go) tryRecv(result *Value, block bool) bool {
+func (q *MPMCqp_go) tryRecv(result *Value, block bool) bool {
 	var empty Value
 	for loopCount := 0; ; backoff(&loopCount) {
 		// if closed return false
@@ -155,7 +151,6 @@ func (q *MPMCq_go) tryRecv(result *Value, block bool) bool {
 			}
 
 			//fmt.Printf("recv: sleep %v\n", pos)
-			// TODO: avoid lock when noone is waiting
 			q.mu.Lock()
 			if x != atomic.LoadUint64(&q.sendx) {
 				q.mu.Unlock()

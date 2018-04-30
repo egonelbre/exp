@@ -1,8 +1,10 @@
 package queue
 
 import (
+	"flag"
 	"fmt"
 	"runtime"
+	"strconv"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -11,7 +13,9 @@ import (
 	"github.com/egonelbre/exp/sync2/spin"
 )
 
-const TestProcs = 16
+const TestProcs = 2
+
+var shake = flag.Int("shake", 1, "run test multiple times in a row")
 
 var BatchSizes = [...]int{1, 8, 32, 64}
 var TestSizes = [...]int{1, 2, 3, 7, 8, 9, 15, 127, 128, 129}
@@ -55,35 +59,37 @@ func mustRecv(q NonblockingSPSC, v *Value) bool {
 }
 
 func test(t *testing.T, ctor Ctor) {
-	t.Run("b", func(t *testing.T) {
-		if ctor := ctor.SPSC(); ctor != nil {
-			t.Run("SPSC", func(t *testing.T) { testSPSC(t, ctor) })
-		}
-		if ctor := ctor.SPMC(); ctor != nil {
-			t.Run("SPMC", func(t *testing.T) { testSPMC(t, ctor) })
-		}
-		if ctor := ctor.MPSC(); ctor != nil {
-			t.Run("MPSC", func(t *testing.T) { testMPSC(t, ctor) })
-		}
-		if ctor := ctor.MPMC(); ctor != nil {
-			t.Run("MPMC", func(t *testing.T) { testMPMC(t, ctor) })
-		}
-	})
+	for k := 0; k < *shake; k++ {
+		t.Run("b", func(t *testing.T) {
+			if ctor := ctor.SPSC(); ctor != nil {
+				t.Run("SPSC", func(t *testing.T) { testSPSC(t, ctor) })
+			}
+			if ctor := ctor.SPMC(); ctor != nil {
+				t.Run("SPMC", func(t *testing.T) { testSPMC(t, ctor) })
+			}
+			if ctor := ctor.MPSC(); ctor != nil {
+				t.Run("MPSC", func(t *testing.T) { testMPSC(t, ctor) })
+			}
+			if ctor := ctor.MPMC(); ctor != nil {
+				t.Run("MPMC", func(t *testing.T) { testMPMC(t, ctor) })
+			}
+		})
 
-	t.Run("n", func(t *testing.T) {
-		if ctor := ctor.NonblockingSPSC(); ctor != nil {
-			t.Run("SPSC", func(t *testing.T) { testNonblockingSPSC(t, ctor) })
-		}
-		if ctor := ctor.NonblockingSPMC(); ctor != nil {
-			t.Run("SPMC", func(t *testing.T) { testNonblockingSPMC(t, ctor) })
-		}
-		if ctor := ctor.NonblockingMPSC(); ctor != nil {
-			t.Run("MPSC", func(t *testing.T) { testNonblockingMPSC(t, ctor) })
-		}
-		if ctor := ctor.NonblockingMPMC(); ctor != nil {
-			t.Run("MPMC", func(t *testing.T) { testNonblockingMPMC(t, ctor) })
-		}
-	})
+		t.Run("n", func(t *testing.T) {
+			if ctor := ctor.NonblockingSPSC(); ctor != nil {
+				t.Run("SPSC", func(t *testing.T) { testNonblockingSPSC(t, ctor) })
+			}
+			if ctor := ctor.NonblockingSPMC(); ctor != nil {
+				t.Run("SPMC", func(t *testing.T) { testNonblockingSPMC(t, ctor) })
+			}
+			if ctor := ctor.NonblockingMPSC(); ctor != nil {
+				t.Run("MPSC", func(t *testing.T) { testNonblockingMPSC(t, ctor) })
+			}
+			if ctor := ctor.NonblockingMPMC(); ctor != nil {
+				t.Run("MPMC", func(t *testing.T) { testNonblockingMPMC(t, ctor) })
+			}
+		})
+	}
 }
 
 func testSPSC(t *testing.T, ctor func(int) SPSC) {
@@ -342,44 +348,46 @@ func testSPMC(t *testing.T, ctor func(int) SPMC) {
 func testMPMC(t *testing.T, ctor func(int) MPMC) {
 	t.Run("Basic", func(t *testing.T) {
 		for _, size := range TestSizes {
-			q := ctor(size)
-			count := Value(size/2) + 1
+			t.Run(strconv.Itoa(size), func(t *testing.T) {
+				q := ctor(size)
+				count := Value(size/2) + 1
 
-			result := async.All(func() error {
-				return async.SpawnWithResult(TestProcs, func(id int) error {
-					for i := Value(0); i < count; i++ {
-						if !q.Send(Value(id)<<32 | i) {
-							return fmt.Errorf("%v: failed to send %v", size, i)
+				result := async.All(func() error {
+					return async.SpawnWithResult(TestProcs, func(id int) error {
+						for i := Value(0); i < count; i++ {
+							if !q.Send(Value(id)<<32 | i) {
+								return fmt.Errorf("%v: failed to send %v", size, i)
+							}
 						}
-					}
-					flushsend(q)
-					return nil
-				}).WaitError()
-			}, func() error {
-				return async.SpawnWithResult(TestProcs, func(int) error {
-					var exps [TestProcs]Value
-					for i := range exps {
-						exps[i] = -1
-					}
-					for i := Value(0); i < count; i++ {
-						var val Value
-						if !q.Recv(&val) {
-							return fmt.Errorf("%v: failed to get", size)
+						flushsend(q)
+						return nil
+					}).WaitError()
+				}, func() error {
+					return async.SpawnWithResult(TestProcs, func(int) error {
+						var exps [TestProcs]Value
+						for i := range exps {
+							exps[i] = -1
 						}
-						id, got := val>>32, val&0xFFFFFFFF
-						exp := exps[id]
-						exps[id] = got
-						if got <= exp {
-							return fmt.Errorf("%v: invalid order got %v, expected %v", size, got, exp)
+						for i := Value(0); i < count; i++ {
+							var val Value
+							if !q.Recv(&val) {
+								return fmt.Errorf("%v: failed to get", size)
+							}
+							id, got := val>>32, val&0xFFFFFFFF
+							exp := exps[id]
+							exps[id] = got
+							if got <= exp {
+								return fmt.Errorf("%v: invalid order got %v, expected %v", size, got, exp)
+							}
 						}
-					}
-					return nil
-				}).WaitError()
+						return nil
+					}).WaitError()
+				})
+
+				if errs := result.Wait(); errs != nil {
+					t.Fatal(errs)
+				}
 			})
-
-			if errs := result.Wait(); errs != nil {
-				t.Fatal(errs)
-			}
 		}
 	})
 

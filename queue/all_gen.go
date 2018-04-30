@@ -14,7 +14,8 @@ import (
 
 var Impls = []Impl{
 	{"MPMCc_go", Blocking | Nonblocking},
-	{"MPMCq_go", Broken | Blocking | Nonblocking},
+	{"MPMCq_go", Blocking | Nonblocking},
+	{"MPMCqp_go", Blocking | Nonblocking},
 
 	{"SPSCr_mc", Broken | Blocking | Batched},
 	{"SPSCrs_mc", Broken | Blocking | Batched},
