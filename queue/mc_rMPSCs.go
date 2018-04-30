@@ -1,13 +1,11 @@
-// +build todo
-
 package queue
 
 import (
 	"sync"
 )
 
-// MPSCrs_mc is a MPSC queue based on MCRingBuffer
-type MPSCrs_mc struct {
+// MPSCrsMC is a MPSC queue based on MCRingBuffer
+type MPSCrsMC struct {
 	_ [8]uint64
 	// volatile
 	read  int64
@@ -29,24 +27,24 @@ type MPSCrs_mc struct {
 	buffer    []Value
 }
 
-func NewMPSCrs_mc(batchSize, size int) *MPSCrs_mc {
-	q := &MPSCrs_mc{}
+func NewMPSCrsMC(batchSize, size int) *MPSCrsMC {
+	q := &MPSCrsMC{}
 	q.Init(batchSize, size)
 	return q
 }
 
-func (q *MPSCrs_mc) Cap() int { return len(q.buffer) - 1 }
+func (q *MPSCrsMC) Cap() int { return len(q.buffer) - 1 }
 
-func (q *MPSCrs_mc) MultipleProducers() {}
+func (q *MPSCrsMC) MultipleProducers() {}
 
-func (q *MPSCrs_mc) Init(batchSize, size int) {
+func (q *MPSCrsMC) Init(batchSize, size int) {
 	q.reader.L = &q.mu
 	q.writer.L = &q.mu
 	q.batchSize = int64(batchSize)
 	q.buffer = make([]Value, ceil(size+1, batchSize))
 }
 
-func (q *MPSCrs_mc) next(i int64) int64 {
+func (q *MPSCrsMC) next(i int64) int64 {
 	r := i + 1
 	if r >= int64(len(q.buffer)) {
 		r = 0
@@ -54,7 +52,7 @@ func (q *MPSCrs_mc) next(i int64) int64 {
 	return r
 }
 
-func (q *MPSCrs_mc) Send(v Value) bool {
+func (q *MPSCrsMC) Send(v Value) bool {
 	q.mu.Lock()
 	nextWrite := q.next(q.write)
 	for nextWrite == q.localRead {
@@ -73,7 +71,7 @@ func (q *MPSCrs_mc) Send(v Value) bool {
 	return true
 }
 
-func (q *MPSCrs_mc) Recv(v *Value) bool {
+func (q *MPSCrsMC) Recv(v *Value) bool {
 	if q.nextRead == q.localWrite {
 		q.mu.Lock()
 		if q.nextRead == q.write {
@@ -96,7 +94,7 @@ func (q *MPSCrs_mc) Recv(v *Value) bool {
 	return true
 }
 
-func (q *MPSCrs_mc) FlushRecv() {
+func (q *MPSCrsMC) FlushRecv() {
 	q.mu.Lock()
 	q.read = q.nextRead
 	q.readBatch = 0

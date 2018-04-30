@@ -9,10 +9,10 @@ import (
 // implementation based on MCRingBuffer
 // http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.577.960&rep=rep1&type=pdf
 
-var _ SPSC = (*SPSCrs_mc)(nil)
+var _ SPSC = (*SPSCrsMC)(nil)
 
-// SPSCrs_mc is a SPSC queue based on MCRingBuffer
-type SPSCrs_mc struct {
+// SPSCrsMC is a SPSC queue based on MCRingBuffer
+type SPSCrsMC struct {
 	_ [8]uint64
 	// volatile
 	read  int64
@@ -34,25 +34,25 @@ type SPSCrs_mc struct {
 	buffer    []Value
 }
 
-func NewSPSCrs_mc(batchSize, size int) *SPSCrs_mc {
-	q := &SPSCrs_mc{}
+func NewSPSCrsMC(batchSize, size int) *SPSCrsMC {
+	q := &SPSCrsMC{}
 	q.Init(batchSize, size)
 	return q
 }
 
-func (q *SPSCrs_mc) Cap() int { return len(q.buffer) - 1 }
+func (q *SPSCrsMC) Cap() int { return len(q.buffer) - 1 }
 
-func (q *SPSCrs_mc) Init(batchSize, size int) {
+func (q *SPSCrsMC) Init(batchSize, size int) {
 	q.blocking = true
 	q.batchSize = int64(batchSize)
 	q.buffer = make([]Value, ceil(size+1, batchSize))
 }
 
-func (q *SPSCrs_mc) SetBlocking(blocking bool) {
+func (q *SPSCrsMC) SetBlocking(blocking bool) {
 	q.blocking = blocking
 }
 
-func (q *SPSCrs_mc) next(i int64) int64 {
+func (q *SPSCrsMC) next(i int64) int64 {
 	r := i + 1
 	if r >= int64(len(q.buffer)) {
 		r = 0
@@ -60,7 +60,7 @@ func (q *SPSCrs_mc) next(i int64) int64 {
 	return r
 }
 
-func (q *SPSCrs_mc) Send(v Value) bool {
+func (q *SPSCrsMC) Send(v Value) bool {
 	afterNextWrite := q.next(q.nextWrite)
 	if afterNextWrite == q.localRead {
 		var s spin.T
@@ -81,12 +81,12 @@ func (q *SPSCrs_mc) Send(v Value) bool {
 	return true
 }
 
-func (q *SPSCrs_mc) FlushSend() {
+func (q *SPSCrsMC) FlushSend() {
 	atomic.StoreInt64(&q.write, q.nextWrite)
 	q.writeBatch = 0
 }
 
-func (q *SPSCrs_mc) Recv(v *Value) bool {
+func (q *SPSCrsMC) Recv(v *Value) bool {
 	if q.nextRead == q.localWrite {
 		var s spin.T
 		for q.nextRead == atomic.LoadInt64(&q.write) && s.Spin() {
@@ -109,7 +109,7 @@ func (q *SPSCrs_mc) Recv(v *Value) bool {
 	return true
 }
 
-func (q *SPSCrs_mc) FlushRecv() {
+func (q *SPSCrsMC) FlushRecv() {
 	atomic.StoreInt64(&q.read, q.nextRead)
 	q.readBatch = 0
 }
