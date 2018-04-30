@@ -93,7 +93,23 @@ func test(t *testing.T, ctor Ctor) {
 }
 
 func testSPSC(t *testing.T, ctor func(int) SPSC) {
-	t.Run("Basic", func(t *testing.T) {
+	t.Run("SendRecv", func(t *testing.T) {
+		for _, size := range TestSizes {
+			q := ctor(size)
+			count := size*8 + 3
+			for i := 0; i < count; i++ {
+				exp := Value(i)
+				q.Send(exp)
+				var got Value
+				q.Recv(&got)
+				if exp != got {
+					t.Fatalf("expected %v got %v", exp, got)
+				}
+			}
+		}
+	})
+
+	t.Run("Concurrent", func(t *testing.T) {
 		for _, size := range TestSizes {
 			q := ctor(size)
 			count := Value(size/2) + 1
@@ -346,6 +362,34 @@ func testSPMC(t *testing.T, ctor func(int) SPMC) {
 	// TODO: Batch
 }
 func testMPMC(t *testing.T, ctor func(int) MPMC) {
+	t.Run("SendRecv", func(t *testing.T) {
+		for _, size := range TestSizes {
+			q := ctor(size)
+			count := size*8 + 3
+
+			result := async.SpawnWithResult(TestProcs, func(id int) error {
+				var lastSeen [TestProcs]Value
+				for i := 1; i <= count; i++ {
+					q.Send(Value(int64(id)<<32 | int64(i)))
+
+					var got Value
+					q.Recv(&got)
+
+					id, val := int(got>>32), got&0xFFFFFFFF
+					exp := lastSeen[id]
+					lastSeen[id] = val
+					if val <= exp {
+						return fmt.Errorf("expected larger %v got %v", exp, got)
+					}
+				}
+				return nil
+			})
+			if errs := result.Wait(); errs != nil {
+				t.Fatal(errs)
+			}
+		}
+	})
+
 	t.Run("Basic", func(t *testing.T) {
 		for _, size := range TestSizes {
 			t.Run(strconv.Itoa(size), func(t *testing.T) {
