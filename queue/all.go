@@ -6,10 +6,8 @@ import (
 )
 
 var Descs = []extqueue.Desc{
-	{"SPSCrMC", extqueue.Batched, func(bs, s int) testsuite.Queue { return NewSPSCrMC(bs, s) }},
+	// {"SPSCrMC", extqueue.Batched, func(bs, s int) testsuite.Queue { return NewSPSCrMC(bs, s) }},
 	{"SPSCrsMC", extqueue.Batched, func(bs, s int) testsuite.Queue { return NewSPSCrsMC(bs, s) }},
-	{"MPSCrMC", extqueue.Batched, func(bs, s int) testsuite.Queue { return NewMPSCrMC(bs, s) }},
-	{"MPSCrsMC", extqueue.Batched, func(bs, s int) testsuite.Queue { return NewMPSCrsMC(bs, s) }},
-
-	{"MPSCnsiDV", extqueue.Unbounded, func(bs, s int) testsuite.Queue { return NewMPSCnsiDV() }},
+	// {"MPSCrMC", extqueue.Batched, func(bs, s int) testsuite.Queue { return NewMPSCrMC(bs, s) }},
+	// {"MPSCrsMC", extqueue.Batched, func(bs, s int) testsuite.Queue { return NewMPSCrsMC(bs, s) }},
 }
