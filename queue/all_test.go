@@ -4,19 +4,24 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/loov/queue/extqueue"
 	"github.com/loov/queue/testsuite"
 )
+
+var Descs = []extqueue.Desc{
+	// {Name: "MPSCrwMC", Flags: extqueue.Batched, Create: func(bs, s int) testsuite.Queue { return NewMPSCrwMC(bs, s) }},
+}
 
 func Test(t *testing.T) {
 	t.Helper()
 	for _, desc := range Descs {
 		batchSizes := testsuite.BatchSizes
-		if !desc.HasBatchSize() {
+		if !desc.BatchSize() {
 			batchSizes = []int{0}
 		}
 
 		testSizes := testsuite.TestSizes
-		if desc.IsUnbouned() {
+		if desc.Unbounded() {
 			testSizes = []int{0}
 		}
 
@@ -44,12 +49,12 @@ func Benchmark(b *testing.B) {
 	b.Helper()
 	for _, desc := range Descs {
 		batchSizes := testsuite.BenchBatchSizes
-		if !desc.HasBatchSize() {
+		if !desc.BatchSize() {
 			batchSizes = []int{0}
 		}
 
 		benchSizes := testsuite.BenchSizes
-		if desc.IsUnbouned() {
+		if desc.Unbounded() {
 			benchSizes = []int{0}
 		}
 
