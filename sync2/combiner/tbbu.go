@@ -7,14 +7,15 @@ import (
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type TBBU struct {
+	head    uintptr // *tbbNodeU
+	_       pad7
 	batcher Batcher
 	busy    int64
-	head    uintptr // *tbbNodeU
 }
 
 type tbbNodeU struct {
-	argument Argument
 	next     uintptr // *tbbNodeU
+	argument Argument
 }
 
 func NewTBBU(batcher Batcher) *TBBU {

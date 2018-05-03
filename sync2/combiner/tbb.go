@@ -7,14 +7,15 @@ import (
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type TBB struct {
+	head    unsafe.Pointer // *tbbNode
+	_       pad7
 	batcher Batcher
 	busy    int64
-	head    unsafe.Pointer // *tbbNode
 }
 
 type tbbNode struct {
-	argument Argument
 	next     unsafe.Pointer // *tbbNode
+	argument Argument
 }
 
 func NewTBB(batcher Batcher) *TBB {

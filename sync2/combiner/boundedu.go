@@ -9,14 +9,15 @@ var _ Combiner = (*BoundedU)(nil)
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type BoundedU struct {
+	head    uintptr // *boundedUNode
+	_       pad7
 	batcher Batcher
 	limit   int
-	head    uintptr // *boundedUNode
 }
 
 type boundedUNode struct {
-	argument Argument
 	next     uintptr // *boundedUNode
+	argument Argument
 }
 
 func NewBoundedU(batcher Batcher, limit int) *BoundedU {

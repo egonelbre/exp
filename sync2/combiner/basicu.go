@@ -9,13 +9,14 @@ var _ Combiner = (*BasicU)(nil)
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type BasicU struct {
-	batcher Batcher
 	head    uintptr // *basicUNode
+	_       pad7
+	batcher Batcher
 }
 
 type basicUNode struct {
-	argument Argument
 	next     uintptr // *basicUNode
+	argument Argument
 }
 
 func NewBasicU(batcher Batcher) *BasicU {

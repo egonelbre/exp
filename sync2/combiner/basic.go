@@ -9,13 +9,14 @@ var _ Combiner = (*Basic)(nil)
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type Basic struct {
-	batcher Batcher
 	head    unsafe.Pointer // *basicNode
+	_       pad7
+	batcher Batcher
 }
 
 type basicNode struct {
-	argument Argument
 	next     unsafe.Pointer // *basicNode
+	argument Argument
 }
 
 func NewBasic(batcher Batcher) *Basic {
