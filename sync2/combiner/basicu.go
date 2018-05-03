@@ -5,37 +5,35 @@ import (
 	"unsafe"
 )
 
-var _ Combiner = (*Basic)(nil)
+var _ Combiner = (*BasicU)(nil)
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
-type Basic struct {
+type BasicU struct {
 	batcher Batcher
-	head    unsafe.Pointer // *basicNode
+	head    uintptr // *basicUNode
 }
 
-type basicNode struct {
+type basicUNode struct {
 	argument Argument
-	next     unsafe.Pointer // *basicNode
+	next     uintptr // *basicUNode
 }
 
-func NewBasic(batcher Batcher) *Basic {
-	return &Basic{
+func NewBasicU(batcher Batcher) *BasicU {
+	return &BasicU{
 		batcher: batcher,
-		head:    nil,
+		head:    0,
 	}
 }
 
-var basicLockedElem = basicNode{}
-var basicLockedNode = &basicLockedElem
-var basicLocked = (unsafe.Pointer)(basicLockedNode)
+const basicULocked = uintptr(1)
 
-func (c *Basic) Do(op Argument) {
-	node := &basicNode{argument: op}
+func (c *BasicU) Do(op Argument) {
+	node := &basicUNode{argument: op}
 
 	// c.head can be in 3 states:
 	// c.head == 0: no operations in-flight, initial state.
 	// c.head == LOCKED: single operation in-flight, no combining opportunities.
-	// c.head == pointer to some basicNode that is subject to combining.
+	// c.head == pointer to some basicUNode that is subject to combining.
 	//            The args are chainded into a lock-free list via 'next' fields.
 	// node.next also can be in 3 states:
 	// node.next == pointer to other node.
@@ -46,25 +44,25 @@ func (c *Basic) Do(op Argument) {
 	// 1. If c.head == nil, exchange it to LOCKED and become the combiner.
 	// Otherwise, enqueue own node into the c->head lock-free list.
 
-	var cmp unsafe.Pointer
+	var cmp uintptr
 	for {
-		cmp = atomic.LoadPointer(&c.head)
-		xchg := basicLocked
-		if cmp != nil {
+		cmp = atomic.LoadUintptr(&c.head)
+		xchg := basicULocked
+		if cmp != 0 {
 			// There is already a combiner, enqueue itself.
-			xchg = (unsafe.Pointer)(node)
+			xchg = uintptr(unsafe.Pointer(node))
 			node.next = cmp
 		}
 
-		if atomic.CompareAndSwapPointer(&c.head, cmp, xchg) {
+		if atomic.CompareAndSwapUintptr(&c.head, cmp, xchg) {
 			break
 		}
 	}
 
-	if cmp != nil {
+	if cmp != 0 {
 		// 2. If we are not the combiner, wait for node.next to become nil
 		// (which means the operation is finished).
-		for try := 0; atomic.LoadPointer(&node.next) != nil; spin(&try) {
+		for try := 0; atomic.LoadUintptr(&node.next) != 0; spin(&try) {
 		}
 	} else {
 		// 3. We are the combiner.
@@ -78,33 +76,33 @@ func (c *Basic) Do(op Argument) {
 		// Then, look for combining opportunities.
 		for {
 			for {
-				cmp = atomic.LoadPointer(&c.head)
+				cmp = atomic.LoadUintptr(&c.head)
 				// If there are some operations in the list,
 				// grab the list and replace with LOCKED.
 				// Otherwise, exchange to nil.
-				var xchg unsafe.Pointer
-				if cmp != basicLocked {
-					xchg = basicLocked
+				var xchg uintptr = 0
+				if cmp != basicULocked {
+					xchg = basicULocked
 				}
 
-				if atomic.CompareAndSwapPointer(&c.head, cmp, xchg) {
+				if atomic.CompareAndSwapUintptr(&c.head, cmp, xchg) {
 					break
 				}
 			}
 
 			// No more operations to combine, return.
-			if cmp == basicLocked {
+			if cmp == basicULocked {
 				break
 			}
 
 			// Execute the list of operations.
-			for cmp != basicLocked {
-				node = (*basicNode)(unsafe.Pointer(cmp))
+			for cmp != basicULocked {
+				node = (*basicUNode)(unsafe.Pointer(cmp))
 				cmp = node.next
 
 				c.batcher.Include(node.argument)
 				// Mark completion.
-				atomic.StorePointer(&node.next, nil)
+				atomic.StoreUintptr(&node.next, 0)
 			}
 		}
 	}

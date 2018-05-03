@@ -2,7 +2,6 @@ package combiner
 
 import (
 	"runtime"
-	"sync"
 )
 
 type Worker struct {
@@ -10,25 +9,22 @@ type Worker struct {
 	WorkInclude int
 	WorkFinish  int
 
-	mu    sync.Mutex
-	total int64
+	Total int64
 }
 
 func NewWorker() *Worker { return &Worker{} }
 
 func (exe *Worker) Start() {
-	exe.mu.Lock()
 	simulateWork(exe.WorkStart)
 }
 
 func (exe *Worker) Include(v Argument) {
-	exe.total += v.(int64)
+	exe.Total += v.(int64)
 	simulateWork(exe.WorkInclude)
 }
 
 func (exe *Worker) Finish() {
 	simulateWork(exe.WorkFinish)
-	exe.mu.Unlock()
 }
 
 func simulateWork(amount int) {

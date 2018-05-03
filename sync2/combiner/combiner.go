@@ -9,6 +9,11 @@ type Combiner interface {
 	Do(op Argument)
 }
 
+type AsyncCombiner interface {
+	Combiner
+	DoAsync(op Argument)
+}
+
 type Batcher interface {
 	Start()
 	Include(op Argument)
@@ -27,8 +32,8 @@ var (
 	TestProcs  = []int{1, 2, 3, 4, 8, 16, 32, 64, 128, 256}
 	TestBounds = []int{1, 2, 3, 4, 5, 6, 7, 8}
 
-	BenchProcs  = []int{1, 2, 4, 8, 16, 32, 128, 512}
-	BenchBounds = []int{4, 8, 16, 32, 64}
+	BenchProcs  = []int{2, 4, 8, 32, 256}
+	BenchBounds = []int{4, 8, 16, 64}
 )
 
 type Desc struct {

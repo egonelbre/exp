@@ -12,12 +12,12 @@ var _ Combiner = (*Bounded)(nil)
 type Bounded struct {
 	batcher Batcher
 	limit   int
-	head    unsafe.Pointer // *boundedArg
+	head    unsafe.Pointer // *boundedNode
 }
 
-type boundedArg struct {
+type boundedNode struct {
 	argument Argument
-	next     unsafe.Pointer // *boundedArg
+	next     unsafe.Pointer // *boundedNode
 	handoff  int64
 }
 
@@ -29,12 +29,12 @@ func NewBounded(batcher Batcher, limit int) *Bounded {
 	}
 }
 
-var boundedLockedElem = boundedArg{}
-var boundedLockedArg = &boundedLockedElem
-var boundedLocked = (unsafe.Pointer)(boundedLockedArg)
+var boundedLockedElem = boundedNode{}
+var boundedLockedNode = &boundedLockedElem
+var boundedLocked = (unsafe.Pointer)(boundedLockedNode)
 
 func (c *Bounded) Do(arg Argument) {
-	node := &boundedArg{argument: arg}
+	node := &boundedNode{argument: arg}
 
 	var cmp unsafe.Pointer
 	for {
@@ -89,12 +89,12 @@ func (c *Bounded) Do(arg Argument) {
 		count++
 	} else {
 		// Execute the list of operations.
-		for node != boundedLockedArg {
+		for node != boundedLockedNode {
 			if count == c.limit {
 				atomic.StoreInt64(&node.handoff, 1)
 				return
 			}
-			next := (*boundedArg)(node.next)
+			next := (*boundedNode)(node.next)
 			c.batcher.Include(node.argument)
 			count++
 			// Mark completion.
@@ -124,15 +124,15 @@ func (c *Bounded) Do(arg Argument) {
 			break
 		}
 
-		node = (*boundedArg)(cmp)
+		node = (*boundedNode)(cmp)
 
 		// Execute the list of operations.
-		for node != boundedLockedArg {
+		for node != boundedLockedNode {
 			if count == c.limit {
 				atomic.StoreInt64(&node.handoff, 1)
 				return
 			}
-			next := (*boundedArg)(node.next)
+			next := (*boundedNode)(node.next)
 			c.batcher.Include(node.argument)
 			count++
 			// Mark completion.
