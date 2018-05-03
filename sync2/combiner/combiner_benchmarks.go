@@ -22,6 +22,7 @@ func RunBenchmarks(b *testing.B, procs int, create func(Batcher) Combiner) {
 func benchSum(b *testing.B, worker *Worker, procs int, create func(Batcher) Combiner) {
 	const N = 100
 	combiner := create(worker)
+	defer StartClose(combiner)()
 
 	var wg sync.WaitGroup
 	wg.Add(procs)

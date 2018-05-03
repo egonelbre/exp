@@ -2,7 +2,7 @@ package runtime2
 
 import _ "unsafe"
 
-func ProcessorHint() int { return int(asm_pid()) }
+func ProcessorHint() int { return int(runtime_pid()) }
 
 // func pid() uint32 {
 // 	return getg().m.p.ptr().id

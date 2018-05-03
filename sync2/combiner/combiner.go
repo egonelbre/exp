@@ -5,8 +5,24 @@ import (
 	"testing"
 )
 
+const maxProcessors = 16
+
 type Combiner interface {
 	Do(op Argument)
+}
+
+type Runner interface {
+	Combiner
+	Run()
+	Close()
+}
+
+func StartClose(c Combiner) func() {
+	if r, ok := c.(Runner); ok {
+		go r.Run()
+		return r.Close
+	}
+	return func() {}
 }
 
 type AsyncCombiner interface {

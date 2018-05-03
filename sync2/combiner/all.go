@@ -9,4 +9,5 @@ var All = Descs{
 	{"BoundedU", true, func(bat Batcher, bound int) Combiner { return NewBoundedU(bat, bound) }},
 	{"TBB", false, func(bat Batcher, bound int) Combiner { return NewTBB(bat) }},
 	{"TBBU", false, func(bat Batcher, bound int) Combiner { return NewTBBU(bat) }},
+	{"Remote", false, func(bat Batcher, bound int) Combiner { return NewRemote(bat) }},
 }

@@ -19,6 +19,7 @@ func testSum(t *testing.T, procs int, create func(Batcher) Combiner) {
 
 	var worker Worker
 	combiner := create(&worker)
+	defer StartClose(combiner)()
 
 	var wg sync.WaitGroup
 
@@ -43,6 +44,7 @@ func testSumSequence(t *testing.T, procs int, create func(Batcher) Combiner) {
 
 	var worker Worker
 	combiner := create(&worker)
+	defer StartClose(combiner)()
 
 	var wg sync.WaitGroup
 

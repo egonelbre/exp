@@ -31,6 +31,7 @@ func RunLatency(t *testing.T, procs int, create func(Batcher) Combiner) {
 					work.WorkFinish = finishWork
 
 					combiner := create(&work)
+					defer StartClose(combiner)()
 
 					for i := 0; i < procs; i++ {
 						go func(b *hrtime.BenchmarkTSC) {

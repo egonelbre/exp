@@ -14,12 +14,12 @@ const (
 	max_spin  = 256
 )
 
-type FlatCombiner struct {
-	threadlocal [max_cores]flatNodePadded
-	tail        unsafe.Pointer
+type Flat struct {
+	proc [maxProcessors]flatProc
+	tail unsafe.Pointer
 }
 
-type flatNodePadded struct {
+type flatProc struct {
 	root flatNode
 	_    [7]int64
 }
@@ -31,9 +31,9 @@ type flatNode struct {
 	next     unsafe.Pointer
 }
 
-func (q *FlatCombiner) Do(request func()) {
-	pin := runtime2.ProcessorHint()
-	nextNode := &q.threadlocal[pin].root
+func (q *Flat) Do(request func()) {
+	pid := runtime2.ProcessorHint()
+	nextNode := &q.proc[pid%maxProcessors].root
 	nextNode.complete = 0
 	atomic.StoreInt64(&nextNode.wait, 1)
 
