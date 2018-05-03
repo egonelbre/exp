@@ -1,14 +1,14 @@
 package combiner
 
 import (
-	"runtime"
-	"strconv"
-	"sync"
 	"testing"
-
-	"github.com/loov/hrtime"
 )
 
+func RunBenchmarks(b *testing.B, procs int, create func(Batcher) Combiner) {
+
+}
+
+/*
 const benchWork = false
 
 type Total struct {
@@ -169,3 +169,4 @@ func benchSumming(b *testing.B, create func(Executor) Combiner) {
 		})
 	}
 }
+*/

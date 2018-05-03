@@ -5,23 +5,25 @@ import (
 	"unsafe"
 )
 
+var _ Combiner = (*BoundedU)(nil)
+
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type BoundedU struct {
-	exe   Executor
-	limit int
-	head  uintptr // *boundedUArg
+	batcher Batcher
+	limit   int
+	head    uintptr // *boundedUNode
 }
 
-type boundedUArg struct {
-	value int64
-	next  uintptr // *boundedUArg
+type boundedUNode struct {
+	argument Argument
+	next     uintptr // *boundedUNode
 }
 
-func NewBoundedU(exe Executor, limit int) *BoundedU {
+func NewBoundedU(batcher Batcher, limit int) *BoundedU {
 	return &BoundedU{
-		exe:   exe,
-		limit: limit,
-		head:  0,
+		batcher: batcher,
+		limit:   limit,
+		head:    0,
 	}
 }
 
@@ -30,8 +32,8 @@ const (
 	boundeduHandoffTag = uintptr(2)
 )
 
-func (c *BoundedU) Do(v int64) {
-	arg := &boundedUArg{value: v}
+func (c *BoundedU) Do(arg Argument) {
+	node := &boundedUNode{argument: arg}
 
 	var cmp uintptr
 	for {
@@ -39,8 +41,8 @@ func (c *BoundedU) Do(v int64) {
 		xchg := boundeduLocked
 		if cmp != 0 {
 			// There is already a combiner, enqueue itself.
-			xchg = uintptr(unsafe.Pointer(arg))
-			arg.next = cmp
+			xchg = uintptr(unsafe.Pointer(node))
+			node.next = cmp
 		}
 
 		if atomic.CompareAndSwapUintptr(&c.head, cmp, xchg) {
@@ -53,15 +55,14 @@ func (c *BoundedU) Do(v int64) {
 	if cmp != 0 {
 		// 2. If we are not the combiner, wait for arg.next to become nil
 		// (which means the operation is finished).
-		var s spinner
-		for s.spin() {
-			next := atomic.LoadUintptr(&arg.next)
+		for try := 0; ; spin(&try) {
+			next := atomic.LoadUintptr(&node.next)
 			if next == 0 {
 				return
 			}
 
 			if next&boundeduHandoffTag != 0 {
-				arg.next &^= boundeduHandoffTag
+				node.next &^= boundeduHandoffTag
 				// DO COMBINING
 				handoff = true
 				break
@@ -72,9 +73,9 @@ func (c *BoundedU) Do(v int64) {
 	// 3. We are the combiner.
 
 	// First, execute own operation.
-	c.exe.Start()
-	defer c.exe.Finish()
-	c.exe.Include(arg.value)
+	c.batcher.Start()
+	defer c.batcher.Finish()
+	c.batcher.Include(node.argument)
 	count++
 
 	// Then, look for combining opportunities.
@@ -107,17 +108,17 @@ func (c *BoundedU) Do(v int64) {
 	combiner:
 		// Execute the list of operations.
 		for cmp != boundeduLocked {
-			arg = (*boundedUArg)(unsafe.Pointer(cmp))
+			node = (*boundedUNode)(unsafe.Pointer(cmp))
 			if count == c.limit {
-				atomic.StoreUintptr(&arg.next, arg.next|boundeduHandoffTag)
+				atomic.StoreUintptr(&node.next, node.next|boundeduHandoffTag)
 				return
 			}
-			cmp = arg.next
+			cmp = node.next
 
-			c.exe.Include(arg.value)
+			c.batcher.Include(node.argument)
 			count++
 			// Mark completion.
-			atomic.StoreUintptr(&arg.next, 0)
+			atomic.StoreUintptr(&node.next, 0)
 		}
 	}
 }

@@ -7,35 +7,35 @@ import (
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type TBB struct {
-	exe  Executor
-	busy int64
-	head unsafe.Pointer // *tbbArg
+	batcher Batcher
+	busy    int64
+	head    unsafe.Pointer // *tbbNode
 }
 
-type tbbArg struct {
-	value int64
-	next  unsafe.Pointer // *tbbArg
+type tbbNode struct {
+	argument Argument
+	next     unsafe.Pointer // *tbbNode
 }
 
-func NewTBB(exe Executor) *TBB {
+func NewTBB(batcher Batcher) *TBB {
 	return &TBB{
-		exe:  exe,
-		head: nil,
+		batcher: batcher,
+		head:    nil,
 	}
 }
 
-var tbbLockedElem = tbbArg{}
-var tbbLockedArg = &tbbLockedElem
-var tbbLocked = (unsafe.Pointer)(tbbLockedArg)
+var tbbLockedElem = tbbNode{}
+var tbbLockedNode = &tbbLockedElem
+var tbbLocked = (unsafe.Pointer)(tbbLockedNode)
 
-func (c *TBB) Do(v int64) {
-	arg := &tbbArg{value: v}
+func (c *TBB) Do(arg Argument) {
+	node := &tbbNode{argument: arg}
 
 	var cmp unsafe.Pointer
 	for {
 		cmp = atomic.LoadPointer(&c.head)
-		arg.next = cmp
-		if atomic.CompareAndSwapPointer(&c.head, cmp, unsafe.Pointer(arg)) {
+		node.next = cmp
+		if atomic.CompareAndSwapPointer(&c.head, cmp, unsafe.Pointer(node)) {
 			break
 		}
 	}
@@ -43,21 +43,19 @@ func (c *TBB) Do(v int64) {
 	if cmp != nil {
 		// 2. If we are not the combiner, wait for arg.next to become nil
 		// (which means the operation is finished).
-		var s spinner
-		for atomic.LoadPointer(&arg.next) != nil && s.spin() {
+		for try := 0; atomic.LoadPointer(&node.next) != nil; spin(&try) {
 		}
 	} else {
 		// 3. We are the combiner.
 
 		// wait for previous combiner to finish
-		var s spinner
-		for atomic.LoadInt64(&c.busy) == 1 && s.spin() {
+		for try := 0; atomic.LoadInt64(&c.busy) == 1; spin(&try) {
 		}
 		atomic.StoreInt64(&c.busy, 1)
 
 		// First, execute own operation.
-		c.exe.Start()
-		defer c.exe.Finish()
+		c.batcher.Start()
+		defer c.batcher.Finish()
 
 		// Grab the batch of operations only once
 		for {
@@ -67,14 +65,14 @@ func (c *TBB) Do(v int64) {
 			}
 		}
 
-		arg = (*tbbArg)(cmp)
+		node = (*tbbNode)(cmp)
 		// Execute the list of operations.
-		for arg != nil {
-			next := (*tbbArg)(arg.next)
-			c.exe.Include(arg.value)
+		for node != nil {
+			next := (*tbbNode)(node.next)
+			c.batcher.Include(node.argument)
 			// Mark completion.
-			atomic.StorePointer(&arg.next, nil)
-			arg = next
+			atomic.StorePointer(&node.next, nil)
+			node = next
 		}
 
 		// allow next combiner to proceed

@@ -6,24 +6,26 @@ import (
 	"unsafe"
 )
 
+var _ Combiner = (*Bounded)(nil)
+
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type Bounded struct {
-	exe   Executor
-	limit int
-	head  unsafe.Pointer // *boundedArg
+	batcher Batcher
+	limit   int
+	head    unsafe.Pointer // *boundedArg
 }
 
 type boundedArg struct {
-	value   int64
-	next    unsafe.Pointer // *boundedArg
-	handoff int64
+	argument Argument
+	next     unsafe.Pointer // *boundedArg
+	handoff  int64
 }
 
-func NewBounded(exe Executor, limit int) *Bounded {
+func NewBounded(batcher Batcher, limit int) *Bounded {
 	return &Bounded{
-		exe:   exe,
-		limit: limit,
-		head:  nil,
+		batcher: batcher,
+		limit:   limit,
+		head:    nil,
 	}
 }
 
@@ -31,8 +33,8 @@ var boundedLockedElem = boundedArg{}
 var boundedLockedArg = &boundedLockedElem
 var boundedLocked = (unsafe.Pointer)(boundedLockedArg)
 
-func (c *Bounded) Do(v int64) {
-	arg := &boundedArg{value: v}
+func (c *Bounded) Do(arg Argument) {
+	node := &boundedArg{argument: arg}
 
 	var cmp unsafe.Pointer
 	for {
@@ -40,8 +42,8 @@ func (c *Bounded) Do(v int64) {
 		xchg := boundedLocked
 		if cmp != nil {
 			// There is already a combiner, enqueue itself.
-			xchg = (unsafe.Pointer)(arg)
-			arg.next = cmp
+			xchg = (unsafe.Pointer)(node)
+			node.next = cmp
 		}
 
 		if atomic.CompareAndSwapPointer(&c.head, cmp, xchg) {
@@ -56,12 +58,12 @@ func (c *Bounded) Do(v int64) {
 		const maxspin = 256
 		spin := 0
 		for {
-			next := atomic.LoadPointer(&arg.next)
+			next := atomic.LoadPointer(&node.next)
 			if next == nil {
 				return
 			}
 
-			if atomic.LoadInt64(&arg.handoff) == 1 {
+			if atomic.LoadInt64(&node.handoff) == 1 {
 				// start combining from the current position
 				handoff = true
 				break
@@ -78,26 +80,26 @@ func (c *Bounded) Do(v int64) {
 	// 3. We are the combiner.
 
 	// First, execute own operation.
-	c.exe.Start()
-	defer c.exe.Finish()
+	c.batcher.Start()
+	defer c.batcher.Finish()
 
 	var count int
 	if !handoff {
-		c.exe.Include(arg.value)
+		c.batcher.Include(node.argument)
 		count++
 	} else {
 		// Execute the list of operations.
-		for arg != boundedLockedArg {
+		for node != boundedLockedArg {
 			if count == c.limit {
-				atomic.StoreInt64(&arg.handoff, 1)
+				atomic.StoreInt64(&node.handoff, 1)
 				return
 			}
-			next := (*boundedArg)(arg.next)
-			c.exe.Include(arg.value)
+			next := (*boundedArg)(node.next)
+			c.batcher.Include(node.argument)
 			count++
 			// Mark completion.
-			atomic.StorePointer(&arg.next, nil)
-			arg = next
+			atomic.StorePointer(&node.next, nil)
+			node = next
 		}
 	}
 
@@ -122,20 +124,20 @@ func (c *Bounded) Do(v int64) {
 			break
 		}
 
-		arg = (*boundedArg)(cmp)
+		node = (*boundedArg)(cmp)
 
 		// Execute the list of operations.
-		for arg != boundedLockedArg {
+		for node != boundedLockedArg {
 			if count == c.limit {
-				atomic.StoreInt64(&arg.handoff, 1)
+				atomic.StoreInt64(&node.handoff, 1)
 				return
 			}
-			next := (*boundedArg)(arg.next)
-			c.exe.Include(arg.value)
+			next := (*boundedArg)(node.next)
+			c.batcher.Include(node.argument)
 			count++
 			// Mark completion.
-			atomic.StorePointer(&arg.next, nil)
-			arg = next
+			atomic.StorePointer(&node.next, nil)
+			node = next
 		}
 	}
 }
