@@ -7,4 +7,5 @@ var All = Descs{
 	{"Bounded", true, func(bat Batcher, bound int) Combiner { return NewBounded(bat, bound) }},
 	{"BoundedU", true, func(bat Batcher, bound int) Combiner { return NewBoundedU(bat, bound) }},
 	{"TBB", false, func(bat Batcher, bound int) Combiner { return NewTBB(bat) }},
+	{"TBBU", false, func(bat Batcher, bound int) Combiner { return NewTBBU(bat) }},
 }

@@ -1,7 +1,6 @@
 package combiner
 
 import (
-	"runtime"
 	"sync/atomic"
 	"unsafe"
 )
@@ -55,9 +54,7 @@ func (c *Bounded) Do(arg Argument) {
 	if cmp != nil {
 		// 2. If we are not the combiner, wait for arg.next to become nil
 		// (which means the operation is finished).
-		const maxspin = 256
-		spin := 0
-		for {
+		for try := 0; ; spin(&try) {
 			next := atomic.LoadPointer(&node.next)
 			if next == nil {
 				return
@@ -67,12 +64,6 @@ func (c *Bounded) Do(arg Argument) {
 				// start combining from the current position
 				handoff = true
 				break
-			}
-
-			spin++
-			if spin >= maxspin {
-				runtime.Gosched()
-				spin = 0
 			}
 		}
 	}

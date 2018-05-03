@@ -29,7 +29,10 @@ var basicLockedElem = basicNode{}
 var basicLockedNode = &basicLockedElem
 var basicLocked = (unsafe.Pointer)(basicLockedNode)
 
-func (c *Basic) Do(op Argument) {
+func (c *Basic) DoAsync(op Argument) { c.do(op, true) }
+func (c *Basic) Do(op Argument)      { c.do(op, false) }
+
+func (c *Basic) do(op Argument, async bool) {
 	node := &basicNode{argument: op}
 
 	// c.head can be in 3 states:
@@ -62,6 +65,10 @@ func (c *Basic) Do(op Argument) {
 	}
 
 	if cmp != nil {
+		if async {
+			return
+		}
+
 		// 2. If we are not the combiner, wait for node.next to become nil
 		// (which means the operation is finished).
 		for try := 0; atomic.LoadPointer(&node.next) != nil; spin(&try) {

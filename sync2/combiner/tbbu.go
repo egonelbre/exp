@@ -6,47 +6,40 @@ import (
 )
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
-type TBB struct {
+type TBBU struct {
 	batcher Batcher
 	busy    int64
-	head    unsafe.Pointer // *tbbNode
+	head    uintptr // *tbbNodeU
 }
 
-type tbbNode struct {
+type tbbNodeU struct {
 	argument Argument
-	next     unsafe.Pointer // *tbbNode
+	next     uintptr // *tbbNodeU
 }
 
-func NewTBB(batcher Batcher) *TBB {
-	return &TBB{
+func NewTBBU(batcher Batcher) *TBBU {
+	return &TBBU{
 		batcher: batcher,
-		head:    nil,
+		head:    0,
 	}
 }
 
-func (c *TBB) DoAsync(op Argument) { c.do(op, true) }
-func (c *TBB) Do(op Argument)      { c.do(op, false) }
+func (c *TBBU) Do(arg Argument) {
+	node := &tbbNodeU{argument: arg}
 
-func (c *TBB) do(arg Argument, async bool) {
-	node := &tbbNode{argument: arg}
-
-	var cmp unsafe.Pointer
+	var cmp uintptr
 	for {
-		cmp = atomic.LoadPointer(&c.head)
+		cmp = atomic.LoadUintptr(&c.head)
 		node.next = cmp
-		if atomic.CompareAndSwapPointer(&c.head, cmp, unsafe.Pointer(node)) {
+		if atomic.CompareAndSwapUintptr(&c.head, cmp, uintptr(unsafe.Pointer(node))) {
 			break
 		}
 	}
 
-	if cmp != nil {
-		if async {
-			return
-		}
-
+	if cmp != 0 {
 		// 2. If we are not the combiner, wait for arg.next to become nil
 		// (which means the operation is finished).
-		for try := 0; atomic.LoadPointer(&node.next) != nil; spin(&try) {
+		for try := 0; atomic.LoadUintptr(&node.next) != 0; spin(&try) {
 		}
 	} else {
 		// 3. We are the combiner.
@@ -62,19 +55,19 @@ func (c *TBB) do(arg Argument, async bool) {
 
 		// Grab the batch of operations only once
 		for {
-			cmp = atomic.LoadPointer(&c.head)
-			if atomic.CompareAndSwapPointer(&c.head, cmp, nil) {
+			cmp = atomic.LoadUintptr(&c.head)
+			if atomic.CompareAndSwapUintptr(&c.head, cmp, 0) {
 				break
 			}
 		}
 
-		node = (*tbbNode)(cmp)
+		node = (*tbbNodeU)(unsafe.Pointer(cmp))
 		// Execute the list of operations.
 		for node != nil {
-			next := (*tbbNode)(node.next)
+			next := (*tbbNodeU)(unsafe.Pointer(node.next))
 			c.batcher.Include(node.argument)
 			// Mark completion.
-			atomic.StorePointer(&node.next, nil)
+			atomic.StoreUintptr(&node.next, 0)
 			node = next
 		}
 
