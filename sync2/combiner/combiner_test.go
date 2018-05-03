@@ -107,6 +107,7 @@ func testSummingSequence(t *testing.T, create func(Executor) Combiner) {
 }
 
 func testLatencies(t *testing.T, create func(Executor) Combiner) {
+	t.Skip("ignore")
 	const N = 300
 	const K = 30
 	for _, procs := range []int{4, 8, 16, 32, 64, 128, 256} {
@@ -135,9 +136,9 @@ func testLatencies(t *testing.T, create func(Executor) Combiner) {
 			}
 			wg.Wait()
 
-			hist := hrtime.CombinedHistogram(10, hrs...)
-			hist.Divide(K)
-			t.Log("\n" + hist.String())
+			//hist := benchplot.CombinedHistogram(10, hrs...)
+			//hist.Divide(K)
+			//t.Log("\n" + hist.String())
 		})
 	}
 }
