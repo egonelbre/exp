@@ -2,6 +2,7 @@ package combiner
 
 import (
 	"runtime"
+	"time"
 )
 
 type Worker struct {
@@ -9,25 +10,29 @@ type Worker struct {
 	WorkInclude int
 	WorkFinish  int
 
+	SleepStart   time.Duration
+	SleepInclude time.Duration
+	SleepFinish  time.Duration
+
 	Total int64
 }
 
 func NewWorker() *Worker { return &Worker{} }
 
 func (exe *Worker) Start() {
-	simulateWork(exe.WorkStart)
+	simulateWork(exe.WorkStart, exe.SleepStart)
 }
 
 func (exe *Worker) Include(v Argument) {
 	exe.Total += v.(int64)
-	simulateWork(exe.WorkInclude)
+	simulateWork(exe.WorkInclude, exe.SleepInclude)
 }
 
 func (exe *Worker) Finish() {
-	simulateWork(exe.WorkFinish)
+	simulateWork(exe.WorkFinish, exe.SleepFinish)
 }
 
-func simulateWork(amount int) {
+func simulateWork(amount int, sleep time.Duration) {
 	foo := 1
 	for i := 0; i < amount; i++ {
 		foo *= 2
@@ -35,5 +40,9 @@ func simulateWork(amount int) {
 	}
 	if amount > 0 {
 		runtime.Gosched()
+	}
+
+	if sleep > 0 {
+		time.Sleep(sleep)
 	}
 }

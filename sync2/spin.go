@@ -1,6 +1,9 @@
 package sync2
 
-import "sync/atomic"
+import (
+	"runtime"
+	"sync/atomic"
+)
 
 type SpinMutex struct {
 	locked int64
@@ -9,7 +12,10 @@ type SpinMutex struct {
 
 func (m *SpinMutex) Lock() {
 	for atomic.SwapInt64(&m.locked, 1) == 1 {
-		for atomic.LoadInt64(&m.locked) == 1 {
+		for try := 0; atomic.LoadInt64(&m.locked) == 1; try++ {
+			if try > 256 {
+				runtime.Gosched()
+			}
 		}
 	}
 }
