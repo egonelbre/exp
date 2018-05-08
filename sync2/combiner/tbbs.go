@@ -8,11 +8,11 @@ import (
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type TBBSleepy struct {
-	head    unsafe.Pointer // *tbbSleepyNode
-	_       pad7
-	lock    sync.Mutex
-	cond    sync.Cond
-	_       pad7
+	head unsafe.Pointer // *tbbSleepyNode
+	_    pad7
+	lock sync.Mutex
+	cond sync.Cond
+	// cacheline boundary
 	batcher Batcher
 	busy    int64
 }

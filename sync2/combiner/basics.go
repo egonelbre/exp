@@ -14,9 +14,9 @@ type BasicSleepy struct {
 	head    unsafe.Pointer // *basicSleepyNode
 	_       pad7
 	batcher Batcher
-	_       pad7
-	lock    sync.Mutex
-	cond    sync.Cond
+	// cacheline boundary
+	lock sync.Mutex
+	cond sync.Cond
 }
 
 type basicSleepyNode struct {

@@ -10,11 +10,11 @@ var _ Combiner = (*BoundedSleepy)(nil)
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type BoundedSleepy struct {
-	head    unsafe.Pointer // *boundedSleepyNode
-	_       pad7
-	lock    sync.Mutex
-	cond    sync.Cond
-	_       pad7
+	head unsafe.Pointer // *boundedSleepyNode
+	_    pad7
+	lock sync.Mutex
+	cond sync.Cond
+	// cacheline boundary
 	batcher Batcher
 	limit   int
 }
