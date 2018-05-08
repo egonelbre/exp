@@ -5,36 +5,36 @@ import (
 	"unsafe"
 )
 
-var _ Combiner = (*BasicU)(nil)
+var _ Combiner = (*BasicUintptr)(nil)
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
-type BasicU struct {
-	head    uintptr // *basicUNode
+type BasicUintptr struct {
+	head    uintptr // *basicUintptrNode
 	_       pad7
 	batcher Batcher
 }
 
-type basicUNode struct {
-	next     uintptr // *basicUNode
+type basicUintptrNode struct {
+	next     uintptr // *basicUintptrNode
 	argument Argument
 }
 
-func NewBasicU(batcher Batcher) *BasicU {
-	return &BasicU{
+func NewBasicUintptr(batcher Batcher) *BasicUintptr {
+	return &BasicUintptr{
 		batcher: batcher,
 		head:    0,
 	}
 }
 
-const basicULocked = uintptr(1)
+const basicUintptrLocked = uintptr(1)
 
-func (c *BasicU) Do(op Argument) {
-	node := &basicUNode{argument: op}
+func (c *BasicUintptr) Do(op Argument) {
+	node := &basicUintptrNode{argument: op}
 
 	// c.head can be in 3 states:
 	// c.head == 0: no operations in-flight, initial state.
 	// c.head == LOCKED: single operation in-flight, no combining opportunities.
-	// c.head == pointer to some basicUNode that is subject to combining.
+	// c.head == pointer to some basicUintptrNode that is subject to combining.
 	//            The args are chainded into a lock-free list via 'next' fields.
 	// node.next also can be in 3 states:
 	// node.next == pointer to other node.
@@ -48,7 +48,7 @@ func (c *BasicU) Do(op Argument) {
 	var cmp uintptr
 	for {
 		cmp = atomic.LoadUintptr(&c.head)
-		xchg := basicULocked
+		xchg := basicUintptrLocked
 		if cmp != 0 {
 			// There is already a combiner, enqueue itself.
 			xchg = uintptr(unsafe.Pointer(node))
@@ -82,8 +82,8 @@ func (c *BasicU) Do(op Argument) {
 				// grab the list and replace with LOCKED.
 				// Otherwise, exchange to nil.
 				var xchg uintptr = 0
-				if cmp != basicULocked {
-					xchg = basicULocked
+				if cmp != basicUintptrLocked {
+					xchg = basicUintptrLocked
 				}
 
 				if atomic.CompareAndSwapUintptr(&c.head, cmp, xchg) {
@@ -92,13 +92,13 @@ func (c *BasicU) Do(op Argument) {
 			}
 
 			// No more operations to combine, return.
-			if cmp == basicULocked {
+			if cmp == basicUintptrLocked {
 				break
 			}
 
 			// Execute the list of operations.
-			for cmp != basicULocked {
-				node = (*basicUNode)(unsafe.Pointer(cmp))
+			for cmp != basicUintptrLocked {
+				node = (*basicUintptrNode)(unsafe.Pointer(cmp))
 				cmp = node.next
 
 				c.batcher.Include(node.argument)

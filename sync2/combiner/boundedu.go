@@ -5,23 +5,23 @@ import (
 	"unsafe"
 )
 
-var _ Combiner = (*BoundedU)(nil)
+var _ Combiner = (*BoundedUintptr)(nil)
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
-type BoundedU struct {
-	head    uintptr // *boundedUNode
+type BoundedUintptr struct {
+	head    uintptr // *boundedUintptrNode
 	_       pad7
 	batcher Batcher
 	limit   int
 }
 
-type boundedUNode struct {
-	next     uintptr // *boundedUNode
+type boundedUintptrNode struct {
+	next     uintptr // *boundedUintptrNode
 	argument Argument
 }
 
-func NewBoundedU(batcher Batcher, limit int) *BoundedU {
-	return &BoundedU{
+func NewBoundedUintptr(batcher Batcher, limit int) *BoundedUintptr {
+	return &BoundedUintptr{
 		batcher: batcher,
 		limit:   limit,
 		head:    0,
@@ -29,17 +29,17 @@ func NewBoundedU(batcher Batcher, limit int) *BoundedU {
 }
 
 const (
-	boundeduLocked     = uintptr(1)
-	boundeduHandoffTag = uintptr(2)
+	boundedUintptrLocked     = uintptr(1)
+	boundedUintptrHandoffTag = uintptr(2)
 )
 
-func (c *BoundedU) Do(arg Argument) {
-	node := &boundedUNode{argument: arg}
+func (c *BoundedUintptr) Do(arg Argument) {
+	node := &boundedUintptrNode{argument: arg}
 
 	var cmp uintptr
 	for {
 		cmp = atomic.LoadUintptr(&c.head)
-		xchg := boundeduLocked
+		xchg := boundedUintptrLocked
 		if cmp != 0 {
 			// There is already a combiner, enqueue itself.
 			xchg = uintptr(unsafe.Pointer(node))
@@ -62,8 +62,8 @@ func (c *BoundedU) Do(arg Argument) {
 				return
 			}
 
-			if next&boundeduHandoffTag != 0 {
-				node.next &^= boundeduHandoffTag
+			if next&boundedUintptrHandoffTag != 0 {
+				node.next &^= boundedUintptrHandoffTag
 				// DO COMBINING
 				handoff = true
 				break
@@ -92,8 +92,8 @@ func (c *BoundedU) Do(arg Argument) {
 			// grab the list and replace with LOCKED.
 			// Otherwise, exchange to nil.
 			var xchg uintptr = 0
-			if cmp != boundeduLocked {
-				xchg = boundeduLocked
+			if cmp != boundedUintptrLocked {
+				xchg = boundedUintptrLocked
 			}
 
 			if atomic.CompareAndSwapUintptr(&c.head, cmp, xchg) {
@@ -102,16 +102,16 @@ func (c *BoundedU) Do(arg Argument) {
 		}
 
 		// No more operations to combine, return.
-		if cmp == boundeduLocked {
+		if cmp == boundedUintptrLocked {
 			break
 		}
 
 	combiner:
 		// Execute the list of operations.
-		for cmp != boundeduLocked {
-			node = (*boundedUNode)(unsafe.Pointer(cmp))
+		for cmp != boundedUintptrLocked {
+			node = (*boundedUintptrNode)(unsafe.Pointer(cmp))
 			if count == c.limit {
-				atomic.StoreUintptr(&node.next, node.next|boundeduHandoffTag)
+				atomic.StoreUintptr(&node.next, node.next|boundedUintptrHandoffTag)
 				return
 			}
 			cmp = node.next

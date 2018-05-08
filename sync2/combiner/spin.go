@@ -10,3 +10,5 @@ func spin(v *int) {
 		runtime.Gosched()
 	}
 }
+
+const busyspin = 8
