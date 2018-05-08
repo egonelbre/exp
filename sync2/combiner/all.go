@@ -12,6 +12,8 @@ var All = Descs{
 	{"BoundedU", true, func(bat Batcher, bound int) Combiner { return NewBoundedUintptr(bat, bound) }},
 	{"BoundedSU", true, func(bat Batcher, bound int) Combiner { return NewBoundedSleepyUintptr(bat, bound) }},
 	{"TBB", false, func(bat Batcher, bound int) Combiner { return NewTBB(bat) }},
-	{"TBBU", false, func(bat Batcher, bound int) Combiner { return NewTBBU(bat) }},
+	{"TBBS", false, func(bat Batcher, bound int) Combiner { return NewTBBSleepy(bat) }},
+	{"TBBU", false, func(bat Batcher, bound int) Combiner { return NewTBBUintptr(bat) }},
+	{"TBBSU", false, func(bat Batcher, bound int) Combiner { return NewTBBSleepyUintptr(bat) }},
 	{"Remote", false, func(bat Batcher, bound int) Combiner { return NewRemote(bat) }},
 }
