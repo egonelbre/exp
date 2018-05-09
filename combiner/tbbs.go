@@ -19,7 +19,7 @@ type TBBSleepy struct {
 
 type tbbSleepyNode struct {
 	next     unsafe.Pointer // *tbbSleepyNode
-	argument Argument
+	argument interface{}
 }
 
 func NewTBBSleepy(batcher Batcher) *TBBSleepy {
@@ -31,10 +31,10 @@ func NewTBBSleepy(batcher Batcher) *TBBSleepy {
 	return c
 }
 
-func (c *TBBSleepy) DoAsync(op Argument) { c.do(op, true) }
-func (c *TBBSleepy) Do(op Argument)      { c.do(op, false) }
+func (c *TBBSleepy) DoAsync(op interface{}) { c.do(op, true) }
+func (c *TBBSleepy) Do(op interface{})      { c.do(op, false) }
 
-func (c *TBBSleepy) do(arg Argument, async bool) {
+func (c *TBBSleepy) do(arg interface{}, async bool) {
 	node := &tbbSleepyNode{argument: arg}
 
 	var cmp unsafe.Pointer

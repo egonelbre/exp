@@ -19,7 +19,7 @@ type Remote struct {
 
 type remoteNode struct {
 	next     unsafe.Pointer // *remoteNode
-	argument Argument
+	argument interface{}
 }
 
 type remoteProc struct {
@@ -58,7 +58,7 @@ func (c *Remote) Run() {
 
 func (c *Remote) Close() { atomic.StoreInt64(&c.done, 1) }
 
-func (c *Remote) Do(arg Argument) {
+func (c *Remote) Do(arg interface{}) {
 	node := &remoteNode{argument: arg}
 
 	pid := runtime2.ProcessorHint()

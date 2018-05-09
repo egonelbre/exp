@@ -15,7 +15,7 @@ type TBB struct {
 
 type tbbNode struct {
 	next     unsafe.Pointer // *tbbNode
-	argument Argument
+	argument interface{}
 }
 
 func NewTBB(batcher Batcher) *TBB {
@@ -25,10 +25,10 @@ func NewTBB(batcher Batcher) *TBB {
 	}
 }
 
-func (c *TBB) DoAsync(op Argument) { c.do(op, true) }
-func (c *TBB) Do(op Argument)      { c.do(op, false) }
+func (c *TBB) DoAsync(op interface{}) { c.do(op, true) }
+func (c *TBB) Do(op interface{})      { c.do(op, false) }
 
-func (c *TBB) do(arg Argument, async bool) {
+func (c *TBB) do(arg interface{}, async bool) {
 	node := &tbbNode{argument: arg}
 
 	var cmp unsafe.Pointer

@@ -15,7 +15,7 @@ type TBBUintptr struct {
 
 type tbbNodeUintptr struct {
 	next     uintptr // *tbbNodeUintptr
-	argument Argument
+	argument interface{}
 }
 
 func NewTBBUintptr(batcher Batcher) *TBBUintptr {
@@ -25,7 +25,7 @@ func NewTBBUintptr(batcher Batcher) *TBBUintptr {
 	}
 }
 
-func (c *TBBUintptr) Do(arg Argument) {
+func (c *TBBUintptr) Do(arg interface{}) {
 	node := &tbbNodeUintptr{argument: arg}
 
 	var cmp uintptr

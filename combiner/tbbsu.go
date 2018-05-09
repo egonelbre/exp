@@ -19,7 +19,7 @@ type TBBSleepyUintptr struct {
 
 type tbbNodeSleepyUintptr struct {
 	next     uintptr // *tbbNodeSleepyUintptr
-	argument Argument
+	argument interface{}
 }
 
 func NewTBBSleepyUintptr(batcher Batcher) *TBBSleepyUintptr {
@@ -31,7 +31,7 @@ func NewTBBSleepyUintptr(batcher Batcher) *TBBSleepyUintptr {
 	return c
 }
 
-func (c *TBBSleepyUintptr) Do(arg Argument) {
+func (c *TBBSleepyUintptr) Do(arg interface{}) {
 	node := &tbbNodeSleepyUintptr{argument: arg}
 
 	var cmp uintptr
