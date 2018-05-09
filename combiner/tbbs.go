@@ -1,35 +1,41 @@
 package combiner
 
 import (
+	"sync"
 	"sync/atomic"
 	"unsafe"
 )
 
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
-type TBB struct {
-	head    unsafe.Pointer // *tbbNode
-	_       pad7
+type TBBSleepy struct {
+	head unsafe.Pointer // *tbbSleepyNode
+	_    [7]uint64
+	lock sync.Mutex
+	cond sync.Cond
+	// cacheline boundary
 	batcher Batcher
 	busy    int64
 }
 
-type tbbNode struct {
-	next     unsafe.Pointer // *tbbNode
+type tbbSleepyNode struct {
+	next     unsafe.Pointer // *tbbSleepyNode
 	argument Argument
 }
 
-func NewTBB(batcher Batcher) *TBB {
-	return &TBB{
+func NewTBBSleepy(batcher Batcher) *TBBSleepy {
+	c := &TBBSleepy{
 		batcher: batcher,
 		head:    nil,
 	}
+	c.cond.L = &c.lock
+	return c
 }
 
-func (c *TBB) DoAsync(op Argument) { c.do(op, true) }
-func (c *TBB) Do(op Argument)      { c.do(op, false) }
+func (c *TBBSleepy) DoAsync(op Argument) { c.do(op, true) }
+func (c *TBBSleepy) Do(op Argument)      { c.do(op, false) }
 
-func (c *TBB) do(arg Argument, async bool) {
-	node := &tbbNode{argument: arg}
+func (c *TBBSleepy) do(arg Argument, async bool) {
+	node := &tbbSleepyNode{argument: arg}
 
 	var cmp unsafe.Pointer
 	for {
@@ -47,19 +53,31 @@ func (c *TBB) do(arg Argument, async bool) {
 
 		// 2. If we are not the combiner, wait for arg.next to become nil
 		// (which means the operation is finished).
-		for try := 0; atomic.LoadPointer(&node.next) != nil; spin(&try) {
+		c.lock.Lock()
+		for {
+			if atomic.LoadPointer(&node.next) == nil {
+				c.lock.Unlock()
+				return
+			}
+			c.cond.Wait()
 		}
+		c.lock.Unlock()
 	} else {
 		// 3. We are the combiner.
 
 		// wait for previous combiner to finish
-		for try := 0; atomic.LoadInt64(&c.busy) == 1; spin(&try) {
+		c.lock.Lock()
+		for {
+			if atomic.LoadInt64(&c.busy) != 1 {
+				break
+			}
+			c.cond.Wait()
 		}
 		atomic.StoreInt64(&c.busy, 1)
+		c.lock.Unlock()
 
 		// First, execute own operation.
 		c.batcher.Start()
-		defer c.batcher.Finish()
 
 		// Grab the batch of operations only once
 		for {
@@ -69,17 +87,22 @@ func (c *TBB) do(arg Argument, async bool) {
 			}
 		}
 
-		node = (*tbbNode)(cmp)
+		node = (*tbbSleepyNode)(cmp)
 		// Execute the list of operations.
 		for node != nil {
-			next := (*tbbNode)(node.next)
+			next := (*tbbSleepyNode)(node.next)
 			c.batcher.Include(node.argument)
 			// Mark completion.
 			atomic.StorePointer(&node.next, nil)
 			node = next
 		}
 
+		c.batcher.Finish()
+
 		// allow next combiner to proceed
+		c.lock.Lock()
 		atomic.StoreInt64(&c.busy, 0)
+		c.cond.Broadcast()
+		c.lock.Unlock()
 	}
 }

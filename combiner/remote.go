@@ -8,6 +8,8 @@ import (
 	"github.com/egonelbre/exp/sync2/runtime2"
 )
 
+const maxProcessors = 16
+
 type Remote struct {
 	batcher Batcher
 	done    int64

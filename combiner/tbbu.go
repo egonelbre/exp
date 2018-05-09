@@ -8,7 +8,7 @@ import (
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type TBBUintptr struct {
 	head    uintptr // *tbbNodeUintptr
-	_       pad7
+	_       [7]uint64
 	batcher Batcher
 	busy    int64
 }

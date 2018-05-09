@@ -9,7 +9,7 @@ import (
 // based on https://software.intel.com/en-us/blogs/2013/02/22/combineraggregator-synchronization-primitive
 type TBBSleepyUintptr struct {
 	head uintptr // *tbbNodeSleepyUintptr
-	_    pad7
+	_    [7]uint64
 	lock sync.Mutex
 	cond sync.Cond
 	// cacheline boundary
