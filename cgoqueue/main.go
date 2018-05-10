@@ -30,7 +30,6 @@ void service(volatile queue *q) {
 			if(sequence % 4 == 1) {
 				break;
 			}
-			sleep(0);
 		}
 
 		int64_t result = q->request;
@@ -67,14 +66,12 @@ func main() {
 
 		// wait for our turn
 		for atomic.LoadInt64(&queue.sequence) != token {
-			runtime.Gosched()
 		}
 
 		atomic.StoreInt64(&queue.request, request)
 		atomic.StoreInt64(&queue.sequence, token+1)
 
 		for atomic.LoadInt64(&queue.sequence) != token+2 {
-			runtime.Gosched()
 		}
 
 		response := atomic.LoadInt64(&queue.sequence)
