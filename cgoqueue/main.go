@@ -34,6 +34,7 @@ void service(volatile queue *q) {
 
 		int64_t result = q->request;
 		q->response = result * 10;
+
 		__atomic_add_fetch(&q->sequence, 1, __ATOMIC_RELEASE);
 	}
 }
@@ -68,15 +69,17 @@ func main() {
 		for atomic.LoadInt64(&queue.sequence) != token {
 		}
 
-		atomic.StoreInt64(&queue.request, request)
+		queue.request = request
+
 		atomic.StoreInt64(&queue.sequence, token+1)
 
 		for atomic.LoadInt64(&queue.sequence) != token+2 {
 		}
 
-		response := atomic.LoadInt64(&queue.sequence)
-		_ = response
+		response := queue.response
 		atomic.StoreInt64(&queue.sequence, token+4)
+
+		_ = response
 	}
 	stop := hrtime.TSC()
 	fmt.Println((stop - start).ApproxDuration() / N)
