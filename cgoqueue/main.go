@@ -16,7 +16,6 @@ import (
 
 typedef struct {
 	int64_t closed;
-	int64_t token;
 	int64_t sequence;
 	int64_t request;
 	int64_t response;
@@ -27,7 +26,7 @@ void service(volatile queue *q) {
 		int64_t sequence;
 		while(1){
 			__atomic_load(&q->sequence, &sequence, __ATOMIC_ACQUIRE);
-			if(sequence % 4 == 1) {
+			if(sequence == 1) {
 				break;
 			}
 		}
@@ -35,7 +34,7 @@ void service(volatile queue *q) {
 		int64_t result = q->request;
 		q->response = result * 10;
 
-		__atomic_add_fetch(&q->sequence, 1, __ATOMIC_RELEASE);
+		__atomic_store_n(&q->sequence, 0, __ATOMIC_RELEASE);
 	}
 }
 
@@ -44,7 +43,6 @@ import "C"
 
 type Queue struct {
 	closed   int64
-	token    int64
 	sequence int64
 	request  int64
 	response int64
@@ -63,22 +61,14 @@ func main() {
 	for i := 0; i < N; i++ {
 		request := int64(i)
 
-		token := atomic.AddInt64(&queue.token, 4) - 4
-
-		// wait for our turn
-		for atomic.LoadInt64(&queue.sequence) != token {
-		}
-
 		queue.request = request
-
-		atomic.StoreInt64(&queue.sequence, token+1)
-
-		for atomic.LoadInt64(&queue.sequence) != token+2 {
+		// signal service
+		atomic.StoreInt64(&queue.sequence, 1)
+		// wait for response
+		for atomic.LoadInt64(&queue.sequence) != 0 {
 		}
-
+		// read response
 		response := queue.response
-		atomic.StoreInt64(&queue.sequence, token+4)
-
 		_ = response
 	}
 	stop := hrtime.TSC()
