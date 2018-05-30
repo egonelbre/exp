@@ -2,21 +2,23 @@ package reflectmap
 
 import (
 	"reflect"
+	"unsafe"
 )
 
-const bucketSize = 8
-
 // only supports int for key
-type Map struct {
+type PointerMap struct {
 	keyType    reflect.Type
 	valueType  reflect.Type
 	bucketType reflect.Type
+
+	tempKey   reflect.Value
+	tempValue reflect.Value
 
 	bucketCount int
 	buckets     reflect.Value
 }
 
-func NewMap(key, value interface{}) *Map {
+func NewPointerMap(key, value interface{}) *PointerMap {
 	keyType := reflect.TypeOf(key)
 	valueType := reflect.TypeOf(value)
 	bucketCount := 128
@@ -37,29 +39,22 @@ func NewMap(key, value interface{}) *Map {
 	})
 
 	buckets := reflect.New(reflect.ArrayOf(bucketCount, bucketType))
-	return &Map{
+	return &PointerMap{
 		keyType:    keyType,
 		valueType:  valueType,
 		bucketType: bucketType,
+
+		tempKey:   reflect.NewAt(keyType, nil),
+		tempValue: reflect.NewAt(valueType, nil),
 
 		bucketCount: bucketCount,
 		buckets:     buckets,
 	}
 }
 
-type hashBucket [bucketSize]byte
-
-/*
-type bucketType struct {
-	hash  [bucketSize]byte
-	key   [bucketSize]keyType
-	value [bucketSize]valueType
-}
-*/
-
-func (m *Map) Add(key, value interface{}) {
+func (m *PointerMap) Add(key, value unsafe.Pointer) {
 	// hack to avoid figuring out a hash function
-	keyi := key.(int)
+	keyi := *(*int)(key)
 
 	bucketi := keyi % m.bucketCount
 	tophash := byte(keyi)
@@ -68,21 +63,26 @@ func (m *Map) Add(key, value interface{}) {
 	}
 
 	bucket := m.buckets.Elem().Index(bucketi)
-	hashesField := bucket.FieldByIndex([]int{0})
-	keys := bucket.FieldByIndex([]int{1})
-	values := bucket.FieldByIndex([]int{2})
+	hashesField := bucket.Field(0)
+	keys := bucket.Field(1)
+	values := bucket.Field(2)
 
 	hashes := hashesField.Addr().Interface().(*hashBucket)
 	for i, v := range *hashes {
 		if v == 0 {
 			(*hashes)[i] = tophash
-			keys.Index(i).Set(reflect.ValueOf(key))
-			values.Index(i).Set(reflect.ValueOf(value))
+			(*reflectvalue)(unsafe.Pointer(&m.tempKey)).ptr = key
+			keys.Index(i).Set(m.tempKey.Elem())
+			(*reflectvalue)(unsafe.Pointer(&m.tempValue)).ptr = value
+			values.Index(i).Set(m.tempValue.Elem())
 			return
 		}
 	}
 
-	(*hashes)[0] = tophash
-	keys.Index(0).Set(reflect.ValueOf(key))
-	values.Index(0).Set(reflect.ValueOf(value))
+	i := 0
+	(*hashes)[i] = tophash
+	(*reflectvalue)(unsafe.Pointer(&m.tempKey)).ptr = key
+	keys.Index(i).Set(m.tempKey.Elem())
+	(*reflectvalue)(unsafe.Pointer(&m.tempValue)).ptr = value
+	values.Index(i).Set(m.tempValue.Elem())
 }
