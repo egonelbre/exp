@@ -17,9 +17,3 @@ func main() {
 	fmt.Printf("%#+v\n", Add(fields["Alpha"], fields["Beta"]))
 	fmt.Printf("%#+v\n", Add(fields["Alpha"], fields["Gamma"]))
 }
-
-func panicIf(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
