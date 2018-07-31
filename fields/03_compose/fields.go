@@ -2,7 +2,8 @@ package main
 
 import "fmt"
 
-// using spec types
+// using composed types
+//gistsnip:start:field
 type Field interface {
 	Name() string
 	Assign(typ string, value interface{}) error
@@ -22,6 +23,8 @@ func (s Float) Assign(typ string, val interface{}) error {
 	*s.Value = uv
 	return nil
 }
+
+//gistsnip:end:field
 
 type Uint struct {
 	FieldName string

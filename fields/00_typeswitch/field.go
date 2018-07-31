@@ -1,5 +1,6 @@
 package main
 
+//gistsnip:start:interface
 type Field interface {
 	Name() string
 }
@@ -21,6 +22,8 @@ type Float struct {
 func (a *Float) Name() string        { return a.ID }
 func (a *Float) Add(b *Float) *Float { return &Float{Value: a.Value + b.Value} }
 func (a *Float) Sub(b *Float) *Float { return &Float{Value: a.Value - b.Value} }
+
+//gistsnip:end:interface
 
 type Error struct{ Desc string }
 

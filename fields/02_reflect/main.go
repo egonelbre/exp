@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	//gistsnip:start:main
 	var example struct {
 		Alpha float64
 		Gamma float64
@@ -19,6 +20,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// use example as usual
 	fmt.Println(example.Alpha + example.Gamma)
+	//gistsnip:start:end
 }

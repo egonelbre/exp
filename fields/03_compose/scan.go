@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+//gistsnip:start:scan
 type jsonConfig struct {
 	Fields []jsonField
 }
@@ -31,6 +32,8 @@ func (config *jsonConfig) Scan(fields ...Field) error {
 	}
 	return nil
 }
+
+//gistsnip:end:field
 
 func (config *jsonConfig) findField(name string) (*jsonField, error) {
 	for i := 0; i < len(config.Fields); i++ {

@@ -2,6 +2,7 @@ package main
 
 import "reflect"
 
+//gistsnip:start:ops
 type Op struct {
 	Name  string
 	Left  reflect.Type
@@ -39,3 +40,5 @@ func Call(name string, a, b Field) Field {
 
 func Add(a, b Field) Field { return Call("Add", a, b) }
 func Sub(a, b Field) Field { return Call("Sub", a, b) }
+
+//gistsnip:end:ops

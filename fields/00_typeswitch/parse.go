@@ -6,6 +6,7 @@ import (
 	"io"
 )
 
+//gistsnip:start:parse
 func ParseFields(r io.Reader) (map[string]Field, error) {
 	var config struct {
 		Fields []struct {
@@ -50,3 +51,5 @@ func ParseFields(r io.Reader) (map[string]Field, error) {
 
 	return fields, nil
 }
+
+//gistsnip:end:parse

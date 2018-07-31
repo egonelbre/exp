@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+//gistsnip:start:main
 func Unmarshal(rd io.Reader, data interface{}) error {
 	var config jsonConfig
 	err := json.NewDecoder(rd).Decode(&config)
@@ -29,6 +30,9 @@ type jsonField struct {
 	Multiplier interface{}
 }
 
+//gistsnip:end:main
+
+//gistsnip:start:scan
 func (config *jsonConfig) Scan(r interface{}) error {
 	// check that r is a pointer to some struct
 	rv := reflect.ValueOf(r)
@@ -59,6 +63,8 @@ func (config *jsonConfig) Scan(r interface{}) error {
 	return nil
 }
 
+//gistsnip:end:scan
+
 func (config *jsonConfig) findField(name string) (*jsonField, error) {
 	for i := 0; i < len(config.Fields); i++ {
 		field := &config.Fields[i]
@@ -69,6 +75,7 @@ func (config *jsonConfig) findField(name string) (*jsonField, error) {
 	return nil, fmt.Errorf("unable to find field " + name)
 }
 
+//gistsnip:start:assignField
 func (config *jsonConfig) assignField(field *jsonField, p interface{}) error {
 	// p is a pointer to struct field
 	switch p := p.(type) {
@@ -89,3 +96,5 @@ func (config *jsonConfig) assignField(field *jsonField, p interface{}) error {
 	}
 	return nil
 }
+
+//gistsnip:end:assignField

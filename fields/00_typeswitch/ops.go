@@ -1,5 +1,6 @@
 package main
 
+//gistsnip:start:ops
 func Add(a, b Field) Field {
 	if aerr, ok := a.(*Error); ok {
 		return aerr
@@ -25,6 +26,8 @@ func Add(a, b Field) Field {
 		return &Error{"unhandled types"}
 	}
 }
+
+//gistsnip:end:ops
 
 func Sub(a, b Field) Field {
 	if aerr, ok := a.(*Error); ok {
