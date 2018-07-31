@@ -12,6 +12,7 @@ import (
 func main() {
 	var err error
 
+	//gistsnip:start:main
 	config := &jsonConfig{}
 	err = json.NewDecoder(strings.NewReader(testdata.Basic)).Decode(config)
 	if err != nil {
@@ -33,6 +34,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// use example as usual
 	fmt.Println(alpha + gamma)
+	//gistsnip:end:main
 }

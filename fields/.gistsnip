@@ -1,0 +1,131 @@
+{
+    "Description": "",
+    "Snippets": {
+        "00_typeswitch/field#interface.go": {
+            "GistID": "55ca3e70d6d4b5ca78a7dc76a16bce14",
+            "GistURL": "https://gist.github.com/55ca3e70d6d4b5ca78a7dc76a16bce14",
+            "Line": 3,
+            "File": "00_typeswitch/field.go",
+            "Path": "00_typeswitch/field#interface.go",
+            "Name": "interface",
+            "Content": "type Field interface {\n\tName() string\n}\n\ntype Uint struct {\n\tID    string\n\tValue uint64\n}\n\nfunc (a *Uint) Name() string      { return a.ID }\nfunc (a *Uint) Add(b *Uint) *Uint { return \u0026Uint{Value: a.Value + b.Value} }\nfunc (a *Uint) Sub(b *Uint) *Uint { return \u0026Uint{Value: a.Value - b.Value} }\n\ntype Float struct {\n\tID    string\n\tValue float64\n}\n\nfunc (a *Float) Name() string        { return a.ID }\nfunc (a *Float) Add(b *Float) *Float { return \u0026Float{Value: a.Value + b.Value} }\nfunc (a *Float) Sub(b *Float) *Float { return \u0026Float{Value: a.Value - b.Value} }"
+        },
+        "00_typeswitch/main#main.go": {
+            "GistID": "5cff51a1b5f2d50966876129554897a2",
+            "GistURL": "https://gist.github.com/5cff51a1b5f2d50966876129554897a2",
+            "Line": 12,
+            "File": "00_typeswitch/main.go",
+            "Path": "00_typeswitch/main#main.go",
+            "Name": "main",
+            "Content": "fields, err := ParseFields(strings.NewReader(testdata.Basic))\nif err != nil {\n\tlog.Fatal(err)\n}\n\nfmt.Printf(\"%#+v\\n\", Add(fields[\"Alpha\"], fields[\"Beta\"]))\nfmt.Printf(\"%#+v\\n\", Add(fields[\"Alpha\"], fields[\"Gamma\"]))"
+        },
+        "00_typeswitch/ops#ops.go": {
+            "GistID": "cb203f996d6c50487c632e30b5d649d6",
+            "GistURL": "https://gist.github.com/cb203f996d6c50487c632e30b5d649d6",
+            "Line": 3,
+            "File": "00_typeswitch/ops.go",
+            "Path": "00_typeswitch/ops#ops.go",
+            "Name": "ops",
+            "Content": "func Add(a, b Field) Field {\n\tif aerr, ok := a.(*Error); ok {\n\t\treturn aerr\n\t}\n\tif berr, ok := b.(*Error); ok {\n\t\treturn berr\n\t}\n\n\tswitch x := a.(type) {\n\tcase *Float:\n\t\tif y, ok := b.(*Float); ok {\n\t\t\treturn x.Add(y)\n\t\t} else {\n\t\t\treturn \u0026Error{\"add type-mismatch\"}\n\t\t}\n\tcase *Uint:\n\t\tif y, ok := b.(*Uint); ok {\n\t\t\treturn x.Add(y)\n\t\t} else {\n\t\t\treturn \u0026Error{\"add type-mismatch\"}\n\t\t}\n\tdefault:\n\t\treturn \u0026Error{\"unhandled types\"}\n\t}\n}"
+        },
+        "00_typeswitch/parse#parse.go": {
+            "GistID": "cf3f718ea7e1a9a6ad18ab80aa1d9b07",
+            "GistURL": "https://gist.github.com/cf3f718ea7e1a9a6ad18ab80aa1d9b07",
+            "Line": 9,
+            "File": "00_typeswitch/parse.go",
+            "Path": "00_typeswitch/parse#parse.go",
+            "Name": "parse",
+            "Content": "func ParseFields(r io.Reader) (map[string]Field, error) {\n\tvar config struct {\n\t\tFields []struct {\n\t\t\tName       string\n\t\t\tType       string\n\t\t\tVal        interface{}\n\t\t\tMultiplier interface{}\n\t\t}\n\t}\n\n\terr := json.NewDecoder(r).Decode(\u0026config)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\tfields := map[string]Field{}\n\n\tfor _, jsonField := range config.Fields {\n\t\tval, valok := jsonField.Val.(float64)\n\t\tif !valok {\n\t\t\treturn nil, errors.New(\"unsupported type \" + jsonField.Type)\n\t\t}\n\n\t\tvar field Field\n\t\tswitch jsonField.Type {\n\t\tcase \"uint\":\n\t\t\tfield = \u0026Uint{\n\t\t\t\tID:    jsonField.Name,\n\t\t\t\tValue: uint64(val),\n\t\t\t}\n\t\tcase \"float\":\n\t\t\tfield = \u0026Float{\n\t\t\t\tID:    jsonField.Name,\n\t\t\t\tValue: float64(val),\n\t\t\t}\n\t\tdefault:\n\t\t\treturn nil, errors.New(\"unsupported type \" + jsonField.Type)\n\t\t}\n\n\t\tfields[field.Name()] = field\n\t}\n\n\treturn fields, nil\n}"
+        },
+        "01_typemap/main#main.go": {
+            "GistID": "b2c0efddfdc7269a3349e044a0788edc",
+            "GistURL": "https://gist.github.com/b2c0efddfdc7269a3349e044a0788edc",
+            "Line": 12,
+            "File": "01_typemap/main.go",
+            "Path": "01_typemap/main#main.go",
+            "Name": "main",
+            "Content": "fields, err := ParseFields(strings.NewReader(testdata.Basic))\nif err != nil {\n\tlog.Fatal(err)\n}\n\nfmt.Printf(\"%#+v\\n\", Add(fields[\"Alpha\"], fields[\"Beta\"]))\nfmt.Printf(\"%#+v\\n\", Add(fields[\"Alpha\"], fields[\"Gamma\"]))"
+        },
+        "01_typemap/ops#ops.go": {
+            "GistID": "f768c7099d81db7202aa783e5b858554",
+            "GistURL": "https://gist.github.com/f768c7099d81db7202aa783e5b858554",
+            "Line": 5,
+            "File": "01_typemap/ops.go",
+            "Path": "01_typemap/ops#ops.go",
+            "Name": "ops",
+            "Content": "type Op struct {\n\tName  string\n\tLeft  reflect.Type\n\tRight reflect.Type\n}\n\nvar Ops = map[Op]func(a, b Field) Field{}\n\nfunc init() {\n\ttUint := reflect.TypeOf(\u0026Uint{})\n\ttFloat := reflect.TypeOf(\u0026Float{})\n\n\tOps[Op{\"Add\", tUint, tUint}] = func(a, b Field) Field { return a.(*Uint).Add(b.(*Uint)) }\n\tOps[Op{\"Sub\", tUint, tUint}] = func(a, b Field) Field { return a.(*Uint).Sub(b.(*Uint)) }\n\n\tOps[Op{\"Add\", tFloat, tFloat}] = func(a, b Field) Field { return a.(*Float).Add(b.(*Float)) }\n\tOps[Op{\"Sub\", tFloat, tFloat}] = func(a, b Field) Field { return a.(*Float).Sub(b.(*Float)) }\n}\n\nfunc Call(name string, a, b Field) Field {\n\tif aerr, ok := a.(*Error); ok {\n\t\treturn aerr\n\t}\n\tif berr, ok := b.(*Error); ok {\n\t\treturn berr\n\t}\n\n\tta, tb := reflect.TypeOf(a), reflect.TypeOf(b)\n\tcall, found := Ops[Op{\"Add\", ta, tb}]\n\tif !found {\n\t\treturn \u0026Error{\"unhandled op\"}\n\t}\n\treturn call(a, b)\n}\n\nfunc Add(a, b Field) Field { return Call(\"Add\", a, b) }\nfunc Sub(a, b Field) Field { return Call(\"Sub\", a, b) }"
+        },
+        "02_reflect/main#main.go": {
+            "GistID": "ad6d16f06731554fb74c056338780c4a",
+            "GistURL": "https://gist.github.com/ad6d16f06731554fb74c056338780c4a",
+            "Line": 12,
+            "File": "02_reflect/main.go",
+            "Path": "02_reflect/main#main.go",
+            "Name": "main",
+            "Content": "var example struct {\n\tAlpha float64\n\tGamma float64\n\tBeta  uint\n}\nerr := Unmarshal(strings.NewReader(testdata.Basic), \u0026example)\nif err != nil {\n\tlog.Fatal(err)\n}\n\nfmt.Println(example.Alpha + example.Gamma)"
+        },
+        "02_reflect/scan#assignfield.go": {
+            "GistID": "da954a2e761d8eb0a65e1bece1efd03f",
+            "GistURL": "https://gist.github.com/da954a2e761d8eb0a65e1bece1efd03f",
+            "Line": 78,
+            "File": "02_reflect/scan.go",
+            "Path": "02_reflect/scan#assignfield.go",
+            "Name": "assignfield",
+            "Content": "func (config *jsonConfig) assignField(field *jsonField, p interface{}) error {\n\t// p is a pointer to struct field\n\tswitch p := p.(type) {\n\tcase *uint:\n\t\tuv, ok := field.Val.(float64)\n\t\tif !ok || field.Type != \"uint\" {\n\t\t\treturn fmt.Errorf(\"expected uint, got %T and %v\", field.Val, field.Type)\n\t\t}\n\t\t*p = uint(uv)\n\tcase *float64:\n\t\tuv, ok := field.Val.(float64)\n\t\tif !ok || field.Type != \"float\" {\n\t\t\treturn fmt.Errorf(\"expected float, got %T and %v\", field.Val, field.Type)\n\t\t}\n\t\t*p = uv\n\tdefault:\n\t\treturn fmt.Errorf(\"unhandled field type %T\", p)\n\t}\n\treturn nil\n}"
+        },
+        "02_reflect/scan#scan.go": {
+            "GistID": "160e39000c0518d6df7c4c27ccfbc86f",
+            "GistURL": "https://gist.github.com/160e39000c0518d6df7c4c27ccfbc86f",
+            "Line": 35,
+            "File": "02_reflect/scan.go",
+            "Path": "02_reflect/scan#scan.go",
+            "Name": "scan",
+            "Content": "func (config *jsonConfig) Scan(r interface{}) error {\n\t// check that r is a pointer to some struct\n\trv := reflect.ValueOf(r)\n\tif rv.Kind() != reflect.Ptr || rv.Elem().Kind() != reflect.Struct {\n\t\treturn fmt.Errorf(\"expected pointer to a struct, got %T\", r)\n\t}\n\n\ts := rv.Elem()\n\tt := s.Type()\n\n\t// iterate over all struct fields\n\tfor i, n := 0, s.NumField(); i \u003c n; i++ {\n\t\tresultField := s.Field(i)\n\n\t\t// find the corresponding field from config\n\t\tfield, err := config.findField(t.Field(i).Name)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\n\t\t// assign field value to the struct field\n\t\terr = config.assignField(field, resultField.Addr().Interface())\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t}\n\n\treturn nil\n}"
+        },
+        "02_reflect/scan#unmarshal.go": {
+            "GistID": "55a2bf2da8961f29ab9a22c5a4a775dc",
+            "GistURL": "https://gist.github.com/55a2bf2da8961f29ab9a22c5a4a775dc",
+            "Line": 11,
+            "File": "02_reflect/scan.go",
+            "Path": "02_reflect/scan#unmarshal.go",
+            "Name": "unmarshal",
+            "Content": "func Unmarshal(rd io.Reader, data interface{}) error {\n\tvar config jsonConfig\n\terr := json.NewDecoder(rd).Decode(\u0026config)\n\tif err != nil {\n\t\treturn err\n\t}\n\n\treturn config.Scan(data)\n}\n\ntype jsonConfig struct {\n\tFields []jsonField\n}\n\ntype jsonField struct {\n\tName       string\n\tType       string\n\tVal        interface{}\n\tMultiplier interface{}\n}"
+        },
+        "03_compose/fields#field.go": {
+            "GistID": "8e16073941df6a9514d62f779fa5e017",
+            "GistURL": "https://gist.github.com/8e16073941df6a9514d62f779fa5e017",
+            "Line": 6,
+            "File": "03_compose/fields.go",
+            "Path": "03_compose/fields#field.go",
+            "Name": "field",
+            "Content": "type Field interface {\n\tName() string\n\tAssign(typ string, value interface{}) error\n}\n\ntype Float struct {\n\tFieldName string\n\tValue     *float64\n}\n\nfunc (s Float) Name() string { return s.FieldName }\nfunc (s Float) Assign(typ string, val interface{}) error {\n\tuv, ok := val.(float64)\n\tif !ok || typ != \"float\" {\n\t\treturn fmt.Errorf(\"expected float, got %T and %v\", val, typ)\n\t}\n\t*s.Value = uv\n\treturn nil\n}"
+        },
+        "03_compose/main#main.go": {
+            "GistID": "2da839012c19ece1af8e9ae9038cfad7",
+            "GistURL": "https://gist.github.com/2da839012c19ece1af8e9ae9038cfad7",
+            "Line": 15,
+            "File": "03_compose/main.go",
+            "Path": "03_compose/main#main.go",
+            "Name": "main",
+            "Content": "config := \u0026jsonConfig{}\nerr = json.NewDecoder(strings.NewReader(testdata.Basic)).Decode(config)\nif err != nil {\n\tlog.Fatal(err)\n}\n\nvar (\n\talpha float64\n\tgamma float64\n\tbeta  uint\n)\n\nerr = config.Scan(\n\tFloat{\"Alpha\", \u0026alpha},\n\tFloat{\"Gamma\", \u0026gamma},\n\tUint{\"Beta\", \u0026beta},\n)\nif err != nil {\n\tlog.Fatal(err)\n}\n\nfmt.Println(alpha + gamma)"
+        },
+        "03_compose/scan#scan.go": {
+            "GistID": "7c67a02167834e7ef19b325e3609b46c",
+            "GistURL": "https://gist.github.com/7c67a02167834e7ef19b325e3609b46c",
+            "Line": 8,
+            "File": "03_compose/scan.go",
+            "Path": "03_compose/scan#scan.go",
+            "Name": "scan",
+            "Content": "type jsonConfig struct {\n\tFields []jsonField\n}\n\ntype jsonField struct {\n\tName       string\n\tType       string\n\tVal        interface{}\n\tMultiplier interface{}\n}\n\nfunc (config *jsonConfig) Scan(fields ...Field) error {\n\tfor _, dst := range fields {\n\t\tname := dst.Name()\n\t\tsrc, err := config.findField(name)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\n\t\terr = dst.Assign(src.Type, src.Val)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t}\n\treturn nil\n}"
+        },
+        "testdata/basic#data.go": {
+            "GistID": "9bb4702ad4cff0def933916cfdb00c20",
+            "GistURL": "https://gist.github.com/9bb4702ad4cff0def933916cfdb00c20",
+            "Line": 3,
+            "File": "testdata/basic.go",
+            "Path": "testdata/basic#data.go",
+            "Name": "data",
+            "Content": "const Basic = `{\n\t\"Fields\": [\n\t\t{ \"Name\": \"Alpha\", \"Type\": \"float\", \"Val\": 15, \"Multiplier\": 0.5 },\n\t\t{ \"Name\": \"Beta\",  \"Type\": \"uint\",  \"Val\": 10, \"Multiplier\": 10   },\n\t\t{ \"Name\": \"Gamma\", \"Type\": \"float\", \"Val\": 10, \"Multiplier\": 0.5 }\n\t]\n}`"
+        }
+    }
+}

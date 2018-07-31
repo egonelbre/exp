@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-//gistsnip:start:main
+//gistsnip:start:unmarshal
 func Unmarshal(rd io.Reader, data interface{}) error {
 	var config jsonConfig
 	err := json.NewDecoder(rd).Decode(&config)
@@ -30,7 +30,7 @@ type jsonField struct {
 	Multiplier interface{}
 }
 
-//gistsnip:end:main
+//gistsnip:end:unmarshal
 
 //gistsnip:start:scan
 func (config *jsonConfig) Scan(r interface{}) error {

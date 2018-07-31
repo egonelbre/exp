@@ -21,5 +21,5 @@ func main() {
 	}
 
 	fmt.Println(example.Alpha + example.Gamma)
-	//gistsnip:start:end
+	//gistsnip:end:main
 }
