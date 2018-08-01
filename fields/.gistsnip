@@ -112,11 +112,11 @@
         "03_compose/scan#scan.go": {
             "GistID": "7c67a02167834e7ef19b325e3609b46c",
             "GistURL": "https://gist.github.com/7c67a02167834e7ef19b325e3609b46c",
-            "Line": 8,
+            "Line": 19,
             "File": "03_compose/scan.go",
             "Path": "03_compose/scan#scan.go",
             "Name": "scan",
-            "Content": "type jsonConfig struct {\n\tFields []jsonField\n}\n\ntype jsonField struct {\n\tName       string\n\tType       string\n\tVal        interface{}\n\tMultiplier interface{}\n}\n\nfunc (config *jsonConfig) Scan(fields ...Field) error {\n\tfor _, dst := range fields {\n\t\tname := dst.Name()\n\t\tsrc, err := config.findField(name)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\n\t\terr = dst.Assign(src.Type, src.Val)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t}\n\treturn nil\n}"
+            "Content": "func (config *jsonConfig) Scan(fields ...Field) error {\n\tfor _, dst := range fields {\n\t\tname := dst.Name()\n\t\tsrc, err := config.findField(name)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\n\t\terr = dst.Assign(src.Type, src.Val)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t}\n\treturn nil\n}"
         },
         "testdata/basic#data.go": {
             "GistID": "9bb4702ad4cff0def933916cfdb00c20",
