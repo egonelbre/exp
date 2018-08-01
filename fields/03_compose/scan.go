@@ -5,7 +5,6 @@ import (
 	"strings"
 )
 
-//gistsnip:start:scan
 type jsonConfig struct {
 	Fields []jsonField
 }
@@ -17,6 +16,7 @@ type jsonField struct {
 	Multiplier interface{}
 }
 
+//gistsnip:start:scan
 func (config *jsonConfig) Scan(fields ...Field) error {
 	for _, dst := range fields {
 		name := dst.Name()
