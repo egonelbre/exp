@@ -1,0 +1,7 @@
+package smime
+
+import "github.com/gobs/pretty"
+
+func pp(v interface{}) {
+	pretty.PrettyPrint(v)
+}
