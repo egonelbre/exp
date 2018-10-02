@@ -1,4 +1,4 @@
-package blockqueue
+package blockfreequeue
 
 const (
 	BlockSize = 1024
@@ -10,6 +10,7 @@ type Queue struct {
 	tailx  uint32
 	head   *Block
 	tail   *Block
+	free   *Block
 	blocks uint32
 }
 
@@ -24,10 +25,14 @@ func (q *Queue) Len() int {
 	return int(q.blocks)*BlockSize - BlockSize + int(q.tailx) - int(q.headx)
 }
 
-func (q *Queue) Empty() bool { return q.head == nil }
-
 func (q *Queue) newBlock() *Block {
-	return &Block{}
+	block := q.free
+	if block == nil {
+		return &Block{}
+	} else {
+		q.free = nil
+	}
+	return block
 }
 
 func (q *Queue) tailBlock() *Block {
@@ -65,7 +70,8 @@ func (q *Queue) Pop() (interface{}, bool) {
 	if q.headx == BlockSize {
 		q.headx = 0
 		q.blocks--
-		q.head.Next, q.head = nil, q.head.Next
+		q.free, q.head = q.head, q.head.Next
+		q.free.Next = nil
 	}
 
 	return value, true
