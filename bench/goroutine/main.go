@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	const P = 16
+	const P = 128
 	const K = 100
 	const N = 10000
 
