@@ -5,136 +5,131 @@ import (
 	"testing"
 )
 
-func BenchmarkGetXInderectStruct(b *testing.B) {
-	var s = &Struct{}
-	s.x = 10
-	for n := 0; n < b.N; n++ {
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-	}
-}
-
-func BenchmarkGetXManually(b *testing.B) {
-	var s = &Struct{}
-	s.x = 10
-	for n := 0; n < b.N; n++ {
-		s.x = s.x
-		s.x = s.x
-		s.x = s.x
-		s.x = s.x
-		s.x = s.x
-		s.x = s.x
-		s.x = s.x
-		s.x = s.x
-		s.x = s.x
-		s.x = s.x
-	}
-}
-
-func BenchmarkGetXerectStruct(b *testing.B) {
-	var s = Struct{}
-	s.x = 10
-	for n := 0; n < b.N; n++ {
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-	}
-}
-
-func BenchmarkGetXInderectInterface(b *testing.B) {
-	var s Interface = &Struct{10}
-
-	for n := 0; n < b.N; n++ {
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-		s.GetXIndirect()
-
-	}
-}
-
-func BenchmarkGetXerectInterface(b *testing.B) {
-	var s Interface = &Struct{10}
-	for n := 0; n < b.N; n++ {
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-		s.GetX()
-	}
-}
-
-func BenchmarkSetXInterface(b *testing.B) {
-	var s Interface = &Struct{10}
-	for n := 0; n < b.N; n++ {
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-	}
-}
-
-func BenchmarkSetXStruct(b *testing.B) {
+func BenchmarkStruct_Direct(b *testing.B) {
 	var s = &Struct{10}
 	for n := 0; n < b.N; n++ {
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
-		s.SetX(0)
+		s.x = s.x
+		s.x = s.x
+		s.x = s.x
+		s.x = s.x
+		s.x = s.x
+		s.x = s.x
+		s.x = s.x
+		s.x = s.x
+		s.x = s.x
+		s.x = s.x
 	}
 }
 
-func BenchmarkSetXManually(b *testing.B) {
+func BenchmarkStruct_SetDirect(b *testing.B) {
 	var s = &Struct{10}
 	for n := 0; n < b.N; n++ {
 		s.x = 0
-		s.x = 0
-		s.x = 0
-		s.x = 0
-		s.x = 0
-		s.x = 0
-		s.x = 0
-		s.x = 0
-		s.x = 0
-		s.x = 0
+		s.x = 1
+		s.x = 2
+		s.x = 3
+		s.x = 4
+		s.x = 5
+		s.x = 6
+		s.x = 7
+		s.x = 8
+		s.x = 9
+	}
+}
+
+func BenchmarkStruct_Get(b *testing.B) {
+	var s = &Struct{10}
+	for n := 0; n < b.N; n++ {
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+	}
+}
+
+func BenchmarkStruct_Set(b *testing.B) {
+	var s = &Struct{10}
+	for n := 0; n < b.N; n++ {
+		s.Set(n + 0)
+		s.Set(n + 1)
+		s.Set(n + 2)
+		s.Set(n + 3)
+		s.Set(n + 4)
+		s.Set(n + 5)
+		s.Set(n + 6)
+		s.Set(n + 7)
+		s.Set(n + 8)
+		s.Set(n + 9)
+	}
+}
+
+func BenchmarkStruct_GetCopy(b *testing.B) {
+	var s = Struct{10}
+	for n := 0; n < b.N; n++ {
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+	}
+}
+
+func BenchmarkInterface_Get(b *testing.B) {
+	s := NewStruct(b.N & 1)
+	for n := 0; n < b.N; n++ {
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+		s.Get()
+	}
+}
+
+func BenchmarkInterface_CopyGet(b *testing.B) {
+	s := NewStruct(b.N & 1)
+	for n := 0; n < b.N; n++ {
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+		s.CopyGet()
+	}
+}
+
+func BenchmarkInterface_Set(b *testing.B) {
+	s := NewStruct(b.N & 1)
+	for n := 0; n < b.N; n++ {
+		s.Set(0)
+		s.Set(0)
+		s.Set(0)
+		s.Set(0)
+		s.Set(0)
+		s.Set(0)
+		s.Set(0)
+		s.Set(0)
+		s.Set(0)
+		s.Set(0)
 	}
 }
 
@@ -148,8 +143,8 @@ func BenchmarkSetXReflection(b *testing.B) {
 		case int32, int64:
 			fmt.Println(v)
 		case *Struct:
-			s.(*Struct).SetX(0)
-			//t.SetX(0)
+			s.(*Struct).Set(0)
+			//t.Set(0)
 		default:
 			fmt.Printf("unknown %T\n", v)
 		}
@@ -159,8 +154,8 @@ func BenchmarkSetXReflection(b *testing.B) {
 		case int32, int64:
 			fmt.Println(v)
 		case *Struct:
-			s.(*Struct).SetX(0)
-		//t.SetX(0)
+			s.(*Struct).Set(0)
+		//t.Set(0)
 		default:
 			fmt.Printf("unknown %T\n", v)
 		}
@@ -170,8 +165,8 @@ func BenchmarkSetXReflection(b *testing.B) {
 		case int32, int64:
 			fmt.Println(v)
 		case *Struct:
-			s.(*Struct).SetX(0)
-		//t.SetX(0)
+			s.(*Struct).Set(0)
+		//t.Set(0)
 		default:
 			fmt.Printf("unknown %T\n", v)
 		}
@@ -181,8 +176,8 @@ func BenchmarkSetXReflection(b *testing.B) {
 		case int32, int64:
 			fmt.Println(v)
 		case *Struct:
-			s.(*Struct).SetX(0)
-		//t.SetX(0)
+			s.(*Struct).Set(0)
+		//t.Set(0)
 		default:
 			fmt.Printf("unknown %T\n", v)
 		}
@@ -192,8 +187,8 @@ func BenchmarkSetXReflection(b *testing.B) {
 		case int32, int64:
 			fmt.Println(v)
 		case *Struct:
-			s.(*Struct).SetX(0)
-		//t.SetX(0)
+			s.(*Struct).Set(0)
+		//t.Set(0)
 		default:
 			fmt.Printf("unknown %T\n", v)
 		}
@@ -203,8 +198,8 @@ func BenchmarkSetXReflection(b *testing.B) {
 		case int32, int64:
 			fmt.Println(v)
 		case *Struct:
-			s.(*Struct).SetX(0)
-		//t.SetX(0)
+			s.(*Struct).Set(0)
+		//t.Set(0)
 		default:
 			fmt.Printf("unknown %T\n", v)
 		}
@@ -214,8 +209,8 @@ func BenchmarkSetXReflection(b *testing.B) {
 		case int32, int64:
 			fmt.Println(v)
 		case *Struct:
-			s.(*Struct).SetX(0)
-		//t.SetX(0)
+			s.(*Struct).Set(0)
+		//t.Set(0)
 		default:
 			fmt.Printf("unknown %T\n", v)
 		}
@@ -225,8 +220,8 @@ func BenchmarkSetXReflection(b *testing.B) {
 		case int32, int64:
 			fmt.Println(v)
 		case *Struct:
-			s.(*Struct).SetX(0)
-		//t.SetX(0)
+			s.(*Struct).Set(0)
+		//t.Set(0)
 		default:
 			fmt.Printf("unknown %T\n", v)
 		}
@@ -236,8 +231,8 @@ func BenchmarkSetXReflection(b *testing.B) {
 		case int32, int64:
 			fmt.Println(v)
 		case *Struct:
-			s.(*Struct).SetX(0)
-		//t.SetX(0)
+			s.(*Struct).Set(0)
+		//t.Set(0)
 		default:
 			fmt.Printf("unknown %T\n", v)
 		}
@@ -247,8 +242,8 @@ func BenchmarkSetXReflection(b *testing.B) {
 		case int32, int64:
 			fmt.Println(v)
 		case *Struct:
-			s.(*Struct).SetX(0)
-		//t.SetX(0)
+			s.(*Struct).Set(0)
+		//t.Set(0)
 		default:
 			fmt.Printf("unknown %T\n", v)
 		}
