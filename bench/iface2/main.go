@@ -11,35 +11,30 @@ func main() {
 	runtime.LockOSThread()
 
 	const N = 100000000
-	const ProbablyGC = 100
 
-	var overhead uint64
-	var overheadCount int
+	var overhead uint64 = 100
 	for i := 0; i < N; i++ {
 		start := hrtime.RDTSC()
 		stop := hrtime.RDTSCP()
 		delta := stop - start
-		if delta < ProbablyGC {
-			overhead += delta
-			overheadCount++
+		if delta < overhead {
+			overhead = delta
 		}
 	}
 
-	averageOverhead := float64(overhead) / float64(overheadCount)
+	averageOverhead := float64(overhead)
 	fmt.Println("measurement overhead:", averageOverhead, "cy")
 
 	{
-		var measurement uint64
-		var measurementCount int
+		var measurement uint64 = 100
 		for i := 0; i < N; i++ {
 			start := hrtime.RDTSC()
 			x := example.Get()
 			runtime.KeepAlive(x)
 			stop := hrtime.RDTSCP()
 			delta := stop - start
-			if delta < ProbablyGC {
-				measurement += delta
-				measurementCount++
+			if delta < measurement {
+				measurement = delta
 			}
 
 			if i & 1 == 1 {
@@ -49,22 +44,21 @@ func main() {
 			}
 		}
 
-		averageCall := float64(measurement) / float64(measurementCount)
+		averageCall := float64(measurement)
 		fmt.Println("iface call:", averageCall-averageOverhead, "cy")
 	}
 
 
 	{
-		var measurement uint64
-		var measurementCount int
+		var measurement uint64 = 100
 		for i := 0; i < N; i++ {
 			start := hrtime.RDTSC()
-			nop()
+			x := nop()
+			runtime.KeepAlive(x)
 			stop := hrtime.RDTSCP()
 			delta := stop - start
-			if delta < ProbablyGC {
-				measurement += delta
-				measurementCount++
+			if delta < measurement {
+				measurement = delta
 			}
 
 			if i & 1 == 1 {
@@ -74,7 +68,7 @@ func main() {
 			}
 		}
 
-		averageCall := float64(measurement) / float64(measurementCount)
+		averageCall := float64(measurement)
 		fmt.Println("nop call:", averageCall-averageOverhead, "cy")
 	}
 }
