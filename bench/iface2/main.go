@@ -33,7 +33,8 @@ func main() {
 		var measurementCount int
 		for i := 0; i < N; i++ {
 			start := hrtime.RDTSC()
-			_ = example.Get()
+			x := example.Get()
+			runtime.KeepAlive(x)
 			stop := hrtime.RDTSCP()
 			delta := stop - start
 			if delta < ProbablyGC {
