@@ -29,8 +29,19 @@ func main() {
 		var measurement uint64 = 100
 		for i := 0; i < N; i++ {
 			start := hrtime.RDTSC()
-			x := example.Get()
-			runtime.KeepAlive(x)
+
+			runtime.KeepAlive(example.Get())
+			runtime.KeepAlive(example.Get())
+			runtime.KeepAlive(example.Get())
+			runtime.KeepAlive(example.Get())
+			runtime.KeepAlive(example.Get())
+
+			runtime.KeepAlive(example.Get())
+			runtime.KeepAlive(example.Get())
+			runtime.KeepAlive(example.Get())
+			runtime.KeepAlive(example.Get())
+			runtime.KeepAlive(example.Get())
+
 			stop := hrtime.RDTSCP()
 			delta := stop - start
 			if delta < measurement {
@@ -45,7 +56,7 @@ func main() {
 		}
 
 		averageCall := float64(measurement)
-		fmt.Println("iface call:", averageCall-averageOverhead, "cy")
+		fmt.Println("iface call:", float64(averageCall-averageOverhead) / 10, "cy")
 	}
 
 
@@ -53,8 +64,19 @@ func main() {
 		var measurement uint64 = 100
 		for i := 0; i < N; i++ {
 			start := hrtime.RDTSC()
-			x := nop()
-			runtime.KeepAlive(x)
+			
+			runtime.KeepAlive(nop())
+			runtime.KeepAlive(nop())
+			runtime.KeepAlive(nop())
+			runtime.KeepAlive(nop())
+			runtime.KeepAlive(nop())
+
+			runtime.KeepAlive(nop())
+			runtime.KeepAlive(nop())
+			runtime.KeepAlive(nop())
+			runtime.KeepAlive(nop())
+			runtime.KeepAlive(nop())
+
 			stop := hrtime.RDTSCP()
 			delta := stop - start
 			if delta < measurement {
@@ -69,7 +91,7 @@ func main() {
 		}
 
 		averageCall := float64(measurement)
-		fmt.Println("nop call:", averageCall-averageOverhead, "cy")
+		fmt.Println("nop call:", float64(averageCall-averageOverhead) / 10, "cy")
 	}
 }
 
