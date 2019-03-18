@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"strings"
 	"time"
@@ -39,6 +40,7 @@ func main() {
 	fmt.Printf("serialized %d bytes\n", compact.Size())
 	fmt.Printf("%.1f bytes average word\n", float64(wordssize)/float64(len(words)))
 	fmt.Printf("%.1f bytes per word\n", float64(compact.Size())/float64(len(words)))
+	fmt.Printf("%.1f bytes per key\n", math.Log2(float64(compact.NodeCount()))/8)
 
 	start := hrtime.Now()
 	for _, word := range words {
