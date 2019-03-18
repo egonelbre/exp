@@ -16,11 +16,13 @@ import (
 func main() {
 	root := trie.Uncompact{}
 
-	words := []string{}
 	r, err := os.Open("enable1.txt")
 	if err != nil {
 		panic(err)
 	}
+
+	var words []string
+	wordssize := 0
 
 	sc := bufio.NewScanner(r)
 	for sc.Scan() {
@@ -29,11 +31,14 @@ func main() {
 			continue
 		}
 		words = append(words, line)
+		wordssize += len(line)
 		root.Insert(line)
 	}
 
 	compact := root.Compress()
-	fmt.Println(compact.Size(), "bytes")
+	fmt.Printf("serialized %d bytes\n", compact.Size())
+	fmt.Printf("%.1f bytes average word\n", float64(wordssize)/float64(len(words)))
+	fmt.Printf("%.1f bytes per word\n", float64(compact.Size())/float64(len(words)))
 
 	start := hrtime.Now()
 	for _, word := range words {
