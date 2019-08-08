@@ -7,7 +7,7 @@ import (
 	"image/color/palette"
 	"image/draw"
 	"image/gif"
-	"image/png"
+	"math"
 	"math/rand"
 	"os"
 	"time"
@@ -49,25 +49,21 @@ func main() {
 
 	dst := image.NewRGBA(image.Rect(0, 0, advance.Ceil()+2*padding, height+2*padding))
 	drawer.Dst = dst
-
 	drawer.DrawString(text)
 
-	out, err := os.Create("out.png")
-	check(err)
-	defer out.Close()
-
-	err = png.Encode(out, dst)
-	check(err)
-}
-
-func main2() {
-	const size = 64
+	const size = 256
 	const frames = 5
 	const delay = 50
 
+	sphere := &Sphere{
+		Size:      image.Point{size, size},
+		Reference: dst,
+		Radius:    size / 2,
+	}
 	animation := &gif.GIF{}
 	for i := 0; i < frames; i++ {
-		animation.Image = append(animation.Image, frame(image.Point{size, size}))
+		frame := sphere.Frame(float64(i) * delay * 0.001)
+		animation.Image = append(animation.Image, frame)
 		animation.Delay = append(animation.Delay, delay)
 	}
 
@@ -78,14 +74,31 @@ func main2() {
 	check(gif.EncodeAll(file, animation))
 }
 
-func check(err error) {
-	if err != nil {
-		panic(err)
-	}
+type Sphere struct {
+	Size image.Point
+
+	Reference *image.RGBA
+	Radius    float64
 }
 
-func frame(size image.Point) *image.Paletted {
-	img := image.NewPaletted(image.Rect(0, 0, size.X, size.Y), palette.Plan9)
+const Tau = math.Pi
+
+func (sphere *Sphere) Frame(time float64) *image.Paletted {
+	r := image.Rect(0, 0, sphere.Size.X, sphere.Size.Y)
+	img := image.NewPaletted(r, palette.Plan9)
+
+	for y := -sphere.Radius; y <= sphere.Radius; y++ {
+		v := (y + sphere.Radius) / 2 * sphere.Radius
+		for rad := 0.0; rad <= Tau; rad += 1 / Tau {
+			u := rad / Tau
+			rgba := sphere.Reference.RGBAAt(int64(u*10), int64(v*sphere.Reference.Size().Y))
+
+			tx := sphere.Radius * math.Sin(rad)
+			tz := sphere.Radius * math.Cos(rad)
+			sy := sphere.Size.X/2 + int64(y)
+		}
+	}
+
 	draw.Draw(
 		img,
 		img.Rect,
@@ -100,4 +113,10 @@ func randomColor() color.RGBA {
 	rand.Seed(time.Now().UnixNano())
 	r, g, b := rand.Intn(255), rand.Intn(255), rand.Intn(255)
 	return color.RGBA{uint8(r), uint8(g), uint8(b), 255}
+}
+
+func check(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
