@@ -29,8 +29,22 @@ func Uint64(src, buf []uint64) {
 		offset[7][k] = offset[7][k-1] + count[7][k-1]
 	}
 
+	var nonZero [8]byte
+	for k := range nonZero {
+		nz := byte(0)
+		for _, v := range count[k] {
+			if v != 0 {
+				nz++
+			}
+		}
+		nonZero[k] = nz
+	}
+
 	dst := buf
 	for k := uint8(0); k < 8; k++ {
+		if nonZero[k] == 1 {
+			continue
+		}
 		off := &offset[k]
 
 		p := k * 8
@@ -65,8 +79,22 @@ func Uint32(src, buf []uint32) {
 		offset[3][k] = offset[3][k-1] + count[3][k-1]
 	}
 
+	var nonZero [4]byte
+	for k := range nonZero {
+		nz := byte(0)
+		for _, v := range count[k] {
+			if v != 0 {
+				nz++
+			}
+		}
+		nonZero[k] = nz
+	}
+
 	dst := buf
 	for k := uint8(0); k < 4; k++ {
+		if nonZero[k] == 1 {
+			continue
+		}
 		off := &offset[k]
 
 		p := k * 8
