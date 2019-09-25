@@ -7,14 +7,14 @@ func Uint64(src, buf []uint64) {
 
 	var count [8][256]uint32
 	for _, v := range src {
-		count[0][(v>>(0*8))&0xFF]++
-		count[1][(v>>(1*8))&0xFF]++
-		count[2][(v>>(2*8))&0xFF]++
-		count[3][(v>>(3*8))&0xFF]++
-		count[4][(v>>(4*8))&0xFF]++
-		count[5][(v>>(5*8))&0xFF]++
-		count[6][(v>>(6*8))&0xFF]++
-		count[7][(v>>(7*8))&0xFF]++
+		count[0][byte(v>>(0*8))]++
+		count[1][byte(v>>(1*8))]++
+		count[2][byte(v>>(2*8))]++
+		count[3][byte(v>>(3*8))]++
+		count[4][byte(v>>(4*8))]++
+		count[5][byte(v>>(5*8))]++
+		count[6][byte(v>>(6*8))]++
+		count[7][byte(v>>(7*8))]++
 	}
 
 	var offset [8][256]uint32
@@ -51,10 +51,10 @@ func Uint32(src, buf []uint32) {
 
 	var count [4][256]uint32
 	for _, v := range src {
-		count[0][(v>>(0*8))&0xFF]++
-		count[1][(v>>(1*8))&0xFF]++
-		count[2][(v>>(2*8))&0xFF]++
-		count[3][(v>>(3*8))&0xFF]++
+		count[0][byte(v>>(0*8))]++
+		count[1][byte(v>>(1*8))]++
+		count[2][byte(v>>(2*8))]++
+		count[3][byte(v>>(3*8))]++
 	}
 
 	var offset [4][256]uint32
