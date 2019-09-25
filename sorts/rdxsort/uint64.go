@@ -1,15 +1,15 @@
 package rdxsort
 
-func Uint64(src, buf []uint64) {
-	if int64(len(src)) >= int64(1<<32) {
+func Uint64(arr, buf []uint64) {
+	if int64(len(arr)) >= int64(1<<32) {
 		panic("slice too large")
 	}
-	if len(src) != len(buf) {
-		panic("len(src) != len(buf)")
+	if len(arr) != len(buf) {
+		panic("len(arr) != len(buf)")
 	}
 
 	var count [8][256]uint32
-	for _, v := range src {
+	for _, v := range arr {
 		count[0][byte(v>>(0*8))]++
 		count[1][byte(v>>(1*8))]++
 		count[2][byte(v>>(2*8))]++
@@ -44,12 +44,13 @@ func Uint64(src, buf []uint64) {
 	}
 
 	swaps := 0
-	dst := buf
+	src, dst := arr, buf
 	for k := uint8(0); k < 8; k++ {
 		if nonZero[k] == 1 {
 			continue
 		}
 		swaps++
+
 		off := &offset[k]
 
 		p := k * 8
@@ -63,20 +64,20 @@ func Uint64(src, buf []uint64) {
 	}
 
 	if swaps&1 == 1 {
-		copy(src, dst)
+		copy(arr, src)
 	}
 }
 
-func Uint32(src, buf []uint32) {
-	if int64(len(src)) >= int64(1<<32) {
+func Uint32(arr, buf []uint32) {
+	if int64(len(arr)) >= int64(1<<32) {
 		panic("slice too large")
 	}
-	if len(src) != len(buf) {
-		panic("len(src) != len(buf)")
+	if len(arr) != len(buf) {
+		panic("len(arr) != len(buf)")
 	}
 
 	var count [4][256]uint32
-	for _, v := range src {
+	for _, v := range arr {
 		count[0][byte(v>>(0*8))]++
 		count[1][byte(v>>(1*8))]++
 		count[2][byte(v>>(2*8))]++
@@ -102,15 +103,15 @@ func Uint32(src, buf []uint32) {
 		nonZero[k] = nz
 	}
 
-	dst := buf
 	swaps := 0
+	src, dst := arr, buf
 	for k := uint8(0); k < 4; k++ {
 		if nonZero[k] == 1 {
 			continue
 		}
 		swaps++
-		off := &offset[k]
 
+		off := &offset[k]
 		p := k * 8
 		for _, v := range src {
 			key := uint8(v >> p)
@@ -122,6 +123,6 @@ func Uint32(src, buf []uint32) {
 	}
 
 	if swaps&1 == 1 {
-		copy(src, dst)
+		copy(arr, src)
 	}
 }
