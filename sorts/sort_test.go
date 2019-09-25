@@ -1,7 +1,6 @@
 package sort_test
 
 import (
-	"sort"
 	"testing"
 
 	"github.com/shawnsmithdev/zermelo/zuint64"
@@ -14,51 +13,35 @@ import (
 )
 
 func bench(b *testing.B, size int, algo func([]int), name string) {
-	b.StopTimer()
-
+	rng := pcg.New(uint64(0))
 	data := make([]int, size)
 
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		for n := size - 3; n <= size+3; n++ {
-			rng := pcg.New(uint64(n))
-			for i := 0; i < len(data); i++ {
-				data[i] = int(rng.Uint64())
-			}
-
-			b.StartTimer()
-			algo(data)
-			b.StopTimer()
-
-			if !stdsortint.IsSorted(data) {
-				b.Errorf("%s did not sort %d ints", name, n)
-			}
+		for i := 0; i < len(data); i++ {
+			data[i] = int(rng.Uint64())
 		}
+		algo(data)
 	}
 }
 
 func benchRadix(b *testing.B, size int, algo func(src, dst []uint64), name string) {
-	b.StopTimer()
-
+	rng := pcg.New(uint64(0))
 	data := make([]uint64, size)
 	buf := make([]uint64, len(data))
 
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		for n := size - 3; n <= size+3; n++ {
-			rng := pcg.New(uint64(n))
-			for i := 0; i < len(data); i++ {
-				data[i] = rng.Uint64()
-			}
-
-			b.StartTimer()
-			algo(data, buf)
-			b.StopTimer()
-
-			if !sort.SliceIsSorted(data, func(i, k int) bool { return data[i] < data[k] }) {
-				b.Errorf("%s did not sort %d ints", name, n)
-			}
+		for i := 0; i < len(data); i++ {
+			data[i] = rng.Uint64()
 		}
+		algo(data, buf)
 	}
 }
+
+func BenchmarkRandomOverhead1e4(b *testing.B) { benchRadix(b, 1e4, func(x, y []uint64) {}, "Overhead") }
+func BenchmarkRandomOverhead1e6(b *testing.B) { benchRadix(b, 1e6, func(x, y []uint64) {}, "Overhead") }
+
 func BenchmarkStdSort1e2(b *testing.B) { bench(b, 1e2, stdsortint.Sort, "Std") }
 func BenchmarkStdSort1e4(b *testing.B) { bench(b, 1e4, stdsortint.Sort, "Std") }
 func BenchmarkStdSort1e6(b *testing.B) { bench(b, 1e6, stdsortint.Sort, "Std") }
