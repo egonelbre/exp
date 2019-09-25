@@ -1,6 +1,9 @@
 package rdxsort
 
 func Uint64(src, buf []uint64) {
+	if int64(len(src)) >= int64(1<<32) {
+		panic("slice too large")
+	}
 	if len(src) != len(buf) {
 		panic("len(src) != len(buf)")
 	}
@@ -59,6 +62,9 @@ func Uint64(src, buf []uint64) {
 }
 
 func Uint32(src, buf []uint32) {
+	if int64(len(src)) >= int64(1<<32) {
+		panic("slice too large")
+	}
 	if len(src) != len(buf) {
 		panic("len(src) != len(buf)")
 	}
