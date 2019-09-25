@@ -43,11 +43,13 @@ func Uint64(src, buf []uint64) {
 		nonZero[k] = nz
 	}
 
+	swaps := 0
 	dst := buf
 	for k := uint8(0); k < 8; k++ {
 		if nonZero[k] == 1 {
 			continue
 		}
+		swaps++
 		off := &offset[k]
 
 		p := k * 8
@@ -58,6 +60,10 @@ func Uint64(src, buf []uint64) {
 		}
 
 		dst, src = src, dst
+	}
+
+	if swaps&1 == 1 {
+		copy(src, dst)
 	}
 }
 
@@ -97,10 +103,12 @@ func Uint32(src, buf []uint32) {
 	}
 
 	dst := buf
+	swaps := 0
 	for k := uint8(0); k < 4; k++ {
 		if nonZero[k] == 1 {
 			continue
 		}
+		swaps++
 		off := &offset[k]
 
 		p := k * 8
@@ -111,5 +119,9 @@ func Uint32(src, buf []uint32) {
 		}
 
 		dst, src = src, dst
+	}
+
+	if swaps&1 == 1 {
+		copy(src, dst)
 	}
 }
