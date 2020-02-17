@@ -10,6 +10,10 @@ import (
 	"github.com/loov/hrtime"
 )
 
+const (
+	ItemsToAdd = 1e7
+)
+
 func ExampleHalf() {
 	c := cache.NewHalf(1024, func(x cache.Entry) {
 		fmt.Println("evicted", x)
@@ -23,10 +27,6 @@ func ExampleHalf() {
 
 	fmt.Println(c)
 }
-
-const (
-	ItemsToAdd = 1e7
-)
 
 func BenchmarkAny_EncodingBaseline(b *testing.B) {
 	b.ResetTimer()
