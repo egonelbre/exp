@@ -26,9 +26,10 @@ func main() {
 		TwoHashShiftTable{},
 		TwoHashShiftAlt{},
 		TwoHashShiftTableAlt{},
+		Uint64Switch{},
 	}
 	for _, gen := range generators {
-		genname := strings.ToLower(fmt.Sprintf("%+T", gen))
+		genname := strings.ToLower(fmt.Sprintf("%T", gen))
 		genname = strings.TrimPrefix(genname, "main.")
 
 		p := &BasicPrinter{}
