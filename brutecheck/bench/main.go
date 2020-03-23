@@ -36,10 +36,11 @@ func main() {
 	}
 
 	sort.Slice(results, func(i, k int) bool {
-		return results[i].ns > results[k].ns
+		return results[i].ns < results[k].ns
 	})
 
+	fmt.Printf("func, ns\n")
 	for _, r := range results {
-		fmt.Printf("%s\t%.2fns\n", r.name, r.ns)
+		fmt.Printf("%s, %.2f\n", r.name, r.ns)
 	}
 }
