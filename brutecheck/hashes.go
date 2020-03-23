@@ -33,3 +33,10 @@ func twoHashCalc(name string, a, b *Combiner, shiftn, shift0, shift1 byte) byte 
 func twoHashFormat(a, b *Combiner, shiftn, shift0, shift1 byte) string {
 	return fmt.Sprintf("((byte(len(name)) << %d) %s (name[0] << %d)) %s (name[1] << %d)", shiftn, a.Op, shift0, b.Op, shift1)
 }
+
+func twoHashCalcAlt(name string, a, b *Combiner, shiftn, shift0, shift1 byte) byte {
+	return b.Fn(byte(len(name))<<shiftn, a.Fn(name[0]<<shift0, name[1]<<shift1))
+}
+func twoHashFormatAlt(a, b *Combiner, shiftn, shift0, shift1 byte) string {
+	return fmt.Sprintf("(byte(len(name)) << %d) %s ((name[0] << %d) %s (name[1] << %d))", shiftn, a.Op, shift0, b.Op, shift1)
+}

@@ -4141,3 +4141,3723 @@ func BenchTwoHashTable_OrAdd_Shift361(words []string, repeat int) int {
 	}
 	return count
 }
+
+func BenchTwoHashAlt_XorXor_Shift015(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift015(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift016(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift016(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift021(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift021(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift024(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift024(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift025(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift025(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift026(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift026(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift032(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift032(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift034(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift034(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift035(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift035(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift041(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift041(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift043(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift043(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift045(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift045(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift046(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift046(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift050(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift050(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift051(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift051(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift060(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift060(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift062(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift062(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift130(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift130(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift132(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift132(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift135(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift135(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift143(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift143(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift145(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift145(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift146(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift146(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift161(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift161(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift240(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift240(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift246(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift246(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift250(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift250(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift260(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift260(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift303(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift303(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift304(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift304(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift351(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift351(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift361(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift361(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift402(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift402(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift403(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift403(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift404(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift404(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift414(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift414(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift501(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift501(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift503(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift503(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift505(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift505(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift510(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift510(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift513(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift513(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift525(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift525(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift602(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift602(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift603(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift603(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift604(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift604(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift605(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift605(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorXor_Shift630(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorXor_Shift630(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift015(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift015(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift021(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift021(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift024(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift024(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift025(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift025(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift026(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift026(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift030(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift030(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift032(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift032(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift034(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift034(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift035(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift035(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift040(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift040(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift043(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift043(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift045(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift045(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift046(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift046(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift050(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift050(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift052(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift052(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift060(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift060(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift061(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift061(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift062(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift062(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift132(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift132(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift135(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift135(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift141(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift141(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift143(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift143(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift145(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift145(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift146(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift146(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift150(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift150(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift151(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift151(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift161(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift161(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift240(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift240(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift262(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift262(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift304(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift304(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift350(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift350(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift351(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift351(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift403(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift403(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift405(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift405(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift460(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift460(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift502(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift502(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift505(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift505(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift510(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift510(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift603(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift603(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift605(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift605(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift606(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift606(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift616(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift616(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorAdd_Shift630(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorAdd_Shift630(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorOr_Shift034(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorOr_Shift034(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorOr_Shift035(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorOr_Shift035(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorOr_Shift045(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorOr_Shift045(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorOr_Shift046(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorOr_Shift046(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorOr_Shift145(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorOr_Shift145(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorOr_Shift146(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorOr_Shift146(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorOr_Shift306(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorOr_Shift306(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_XorOr_Shift603(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_XorOr_Shift603(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift016(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift016(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift024(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift024(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift025(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift025(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift031(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift031(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift033(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift033(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift041(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift041(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift042(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift042(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift050(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift050(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift051(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift051(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift060(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift060(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift062(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift062(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift120(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift120(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift161(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift161(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift231(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift231(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift260(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift260(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift303(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift303(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift460(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift460(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift500(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift500(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift601(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift601(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift603(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift603(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift605(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift605(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift620(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift620(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddXor_Shift630(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddXor_Shift630(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift022(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift022(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift024(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift024(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift025(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift025(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift033(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift033(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift041(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift041(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift042(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift042(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift050(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift050(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift051(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift051(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift060(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift060(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift061(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift061(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift062(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift062(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift130(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift130(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift133(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift133(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift150(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift150(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift161(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift161(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift230(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift230(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift302(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift302(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift303(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift303(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift400(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift400(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift403(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift403(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift413(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift413(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift500(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift500(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift511(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift511(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift601(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift601(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift602(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift602(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift620(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift620(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddAdd_Shift630(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddAdd_Shift630(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_AddOr_Shift033(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_AddOr_Shift033(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_OrXor_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_OrXor_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashAlt_OrAdd_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashAlt_OrAdd_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift015(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift015(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift016(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift016(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift021(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift021(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift024(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift024(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift025(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift025(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift026(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift026(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift032(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift032(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift034(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift034(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift035(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift035(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift041(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift041(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift043(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift043(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift045(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift045(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift046(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift046(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift050(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift050(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift051(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift051(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift060(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift060(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift062(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift062(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift130(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift130(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift132(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift132(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift135(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift135(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift143(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift143(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift145(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift145(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift146(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift146(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift161(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift161(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift240(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift240(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift246(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift246(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift250(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift250(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift260(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift260(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift303(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift303(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift304(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift304(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift351(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift351(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift361(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift361(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift402(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift402(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift403(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift403(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift404(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift404(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift414(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift414(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift501(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift501(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift503(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift503(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift505(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift505(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift510(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift510(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift513(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift513(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift525(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift525(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift602(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift602(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift603(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift603(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift604(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift604(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift605(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift605(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorXor_Shift630(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorXor_Shift630(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift015(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift015(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift021(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift021(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift024(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift024(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift025(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift025(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift026(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift026(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift030(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift030(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift032(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift032(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift034(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift034(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift035(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift035(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift040(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift040(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift043(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift043(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift045(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift045(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift046(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift046(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift050(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift050(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift052(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift052(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift060(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift060(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift061(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift061(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift062(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift062(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift132(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift132(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift135(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift135(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift141(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift141(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift143(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift143(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift145(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift145(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift146(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift146(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift150(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift150(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift151(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift151(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift161(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift161(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift240(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift240(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift262(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift262(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift304(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift304(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift350(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift350(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift351(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift351(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift403(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift403(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift405(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift405(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift460(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift460(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift502(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift502(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift505(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift505(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift510(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift510(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift603(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift603(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift605(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift605(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift606(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift606(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift616(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift616(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorAdd_Shift630(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorAdd_Shift630(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorOr_Shift034(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorOr_Shift034(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorOr_Shift035(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorOr_Shift035(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorOr_Shift045(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorOr_Shift045(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorOr_Shift046(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorOr_Shift046(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorOr_Shift145(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorOr_Shift145(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorOr_Shift146(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorOr_Shift146(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorOr_Shift306(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorOr_Shift306(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_XorOr_Shift603(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_XorOr_Shift603(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift016(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift016(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift024(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift024(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift025(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift025(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift031(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift031(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift033(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift033(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift041(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift041(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift042(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift042(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift050(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift050(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift051(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift051(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift060(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift060(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift062(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift062(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift120(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift120(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift161(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift161(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift231(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift231(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift260(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift260(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift303(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift303(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift460(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift460(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift500(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift500(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift601(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift601(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift603(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift603(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift605(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift605(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift620(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift620(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddXor_Shift630(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddXor_Shift630(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift022(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift022(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift024(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift024(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift025(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift025(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift033(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift033(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift041(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift041(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift042(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift042(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift050(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift050(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift051(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift051(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift060(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift060(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift061(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift061(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift062(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift062(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift130(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift130(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift133(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift133(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift150(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift150(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift161(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift161(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift230(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift230(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift302(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift302(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift303(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift303(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift400(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift400(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift403(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift403(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift413(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift413(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift500(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift500(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift511(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift511(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift601(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift601(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift602(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift602(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift620(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift620(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddAdd_Shift630(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddAdd_Shift630(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_AddOr_Shift033(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_AddOr_Shift033(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_OrXor_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_OrXor_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchTwoHashTableAlt_OrAdd_Shift073(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if TwoHashTableAlt_OrAdd_Shift073(word) {
+				count++
+			}
+		}
+	}
+	return count
+}

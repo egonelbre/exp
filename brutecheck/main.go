@@ -24,6 +24,8 @@ func main() {
 		LengthSingle{},
 		TwoHashShift{},
 		TwoHashShiftTable{},
+		TwoHashShiftAlt{},
+		TwoHashShiftTableAlt{},
 	}
 	for _, gen := range generators {
 		genname := strings.ToLower(fmt.Sprintf("%+T", gen))
