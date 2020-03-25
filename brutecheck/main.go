@@ -22,11 +22,12 @@ func main() {
 
 	generators := []Generator{
 		LengthSingle{},
+		Uint64Switch{},
+		MapCheck{},
 		TwoHashShift{},
 		TwoHashShiftTable{},
 		TwoHashShiftAlt{},
 		TwoHashShiftTableAlt{},
-		Uint64Switch{},
 	}
 	for _, gen := range generators {
 		genname := strings.ToLower(fmt.Sprintf("%T", gen))

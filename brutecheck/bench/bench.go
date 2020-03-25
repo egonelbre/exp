@@ -14,6 +14,30 @@ func BenchLen1Ch(words []string, repeat int) int {
 	return count
 }
 
+func BenchUint64Switch(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if Uint64Switch(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func BenchMapCheck(words []string, repeat int) int {
+	var count int
+	for i := 0; i < repeat; i++ {
+		for _, word := range words {
+			if MapCheck(word) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
 func BenchTwoHash_XorXor_Shift015(words []string, repeat int) int {
 	var count int
 	for i := 0; i < repeat; i++ {

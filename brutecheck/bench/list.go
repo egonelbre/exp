@@ -7,6 +7,8 @@ type Bench struct {
 
 var AllBenches = []Bench{
 	{Name: "Len1Ch", Fn: BenchLen1Ch},
+	{Name: "Uint64Switch", Fn: BenchUint64Switch},
+	{Name: "MapCheck", Fn: BenchMapCheck},
 	{Name: "TwoHash_XorXor_Shift015", Fn: BenchTwoHash_XorXor_Shift015},
 	{Name: "TwoHash_XorXor_Shift016", Fn: BenchTwoHash_XorXor_Shift016},
 	{Name: "TwoHash_XorXor_Shift021", Fn: BenchTwoHash_XorXor_Shift021},

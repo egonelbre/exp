@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"sort"
+	"runtime"
 
 	"github.com/loov/hrtime"
+	"gonum.org/v1/gonum/stat"
 )
 
 var Valid = []string{
@@ -15,32 +16,50 @@ var Valid = []string{
 }
 
 func main() {
-	const repeat = 100000
+	runtime.LockOSThread()
+
+	const repeat = 20000
+	const rounds = 20
+
 	type result struct {
 		name string
-		ns   float64
-	}
-	results := make([]result, 0, len(AllBenches))
-
-	for _, bench := range AllBenches {
-		fn := bench.Fn
-		fn(Valid, 1)
-
-		start := hrtime.TSC()
-		fn(Valid, repeat)
-		finish := hrtime.TSC()
-
-		totalns := float64((finish - start).ApproxDuration().Nanoseconds())
-		avgns := totalns / float64(repeat*len(Valid))
-		results = append(results, result{bench.Name, avgns})
+		ns   [rounds]float64
 	}
 
-	sort.Slice(results, func(i, k int) bool {
-		return results[i].ns < results[k].ns
-	})
+	results := make([]result, len(AllBenches))
+	for i, bench := range AllBenches {
+		results[i].name = bench.Name
+	}
 
-	fmt.Printf("func, ns\n")
+	for round := 0; round < rounds; round++ {
+		for i, bench := range AllBenches {
+			fn := bench.Fn
+			fn(Valid, 1)
+
+			start := hrtime.TSC()
+			fn(Valid, repeat)
+			finish := hrtime.TSC()
+
+			totalns := float64((finish - start).ApproxDuration().Nanoseconds())
+			avgns := totalns / float64(repeat*len(Valid))
+
+			results[i].ns[round] = avgns
+		}
+	}
+
+	fmt.Printf("func,mean,stddev")
+	for round := 0; round < rounds; round++ {
+		fmt.Printf(",#%d ns", round)
+	}
+	fmt.Println()
+
 	for _, r := range results {
-		fmt.Printf("%s, %.2f\n", r.name, r.ns)
+		fmt.Printf("%s,", r.name)
+		mean, stddev := stat.MeanStdDev(r.ns[:], nil)
+		fmt.Printf("%.2f, %.2f", mean, stddev)
+		for _, ns := range r.ns {
+			fmt.Printf(",%.2f", ns)
+		}
+		fmt.Println()
 	}
 }
