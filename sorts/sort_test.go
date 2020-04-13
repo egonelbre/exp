@@ -7,7 +7,6 @@ import (
 	"github.com/shawnsmithdev/zermelo/zuint64"
 
 	"github.com/egonelbre/exp/sorts/dpsortint"
-	"github.com/egonelbre/exp/sorts/qpsortint"
 	"github.com/egonelbre/exp/sorts/rdxsort"
 	"github.com/egonelbre/exp/sorts/stdsortint"
 	"github.com/zeebo/pcg"
@@ -50,14 +49,6 @@ func BenchmarkStdSort1e6(b *testing.B) { bench(b, 1e6, sort.Ints, "Std") }
 func BenchmarkStdSortInt1e2(b *testing.B) { bench(b, 1e2, stdsortint.Sort, "StdInt") }
 func BenchmarkStdSortInt1e4(b *testing.B) { bench(b, 1e4, stdsortint.Sort, "StdInt") }
 func BenchmarkStdSortInt1e6(b *testing.B) { bench(b, 1e6, stdsortint.Sort, "StdInt") }
-
-func BenchmarkQpSort1e2(b *testing.B) { bench(b, 1e2, qpsortint.Sort, "Qp") }
-func BenchmarkQpSort1e4(b *testing.B) { bench(b, 1e4, qpsortint.Sort, "Qp") }
-func BenchmarkQpSort1e6(b *testing.B) { bench(b, 1e6, qpsortint.Sort, "Qp") }
-
-func BenchmarkQpSortBasic1e2(b *testing.B) { bench(b, 1e2, qpsortint.SortBasic, "Qp") }
-func BenchmarkQpSortBasic1e4(b *testing.B) { bench(b, 1e4, qpsortint.SortBasic, "Qp") }
-func BenchmarkQpSortBasic1e6(b *testing.B) { bench(b, 1e6, qpsortint.SortBasic, "Qp") }
 
 func BenchmarkDpSort1e2(b *testing.B) { bench(b, 1e2, dpsortint.Sort, "Dp") }
 func BenchmarkDpSort1e4(b *testing.B) { bench(b, 1e4, dpsortint.Sort, "Dp") }
