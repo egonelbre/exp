@@ -1,6 +1,7 @@
 package sort_test
 
 import (
+	"sort"
 	"testing"
 
 	"github.com/shawnsmithdev/zermelo/zuint64"
@@ -42,9 +43,13 @@ func benchRadix(b *testing.B, size int, algo func(src, dst []uint64), name strin
 func BenchmarkRandomOverhead1e4(b *testing.B) { benchRadix(b, 1e4, func(x, y []uint64) {}, "Overhead") }
 func BenchmarkRandomOverhead1e6(b *testing.B) { benchRadix(b, 1e6, func(x, y []uint64) {}, "Overhead") }
 
-func BenchmarkStdSort1e2(b *testing.B) { bench(b, 1e2, stdsortint.Sort, "Std") }
-func BenchmarkStdSort1e4(b *testing.B) { bench(b, 1e4, stdsortint.Sort, "Std") }
-func BenchmarkStdSort1e6(b *testing.B) { bench(b, 1e6, stdsortint.Sort, "Std") }
+func BenchmarkStdSort1e2(b *testing.B) { bench(b, 1e2, sort.Ints, "Std") }
+func BenchmarkStdSort1e4(b *testing.B) { bench(b, 1e4, sort.Ints, "Std") }
+func BenchmarkStdSort1e6(b *testing.B) { bench(b, 1e6, sort.Ints, "Std") }
+
+func BenchmarkStdSortInt1e2(b *testing.B) { bench(b, 1e2, stdsortint.Sort, "StdInt") }
+func BenchmarkStdSortInt1e4(b *testing.B) { bench(b, 1e4, stdsortint.Sort, "StdInt") }
+func BenchmarkStdSortInt1e6(b *testing.B) { bench(b, 1e6, stdsortint.Sort, "StdInt") }
 
 func BenchmarkQpSort1e2(b *testing.B) { bench(b, 1e2, qpsortint.Sort, "Qp") }
 func BenchmarkQpSort1e4(b *testing.B) { bench(b, 1e4, qpsortint.Sort, "Qp") }
