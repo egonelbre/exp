@@ -6,7 +6,7 @@ import (
 
 	"github.com/egonelbre/exp/zerostream/op"
 
-	"github.com/davecheney/profile"
+	"github.com/pkg/profile"
 )
 
 type Rect struct{ X, Y, W, H int32 }

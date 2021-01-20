@@ -5,7 +5,7 @@ import (
 	"encoding/asn1"
 	"fmt"
 
-	"github.com/egonelbre/smime/ber"
+	"github.com/egonelbre/exp/smime/ber"
 )
 
 // RFC 5652 12.1

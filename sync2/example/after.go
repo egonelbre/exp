@@ -3,7 +3,7 @@ package after
 import (
 	"io"
 
-	"github.com/egonelbre/sync2"
+	"github.com/egonelbre/exp/sync2"
 )
 
 type Channel struct {

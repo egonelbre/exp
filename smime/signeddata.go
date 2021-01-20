@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/egonelbre/smime/ber"
+	"github.com/egonelbre/exp/smime/ber"
 )
 
 const panictodo = false
