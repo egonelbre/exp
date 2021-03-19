@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Canvas</title>
+</head>
+<body>
+	<canvas id="view" style="border: 1px solid;"></canvas>
+	<image id="image" src="tile.png"></image>
+
+	<script src="wasm_exec.js"></script>
+	<script>
+		if (!WebAssembly.instantiateStreaming) { // polyfill
+			WebAssembly.instantiateStreaming = async (resp, importObject) => {
+				const source = await (await resp).arrayBuffer();
+				return await WebAssembly.instantiate(source, importObject);
+			};
+		}
+
+		const go = new Go();
+		let mod, inst;
+		WebAssembly.instantiateStreaming(fetch("wasmcanvas.wasm"), go.importObject).then((result) => {
+			mod = result.module;
+			inst = result.instance;
+			go.run(inst);
+		}).catch((err) => {
+			console.error(err);
+		});
+	</script>
+</body>
+
+</html>

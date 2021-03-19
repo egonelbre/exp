@@ -25,4 +25,5 @@ require (
 	golang.org/x/mobile v0.0.0-20201217150744-e6ae53a27f4f
 	golang.org/x/text v0.3.5
 	gonum.org/v1/gonum v0.8.2
+	honnef.co/go/js/dom/v2 v2.0.0-20200509013220-d4405f7ab4d8
 )
