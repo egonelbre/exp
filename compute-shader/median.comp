@@ -1,0 +1,59 @@
+#version 430
+
+#define RADIUS      4
+#define KERNEL_SIZE (2*RADIUS+1)*(2*RADIUS+1)
+#define KERNEL_MID  (KERNEL_SIZE/2 + 1)
+#define BINS_SIZE   4
+
+layout (local_size_x = 1, local_size_y = 1) in;
+
+layout (rgba32f, binding = 0) uniform image2D input;
+layout (rgba32f, binding = 1) uniform image2D result;
+
+void main() {
+	ivec2 coord = ivec2(gl_GlobalInvocationID.xy);
+
+	vec4  colors[KERNEL_SIZE];
+
+	int off = 0;
+	for(int x = -RADIUS; x <= RADIUS; x++) {
+		for(int y = -RADIUS; y <= RADIUS; y++) {
+			colors[off] = imageLoad(input, coord + ivec2(x, y));
+			off++;
+		}
+	}
+
+	float count[BINS_SIZE];
+	int   bin[KERNEL_SIZE];
+
+	for(int i = 0; i < BINS_SIZE; i++) {
+		count[i] = 0;
+	}
+	for(int i = 0; i < KERNEL_SIZE; i++) {
+		float value = dot(colors[i].rgb, vec3(0.3, 0.59, 0.11));
+		int idx = int(floor(value * BINS_SIZE));
+		idx = clamp(idx, 0, BINS_SIZE-1);
+		count[idx] += 1.0;
+		bin[i] = idx;
+	}
+
+	int targetBin;
+	float total = 0.0;
+	for(int i = 0; i < BINS_SIZE; i++) {
+		total += count[i];
+		if(total >= KERNEL_MID) {
+			targetBin = i;
+			break;
+		}
+	}
+
+	vec4 pixel = vec4(0, 0, 0, 0);
+	for(int i = 0; i < KERNEL_SIZE; i++) {
+		if(bin[i] == targetBin) {
+			pixel += colors[i];
+		}
+	}
+	pixel /= count[targetBin];
+
+	imageStore(result, coord, pixel);
+}
