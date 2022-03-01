@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+Copyright 2018 The Go Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Go wasm</title>
+  </head>
+
+  <body>
+    <script src="wasm_exec.js"></script>
+
+    <script>
+      const go = new Go(); // Defined in wasm_exec.js
+      const WASM_URL = 'wasm.wasm';
+
+      var wasm;
+
+      if ('instantiateStreaming' in WebAssembly) {
+        WebAssembly.instantiateStreaming(fetch(WASM_URL), go.importObject).then(function (obj) {
+          wasm = obj.instance;
+          go.run(wasm);
+        })
+      } else {
+        fetch(WASM_URL).then(resp =>
+          resp.arrayBuffer()
+        ).then(bytes =>
+          WebAssembly.instantiate(bytes, go.importObject).then(function (obj) {
+            wasm = obj.instance;
+            go.run(wasm);
+          })
+        )
+      }
+    </script>
+  </body>
+</html>
