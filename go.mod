@@ -26,4 +26,5 @@ require (
 	golang.org/x/text v0.3.5
 	gonum.org/v1/gonum v0.8.2
 	honnef.co/go/js/dom/v2 v2.0.0-20200509013220-d4405f7ab4d8
+	loov.dev/diagram v0.0.0-20200428131328-71c74e2166f9
 )

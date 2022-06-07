@@ -1,0 +1,276 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:loov='http://www.loov.io' width='10000px' height='10000px' viewBox='0 0 10000 10000'>
+<style>/* <![CDATA[ */ text { text-shadow: -1px -1px 0 rgba(255,255,255,0.5),	1px -1px 0 rgba(255,255,255,0.5), 1px  1px 0 rgba(255,255,255,0.5), -1px  1px 0 rgba(255,255,255,0.5); } /* ]]> */ </style>
+<g transform='translate(0.5, 0.5)'>
+<g loov:index='0'>
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1295.68,0.00 1295.68,22.50 1295.68,45.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1295.68,45.00 799.80,67.50 799.80,90.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='799.80,90.00 326.95,112.50 326.95,135.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='326.95,135.00 326.95,157.50 326.95,180.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='326.95,180.00 144.84,202.50 144.84,225.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='144.84,225.00 22.50,247.50 22.50,270.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='22.50,270.00 22.50,292.50 22.50,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='22.50,315.00 22.50,337.50 22.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='22.50,360.00 22.50,382.50 22.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='22.50,405.00 0.00,427.50 0.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='22.50,405.00 45.00,427.50 45.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='144.84,225.00 267.19,247.50 267.19,270.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='267.19,270.00 196.88,292.50 196.88,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='196.88,315.00 146.25,337.50 146.25,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='146.25,360.00 112.50,382.50 112.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='112.50,405.00 90.00,427.50 90.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='112.50,405.00 135.00,427.50 135.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='146.25,360.00 180.00,382.50 180.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='180.00,405.00 180.00,427.50 180.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='196.88,315.00 247.50,337.50 247.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='247.50,360.00 247.50,382.50 247.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='247.50,405.00 225.00,427.50 225.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='247.50,405.00 270.00,427.50 270.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='267.19,270.00 337.50,292.50 337.50,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='337.50,315.00 337.50,337.50 337.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='337.50,360.00 337.50,382.50 337.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='337.50,405.00 315.00,427.50 315.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='337.50,405.00 360.00,427.50 360.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='326.95,180.00 509.06,202.50 509.06,225.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='509.06,225.00 509.06,247.50 509.06,270.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='509.06,270.00 427.50,292.50 427.50,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='427.50,315.00 427.50,337.50 427.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='427.50,360.00 427.50,382.50 427.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='427.50,405.00 405.00,427.50 405.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='427.50,405.00 450.00,427.50 450.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='509.06,270.00 590.62,292.50 590.62,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='590.62,315.00 528.75,337.50 528.75,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='528.75,360.00 495.00,382.50 495.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='495.00,405.00 495.00,427.50 495.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='528.75,360.00 562.50,382.50 562.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='562.50,405.00 540.00,427.50 540.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='562.50,405.00 585.00,427.50 585.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='590.62,315.00 652.50,337.50 652.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='652.50,360.00 652.50,382.50 652.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='652.50,405.00 630.00,427.50 630.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='652.50,405.00 675.00,427.50 675.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='799.80,90.00 1272.66,112.50 1272.66,135.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1272.66,135.00 1094.06,157.50 1094.06,180.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1094.06,180.00 1094.06,202.50 1094.06,225.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1094.06,225.00 911.25,247.50 911.25,270.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='911.25,270.00 787.50,292.50 787.50,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='787.50,315.00 742.50,337.50 742.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='742.50,360.00 720.00,382.50 720.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='720.00,405.00 720.00,427.50 720.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='742.50,360.00 765.00,382.50 765.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='765.00,405.00 765.00,427.50 765.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='787.50,315.00 832.50,337.50 832.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='832.50,360.00 832.50,382.50 832.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='832.50,405.00 810.00,427.50 810.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='832.50,405.00 855.00,427.50 855.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='911.25,270.00 1035.00,292.50 1035.00,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1035.00,315.00 967.50,337.50 967.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='967.50,360.00 922.50,382.50 922.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='922.50,405.00 900.00,427.50 900.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='922.50,405.00 945.00,427.50 945.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='967.50,360.00 1012.50,382.50 1012.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1012.50,405.00 990.00,427.50 990.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1012.50,405.00 1035.00,427.50 1035.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1035.00,315.00 1102.50,337.50 1102.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1102.50,360.00 1102.50,382.50 1102.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1102.50,405.00 1080.00,427.50 1080.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1102.50,405.00 1125.00,427.50 1125.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1094.06,225.00 1276.88,247.50 1276.88,270.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1276.88,270.00 1226.25,292.50 1226.25,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1226.25,315.00 1226.25,337.50 1226.25,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1226.25,360.00 1192.50,382.50 1192.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1192.50,405.00 1170.00,427.50 1170.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1192.50,405.00 1215.00,427.50 1215.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1226.25,360.00 1260.00,382.50 1260.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1260.00,405.00 1260.00,427.50 1260.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1276.88,270.00 1327.50,292.50 1327.50,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1327.50,315.00 1327.50,337.50 1327.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1327.50,360.00 1327.50,382.50 1327.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1327.50,405.00 1305.00,427.50 1305.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1327.50,405.00 1350.00,427.50 1350.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1272.66,135.00 1451.25,157.50 1451.25,180.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1451.25,180.00 1451.25,202.50 1451.25,225.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1451.25,225.00 1451.25,247.50 1451.25,270.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1451.25,270.00 1451.25,292.50 1451.25,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1451.25,315.00 1417.50,337.50 1417.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1417.50,360.00 1395.00,382.50 1395.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1395.00,405.00 1395.00,427.50 1395.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1417.50,360.00 1440.00,382.50 1440.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1440.00,405.00 1440.00,427.50 1440.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1451.25,315.00 1485.00,337.50 1485.00,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1485.00,360.00 1485.00,382.50 1485.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1485.00,405.00 1485.00,427.50 1485.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1295.68,45.00 1791.56,67.50 1791.56,90.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1791.56,90.00 1791.56,112.50 1791.56,135.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1791.56,135.00 1791.56,157.50 1791.56,180.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1791.56,180.00 1791.56,202.50 1791.56,225.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1791.56,225.00 1648.12,247.50 1648.12,270.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1648.12,270.00 1648.12,292.50 1648.12,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1648.12,315.00 1563.75,337.50 1563.75,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1563.75,360.00 1530.00,382.50 1530.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1530.00,405.00 1530.00,427.50 1530.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1563.75,360.00 1597.50,382.50 1597.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1597.50,405.00 1575.00,427.50 1575.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1597.50,405.00 1620.00,427.50 1620.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1648.12,315.00 1732.50,337.50 1732.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1732.50,360.00 1687.50,382.50 1687.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1687.50,405.00 1665.00,427.50 1665.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1687.50,405.00 1710.00,427.50 1710.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1732.50,360.00 1777.50,382.50 1777.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1777.50,405.00 1755.00,427.50 1755.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1777.50,405.00 1800.00,427.50 1800.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1791.56,225.00 1935.00,247.50 1935.00,270.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1935.00,270.00 1867.50,292.50 1867.50,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1867.50,315.00 1845.00,337.50 1845.00,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1845.00,360.00 1845.00,382.50 1845.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1845.00,405.00 1845.00,427.50 1845.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1867.50,315.00 1890.00,337.50 1890.00,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1890.00,360.00 1890.00,382.50 1890.00,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1890.00,405.00 1890.00,427.50 1890.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1935.00,270.00 2002.50,292.50 2002.50,315.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='2002.50,315.00 1957.50,337.50 1957.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1957.50,360.00 1957.50,382.50 1957.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1957.50,405.00 1935.00,427.50 1935.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='1957.50,405.00 1980.00,427.50 1980.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='2002.50,315.00 2047.50,337.50 2047.50,360.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='2047.50,360.00 2047.50,382.50 2047.50,405.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='2047.50,405.00 2025.00,427.50 2025.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: transparent;stroke-width: 1px;' points='2047.50,405.00 2070.00,427.50 2070.00,450.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1280.68,-15.00 1280.68,15.00 1310.68,15.00 1310.68,-15.00 1280.68,-15.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1280.68,30.00 1280.68,60.00 1310.68,60.00 1310.68,30.00 1280.68,30.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='784.80,75.00 784.80,105.00 814.80,105.00 814.80,75.00 784.80,75.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='311.95,120.00 311.95,150.00 341.95,150.00 341.95,120.00 311.95,120.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='311.95,165.00 311.95,195.00 341.95,195.00 341.95,165.00 311.95,165.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='129.84,210.00 129.84,240.00 159.84,240.00 159.84,210.00 129.84,210.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='7.50,255.00 7.50,285.00 37.50,285.00 37.50,255.00 7.50,255.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='7.50,300.00 7.50,330.00 37.50,330.00 37.50,300.00 7.50,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='7.50,345.00 7.50,375.00 37.50,375.00 37.50,345.00 7.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='7.50,390.00 7.50,420.00 37.50,420.00 37.50,390.00 7.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='-15.00,435.00 -15.00,465.00 15.00,465.00 15.00,435.00 -15.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='30.00,435.00 30.00,465.00 60.00,465.00 60.00,435.00 30.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='252.19,255.00 252.19,285.00 282.19,285.00 282.19,255.00 252.19,255.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='181.88,300.00 181.88,330.00 211.88,330.00 211.88,300.00 181.88,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='131.25,345.00 131.25,375.00 161.25,375.00 161.25,345.00 131.25,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='97.50,390.00 97.50,420.00 127.50,420.00 127.50,390.00 97.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='75.00,435.00 75.00,465.00 105.00,465.00 105.00,435.00 75.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='120.00,435.00 120.00,465.00 150.00,465.00 150.00,435.00 120.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='165.00,390.00 165.00,420.00 195.00,420.00 195.00,390.00 165.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='165.00,435.00 165.00,465.00 195.00,465.00 195.00,435.00 165.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='232.50,345.00 232.50,375.00 262.50,375.00 262.50,345.00 232.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='232.50,390.00 232.50,420.00 262.50,420.00 262.50,390.00 232.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='210.00,435.00 210.00,465.00 240.00,465.00 240.00,435.00 210.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='255.00,435.00 255.00,465.00 285.00,465.00 285.00,435.00 255.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='322.50,300.00 322.50,330.00 352.50,330.00 352.50,300.00 322.50,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='322.50,345.00 322.50,375.00 352.50,375.00 352.50,345.00 322.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='322.50,390.00 322.50,420.00 352.50,420.00 352.50,390.00 322.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='300.00,435.00 300.00,465.00 330.00,465.00 330.00,435.00 300.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='345.00,435.00 345.00,465.00 375.00,465.00 375.00,435.00 345.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='494.06,210.00 494.06,240.00 524.06,240.00 524.06,210.00 494.06,210.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='494.06,255.00 494.06,285.00 524.06,285.00 524.06,255.00 494.06,255.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='412.50,300.00 412.50,330.00 442.50,330.00 442.50,300.00 412.50,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='412.50,345.00 412.50,375.00 442.50,375.00 442.50,345.00 412.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='412.50,390.00 412.50,420.00 442.50,420.00 442.50,390.00 412.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='390.00,435.00 390.00,465.00 420.00,465.00 420.00,435.00 390.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='435.00,435.00 435.00,465.00 465.00,465.00 465.00,435.00 435.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='575.62,300.00 575.62,330.00 605.62,330.00 605.62,300.00 575.62,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='513.75,345.00 513.75,375.00 543.75,375.00 543.75,345.00 513.75,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='480.00,390.00 480.00,420.00 510.00,420.00 510.00,390.00 480.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='480.00,435.00 480.00,465.00 510.00,465.00 510.00,435.00 480.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='547.50,390.00 547.50,420.00 577.50,420.00 577.50,390.00 547.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='525.00,435.00 525.00,465.00 555.00,465.00 555.00,435.00 525.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='570.00,435.00 570.00,465.00 600.00,465.00 600.00,435.00 570.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='637.50,345.00 637.50,375.00 667.50,375.00 667.50,345.00 637.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='637.50,390.00 637.50,420.00 667.50,420.00 667.50,390.00 637.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='615.00,435.00 615.00,465.00 645.00,465.00 645.00,435.00 615.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='660.00,435.00 660.00,465.00 690.00,465.00 690.00,435.00 660.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1257.66,120.00 1257.66,150.00 1287.66,150.00 1287.66,120.00 1257.66,120.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1079.06,165.00 1079.06,195.00 1109.06,195.00 1109.06,165.00 1079.06,165.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1079.06,210.00 1079.06,240.00 1109.06,240.00 1109.06,210.00 1079.06,210.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='896.25,255.00 896.25,285.00 926.25,285.00 926.25,255.00 896.25,255.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='772.50,300.00 772.50,330.00 802.50,330.00 802.50,300.00 772.50,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='727.50,345.00 727.50,375.00 757.50,375.00 757.50,345.00 727.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='705.00,390.00 705.00,420.00 735.00,420.00 735.00,390.00 705.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='705.00,435.00 705.00,465.00 735.00,465.00 735.00,435.00 705.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='750.00,390.00 750.00,420.00 780.00,420.00 780.00,390.00 750.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='750.00,435.00 750.00,465.00 780.00,465.00 780.00,435.00 750.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='817.50,345.00 817.50,375.00 847.50,375.00 847.50,345.00 817.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='817.50,390.00 817.50,420.00 847.50,420.00 847.50,390.00 817.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='795.00,435.00 795.00,465.00 825.00,465.00 825.00,435.00 795.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='840.00,435.00 840.00,465.00 870.00,465.00 870.00,435.00 840.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1020.00,300.00 1020.00,330.00 1050.00,330.00 1050.00,300.00 1020.00,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='952.50,345.00 952.50,375.00 982.50,375.00 982.50,345.00 952.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='907.50,390.00 907.50,420.00 937.50,420.00 937.50,390.00 907.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='885.00,435.00 885.00,465.00 915.00,465.00 915.00,435.00 885.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='930.00,435.00 930.00,465.00 960.00,465.00 960.00,435.00 930.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='997.50,390.00 997.50,420.00 1027.50,420.00 1027.50,390.00 997.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='975.00,435.00 975.00,465.00 1005.00,465.00 1005.00,435.00 975.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1020.00,435.00 1020.00,465.00 1050.00,465.00 1050.00,435.00 1020.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1087.50,345.00 1087.50,375.00 1117.50,375.00 1117.50,345.00 1087.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1087.50,390.00 1087.50,420.00 1117.50,420.00 1117.50,390.00 1087.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1065.00,435.00 1065.00,465.00 1095.00,465.00 1095.00,435.00 1065.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1110.00,435.00 1110.00,465.00 1140.00,465.00 1140.00,435.00 1110.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1261.88,255.00 1261.88,285.00 1291.88,285.00 1291.88,255.00 1261.88,255.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1211.25,300.00 1211.25,330.00 1241.25,330.00 1241.25,300.00 1211.25,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1211.25,345.00 1211.25,375.00 1241.25,375.00 1241.25,345.00 1211.25,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1177.50,390.00 1177.50,420.00 1207.50,420.00 1207.50,390.00 1177.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1155.00,435.00 1155.00,465.00 1185.00,465.00 1185.00,435.00 1155.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1200.00,435.00 1200.00,465.00 1230.00,465.00 1230.00,435.00 1200.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1245.00,390.00 1245.00,420.00 1275.00,420.00 1275.00,390.00 1245.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1245.00,435.00 1245.00,465.00 1275.00,465.00 1275.00,435.00 1245.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1312.50,300.00 1312.50,330.00 1342.50,330.00 1342.50,300.00 1312.50,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1312.50,345.00 1312.50,375.00 1342.50,375.00 1342.50,345.00 1312.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1312.50,390.00 1312.50,420.00 1342.50,420.00 1342.50,390.00 1312.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1290.00,435.00 1290.00,465.00 1320.00,465.00 1320.00,435.00 1290.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1335.00,435.00 1335.00,465.00 1365.00,465.00 1365.00,435.00 1335.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1436.25,165.00 1436.25,195.00 1466.25,195.00 1466.25,165.00 1436.25,165.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1436.25,210.00 1436.25,240.00 1466.25,240.00 1466.25,210.00 1436.25,210.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1436.25,255.00 1436.25,285.00 1466.25,285.00 1466.25,255.00 1436.25,255.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1436.25,300.00 1436.25,330.00 1466.25,330.00 1466.25,300.00 1436.25,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1402.50,345.00 1402.50,375.00 1432.50,375.00 1432.50,345.00 1402.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1380.00,390.00 1380.00,420.00 1410.00,420.00 1410.00,390.00 1380.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1380.00,435.00 1380.00,465.00 1410.00,465.00 1410.00,435.00 1380.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1425.00,390.00 1425.00,420.00 1455.00,420.00 1455.00,390.00 1425.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1425.00,435.00 1425.00,465.00 1455.00,465.00 1455.00,435.00 1425.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1470.00,345.00 1470.00,375.00 1500.00,375.00 1500.00,345.00 1470.00,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1470.00,390.00 1470.00,420.00 1500.00,420.00 1500.00,390.00 1470.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1470.00,435.00 1470.00,465.00 1500.00,465.00 1500.00,435.00 1470.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1776.56,75.00 1776.56,105.00 1806.56,105.00 1806.56,75.00 1776.56,75.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1776.56,120.00 1776.56,150.00 1806.56,150.00 1806.56,120.00 1776.56,120.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1776.56,165.00 1776.56,195.00 1806.56,195.00 1806.56,165.00 1776.56,165.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1776.56,210.00 1776.56,240.00 1806.56,240.00 1806.56,210.00 1776.56,210.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1633.12,255.00 1633.12,285.00 1663.12,285.00 1663.12,255.00 1633.12,255.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1633.12,300.00 1633.12,330.00 1663.12,330.00 1663.12,300.00 1633.12,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1548.75,345.00 1548.75,375.00 1578.75,375.00 1578.75,345.00 1548.75,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1515.00,390.00 1515.00,420.00 1545.00,420.00 1545.00,390.00 1515.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1515.00,435.00 1515.00,465.00 1545.00,465.00 1545.00,435.00 1515.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1582.50,390.00 1582.50,420.00 1612.50,420.00 1612.50,390.00 1582.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1560.00,435.00 1560.00,465.00 1590.00,465.00 1590.00,435.00 1560.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1605.00,435.00 1605.00,465.00 1635.00,465.00 1635.00,435.00 1605.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1717.50,345.00 1717.50,375.00 1747.50,375.00 1747.50,345.00 1717.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1672.50,390.00 1672.50,420.00 1702.50,420.00 1702.50,390.00 1672.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1650.00,435.00 1650.00,465.00 1680.00,465.00 1680.00,435.00 1650.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1695.00,435.00 1695.00,465.00 1725.00,465.00 1725.00,435.00 1695.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1762.50,390.00 1762.50,420.00 1792.50,420.00 1792.50,390.00 1762.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1740.00,435.00 1740.00,465.00 1770.00,465.00 1770.00,435.00 1740.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1785.00,435.00 1785.00,465.00 1815.00,465.00 1815.00,435.00 1785.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1920.00,255.00 1920.00,285.00 1950.00,285.00 1950.00,255.00 1920.00,255.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1852.50,300.00 1852.50,330.00 1882.50,330.00 1882.50,300.00 1852.50,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1830.00,345.00 1830.00,375.00 1860.00,375.00 1860.00,345.00 1830.00,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1830.00,390.00 1830.00,420.00 1860.00,420.00 1860.00,390.00 1830.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1830.00,435.00 1830.00,465.00 1860.00,465.00 1860.00,435.00 1830.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1875.00,345.00 1875.00,375.00 1905.00,375.00 1905.00,345.00 1875.00,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1875.00,390.00 1875.00,420.00 1905.00,420.00 1905.00,390.00 1875.00,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1875.00,435.00 1875.00,465.00 1905.00,465.00 1905.00,435.00 1875.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1987.50,300.00 1987.50,330.00 2017.50,330.00 2017.50,300.00 1987.50,300.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1942.50,345.00 1942.50,375.00 1972.50,375.00 1972.50,345.00 1942.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1942.50,390.00 1942.50,420.00 1972.50,420.00 1972.50,390.00 1942.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1920.00,435.00 1920.00,465.00 1950.00,465.00 1950.00,435.00 1920.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='1965.00,435.00 1965.00,465.00 1995.00,465.00 1995.00,435.00 1965.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='2032.50,345.00 2032.50,375.00 2062.50,375.00 2062.50,345.00 2032.50,345.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='2032.50,390.00 2032.50,420.00 2062.50,420.00 2062.50,390.00 2032.50,390.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='2010.00,435.00 2010.00,465.00 2040.00,465.00 2040.00,435.00 2010.00,435.00 ' />
+<polyline  style='stroke: #000000;fill: #ffffff;stroke-width: 1px;' points='2055.00,435.00 2055.00,465.00 2085.00,465.00 2085.00,435.00 2055.00,435.00 ' />
+</g>
+</g>
+</svg>

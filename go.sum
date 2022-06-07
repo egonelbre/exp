@@ -114,4 +114,6 @@ gonum.org/v1/netlib v0.0.0-20190313105609-8cb42192e0e0/go.mod h1:wa6Ws7BG/ESfp6d
 gonum.org/v1/plot v0.0.0-20190515093506-e2840ee46a6b/go.mod h1:Wt8AAjI+ypCyYX3nZBvf6cAIx93T+c/OS2HFAYskSZc=
 honnef.co/go/js/dom/v2 v2.0.0-20200509013220-d4405f7ab4d8 h1:wEmxE7Y1Kwm9Nrzl+0+yYt3uGXkaqbEYLuRzl/hSDgE=
 honnef.co/go/js/dom/v2 v2.0.0-20200509013220-d4405f7ab4d8/go.mod h1:H5R0jAIe6IchQE778FS2QcrNVgS4vPFb0HPb72n/IJI=
+loov.dev/diagram v0.0.0-20200428131328-71c74e2166f9 h1:I4m5XjSM8JXhySTx3D0x2w4pouaN5iMKNfF6fFISg+E=
+loov.dev/diagram v0.0.0-20200428131328-71c74e2166f9/go.mod h1:yHyE+blkp7HRe3Z8xjs3sqM1Qgbq911T+NclGrbo9v0=
 rsc.io/pdf v0.1.1/go.mod h1:n8OzWcQ6Sp37PL01nO98y4iUCRdTGarVfzxY20ICaU4=
