@@ -1,10 +1,9 @@
 module github.com/egonelbre/exp
 
-go 1.16
+go 1.18
 
 require (
 	github.com/apaxa-go/helper v0.0.0-20180607175117-61d31b1c31c3
-	github.com/dchest/siphash v1.2.2 // indirect
 	github.com/dgryski/go-cuckoof v0.0.0-20141216090059-800a4db6becf
 	github.com/edsrzf/mmap-go v1.0.0
 	github.com/egonelbre/async v0.0.0-20180428125808-52e5b9c6d8ca
@@ -27,4 +26,16 @@ require (
 	gonum.org/v1/gonum v0.8.2
 	honnef.co/go/js/dom/v2 v2.0.0-20200509013220-d4405f7ab4d8
 	loov.dev/diagram v0.0.0-20200428131328-71c74e2166f9
+)
+
+require (
+	dmitri.shuralyov.com/gpu/mtl v0.0.0-20201218220906-28db891af037 // indirect
+	github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802 // indirect
+	github.com/dchest/siphash v1.2.2 // indirect
+	github.com/faiface/glhf v0.0.0-20181018222622-82a6317ac380 // indirect
+	github.com/faiface/mainthread v0.0.0-20171120011319-8b78f0a41ae3 // indirect
+	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20200222043503-6f7a984d4dc4 // indirect
+	github.com/mattn/go-runewidth v0.0.9 // indirect
+	github.com/pkg/errors v0.8.1 // indirect
+	golang.org/x/sys v0.0.0-20191026070338-33540a1f6037 // indirect
 )
