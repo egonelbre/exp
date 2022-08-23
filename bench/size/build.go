@@ -17,7 +17,9 @@ func main() {
 		}
 
 		outfile := e.Name() + ".exe"
-		out, err := exec.Command("go1.19", "build", "-o", outfile, "./"+e.Name()).CombinedOutput()
+		cmd := exec.Command("go1.19", "build", "-o", outfile, "./"+e.Name())
+		cmd.Env = append(os.Environ(), "GOOS=linux", "GOARCH=amd64")
+		out, err := cmd.CombinedOutput()
 		if err != nil {
 			fmt.Fprintln(os.Stderr, string(out))
 			fmt.Fprintln(os.Stderr, err)
