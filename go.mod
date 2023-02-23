@@ -19,24 +19,25 @@ require (
 	github.com/shawnsmithdev/zermelo v1.0.3
 	github.com/zeebo/mwc v0.0.4
 	github.com/zeebo/pcg v1.0.0
-	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad
-	golang.org/x/exp v0.0.0-20201229011636-eab1b5eb1a03
-	golang.org/x/image v0.0.0-20201208152932-35266b937fa6
-	golang.org/x/mobile v0.0.0-20201217150744-e6ae53a27f4f
-	golang.org/x/text v0.3.5
+	golang.org/x/crypto v0.6.0
+	golang.org/x/exp/shiny v0.0.0-20230213192124-5e25df0256eb
+	golang.org/x/image v0.5.0
+	golang.org/x/mobile v0.0.0-20221110043201-43a038452099
+	golang.org/x/text v0.7.0
 	gonum.org/v1/gonum v0.8.2
 	honnef.co/go/js/dom/v2 v2.0.0-20200509013220-d4405f7ab4d8
 	loov.dev/diagram v0.0.0-20200428131328-71c74e2166f9
 )
 
 require (
-	dmitri.shuralyov.com/gpu/mtl v0.0.0-20201218220906-28db891af037 // indirect
-	github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802 // indirect
+	dmitri.shuralyov.com/gpu/mtl v0.0.0-20221208032759-85de2813cf6b // indirect
 	github.com/dchest/siphash v1.2.2 // indirect
 	github.com/faiface/glhf v0.0.0-20181018222622-82a6317ac380 // indirect
 	github.com/faiface/mainthread v0.0.0-20171120011319-8b78f0a41ae3 // indirect
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20200222043503-6f7a984d4dc4 // indirect
+	github.com/jezek/xgb v1.0.0 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/pkg/errors v0.8.1 // indirect
-	golang.org/x/sys v0.0.0-20191026070338-33540a1f6037 // indirect
+	golang.org/x/exp v0.0.0-20230213192124-5e25df0256eb // indirect
+	golang.org/x/sys v0.5.0 // indirect
 )
