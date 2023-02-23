@@ -17,6 +17,7 @@ require (
 	github.com/nsf/termbox-go v0.0.0-20210114135735-d04385b850e8
 	github.com/pkg/profile v1.5.0
 	github.com/shawnsmithdev/zermelo v1.0.3
+	github.com/zeebo/mwc v0.0.4
 	github.com/zeebo/pcg v1.0.0
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad
 	golang.org/x/exp v0.0.0-20201229011636-eab1b5eb1a03

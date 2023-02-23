@@ -1,8 +1,7 @@
 package cache
 
 import (
-	"math/rand"
-	"time"
+	"github.com/zeebo/mwc"
 )
 
 type Random struct {
@@ -12,7 +11,7 @@ type Random struct {
 	maxSize     int
 	evicted     EvictFunc
 
-	rng rand.Rand
+	rng mwc.T
 }
 
 const (
@@ -29,7 +28,7 @@ func NewRandom(maxSize int, evicted EvictFunc) *Random {
 		maxSize:     maxSize,
 		evicted:     evicted,
 
-		rng: *rand.New(rand.NewSource(time.Now().Unix())),
+		rng: *mwc.Rand(),
 	}
 }
 
@@ -41,7 +40,7 @@ func NewRandomPrealloc(entries, maxSize int, evicted EvictFunc) *Random {
 		maxSize:     maxSize,
 		evicted:     evicted,
 
-		rng: *rand.New(rand.NewSource(time.Now().Unix())),
+		rng: *mwc.Rand(),
 	}
 }
 
@@ -73,8 +72,9 @@ func (cache *Random) bump(index int) {
 		return
 	}
 
-	// TODO: optimize rng
-	cache.swap(index, low+cache.rng.Intn(high-low))
+	// we don't need an unbiased random value
+	x := cache.rng.Uint64() % uint64(high-low)
+	cache.swap(index, low+int(x))
 }
 
 func (cache *Random) swap(a, b int) {
