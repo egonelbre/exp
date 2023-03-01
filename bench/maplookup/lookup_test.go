@@ -1,11 +1,14 @@
 package maplookup_test
 
 import (
+	_ "embed"
 	"fmt"
 	"math/rand"
 	"sort"
 	"strings"
 	"testing"
+
+	"github.com/egonelbre/exp/wordsearch/trie-compact"
 )
 
 type LookupList []string
@@ -25,14 +28,14 @@ func (x BinaryList) Contains(target string) bool {
 	n := len(x)
 	i, j := 0, n
 	for i < j {
-		h := int(uint(i+j) >> 1) 
+		h := int(uint(i+j) >> 1)
 		if x[h] < target {
-			i = h + 1 
+			i = h + 1
 		} else {
-			j = h 
+			j = h
 		}
 	}
-	
+
 	return i < n && x[i] == target
 }
 
@@ -58,6 +61,14 @@ func (q LookupMap) Contains(x string) bool {
 	return ok
 }
 
+func lookupTrie(entries []string) *trie.Compact {
+	root := trie.Uncompact{}
+	for _, x := range entries {
+		root.Insert(x)
+	}
+	return root.Compress()
+}
+
 func lookupMap(entries []string) LookupMap {
 	xs := make(map[string]struct{})
 	for _, x := range entries {
@@ -72,12 +83,12 @@ var sizes = []int{1, 4, 6, 8, 10, 12, 14, 16, 18, 24}
 
 const maxLookup = 10000
 
+//go:embed enable1.txt
+var dictionary []byte
+
 func init() {
-	for i := 0; i < maxLookup; i++ {
-		var s [128]byte
-		rand.Read(s[:])
-		randomStrings = append(randomStrings, string(s[:]))
-	}
+	randomStrings = strings.Split(string(dictionary), "\n")
+	shuffleStrings(randomStrings)
 }
 
 const queryCount = 1000
@@ -92,21 +103,21 @@ func scenarios(targets, mismatches []string) []scenario {
 		{
 			name:  "100%",
 			query: pickRandom(targets, queryCount),
-		}, 
+		},
 		{
 			name: "90%",
 			query: concat(
 				pickRandom(targets, queryCount*90/100),
 				pickRandom(mismatches, queryCount*10/100),
 			),
-		}, 
+		},
 		{
 			name: "50%",
 			query: concat(
 				pickRandom(targets, queryCount*50/100),
 				pickRandom(mismatches, queryCount*50/100),
 			),
-		}, 
+		},
 		{
 			name: "10%",
 			query: concat(
@@ -126,6 +137,7 @@ func Benchmark(b *testing.B) {
 
 		lisx := lookupList(targets)
 		binx := binaryList(targets)
+		trix := lookupTrie(targets)
 		mapx := lookupMap(targets)
 
 		for _, scenario := range scenarios(targets, mismatches) {
@@ -138,6 +150,7 @@ func Benchmark(b *testing.B) {
 					}
 				}
 			})
+
 			b.Run(fmt.Sprintf("Bin/%d-%s", size, scenario.name), func(b *testing.B) {
 				for i := 0; i < b.N; i++ {
 					for _, q := range scenario.query {
@@ -147,6 +160,17 @@ func Benchmark(b *testing.B) {
 					}
 				}
 			})
+
+			b.Run(fmt.Sprintf("Tri/%d-%s", size, scenario.name), func(b *testing.B) {
+				for i := 0; i < b.N; i++ {
+					for _, q := range scenario.query {
+						if trix.Contains(q) {
+							z++
+						}
+					}
+				}
+			})
+
 			b.Run(fmt.Sprintf("Map/%d-%s", size, scenario.name), func(b *testing.B) {
 				for i := 0; i < b.N; i++ {
 					for _, q := range scenario.query {
@@ -158,6 +182,7 @@ func Benchmark(b *testing.B) {
 			})
 		}
 	}
+
 	b.Log(z)
 }
 
@@ -175,8 +200,12 @@ func pickRandom(xs []string, n int) []string {
 		all = append(all, all...)
 	}
 	all = all[:n]
-	rand.Shuffle(len(all), func(i, k int) {
-		all[i], all[k] = all[k], all[i]
-	})
+	shuffleStrings(all)
 	return all
+}
+
+func shuffleStrings(xs []string) {
+	rand.Shuffle(len(xs), func(i, k int) {
+		xs[i], xs[k] = xs[k], xs[i]
+	})
 }
