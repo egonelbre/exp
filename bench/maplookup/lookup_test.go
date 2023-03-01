@@ -47,7 +47,7 @@ func lookupMap(entries []string) LookupMap {
 }
 
 var randomStrings []string
-var sizes = []int{1, 4, 8, 12, 18, 24, 48, 56}
+var sizes = []int{1, 4, 8, 10, 12, 14, 16, 18, 24}
 
 const maxLookup = 10000
 
