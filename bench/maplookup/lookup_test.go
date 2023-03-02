@@ -78,8 +78,17 @@ func lookupMap(entries []string) LookupMap {
 	return LookupMap(xs)
 }
 
+func lookupMaph(entries []string) LookupMap {
+	xs := make(map[string]struct{}, len(entries))
+	for _, x := range entries {
+		q := "x" + x + "x"
+		xs[q[1:len(q)-1]] = struct{}{}
+	}
+	return LookupMap(xs)
+}
+
 var randomStrings []string
-var sizes = []int{1, 4, 6, 8, 10, 12, 14, 16, 18, 24}
+var sizes = []int{1, 4, 6, 8, 10, 12, 14, 16, 18, 24, 28, 32}
 
 const maxLookup = 10000
 
@@ -139,6 +148,7 @@ func Benchmark(b *testing.B) {
 		binx := binaryList(targets)
 		trix := lookupTrie(targets)
 		mapx := lookupMap(targets)
+		maphx := lookupMaph(targets)
 
 		for _, scenario := range scenarios(targets, mismatches) {
 			b.Run(fmt.Sprintf("Lis/%d-%s", size, scenario.name), func(b *testing.B) {
@@ -175,6 +185,16 @@ func Benchmark(b *testing.B) {
 				for i := 0; i < b.N; i++ {
 					for _, q := range scenario.query {
 						if mapx.Contains(q) {
+							z++
+						}
+					}
+				}
+			})
+
+			b.Run(fmt.Sprintf("Maph/%d-%s", size, scenario.name), func(b *testing.B) {
+				for i := 0; i < b.N; i++ {
+					for _, q := range scenario.query {
+						if maphx.Contains(q) {
 							z++
 						}
 					}
