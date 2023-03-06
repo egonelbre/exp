@@ -13,19 +13,19 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
+var pgaddr = flag.String("database", os.Getenv("DATABASE_URL"), "database address")
+
 func BenchmarkSchema(b *testing.B) {
 	ctx := context.Background()
 	for i := 0; i < b.N; i++ {
 		WithDatabase(ctx, b, func(b *testing.B, db *pgx.Conn) {
-			_, err := db.Exec(ctx, "CREATE TABLE accounts ( user_id serial PRIMARY KEY )")
+			_, err := db.Exec(ctx, DatabaseSchema)
 			if err != nil {
 				b.Fatal(err)
 			}
 		})
 	}
 }
-
-var pgaddr = flag.String("database", os.Getenv("DATABASE_URL"), "database address")
 
 func WithDatabase[TB testing.TB](ctx context.Context, t TB, fn func(t TB, db *pgx.Conn)) {
 	if *pgaddr == "" {
