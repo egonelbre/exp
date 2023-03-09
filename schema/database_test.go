@@ -13,28 +13,39 @@ import (
 
 func BenchmarkDatabase(b *testing.B) {
 	ctx := context.Background()
-	for i := 0; i < b.N; i++ {
-		WithDatabase(ctx, b, func(b *testing.B, db *pgx.Conn) {
-			_, err := db.Exec(ctx, DatabaseSchema)
-			if err != nil {
-				b.Fatal(err)
-			}
-		})
-	}
+	WithDocker(ctx, b, func(b *testing.B, db *pgx.Conn, connstr string) {
+		b.ResetTimer()
+		defer b.StopTimer()
+
+		for i := 0; i < b.N; i++ {
+			withDatabase(ctx, connstr, b, func(b *testing.B, db *pgx.Conn) {
+				_, err := db.Exec(ctx, DatabaseSchema)
+				if err != nil {
+					b.Fatal(err)
+				}
+			})
+		}
+	})
 }
 
 func WithDatabase[TB testing.TB](ctx context.Context, tb TB, fn func(t TB, db *pgx.Conn)) {
 	if *pgaddr == "" {
 		tb.Skip("-database flag not defined")
 	}
-	dbaddr := *pgaddr
+	withDatabase(ctx, *pgaddr, tb, fn)
+}
+
+func withDatabase[TB testing.TB](ctx context.Context, connstr string, tb TB, fn func(t TB, db *pgx.Conn)) {
+	if connstr == "" {
+		tb.Skip("connstr not defined")
+	}
 
 	var id [8]byte
 	rand.Read(id[:])
 	uniqueName := tb.Name() + "/" + hex.EncodeToString(id[:])
 
 	// Create the first connection that we use to create the database.
-	maindb, err := pgx.Connect(ctx, dbaddr)
+	maindb, err := pgx.Connect(ctx, connstr)
 	if err != nil {
 		tb.Fatalf("Unable to connect to database: %v", err)
 	}
@@ -50,7 +61,7 @@ func WithDatabase[TB testing.TB](ctx context.Context, tb TB, fn func(t TB, db *p
 	}()
 
 	// Make a connection the new database.
-	connstr, err := connstrWithDatabase(dbaddr, uniqueName)
+	connstr, err = connstrWithDatabase(connstr, uniqueName)
 	if err != nil {
 		tb.Fatal(err)
 	}

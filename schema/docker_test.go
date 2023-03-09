@@ -35,7 +35,7 @@ func mainWithDocker(m *testing.M) int {
 func BenchmarkDocker(b *testing.B) {
 	ctx := context.Background()
 	for i := 0; i < b.N; i++ {
-		WithDocker(ctx, b, func(b *testing.B, db *pgx.Conn) {
+		WithDocker(ctx, b, func(b *testing.B, db *pgx.Conn, connstr string) {
 			_, err := db.Exec(ctx, DatabaseSchema)
 			if err != nil {
 				b.Fatal(err)
@@ -44,11 +44,11 @@ func BenchmarkDocker(b *testing.B) {
 	}
 }
 
-func WithDocker[TB testing.TB](ctx context.Context, tb TB, fn func(tb TB, db *pgx.Conn)) {
+func WithDocker[TB testing.TB](ctx context.Context, tb TB, fn func(tb TB, db *pgx.Conn, connstr string)) {
 	resource, err := dockerPool.RunWithOptions(&dockertest.RunOptions{
 		Repository: "postgres",
 		Tag:        "15",
-		Cmd: []string{"-c", "fsync=off"},
+		Cmd:        []string{"-c", "fsync=off"},
 		Env: []string{
 			"POSTGRES_PASSWORD=secret",
 			"POSTGRES_USER=user",
@@ -91,5 +91,5 @@ func WithDocker[TB testing.TB](ctx context.Context, tb TB, fn func(tb TB, db *pg
 
 	defer func() { _ = db.Close(ctx) }()
 
-	fn(tb, db)
+	fn(tb, db, databaseConnstr)
 }

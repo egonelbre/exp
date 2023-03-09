@@ -17,27 +17,39 @@ var pgaddr = flag.String("database", os.Getenv("DATABASE_URL"), "database addres
 
 func BenchmarkSchema(b *testing.B) {
 	ctx := context.Background()
-	for i := 0; i < b.N; i++ {
-		WithSchema(ctx, b, func(b *testing.B, db *pgx.Conn) {
-			_, err := db.Exec(ctx, DatabaseSchema)
-			if err != nil {
-				b.Fatal(err)
-			}
-		})
-	}
+	WithDocker(ctx, b, func(b *testing.B, db *pgx.Conn, connstr string) {
+		b.ResetTimer()
+		defer b.StopTimer()
+
+		for i := 0; i < b.N; i++ {
+			withSchema(ctx, connstr, b, func(b *testing.B, db *pgx.Conn) {
+				_, err := db.Exec(ctx, DatabaseSchema)
+				if err != nil {
+					b.Fatal(err)
+				}
+			})
+		}
+	})
 }
 
 func WithSchema[TB testing.TB](ctx context.Context, tb TB, fn func(t TB, db *pgx.Conn)) {
 	if *pgaddr == "" {
 		tb.Skip("-database flag not defined")
 	}
-	dbaddr := *pgaddr
+	withSchema(ctx, *pgaddr, tb, fn)
+}
+
+func withSchema[TB testing.TB](ctx context.Context, connstr string, tb TB, fn func(t TB, db *pgx.Conn)) {
+	if connstr == "" {
+		tb.Skip("-database flag not defined")
+	}
 
 	var id [8]byte
 	rand.Read(id[:])
 	uniqueName := tb.Name() + "/" + hex.EncodeToString(id[:])
 
-	connstr, err := connstrWithSchema(dbaddr, uniqueName)
+	var err error
+	connstr, err = connstrWithSchema(connstr, uniqueName)
 	if err != nil {
 		tb.Fatal(err)
 	}
@@ -72,7 +84,7 @@ func connstrWithSchema(connstr, schema string) (string, error) {
 	}
 	q := u.Query()
 	q.Set("search_path", sanitizeSchema(schema))
-	u.RawQuery  = q.Encode()
+	u.RawQuery = q.Encode()
 	return u.String(), nil
 }
 
