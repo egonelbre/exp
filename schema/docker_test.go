@@ -12,18 +12,24 @@ import (
 	"github.com/ory/dockertest/v3/docker"
 )
 
-var dockerPool *dockertest.Pool
+var (
+	dockerPool *dockertest.Pool
+)
 
 func TestMain(m *testing.M) {
+	os.Exit(mainWithDocker(m))
+}
+
+func mainWithDocker(m *testing.M) int {
 	var err error
 	dockerPool, err = dockertest.NewPool("")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
+		return 1
 	}
 	dockerPool.MaxWait = 120 * time.Second
-	code := m.Run()
-	os.Exit(code)
+
+	return m.Run()
 }
 
 func BenchmarkDocker(b *testing.B) {
@@ -42,6 +48,7 @@ func WithDocker[TB testing.TB](ctx context.Context, tb TB, fn func(tb TB, db *pg
 	resource, err := dockerPool.RunWithOptions(&dockertest.RunOptions{
 		Repository: "postgres",
 		Tag:        "15",
+		Cmd: []string{"-c", "fsync=off"},
 		Env: []string{
 			"POSTGRES_PASSWORD=secret",
 			"POSTGRES_USER=user",
@@ -58,14 +65,12 @@ func WithDocker[TB testing.TB](ctx context.Context, tb TB, fn func(tb TB, db *pg
 	}
 	defer func() {
 		if err := dockerPool.Purge(resource); err != nil {
-			tb.Logf("failed to stop: %v", err)
+			tb.Errorf("failed to stop: %v", err)
 		}
 	}()
 
 	hostAndPort := resource.GetHostPort("5432/tcp")
 	databaseConnstr := fmt.Sprintf("postgres://user:secret@%s/main?sslmode=disable", hostAndPort)
-
-	tb.Logf("Postgres listening on %q", databaseConnstr)
 
 	err = resource.Expire(2 * 60) // hard kill the container after 2 minutes, just in case.
 	if err != nil {
