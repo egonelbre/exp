@@ -15,9 +15,26 @@ import (
 
 var pgaddr = flag.String("database", os.Getenv("DATABASE_URL"), "database address")
 
-func BenchmarkSchema(b *testing.B) {
+func BenchmarkSchema_FsyncOn(b *testing.B) {
 	ctx := context.Background()
-	WithDocker(ctx, b, func(b *testing.B, db *pgx.Conn, connstr string) {
+	WithDocker(ctx, b, true, func(b *testing.B, db *pgx.Conn, connstr string) {
+		b.ResetTimer()
+		defer b.StopTimer()
+
+		for i := 0; i < b.N; i++ {
+			withSchema(ctx, connstr, b, func(b *testing.B, db *pgx.Conn) {
+				_, err := db.Exec(ctx, DatabaseSchema)
+				if err != nil {
+					b.Fatal(err)
+				}
+			})
+		}
+	})
+}
+
+func BenchmarkSchema_FsyncOff(b *testing.B) {
+	ctx := context.Background()
+	WithDocker(ctx, b, false, func(b *testing.B, db *pgx.Conn, connstr string) {
 		b.ResetTimer()
 		defer b.StopTimer()
 

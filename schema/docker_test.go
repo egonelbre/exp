@@ -12,9 +12,7 @@ import (
 	"github.com/ory/dockertest/v3/docker"
 )
 
-var (
-	dockerPool *dockertest.Pool
-)
+var dockerPool *dockertest.Pool
 
 func TestMain(m *testing.M) {
 	os.Exit(mainWithDocker(m))
@@ -32,10 +30,10 @@ func mainWithDocker(m *testing.M) int {
 	return m.Run()
 }
 
-func BenchmarkDocker(b *testing.B) {
+func BenchmarkDocker_FsyncOn(b *testing.B) {
 	ctx := context.Background()
 	for i := 0; i < b.N; i++ {
-		WithDocker(ctx, b, func(b *testing.B, db *pgx.Conn, connstr string) {
+		WithDocker(ctx, b, true, func(b *testing.B, db *pgx.Conn, connstr string) {
 			_, err := db.Exec(ctx, DatabaseSchema)
 			if err != nil {
 				b.Fatal(err)
@@ -44,11 +42,27 @@ func BenchmarkDocker(b *testing.B) {
 	}
 }
 
-func WithDocker[TB testing.TB](ctx context.Context, tb TB, fn func(tb TB, db *pgx.Conn, connstr string)) {
+func BenchmarkDocker_FsyncOff(b *testing.B) {
+	ctx := context.Background()
+	for i := 0; i < b.N; i++ {
+		WithDocker(ctx, b, false, func(b *testing.B, db *pgx.Conn, connstr string) {
+			_, err := db.Exec(ctx, DatabaseSchema)
+			if err != nil {
+				b.Fatal(err)
+			}
+		})
+	}
+}
+
+func WithDocker[TB testing.TB](ctx context.Context, tb TB, fsyncon bool, fn func(tb TB, db *pgx.Conn, connstr string)) {
+	cmd := []string{"-c", "fsync=off"}
+	if fsyncon {
+		cmd = nil
+	}
 	resource, err := dockerPool.RunWithOptions(&dockertest.RunOptions{
 		Repository: "postgres",
 		Tag:        "15",
-		Cmd:        []string{"-c", "fsync=off"},
+		Cmd:        cmd,
 		Env: []string{
 			"POSTGRES_PASSWORD=secret",
 			"POSTGRES_USER=user",

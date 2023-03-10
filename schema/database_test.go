@@ -11,9 +11,26 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-func BenchmarkDatabase(b *testing.B) {
+func BenchmarkDatabase_FsyncOff(b *testing.B) {
 	ctx := context.Background()
-	WithDocker(ctx, b, func(b *testing.B, db *pgx.Conn, connstr string) {
+	WithDocker(ctx, b, false, func(b *testing.B, db *pgx.Conn, connstr string) {
+		b.ResetTimer()
+		defer b.StopTimer()
+
+		for i := 0; i < b.N; i++ {
+			withDatabase(ctx, connstr, b, func(b *testing.B, db *pgx.Conn) {
+				_, err := db.Exec(ctx, DatabaseSchema)
+				if err != nil {
+					b.Fatal(err)
+				}
+			})
+		}
+	})
+}
+
+func BenchmarkDatabase_FsyncOn(b *testing.B) {
+	ctx := context.Background()
+	WithDocker(ctx, b, true, func(b *testing.B, db *pgx.Conn, connstr string) {
 		b.ResetTimer()
 		defer b.StopTimer()
 
