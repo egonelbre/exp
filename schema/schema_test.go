@@ -11,6 +11,7 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5"
+	"golang.org/x/sync/errgroup"
 )
 
 var pgaddr = flag.String("database", os.Getenv("DATABASE_URL"), "database address")
@@ -45,6 +46,27 @@ func BenchmarkSchema_FsyncOff(b *testing.B) {
 					b.Fatal(err)
 				}
 			})
+		}
+	})
+}
+
+func BenchmarkSchema_FsyncOff_Parallel(b *testing.B) {
+	ctx := context.Background()
+	WithDocker(ctx, b, false, func(b *testing.B, db *pgx.Conn, connstr string) {
+		b.ResetTimer()
+		defer b.StopTimer()
+
+		for i := 0; i < b.N; i++ {
+			var g errgroup.Group
+			for k := 0; k < parallelCreate; k++ {
+				g.Go(func() error {
+					withSchema(ctx, connstr, b, func(b *testing.B, db *pgx.Conn) {
+						_, _ = db.Exec(ctx, DatabaseSchema)
+					})
+					return nil
+				})
+			}
+			g.Wait()
 		}
 	})
 }

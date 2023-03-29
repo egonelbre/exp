@@ -5,6 +5,7 @@ go 1.20
 require (
 	github.com/jackc/pgx/v5 v5.3.1
 	github.com/ory/dockertest/v3 v3.9.1
+	golang.org/x/sync v0.1.0
 )
 
 require (

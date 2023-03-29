@@ -9,7 +9,25 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5"
+	"golang.org/x/sync/errgroup"
 )
+
+func BenchmarkDatabase_FsyncOn(b *testing.B) {
+	ctx := context.Background()
+	WithDocker(ctx, b, true, func(b *testing.B, db *pgx.Conn, connstr string) {
+		b.ResetTimer()
+		defer b.StopTimer()
+
+		for i := 0; i < b.N; i++ {
+			withDatabase(ctx, connstr, b, func(b *testing.B, db *pgx.Conn) {
+				_, err := db.Exec(ctx, DatabaseSchema)
+				if err != nil {
+					b.Fatal(err)
+				}
+			})
+		}
+	})
+}
 
 func BenchmarkDatabase_FsyncOff(b *testing.B) {
 	ctx := context.Background()
@@ -28,19 +46,24 @@ func BenchmarkDatabase_FsyncOff(b *testing.B) {
 	})
 }
 
-func BenchmarkDatabase_FsyncOn(b *testing.B) {
+func BenchmarkDatabase_FsyncOff_Parallel(b *testing.B) {
 	ctx := context.Background()
-	WithDocker(ctx, b, true, func(b *testing.B, db *pgx.Conn, connstr string) {
+	WithDocker(ctx, b, false, func(b *testing.B, db *pgx.Conn, connstr string) {
 		b.ResetTimer()
 		defer b.StopTimer()
 
 		for i := 0; i < b.N; i++ {
-			withDatabase(ctx, connstr, b, func(b *testing.B, db *pgx.Conn) {
-				_, err := db.Exec(ctx, DatabaseSchema)
-				if err != nil {
-					b.Fatal(err)
-				}
-			})
+			var g errgroup.Group
+			for k := 0; k < parallelCreate; k++ {
+				g.Go(func() error {
+					withDatabase(ctx, connstr, b, func(b *testing.B, db *pgx.Conn) {
+						_, _ = db.Exec(ctx, DatabaseSchema)
+					})
+					return nil
+				})
+			}
+			g.Wait()
+
 		}
 	})
 }
