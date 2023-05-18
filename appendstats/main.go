@@ -92,7 +92,7 @@ func main() {
 			if r.Key.HasPointers {
 				ptr = "ptr"
 			}
-			fmt.Println("    ", r.Key.Size, r.Value, ptr)
+			fmt.Printf("  %6v %4v %v bytes\n", r.Value, ptr, r.Key.Size)
 		}
 	}
 	{
@@ -109,7 +109,7 @@ func main() {
 			if HasPointers(r.Key) {
 				ptr = "ptr"
 			}
-			fmt.Println("    ", r.Key, r.Value, ptr)
+			fmt.Printf("  %6v %4v %v\n", r.Value, ptr, r.Key)
 		}
 	}
 }
