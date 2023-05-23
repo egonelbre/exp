@@ -71,3 +71,18 @@ func memclrNoHeapPointers(ptr unsafe.Pointer, n uintptr) {}
 func add(p unsafe.Pointer, newlenmem uintptr) unsafe.Pointer {
 	return nil
 }
+
+// this is actually a compiler intrinsic
+func abi_FuncPCABIInternal(f interface{}) uintptr { return 0 }
+
+//go:noinline
+func getcallerpc() uintptr { return 0 }
+
+//go:noinline
+func racereadrangepc(addr unsafe.Pointer, sz, callerpc, pc uintptr) {}
+
+//go:noinline
+func msanread(addr unsafe.Pointer, sz uintptr) {}
+
+//go:noinline
+func asanread(addr unsafe.Pointer, sz uintptr) {}

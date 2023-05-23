@@ -5,6 +5,10 @@
 package main
 
 const (
+	raceenabled = false
+	msanenabled = false
+	asanenabled = false
+
 	goarch_IsAmd64  = 1
 	goarch_IsArm64  = 0
 	goarch_IsMips   = 0

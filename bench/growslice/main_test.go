@@ -31,18 +31,16 @@ func BenchmarkGrowslice(b *testing.B) {
 //go:noinline
 func growslice(oldPtr unsafe.Pointer, newLen, oldCap, num int, et *_type) slice {
 	oldLen := newLen - num
-	/*
-		if raceenabled {
-			callerpc := getcallerpc()
-			racereadrangepc(oldPtr, uintptr(oldLen*int(et.Size_)), callerpc, abi.FuncPCABIInternal(growslice))
-		}
-		if msanenabled {
-			msanread(oldPtr, uintptr(oldLen*int(et.Size_)))
-		}
-		if asanenabled {
-			asanread(oldPtr, uintptr(oldLen*int(et.Size_)))
-		}
-	*/
+	if raceenabled {
+		callerpc := getcallerpc()
+		racereadrangepc(oldPtr, uintptr(oldLen*int(et.Size_)), callerpc, abi_FuncPCABIInternal(growslice))
+	}
+	if msanenabled {
+		msanread(oldPtr, uintptr(oldLen*int(et.Size_)))
+	}
+	if asanenabled {
+		asanread(oldPtr, uintptr(oldLen*int(et.Size_)))
+	}
 
 	if newLen < 0 {
 		panic(errorString("growslice: len out of range"))
