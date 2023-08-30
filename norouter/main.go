@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -64,14 +63,13 @@ func (server *Server) ServeDashboard(w http.ResponseWriter, r *http.Request) {
 func (server *EntitiesServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch prefix, r := Route(r); prefix {
 	case "":
-		fmt.Println(prefix, r.URL.Path)
 		server.ServeDashboard(w, r)
 	default:
-		fmt.Println(prefix, r.URL.Path)
-		// use an ephemeral server for serving subroutes
+		// use an ephemeral server for serving subroute
+		// you can also validate ID here
 		(&EntityServer{
 			EntitiesServer: server,
-			ID:             prefix, // you can validate ID here
+			ID:             prefix,
 		}).ServeHTTP(w, r)
 	}
 }
