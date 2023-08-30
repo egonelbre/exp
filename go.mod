@@ -21,12 +21,12 @@ require (
 	github.com/shawnsmithdev/zermelo v1.0.3
 	github.com/zeebo/mwc v0.0.4
 	github.com/zeebo/pcg v1.0.0
-	golang.org/x/crypto v0.11.0
+	golang.org/x/crypto v0.12.0
 	golang.org/x/exp v0.0.0-20230213192124-5e25df0256eb
 	golang.org/x/exp/shiny v0.0.0-20230213192124-5e25df0256eb
 	golang.org/x/image v0.5.0
 	golang.org/x/mobile v0.0.0-20221110043201-43a038452099
-	golang.org/x/text v0.11.0
+	golang.org/x/text v0.12.0
 	golang.org/x/tools v0.9.1
 	gonum.org/v1/gonum v0.8.2
 	honnef.co/go/js/dom/v2 v2.0.0-20200509013220-d4405f7ab4d8
@@ -47,5 +47,5 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	golang.org/x/mod v0.10.0 // indirect
 	golang.org/x/sync v0.2.0 // indirect
-	golang.org/x/sys v0.10.0 // indirect
+	golang.org/x/sys v0.11.0 // indirect
 )
