@@ -3,8 +3,6 @@ package call
 import (
 	"runtime"
 	"testing"
-
-	"github.com/egonelbre/exp/bench/call/asm"
 )
 
 func BenchmarkNopGo(b *testing.B) {
@@ -16,12 +14,6 @@ func BenchmarkNopGo(b *testing.B) {
 func BenchmarkNopCGO(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		CNop()
-	}
-}
-
-func BenchmarkAsm(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		asm.Nop()
 	}
 }
 
