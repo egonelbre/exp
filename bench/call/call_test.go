@@ -1,6 +1,7 @@
 package call
 
 import (
+	"runtime"
 	"testing"
 
 	"github.com/egonelbre/exp/bench/call/asm"
@@ -24,6 +25,22 @@ func BenchmarkAsm(b *testing.B) {
 	}
 }
 
+func BenchmarkAdd2(b *testing.B) {
+	total := int32(0)
+	for i := 0; i < b.N; i++ {
+		total = Add2(total, int32(i))
+	}
+	runtime.KeepAlive(total)
+}
+
+func BenchmarkCAdd2(b *testing.B) {
+	total := int32(0)
+	for i := 0; i < b.N; i++ {
+		total = CAdd2(total, int32(i))
+	}
+	runtime.KeepAlive(total)
+}
+
 func BenchmarkArgs1(b *testing.B) {
 	n := NewDeviceCreateInfo
 	x0 := n()
@@ -42,15 +59,6 @@ func BenchmarkArgs2(b *testing.B) {
 	Release(x0, x1)
 }
 
-func BenchmarkArgs3(b *testing.B) {
-	n := NewDeviceCreateInfo
-	x0, x1, x2 := n(), n(), n()
-	for i := 0; i < b.N; i++ {
-		Args3(x0, x1, x2)
-	}
-	Release(x0, x1, x2)
-}
-
 func BenchmarkArgs4(b *testing.B) {
 	n := NewDeviceCreateInfo
 	x0, x1, x2, x3 := n(), n(), n(), n()
@@ -58,15 +66,6 @@ func BenchmarkArgs4(b *testing.B) {
 		Args4(x0, x1, x2, x3)
 	}
 	Release(x0, x1, x2, x3)
-}
-
-func BenchmarkArgs8(b *testing.B) {
-	n := NewDeviceCreateInfo
-	x0, x1, x2, x3, x4, x5, x6, x7 := n(), n(), n(), n(), n(), n(), n(), n()
-	for i := 0; i < b.N; i++ {
-		Args8(x0, x1, x2, x3, x4, x5, x6, x7)
-	}
-	Release(x0, x1, x2, x3, x4, x5, x6, x7)
 }
 
 func BenchmarkCArgs1(b *testing.B) {
@@ -87,15 +86,6 @@ func BenchmarkCArgs2(b *testing.B) {
 	Release(x0, x1)
 }
 
-func BenchmarkCArgs3(b *testing.B) {
-	n := NewDeviceCreateInfo
-	x0, x1, x2 := n(), n(), n()
-	for i := 0; i < b.N; i++ {
-		CArgs3(x0, x1, x2)
-	}
-	Release(x0, x1, x2)
-}
-
 func BenchmarkCArgs4(b *testing.B) {
 	n := NewDeviceCreateInfo
 	x0, x1, x2, x3 := n(), n(), n(), n()
@@ -103,13 +93,4 @@ func BenchmarkCArgs4(b *testing.B) {
 		CArgs4(x0, x1, x2, x3)
 	}
 	Release(x0, x1, x2, x3)
-}
-
-func BenchmarkCArgs8(b *testing.B) {
-	n := NewDeviceCreateInfo
-	x0, x1, x2, x3, x4, x5, x6, x7 := n(), n(), n(), n(), n(), n(), n(), n()
-	for i := 0; i < b.N; i++ {
-		CArgs8(x0, x1, x2, x3, x4, x5, x6, x7)
-	}
-	Release(x0, x1, x2, x3, x4, x5, x6, x7)
 }

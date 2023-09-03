@@ -40,6 +40,8 @@ typedef struct VkDeviceCreateInfo {
 
 void nop() { }
 
+int32_t add2(int32_t x, int32_t y) { return x + y; }
+
 VkDeviceCreateInfo * createInfo() {
 	VkDeviceCreateInfo *info = malloc(sizeof(VkDeviceCreateInfo));
 	VkDeviceQueueCreateInfo *queue = malloc(sizeof(VkDeviceQueueCreateInfo));
@@ -49,12 +51,7 @@ VkDeviceCreateInfo * createInfo() {
 
 void create1(VkDeviceCreateInfo *x0) {}
 void create2(VkDeviceCreateInfo *x0, VkDeviceCreateInfo *x1) {}
-void create3(VkDeviceCreateInfo *x0, VkDeviceCreateInfo *x1, VkDeviceCreateInfo *x2) {}
 void create4(VkDeviceCreateInfo *x0, VkDeviceCreateInfo *x1, VkDeviceCreateInfo *x2, VkDeviceCreateInfo *x3) {}
-void create8(
-	VkDeviceCreateInfo *x0, VkDeviceCreateInfo *x1, VkDeviceCreateInfo *x2, VkDeviceCreateInfo *x3,
-	VkDeviceCreateInfo *x4, VkDeviceCreateInfo *x5, VkDeviceCreateInfo *x6, VkDeviceCreateInfo *x7
-) {}
 */
 import "C"
 
@@ -67,28 +64,27 @@ func NewDeviceCreateInfo() *C.VkDeviceCreateInfo {
 	return C.createInfo()
 }
 
-func Release(xs ...*C.VkDeviceCreateInfo)  {
+func Release(xs ...*C.VkDeviceCreateInfo) {
 	for _, x := range xs {
 		C.free(unsafe.Pointer(x))
 	}
 }
 
 //go:noinline
-func Args1(x0 *C.VkDeviceCreateInfo) {	}
+func Add2(x, y int32) int32 { return x + y }
+
+func CAdd2(x, y int32) int32 { return int32(C.add2(C.int32_t(x), C.int32_t(y))) }
+
+//go:noinline
+func Args1(x0 *C.VkDeviceCreateInfo) {}
 
 //go:noinline
 func Args2(x0, x1 *C.VkDeviceCreateInfo) {}
 
 //go:noinline
-func Args3(x0, x1, x2 *C.VkDeviceCreateInfo) {}
-
-//go:noinline
 func Args4(x0, x1, x2, x3 *C.VkDeviceCreateInfo) {}
 
-//go:noinline
-func Args8(x0, x1, x2, x3, x4, x5, x6, x7 *C.VkDeviceCreateInfo) {}
-
-func CArgs1(x0 *C.VkDeviceCreateInfo) {	
+func CArgs1(x0 *C.VkDeviceCreateInfo) {
 	C.create1(x0)
 }
 
@@ -96,15 +92,6 @@ func CArgs2(x0, x1 *C.VkDeviceCreateInfo) {
 	C.create2(x0, x1)
 }
 
-func CArgs3(x0, x1, x2 *C.VkDeviceCreateInfo) {
-	C.create3(x0, x1, x2)
-}
-
 func CArgs4(x0, x1, x2, x3 *C.VkDeviceCreateInfo) {
 	C.create4(x0, x1, x2, x3)
 }
-
-func CArgs8(x0, x1, x2, x3, x4, x5, x6, x7 *C.VkDeviceCreateInfo) {
-	C.create8(x0, x1, x2, x3, x4, x5, x6, x7)
-}
-
