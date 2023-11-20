@@ -1,6 +1,6 @@
 module github.com/egonelbre/exp
 
-go 1.18
+go 1.21.3
 
 require (
 	github.com/apaxa-go/helper v0.0.0-20180607175117-61d31b1c31c3
@@ -35,6 +35,17 @@ require (
 )
 
 require (
+	dmitri.shuralyov.com/gpu/mtl v0.0.0-20221208032759-85de2813cf6b // indirect
 	github.com/dchest/siphash v1.2.2 // indirect
+	github.com/faiface/glhf v0.0.0-20181018222622-82a6317ac380 // indirect
+	github.com/faiface/mainthread v0.0.0-20171120011319-8b78f0a41ae3 // indirect
+	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20200222043503-6f7a984d4dc4 // indirect
+	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
+	github.com/jackc/puddle/v2 v2.2.1 // indirect
+	github.com/jezek/xgb v1.0.0 // indirect
+	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
+	golang.org/x/mod v0.10.0 // indirect
+	golang.org/x/sys v0.11.0 // indirect
 )
