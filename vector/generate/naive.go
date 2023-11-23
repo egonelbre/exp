@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"go/format"
-	"regexp"
 	"strings"
 )
 
@@ -95,6 +94,7 @@ func (ctx *NaiveFile) Iterate(signature string, body Iterate) {
 
 	// generate boundary checks for the iteration
 	prim := itCandidates[0]
+
 	for i, it := range body.Ranges {
 		if i == 0 && firstRangeIsPrimary {
 			// skip the one we used to calculate `n`
@@ -109,77 +109,45 @@ func (ctx *NaiveFile) Iterate(signature string, body Iterate) {
 		pf("if %s < int(%s) { panic(\"%s is too small\") }\n", sub(size, it.Start), mul(prim.Count, it.Inc), it.Name)
 	}
 
-	if ctx.Unroll <= 1 {
-		if ctx.Counter {
-			for i, it := range body.Ranges {
-				if i == 0 && firstRangeIsPrimary || it == prim {
-					continue
-				}
-
-				pf("i%s := %s\n", it.Name, it.Start)
+	// generate iterators if necessary
+	if ctx.Pointer {
+		for i, it := range body.Ranges {
+			if i == 0 && firstRangeIsPrimary || it == prim {
+				continue
 			}
-		}
 
+			pf("p%s := unsafe.Pointer(&%s[%s])\n", it.Name, it.Name, it.Start)
+		}
+	} else if ctx.Counter {
+		for i, it := range body.Ranges {
+			if i == 0 && firstRangeIsPrimary || it == prim {
+				continue
+			}
+
+			pf("i%s := %s\n", it.Name, it.Start)
+		}
+	}
+
+	if ctx.Unroll <= 1 {
 		// TODO: simplify increment
 		pf("for %s := %s ; %s < %s; %s {\n", prim.Name, prim.Start, prim.Name, prim.Count, increment(prim.Name, prim.Inc))
-		if ctx.Counter {
-			pf("	%s\n", ctx.specializeTemplateCounterAccess(body.For, prim, 0, body.Ranges))
-		} else {
-			pf("	%s\n", ctx.specializeTemplateDirectAccess(body.For, prim, 0, body.Ranges))
-		}
-		if ctx.Counter {
-			for i, it := range body.Ranges {
-				if i == 0 && firstRangeIsPrimary || it == prim {
-					continue
-				}
-				pf("	%s\n", increment("i"+it.Name, it.Inc))
-			}
-		}
+		pf("	%s\n", ctx.specializeBody(body.For, prim, 0, body.Ranges))
+		pf("	%s\n", ctx.advanceIterators(firstRangeIsPrimary, prim, body.Ranges, 1))
 		pf("}\n")
 	} else {
 		pf("%s := %s\n", prim.Name, prim.Start)
 		pf("%s_unroll := %s - %s %% %v\n", prim.Count, prim.Count, prim.Count, ctx.Unroll)
 
-		if ctx.Counter {
-			for i, it := range body.Ranges {
-				if i == 0 && firstRangeIsPrimary || it == prim {
-					continue
-				}
-
-				pf("i%s := %s\n", it.Name, it.Start)
-			}
-		}
-
 		pf("for ; %s < %s_unroll; %s {\n", prim.Name, prim.Count, increment(prim.Name, mul(Const(ctx.Unroll), prim.Inc)))
 		for i := 0; i < ctx.Unroll; i++ {
-			if ctx.Counter {
-				pf("	%s\n", ctx.specializeTemplateCounterAccess(body.For, prim, i, body.Ranges))
-			} else {
-				pf("	%s\n", ctx.specializeTemplateDirectAccess(body.For, prim, i, body.Ranges))
-			}
+			pf("	%s\n", ctx.specializeBody(body.For, prim, i, body.Ranges))
 		}
-		if ctx.Counter {
-			for i, it := range body.Ranges {
-				if i == 0 && firstRangeIsPrimary || it == prim {
-					continue
-				}
-				pf("	%s\n", increment("i"+it.Name, mul(it.Inc, Const(ctx.Unroll))))
-			}
-		}
+		pf("	%s\n", ctx.advanceIterators(firstRangeIsPrimary, prim, body.Ranges, ctx.Unroll))
 		pf("}\n")
 
 		pf("for ; %s < %s; %s {\n", prim.Name, prim.Count, increment(prim.Name, prim.Inc))
-		if ctx.Counter {
-			pf("	%s\n", ctx.specializeTemplateCounterAccess(body.For, prim, 0, body.Ranges))
-			for i, it := range body.Ranges {
-				if i == 0 && firstRangeIsPrimary || it == prim {
-					continue
-				}
-				pf("	%s\n", increment("i"+it.Name, it.Inc))
-			}
-		} else {
-			pf("	%s\n", ctx.specializeTemplateDirectAccess(body.For, prim, 0, body.Ranges))
-		}
+		pf("	%s\n", ctx.specializeBody(body.For, prim, 0, body.Ranges))
+		pf("	%s\n", ctx.advanceIterators(firstRangeIsPrimary, prim, body.Ranges, 1))
 		pf("}\n")
 	}
 }
@@ -188,21 +156,54 @@ func (ctx *NaiveFile) specializeSignature(signature string) string {
 	return strings.ReplaceAll(signature, "$Type", ctx.Config.Type.Name)
 }
 
-var rxVariable = regexp.MustCompile("\\$[a-zA-Z]+")
+func (ctx *NaiveFile) specializeBody(body string, prim It, primOffset int, ranges []It) string {
+	if ctx.Pointer {
+		return ctx.specializePointerAccess(body, prim, primOffset, ranges)
+	} else if ctx.Counter {
+		return ctx.specializeCounterAccess(body, prim, primOffset, ranges)
+	} else {
+		return ctx.specializeDirectAccess(body, prim, primOffset, ranges)
+	}
+}
 
-func (ctx *NaiveFile) specializeTemplateDirectAccess(body string, prim It, primOffset int, ranges []It) string {
+func (ctx *NaiveFile) advanceIterators(firstRangeIsPrimary bool, prim It, ranges []It, count int) (code string) {
+	if ctx.Pointer {
+		for _, it := range ranges {
+			if it == prim {
+				continue
+			}
+			code += fmt.Sprintf("p%s = unsafe.Add(%s,%s)\n",
+				it.Name,
+				it.Name,
+				mul(mul(it.Inc, Const(count)), Const(ctx.Type.Size)),
+			)
+		}
+	} else if ctx.Counter {
+		for i, it := range ranges {
+			if i == 0 && firstRangeIsPrimary || it == prim {
+				continue
+			}
+
+			code += increment("i"+it.Name, mul(it.Inc, Const(count))) + "\n"
+		}
+	}
+	return strings.TrimSpace(code)
+}
+
+func (ctx *NaiveFile) specializeDirectAccess(body string, prim It, primOffset int, ranges []It) string {
 	return rxVariable.ReplaceAllStringFunc(body, func(ref string) string {
 		ref = ref[1:]
 
-		for _, r := range ranges {
-			if r.Name == ref {
-				at := ref + "[" + add(r.Start,
-					mul(
-						add(Var(prim.Name), Const(primOffset)),
-						r.Inc,
+		for _, it := range ranges {
+			if it.Name == ref {
+				return fmt.Sprintf("%s[%s]", ref,
+					add(it.Start,
+						mul(
+							add(Var(prim.Name), Const(primOffset)),
+							it.Inc,
+						),
 					),
-				).String() + "]"
-				return at
+				)
 			}
 		}
 
@@ -210,7 +211,7 @@ func (ctx *NaiveFile) specializeTemplateDirectAccess(body string, prim It, primO
 	})
 }
 
-func (ctx *NaiveFile) specializeTemplateCounterAccess(body string, prim It, primOffset int, ranges []It) string {
+func (ctx *NaiveFile) specializeCounterAccess(body string, prim It, primOffset int, ranges []It) string {
 	return rxVariable.ReplaceAllStringFunc(body, func(ref string) string {
 		ref = ref[1:]
 
@@ -229,6 +230,27 @@ func (ctx *NaiveFile) specializeTemplateCounterAccess(body string, prim It, prim
 	})
 }
 
+func (ctx *NaiveFile) specializePointerAccess(body string, prim It, primOffset int, ranges []It) string {
+	return rxVariable.ReplaceAllStringFunc(body, func(ref string) string {
+		ref = ref[1:]
+
+		for _, it := range ranges {
+			if it.Name == ref {
+
+				if primOffset > 0 {
+					return fmt.Sprintf("*(*%s)(unsafe.Add(p%s, %s))",
+						ctx.Type.Name, ref,
+						mul(mul(Const(primOffset), it.Inc), Const(ctx.Type.Size)))
+				} else {
+					return fmt.Sprintf("*(*%s)(p%s)", ctx.Type.Name, ref)
+				}
+			}
+		}
+
+		panic("did not find " + ref)
+	})
+}
+
 func (ctx *NaiveFile) Printf(format string, args ...any) {
 	fmt.Fprintf(&ctx.Content, format, args...)
 }
@@ -237,51 +259,4 @@ func ensure(v bool) {
 	if !v {
 		panic("unexpected")
 	}
-}
-
-// TODO: handle operation order
-
-func mul(a, b Expr) Expr {
-	as := a.String()
-	bs := b.String()
-	if as == "1" {
-		return Expr{Expr: bs}
-	}
-	if bs == "1" {
-		return Expr{Expr: as}
-	}
-	return Expr{Expr: as + " * " + bs}
-}
-
-func add(a, b Expr) Expr {
-	as := a.String()
-	bs := b.String()
-	if as == "0" {
-		return Expr{Expr: bs}
-	}
-	if bs == "0" {
-		return Expr{Expr: as}
-	}
-	return Expr{Expr: as + " + " + bs}
-}
-
-func sub(a, b Expr) Expr {
-	as := a.String()
-	bs := b.String()
-	if as == "0" {
-		return Expr{Expr: "-" + bs}
-	}
-	if bs == "0" {
-		return Expr{Expr: as}
-	}
-	return Expr{Expr: as + " - " + bs}
-}
-
-func increment(varname string, by Expr) string {
-	bys := by.String()
-	switch bys {
-	case "1":
-		return varname + "++"
-	}
-	return varname + " += " + bys
 }

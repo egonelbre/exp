@@ -11,6 +11,7 @@ type Config struct {
 	Unroll  int
 	Type    Type
 	Counter bool
+	Pointer bool
 }
 
 func (c Config) GetConfig() Config { return c }
@@ -32,7 +33,7 @@ type File interface {
 
 type Type struct {
 	Name string
-	Size int64
+	Size int
 }
 
 func Range(name string, start, count any) It {

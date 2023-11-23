@@ -33,6 +33,12 @@ func BenchmarkAxpyPointer(b *testing.B) {
 	}
 }
 
+func BenchmarkAxpyPointerLoop(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		AxpyPointerLoop(alpha, xs[i&3:], 2, ys, 4, K)
+	}
+}
+
 func BenchmarkAxpyBasicR4(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		AxpyBasicR4(alpha, xs[i&3:], 2, ys, 4, K)
@@ -60,6 +66,18 @@ func BenchmarkAxpyUnsafeInlineR8(b *testing.B) {
 func BenchmarkAxpyPointerR4(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		AxpyPointerR4(alpha, xs[i&3:], 2, ys, 4, K)
+	}
+}
+
+func BenchmarkAxpyPointerLoopR4(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		AxpyPointerLoopR4(alpha, xs[i&3:], 2, ys, 4, K)
+	}
+}
+
+func BenchmarkAxpyPointerLoopInterleaveR4(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		AxpyPointerLoopInterleaveR4(alpha, xs[i&3:], 2, ys, 4, K)
 	}
 }
 

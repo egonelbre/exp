@@ -1,6 +1,8 @@
 package vecprocess
 
-import "unsafe"
+import (
+	"unsafe"
+)
 
 func at[T any](xs []T, index uintptr) *T {
 	return (*T)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(xs)), index*unsafe.Sizeof(xs[0])))
@@ -40,6 +42,16 @@ func AxpyPointer(alpha float32, xs []float32, incx uintptr, ys []float32, incy u
 	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
 	xn := unsafe.Add(xp, 4*n*incx)
 	for uintptr(xp) < uintptr(xn) {
+		*(*float32)(xp) += alpha * *(*float32)(yp)
+		xp, yp = unsafe.Add(xp, 4*incx), unsafe.Add(yp, 4*incy)
+	}
+}
+
+//go:noinline
+func AxpyPointerLoop(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
+	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
+	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+	for i := uintptr(0); i < n; i++ {
 		*(*float32)(xp) += alpha * *(*float32)(yp)
 		xp, yp = unsafe.Add(xp, 4*incx), unsafe.Add(yp, 4*incy)
 	}
@@ -164,6 +176,66 @@ func AxpyPointerR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy
 		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
 	}
 	for uintptr(xp) < uintptr(xn) {
+		*(*float32)(yp) += alpha * *(*float32)(xp)
+		xp, yp = unsafe.Add(xp, incx*Size), unsafe.Add(yp, incy*Size)
+	}
+}
+
+//go:noinline
+func AxpyPointerLoopR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
+	const Size = unsafe.Sizeof(xs[0])
+
+	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
+	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+
+	i := uintptr(0)
+	n4 := n &^ 3
+	for ; i < n4; i += 4 {
+		*(*float32)(unsafe.Add(yp, 0*Size)) += alpha * *(*float32)(unsafe.Add(xp, 0*Size))
+		*(*float32)(unsafe.Add(yp, 1*Size)) += alpha * *(*float32)(unsafe.Add(xp, 1*Size))
+		*(*float32)(unsafe.Add(yp, 2*Size)) += alpha * *(*float32)(unsafe.Add(xp, 2*Size))
+		*(*float32)(unsafe.Add(yp, 3*Size)) += alpha * *(*float32)(unsafe.Add(xp, 3*Size))
+		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
+	}
+	for ; i < n; i++ {
+		*(*float32)(yp) += alpha * *(*float32)(xp)
+		xp, yp = unsafe.Add(xp, incx*Size), unsafe.Add(yp, incy*Size)
+	}
+}
+
+//go:noinline
+func AxpyPointerLoopInterleaveR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
+	const Size = unsafe.Sizeof(xs[0])
+
+	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
+	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+
+	i := uintptr(0)
+	n4 := n &^ 3
+	for ; i < n4; i += 4 {
+		x0 := *(*float32)(unsafe.Add(xp, 0*Size))
+		x1 := *(*float32)(unsafe.Add(xp, 1*Size))
+		x2 := *(*float32)(unsafe.Add(xp, 2*Size))
+		x3 := *(*float32)(unsafe.Add(xp, 3*Size))
+
+		m0 := alpha * x0
+		m1 := alpha * x1
+		m2 := alpha * x2
+		m3 := alpha * x3
+
+		t0 := *(*float32)(unsafe.Add(yp, 0*Size)) + m0
+		t1 := *(*float32)(unsafe.Add(yp, 1*Size)) + m1
+		t2 := *(*float32)(unsafe.Add(yp, 2*Size)) + m2
+		t3 := *(*float32)(unsafe.Add(yp, 3*Size)) + m3
+
+		*(*float32)(unsafe.Add(yp, 0*Size)) = t0
+		*(*float32)(unsafe.Add(yp, 1*Size)) = t1
+		*(*float32)(unsafe.Add(yp, 2*Size)) = t2
+		*(*float32)(unsafe.Add(yp, 3*Size)) = t3
+
+		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
+	}
+	for ; i < n; i++ {
 		*(*float32)(yp) += alpha * *(*float32)(xp)
 		xp, yp = unsafe.Add(xp, incx*Size), unsafe.Add(yp, incy*Size)
 	}

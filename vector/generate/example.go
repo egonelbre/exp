@@ -13,7 +13,7 @@ func main() {
 			Size: 4,
 		},
 		Unroll:  4,
-		Counter: true,
+		Pointer: true,
 	})
 
 	All(ctx)
