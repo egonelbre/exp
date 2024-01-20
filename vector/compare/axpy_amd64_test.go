@@ -25,12 +25,40 @@ func BenchmarkAsmAxpyPointer_Align16(b *testing.B) {
 	}
 }
 
+func BenchmarkAsmAxpyPointerLoop_Align11(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		AsmAxpyPointerLoop_Align11(alpha, &xs[i&3], 2, &ys[0], 4, K)
+	}
+}
+
+func BenchmarkAsmAxpyPointerLoop_Align16(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		AsmAxpyPointerLoop_Align16(alpha, &xs[i&3], 2, &ys[0], 4, K)
+	}
+}
+
+func BenchmarkAsmAxpyUnsafe_Align11(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		AsmAxpyUnsafe_Align11(alpha, &xs[i&3], 2, &ys[0], 4, K)
+	}
+}
+
+func BenchmarkAsmAxpyUnsafe_Align16(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		AsmAxpyUnsafe_Align16(alpha, &xs[i&3], 2, &ys[0], 4, K)
+	}
+}
+
 var axpyFuncs = []struct {
 	name string
 	fn   func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 }{
 	{name: "AsmAxpyPointer_Align11", fn: AsmAxpyPointer_Align11},
 	{name: "AsmAxpyPointer_Align16", fn: AsmAxpyPointer_Align16},
+	{name: "AsmAxpyPointerLoop_Align11", fn: AsmAxpyPointerLoop_Align11},
+	{name: "AsmAxpyPointerLoop_Align16", fn: AsmAxpyPointerLoop_Align16},
+	{name: "AsmAxpyUnsafe_Align11", fn: AsmAxpyUnsafe_Align11},
+	{name: "AsmAxpyUnsafe_Align16", fn: AsmAxpyUnsafe_Align16},
 }
 
 func FuzzAsm(f *testing.F) {
