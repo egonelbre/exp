@@ -8,8 +8,8 @@
 
 // RAX, RBX, RCX, RDI, RSI, R8, R9, R10, R11
 
-// func AsmAxpyPointer_Align5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-TEXT ·AsmAxpyPointer_Align5(SB), NOSPLIT, $0
+// func AsmAxpyPointer_Align11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+TEXT ·AsmAxpyPointer_Align11(SB), NOSPLIT, $0
 	MOVSS alpha+0(FP), X0
 
 	MOVQ  xs+8(FP),    AX
@@ -26,7 +26,6 @@ TEXT ·AsmAxpyPointer_Align5(SB), NOSPLIT, $0
 
 	JMP check_limit
 	PCALIGN $8
-	NOP
 	NOP
 	NOP
 	NOP

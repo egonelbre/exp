@@ -13,9 +13,9 @@ func BenchmarkAsmAxpyInc(b *testing.B) {
 	}
 }
 
-func BenchmarkAsmAxpyPointer_Align5(b *testing.B) {
+func BenchmarkAsmAxpyPointer_Align11(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		AsmAxpyPointer_Align5(alpha, &xs[i&3], 2, &ys[0], 4, K)
+		AsmAxpyPointer_Align11(alpha, &xs[i&3], 2, &ys[0], 4, K)
 	}
 }
 
@@ -29,7 +29,7 @@ var axpyFuncs = []struct {
 	name string
 	fn   func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 }{
-	{name: "AsmAxpyPointer_Align5", fn: AsmAxpyPointer_Align5},
+	{name: "AsmAxpyPointer_Align11", fn: AsmAxpyPointer_Align11},
 	{name: "AsmAxpyPointer_Align16", fn: AsmAxpyPointer_Align16},
 }
 
