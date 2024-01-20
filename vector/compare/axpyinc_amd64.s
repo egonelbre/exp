@@ -6,8 +6,8 @@
 
 #include "textflag.h"
 
-// func AxpyInc(alpha float32, x, y []float32, n, incX, incY, ix, iy uintptr)
-TEXT ·AxpyInc(SB), NOSPLIT, $0
+// func AsmAxpyInc(alpha float32, x, y []float32, n, incX, incY, ix, iy uintptr)
+TEXT ·AsmAxpyInc(SB), NOSPLIT, $0
 	MOVQ  n+56(FP), CX      // CX = n
 	CMPQ  CX, $0            // if n==0 { return }
 	JLE   axpyi_end

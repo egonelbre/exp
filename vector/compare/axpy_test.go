@@ -2,7 +2,7 @@ package vecprocess
 
 import "testing"
 
-const N = 1000000
+const N = 10000000
 const K = N/5 - 1
 
 var alpha = float32(1.0)
