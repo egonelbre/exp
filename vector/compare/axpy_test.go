@@ -87,9 +87,11 @@ var axpyTestCases = []axpyTestCase{
 var goAxypDecls = []goAxpyDecl{
 	{name: "AxpyBasic", fn: AxpyBasic},
 	{name: "AxpyUnsafe", fn: AxpyUnsafe},
+	{name: "AxpyUnsafeX", fn: AxpyUnsafeX},
 	{name: "AxpyUnsafeInline", fn: AxpyUnsafeInline},
 	{name: "AxpyPointer", fn: AxpyPointer},
 	{name: "AxpyPointerLoop", fn: AxpyPointerLoop},
+	{name: "AxpyPointerLoopX", fn: AxpyPointerLoopX},
 	{name: "AxpyBasicR4", fn: AxpyBasicR4},
 	{name: "AxpyBasicXR4", fn: AxpyBasicXR4},
 	{name: "AxpyUnsafeR4", fn: AxpyUnsafeR4},

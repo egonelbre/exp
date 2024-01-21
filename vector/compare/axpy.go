@@ -31,6 +31,16 @@ func AxpyUnsafe(alpha float32, xs []float32, incx uintptr, ys []float32, incy ui
 }
 
 //go:noinline
+func AxpyUnsafeX(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
+	xi, yi := uintptr(0), uintptr(0)
+	for ; n > 0; n-- {
+		*at(ys, yi) += alpha * *at(xs, xi)
+		xi += incx
+		yi += incy
+	}
+}
+
+//go:noinline
 func AxpyUnsafeInline(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	for i := uintptr(0); i < n; i++ {
 		*at(ys, i*incy) += alpha * *at(xs, i*incx)
@@ -53,6 +63,16 @@ func AxpyPointerLoop(alpha float32, xs []float32, incx uintptr, ys []float32, in
 	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
 	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
 	for i := uintptr(0); i < n; i++ {
+		*(*float32)(yp) += alpha * *(*float32)(xp)
+		xp, yp = unsafe.Add(xp, 4*incx), unsafe.Add(yp, 4*incy)
+	}
+}
+
+//go:noinline
+func AxpyPointerLoopX(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
+	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
+	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+	for ; n > 0; n-- {
 		*(*float32)(yp) += alpha * *(*float32)(xp)
 		xp, yp = unsafe.Add(xp, 4*incx), unsafe.Add(yp, 4*incy)
 	}
