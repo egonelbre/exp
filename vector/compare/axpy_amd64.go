@@ -2,86 +2,6 @@
 
 package compare
 
-func AxpyPointer_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V1A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V0A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V1A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V2A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V3A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V4A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V0A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V1A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V2A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V3A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V4A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V0A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V1A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V2A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V3A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V4A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V0A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V1A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V2A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V3A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V4A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V0A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V1A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V2A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V3A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V4A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V0A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V1A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V2A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V3A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V4A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V0A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V1A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V2A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V3A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointer_V4A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
 func AxpyPointer_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -171,86 +91,6 @@ func AxpyPointer_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, in
 func AxpyPointer_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V1A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V0A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V1A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V2A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V3A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V4A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V0A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V1A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V2A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V3A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V4A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V0A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V1A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V2A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V3A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V4A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V0A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V1A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V2A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V3A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V4A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V0A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V1A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V2A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V3A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V4A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V0A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V1A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V2A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V3A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V4A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V0A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V1A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V2A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V3A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyPointerLoop_V4A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -342,86 +182,6 @@ func AxpyPointerLoop_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32
 
 func AxpyPointerLoop_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
-func AxpyUnsafe_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V1A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V0A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V1A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V2A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V3A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V4A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V0A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V1A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V2A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V3A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V4A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V0A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V1A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V2A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V3A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V4A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V0A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V1A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V2A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V3A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V4A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V0A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V1A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V2A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V3A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V4A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V0A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V1A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V2A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V3A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V4A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V0A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V1A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V2A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V3A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
-func AxpyUnsafe_V4A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-
 func AxpyUnsafe_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafe_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -511,3 +271,93 @@ func AxpyUnsafe_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, inc
 func AxpyUnsafe_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafe_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V0A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V0A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V0A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V0A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V0A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V0A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V0A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V0A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)

@@ -27,6 +27,7 @@ func main() {
 	emitAlignments(AxpyPointer)
 	emitAlignments(AxpyPointerLoop)
 	emitAlignments(AxpyUnsafe)
+	emitAlignments(AxpyUnsafeR4)
 
 	Generate()
 
@@ -169,8 +170,7 @@ func AxpyUnsafe(variant, align int) {
 
 	n := Load(Param("n"), GP64())
 
-	counter, xi, yi := GP64(), GP64(), GP64()
-	XORQ(counter, counter)
+	xi, yi := GP64(), GP64()
 	XORQ(xi, xi)
 	XORQ(yi, yi)
 
@@ -185,13 +185,79 @@ func AxpyUnsafe(variant, align int) {
 		ADDSS(ys.Idx(yi, 4), tmp)
 		MOVSS(tmp, ys.Idx(yi, 4))
 
-		INCQ(counter)
+		DECQ(n)
 		ADDQ(incx, xi)
 		ADDQ(incy, yi)
 
 		Label("check_limit")
 
-		CMPQ(n, counter)
+		CMPQ(n, U8(0))
+		JHI(LabelRef("loop"))
+	}
+
+	RET()
+}
+
+func AxpyUnsafeR4(variant, align int) {
+	TEXT(fmt.Sprintf("AxpyUnsafe_V%vA%vR4", variant, align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+
+	alpha := Load(Param("alpha"), XMM())
+
+	xs := Mem{Base: Load(Param("xs"), GP64())}
+	incx := Load(Param("incx"), GP64())
+
+	ys := Mem{Base: Load(Param("ys"), GP64())}
+	incy := Load(Param("incy"), GP64())
+
+	n := Load(Param("n"), GP64())
+
+	xi, yi := GP64(), GP64()
+	XORQ(xi, xi)
+	XORQ(yi, yi)
+
+	JMP(LabelRef("check_limit_r4"))
+
+	MISALIGN(align)
+	Label("loop_r4")
+	{
+		for unroll := 0; unroll < 4; unroll++ {
+			tmp := XMM()
+
+			xat := Mem{Base: xs.Base, Index: xi, Scale: 4, Disp: 4 * unroll}
+			yat := Mem{Base: ys.Base, Index: yi, Scale: 4, Disp: 4 * unroll}
+			MOVSS(xat, tmp)
+			MULSS(alpha, tmp)
+			ADDSS(yat, tmp)
+			MOVSS(tmp, yat)
+		}
+
+		SUBQ(Imm(4), n)
+
+		LEAQ(Mem{Base: xi, Index: incx, Scale: 4}, xi)
+		LEAQ(Mem{Base: yi, Index: incy, Scale: 4}, yi)
+
+		Label("check_limit_r4")
+
+		CMPQ(n, U8(4))
+		JHI(LabelRef("loop_r4"))
+	}
+
+	JMP(LabelRef("check_limit"))
+	Label("loop")
+	{
+		tmp := XMM()
+		MOVSS(xs.Idx(xi, 4), tmp)
+		MULSS(alpha, tmp)
+		ADDSS(ys.Idx(yi, 4), tmp)
+		MOVSS(tmp, ys.Idx(yi, 4))
+
+		DECQ(n)
+		ADDQ(incx, xi)
+		ADDQ(incy, yi)
+
+		Label("check_limit")
+
+		CMPQ(n, U8(0))
 		JHI(LabelRef("loop"))
 	}
 
