@@ -8,8 +8,8 @@ import (
 	"unsafe"
 )
 
-func BenchmarkAmd64(b *testing.B) {
-	for _, decl := range amdAxpyDecls {
+func BenchmarkArm64(b *testing.B) {
+	for _, decl := range armAxpyDecls {
 		b.Run(decl.name, func(b *testing.B) {
 			fn := decl.fn
 			for i := 0; i < b.N; i++ {
@@ -19,7 +19,7 @@ func BenchmarkAmd64(b *testing.B) {
 	}
 }
 
-func FuzzAmd64(f *testing.F) {
+func FuzzArm64(f *testing.F) {
 	f.Add(int64(0), uint8(0))
 	f.Fuzz(func(t *testing.T, seed1 int64, bn byte) {
 		n := int(bn) % 8
@@ -36,7 +36,7 @@ func FuzzAmd64(f *testing.F) {
 		alpha := float32(2.3)
 		AxpyBasic(alpha, xs, 1, expectys, 1, uintptr(len(xs)))
 
-		for _, axpy := range amdAxpyDecls {
+		for _, axpy := range armAxpyDecls {
 			lxs := slices.Clone(xs)
 			lys := slices.Clone(ys)
 			axpy.fn(alpha, unsafe.SliceData(lxs), 1, unsafe.SliceData(lys), 1, uintptr(len(xs)))
@@ -50,8 +50,8 @@ func FuzzAmd64(f *testing.F) {
 	})
 }
 
-func TestAmd64(t *testing.T) {
-	for _, axpy := range amdAxpyDecls {
+func TestArm64(t *testing.T) {
+	for _, axpy := range armAxpyDecls {
 		t.Run(axpy.name, func(t *testing.T) {
 			for i, test := range axpyTestCases {
 				t.Run(strconv.Itoa(i), func(t *testing.T) {

@@ -131,10 +131,10 @@ func TestGo(t *testing.T) {
 
 					axpy.fn(test.alpha, lxs, test.incx, lys, test.incy, uintptr(len(lxs)))
 
-					if !slices.Equal(lys, test.expect) {
+					if !equalFloats(lys, test.expect) {
 						t.Errorf("wrong result\n\tgot=%v\n\texp=%v\n\tal=%v\n\txs=%v\n\tys=%v", lys, test.expect, test.alpha, test.xs, test.ys)
 					}
-					if !slices.Equal(lxs, test.xs) {
+					if !equalFloats(lxs, test.xs) {
 						t.Errorf("xs modified")
 					}
 				})
