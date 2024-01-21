@@ -1,4 +1,4 @@
-package vecprocess
+package compare
 
 import "testing"
 

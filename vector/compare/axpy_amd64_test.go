@@ -1,4 +1,4 @@
-package vecprocess
+package compare
 
 import (
 	"math/rand"
@@ -7,64 +7,21 @@ import (
 	"unsafe"
 )
 
-func BenchmarkAsmAxpyInc(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		AsmAxpyInc(alpha, xs[i&3:], ys, K, 2, 4, 0, 0)
+func BenchmarkAsm(b *testing.B) {
+	for _, decl := range axpyDecls {
+		b.Run(decl.name, func(b *testing.B) {
+			fn := decl.fn
+			for i := 0; i < b.N; i++ {
+				fn(alpha, &xs[i&3], 2, &ys[0], 4, K)
+			}
+		})
 	}
-}
-
-func BenchmarkAsmAxpyPointer_Align11(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		AsmAxpyPointer_Align11(alpha, &xs[i&3], 2, &ys[0], 4, K)
-	}
-}
-
-func BenchmarkAsmAxpyPointer_Align16(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		AsmAxpyPointer_Align16(alpha, &xs[i&3], 2, &ys[0], 4, K)
-	}
-}
-
-func BenchmarkAsmAxpyPointerLoop_Align11(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		AsmAxpyPointerLoop_Align11(alpha, &xs[i&3], 2, &ys[0], 4, K)
-	}
-}
-
-func BenchmarkAsmAxpyPointerLoop_Align16(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		AsmAxpyPointerLoop_Align16(alpha, &xs[i&3], 2, &ys[0], 4, K)
-	}
-}
-
-func BenchmarkAsmAxpyUnsafe_Align11(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		AsmAxpyUnsafe_Align11(alpha, &xs[i&3], 2, &ys[0], 4, K)
-	}
-}
-
-func BenchmarkAsmAxpyUnsafe_Align16(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		AsmAxpyUnsafe_Align16(alpha, &xs[i&3], 2, &ys[0], 4, K)
-	}
-}
-
-var axpyFuncs = []struct {
-	name string
-	fn   func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-}{
-	{name: "AsmAxpyPointer_Align11", fn: AsmAxpyPointer_Align11},
-	{name: "AsmAxpyPointer_Align16", fn: AsmAxpyPointer_Align16},
-	{name: "AsmAxpyPointerLoop_Align11", fn: AsmAxpyPointerLoop_Align11},
-	{name: "AsmAxpyPointerLoop_Align16", fn: AsmAxpyPointerLoop_Align16},
-	{name: "AsmAxpyUnsafe_Align11", fn: AsmAxpyUnsafe_Align11},
-	{name: "AsmAxpyUnsafe_Align16", fn: AsmAxpyUnsafe_Align16},
 }
 
 func FuzzAsm(f *testing.F) {
 	f.Add(int64(0), uint8(0))
 	f.Fuzz(func(t *testing.T, seed1 int64, bn byte) {
-		n := int(bn)
+		n := int(bn) % 8
 		xs, ys := make([]float32, n), make([]float32, n)
 
 		const Scale = 10000
@@ -75,13 +32,18 @@ func FuzzAsm(f *testing.F) {
 		}
 
 		expectys := slices.Clone(ys)
-		AxpyBasic(2.3, xs, 1, expectys, 1, uintptr(len(xs)))
+		alpha := float32(2.3)
+		AxpyBasic(alpha, xs, 1, expectys, 1, uintptr(len(xs)))
 
-		for _, axpy := range axpyFuncs {
-			rs := slices.Clone(ys)
-			axpy.fn(2.3, unsafe.SliceData(xs), 1, unsafe.SliceData(rs), 1, uintptr(len(xs)))
-			if !slices.Equal(rs, expectys) {
-				t.Errorf("%q wrong result\n\tgot=%v\n\texp=%v\n\tal=%v\n\txs=%v\n\tys=%v", axpy.name, rs, expectys, 2.3, xs, ys)
+		for _, axpy := range axpyDecls {
+			lxs := slices.Clone(xs)
+			lys := slices.Clone(ys)
+			axpy.fn(alpha, unsafe.SliceData(lxs), 1, unsafe.SliceData(lys), 1, uintptr(len(xs)))
+			if !slices.Equal(lys, expectys) {
+				t.Errorf("%q wrong result\n\tgot=%v\n\texp=%v\n\tal=%v\n\txs=%v\n\tys=%v", axpy.name, lys, expectys, alpha, xs, ys)
+			}
+			if !slices.Equal(lxs, xs) {
+				t.Errorf("%q xs modified\n\tgot=%v\n\texp=%v\n\tal=%v\n\txs=%v\n\tys=%v", axpy.name, lxs, xs, alpha, xs, ys)
 			}
 		}
 	})
@@ -90,7 +52,7 @@ func FuzzAsm(f *testing.F) {
 func TestAsm(t *testing.T) {
 	test := func(alpha float32, xs, ys []float32, expect []float32) {
 		t.Run("", func(t *testing.T) {
-			for _, axpy := range axpyFuncs {
+			for _, axpy := range axpyDecls {
 				t.Run(axpy.name, func(t *testing.T) {
 					lxs := slices.Clone(xs)
 					lys := slices.Clone(ys)
@@ -98,7 +60,7 @@ func TestAsm(t *testing.T) {
 					axpy.fn(alpha, unsafe.SliceData(lxs), 1, unsafe.SliceData(lys), 1, uintptr(len(lxs)))
 
 					if !slices.Equal(lys, expect) {
-						t.Errorf("%v != %v", lys, expect)
+						t.Errorf("wrong result\n\tgot=%v\n\texp=%v\n\tal=%v\n\txs=%v\n\tys=%v", lys, expect, alpha, xs, ys)
 					}
 					if !slices.Equal(lxs, xs) {
 						t.Errorf("xs modified")
@@ -111,4 +73,19 @@ func TestAsm(t *testing.T) {
 	test(1.3, []float32{1}, []float32{2}, []float32{3.3})
 	test(1.3, []float32{}, []float32{}, []float32{})
 	test(2, []float32{8}, []float32{1}, []float32{17})
+
+	test(3,
+		[]float32{1, 2, 3, 4},
+		[]float32{1, 1, 1, 1},
+		[]float32{4, 7, 10, 13})
+
+	test(3,
+		[]float32{1, 2, 3, 5},
+		[]float32{-7, -11, -13, -17},
+		[]float32{-4, -5, -4, -2})
+
+	test(2.3,
+		[]float32{-4691.1084, 1844.69, 1986.0142, 3274.4463, 4433.3447},
+		[]float32{2613.8955, -355.9663, 898.40283, 2144.5698, 4446.6465},
+		[]float32{-8175.6533, 3886.8203, 5466.2354, 9675.796, 14643.339})
 }
