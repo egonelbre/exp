@@ -10017,9 +10017,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10071,9 +10071,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10125,9 +10125,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10179,9 +10179,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10233,9 +10233,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10287,64 +10287,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A9R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeParallel_V1A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10397,9 +10342,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10452,9 +10397,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10507,9 +10452,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10562,9 +10507,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10575,7 +10520,6 @@ TEXT ·AxpyUnsafeParallel_V0A10R4(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 
 loop_unroll:
@@ -10618,9 +10562,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10674,9 +10618,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10730,9 +10674,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10786,9 +10730,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10842,9 +10786,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10855,7 +10799,6 @@ TEXT ·AxpyUnsafeParallel_V0A11R4(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 	NOP
 
@@ -10899,9 +10842,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10956,9 +10899,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11013,9 +10956,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11070,9 +11013,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11127,9 +11070,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11140,7 +11083,6 @@ TEXT ·AxpyUnsafeParallel_V0A12R4(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 	NOP
 	NOP
@@ -11185,9 +11127,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11243,9 +11185,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11301,9 +11243,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11359,9 +11301,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11417,9 +11359,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11430,7 +11372,6 @@ TEXT ·AxpyUnsafeParallel_V0A13R4(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 	NOP
 	NOP
@@ -11476,9 +11417,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11535,9 +11476,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11594,9 +11535,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11653,9 +11594,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11712,9 +11653,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11725,7 +11666,6 @@ TEXT ·AxpyUnsafeParallel_V0A14R4(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 	NOP
 	NOP
@@ -11772,9 +11712,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11832,9 +11772,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11892,9 +11832,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11952,9 +11892,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12012,9 +11952,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12025,7 +11965,6 @@ TEXT ·AxpyUnsafeParallel_V0A15R4(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 	NOP
 	NOP
@@ -12073,9 +12012,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12134,9 +12073,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12195,9 +12134,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12256,9 +12195,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12317,9 +12256,70 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A15R4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	XORQ  DI, DI
+	XORQ  R8, R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX)(DI*4), X1
+	MOVSS 4(AX)(DI*4), X2
+	MOVSS 8(AX)(DI*4), X3
+	MOVSS 12(AX)(DI*4), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (DX)(R8*4), X1
+	ADDSS 4(DX)(R8*4), X2
+	ADDSS 8(DX)(R8*4), X3
+	ADDSS 12(DX)(R8*4), X4
+	MOVSS X1, (DX)(R8*4)
+	MOVSS X2, 4(DX)(R8*4)
+	MOVSS X3, 8(DX)(R8*4)
+	MOVSS X4, 12(DX)(R8*4)
+	SUBQ  $0x04, SI
+	LEAQ  (DI)(CX*4), DI
+	LEAQ  (R8)(BX*4), R8
+
+check_limit_unroll:
+	CMPQ SI, $0x04
+	JHI  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX)(DI*4), X1
+	MULSS X0, X1
+	ADDSS (DX)(R8*4), X1
+	MOVSS X1, (DX)(R8*4)
+	DECQ  SI
+	ADDQ  CX, DI
+	ADDQ  BX, R8
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyUnsafeInterleave_V0A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyUnsafeInterleave_V0A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12371,9 +12371,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12425,9 +12425,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12479,9 +12479,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12533,9 +12533,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12587,9 +12587,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12657,9 +12657,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12727,9 +12727,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12797,9 +12797,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12867,9 +12867,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12937,80 +12937,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A9R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	MULSS X0, X5
-	MULSS X0, X6
-	MULSS X0, X7
-	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeParallel_V1A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13079,9 +13008,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13150,9 +13079,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13221,9 +13150,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13292,9 +13221,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13305,7 +13234,6 @@ TEXT ·AxpyUnsafeParallel_V0A10R8(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 
 loop_unroll:
@@ -13364,9 +13292,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13436,9 +13364,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13508,9 +13436,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13580,9 +13508,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13652,9 +13580,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13665,7 +13593,6 @@ TEXT ·AxpyUnsafeParallel_V0A11R8(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 	NOP
 
@@ -13725,9 +13652,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13798,9 +13725,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13871,9 +13798,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13944,9 +13871,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14017,9 +13944,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14030,7 +13957,6 @@ TEXT ·AxpyUnsafeParallel_V0A12R8(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 	NOP
 	NOP
@@ -14091,9 +14017,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14165,9 +14091,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14239,9 +14165,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14313,9 +14239,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14387,9 +14313,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14400,7 +14326,6 @@ TEXT ·AxpyUnsafeParallel_V0A13R8(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 	NOP
 	NOP
@@ -14462,9 +14387,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14537,9 +14462,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14612,9 +14537,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14687,9 +14612,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14762,9 +14687,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14775,7 +14700,6 @@ TEXT ·AxpyUnsafeParallel_V0A14R8(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 	NOP
 	NOP
@@ -14838,9 +14762,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14914,9 +14838,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14990,9 +14914,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15066,9 +14990,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15142,9 +15066,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15155,7 +15079,6 @@ TEXT ·AxpyUnsafeParallel_V0A15R8(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit_unroll
 	PCALIGN $0x08
-	NOP
 	NOP
 	NOP
 	NOP
@@ -15219,9 +15142,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15296,9 +15219,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15373,9 +15296,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15450,9 +15373,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15527,9 +15450,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V0A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V4A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V0A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V4A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15539,7 +15462,14 @@ TEXT ·AxpyUnsafeParallel_V0A16R8(SB), NOSPLIT, $0-48
 	XORQ  DI, DI
 	XORQ  R8, R8
 	JMP   check_limit_unroll
-	PCALIGN $0x10
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
 
 loop_unroll:
 	MOVSS (AX)(DI*4), X1
@@ -15597,9 +15527,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V1A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V0A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V1A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V0A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15667,9 +15597,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V2A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V1A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V2A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V1A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15737,9 +15667,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V2A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V3A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V2A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15807,9 +15737,79 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeParallel_V4A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeInterleave_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeParallel_V4A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeInterleave_V3A16R8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	XORQ  DI, DI
+	XORQ  R8, R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX)(DI*4), X1
+	MOVSS 4(AX)(DI*4), X2
+	MOVSS 8(AX)(DI*4), X3
+	MOVSS 12(AX)(DI*4), X4
+	MOVSS 16(AX)(DI*4), X5
+	MOVSS 20(AX)(DI*4), X6
+	MOVSS 24(AX)(DI*4), X7
+	MOVSS 28(AX)(DI*4), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (DX)(R8*4), X1
+	ADDSS 4(DX)(R8*4), X2
+	ADDSS 8(DX)(R8*4), X3
+	ADDSS 12(DX)(R8*4), X4
+	ADDSS 16(DX)(R8*4), X5
+	ADDSS 20(DX)(R8*4), X6
+	ADDSS 24(DX)(R8*4), X7
+	ADDSS 28(DX)(R8*4), X8
+	MOVSS X1, (DX)(R8*4)
+	MOVSS X2, 4(DX)(R8*4)
+	MOVSS X3, 8(DX)(R8*4)
+	MOVSS X4, 12(DX)(R8*4)
+	MOVSS X5, 16(DX)(R8*4)
+	MOVSS X6, 20(DX)(R8*4)
+	MOVSS X7, 24(DX)(R8*4)
+	MOVSS X8, 28(DX)(R8*4)
+	SUBQ  $0x08, SI
+	LEAQ  (DI)(CX*8), DI
+	LEAQ  (R8)(BX*8), R8
+
+check_limit_unroll:
+	CMPQ SI, $0x08
+	JHI  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX)(DI*4), X1
+	MULSS X0, X1
+	ADDSS (DX)(R8*4), X1
+	MOVSS X1, (DX)(R8*4)
+	DECQ  SI
+	ADDQ  CX, DI
+	ADDQ  BX, R8
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyUnsafeInterleave_V4A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyUnsafeInterleave_V4A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
