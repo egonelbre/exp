@@ -16,9 +16,11 @@ import (
 var testhelp = flag.String("testhelp", "", "test helpers")
 
 func main() {
-	emitAlignments := func(emit func(align int)) {
-		for align := 0; align <= 16; align++ {
-			emit(align)
+	emitAlignments := func(emit func(variant, align int)) {
+		for align := 8; align <= 16; align++ {
+			for v := 0; v <= 4; v++ {
+				emit(v, align)
+			}
 		}
 	}
 
@@ -74,8 +76,8 @@ func generateTestHelp(stubs, out string) {
 	os.WriteFile(out, formatted, 0755)
 }
 
-func AxpyPointer(align int) {
-	TEXT(fmt.Sprintf("AxpyPointer_A%v", align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+func AxpyPointer(variant, align int) {
+	TEXT(fmt.Sprintf("AxpyPointer_V%vA%v", variant, align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
 
 	alpha := Load(Param("alpha"), XMM())
 
@@ -114,8 +116,8 @@ func AxpyPointer(align int) {
 	RET()
 }
 
-func AxpyPointerLoop(align int) {
-	TEXT(fmt.Sprintf("AxpyPointerLoop_A%v", align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+func AxpyPointerLoop(variant, align int) {
+	TEXT(fmt.Sprintf("AxpyPointerLoop_V%vA%v", variant, align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
 
 	alpha := Load(Param("alpha"), XMM())
 
@@ -154,8 +156,8 @@ func AxpyPointerLoop(align int) {
 	RET()
 }
 
-func AxpyUnsafe(align int) {
-	TEXT(fmt.Sprintf("AxpyUnsafe_A%v", align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+func AxpyUnsafe(variant, align int) {
+	TEXT(fmt.Sprintf("AxpyUnsafe_V%vA%v", variant, align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
 
 	alpha := Load(Param("alpha"), XMM())
 
