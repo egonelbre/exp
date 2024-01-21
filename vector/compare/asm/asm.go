@@ -18,7 +18,7 @@ import (
 var testhelp = flag.String("testhelp", "", "test helpers")
 
 func main() {
-	const variants = 4
+	const variants = 6
 	alignments := []int{0, 8, 9, 10, 11, 12, 13, 14, 15, 16}
 	// const variants = 1
 	// alignments := []int{0}

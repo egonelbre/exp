@@ -10,6 +10,10 @@ func AxpyPointer_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, inc
 
 func AxpyPointer_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointer_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V5A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointer_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -17,6 +21,10 @@ func AxpyPointer_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, inc
 func AxpyPointer_V2A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V3A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V4A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V5A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V0A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -26,6 +34,10 @@ func AxpyPointer_V2A9(alpha float32, xs *float32, incx uintptr, ys *float32, inc
 
 func AxpyPointer_V3A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointer_V4A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V5A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointer_V0A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V1A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -33,6 +45,10 @@ func AxpyPointer_V1A10(alpha float32, xs *float32, incx uintptr, ys *float32, in
 func AxpyPointer_V2A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V3A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V4A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V5A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V0A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -42,6 +58,10 @@ func AxpyPointer_V2A11(alpha float32, xs *float32, incx uintptr, ys *float32, in
 
 func AxpyPointer_V3A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointer_V4A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V5A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointer_V0A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V1A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -49,6 +69,10 @@ func AxpyPointer_V1A12(alpha float32, xs *float32, incx uintptr, ys *float32, in
 func AxpyPointer_V2A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V3A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V4A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V5A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V0A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -58,6 +82,10 @@ func AxpyPointer_V2A13(alpha float32, xs *float32, incx uintptr, ys *float32, in
 
 func AxpyPointer_V3A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointer_V4A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V5A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointer_V0A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V1A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -65,6 +93,10 @@ func AxpyPointer_V1A14(alpha float32, xs *float32, incx uintptr, ys *float32, in
 func AxpyPointer_V2A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V3A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V4A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V5A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V0A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -74,6 +106,10 @@ func AxpyPointer_V2A15(alpha float32, xs *float32, incx uintptr, ys *float32, in
 
 func AxpyPointer_V3A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointer_V4A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V5A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointer_V0A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V1A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -81,6 +117,10 @@ func AxpyPointer_V1A16(alpha float32, xs *float32, incx uintptr, ys *float32, in
 func AxpyPointer_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V5A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -90,6 +130,10 @@ func AxpyPointerLoop_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32,
 
 func AxpyPointerLoop_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoop_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V5A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoop_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -97,6 +141,10 @@ func AxpyPointerLoop_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32,
 func AxpyPointerLoop_V2A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V3A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V4A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V5A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V0A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -106,6 +154,10 @@ func AxpyPointerLoop_V2A9(alpha float32, xs *float32, incx uintptr, ys *float32,
 
 func AxpyPointerLoop_V3A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoop_V4A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V5A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoop_V0A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V1A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -113,6 +165,10 @@ func AxpyPointerLoop_V1A10(alpha float32, xs *float32, incx uintptr, ys *float32
 func AxpyPointerLoop_V2A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V3A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V4A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V5A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V0A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -122,6 +178,10 @@ func AxpyPointerLoop_V2A11(alpha float32, xs *float32, incx uintptr, ys *float32
 
 func AxpyPointerLoop_V3A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoop_V4A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V5A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoop_V0A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V1A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -129,6 +189,10 @@ func AxpyPointerLoop_V1A12(alpha float32, xs *float32, incx uintptr, ys *float32
 func AxpyPointerLoop_V2A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V3A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V4A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V5A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V0A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -138,6 +202,10 @@ func AxpyPointerLoop_V2A13(alpha float32, xs *float32, incx uintptr, ys *float32
 
 func AxpyPointerLoop_V3A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoop_V4A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V5A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoop_V0A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V1A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -145,6 +213,10 @@ func AxpyPointerLoop_V1A14(alpha float32, xs *float32, incx uintptr, ys *float32
 func AxpyPointerLoop_V2A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V3A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V4A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V5A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V0A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -154,6 +226,10 @@ func AxpyPointerLoop_V2A15(alpha float32, xs *float32, incx uintptr, ys *float32
 
 func AxpyPointerLoop_V3A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoop_V4A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V5A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoop_V0A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V1A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -161,6 +237,10 @@ func AxpyPointerLoop_V1A16(alpha float32, xs *float32, incx uintptr, ys *float32
 func AxpyPointerLoop_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V5A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -170,6 +250,10 @@ func AxpyPointerLoopX_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32
 
 func AxpyPointerLoopX_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -177,6 +261,10 @@ func AxpyPointerLoopX_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32
 func AxpyPointerLoopX_V2A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -186,6 +274,10 @@ func AxpyPointerLoopX_V2A9(alpha float32, xs *float32, incx uintptr, ys *float32
 
 func AxpyPointerLoopX_V3A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -193,6 +285,10 @@ func AxpyPointerLoopX_V1A10(alpha float32, xs *float32, incx uintptr, ys *float3
 func AxpyPointerLoopX_V2A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -202,6 +298,10 @@ func AxpyPointerLoopX_V2A11(alpha float32, xs *float32, incx uintptr, ys *float3
 
 func AxpyPointerLoopX_V3A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -209,6 +309,10 @@ func AxpyPointerLoopX_V1A12(alpha float32, xs *float32, incx uintptr, ys *float3
 func AxpyPointerLoopX_V2A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -218,6 +322,10 @@ func AxpyPointerLoopX_V2A13(alpha float32, xs *float32, incx uintptr, ys *float3
 
 func AxpyPointerLoopX_V3A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -225,6 +333,10 @@ func AxpyPointerLoopX_V1A14(alpha float32, xs *float32, incx uintptr, ys *float3
 func AxpyPointerLoopX_V2A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -234,6 +346,10 @@ func AxpyPointerLoopX_V2A15(alpha float32, xs *float32, incx uintptr, ys *float3
 
 func AxpyPointerLoopX_V3A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -241,6 +357,10 @@ func AxpyPointerLoopX_V1A16(alpha float32, xs *float32, incx uintptr, ys *float3
 func AxpyPointerLoopX_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -250,6 +370,10 @@ func AxpyUnsafeX_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, inc
 
 func AxpyUnsafeX_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -257,6 +381,10 @@ func AxpyUnsafeX_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, inc
 func AxpyUnsafeX_V2A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -266,6 +394,10 @@ func AxpyUnsafeX_V2A9(alpha float32, xs *float32, incx uintptr, ys *float32, inc
 
 func AxpyUnsafeX_V3A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -273,6 +405,10 @@ func AxpyUnsafeX_V1A10(alpha float32, xs *float32, incx uintptr, ys *float32, in
 func AxpyUnsafeX_V2A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -282,6 +418,10 @@ func AxpyUnsafeX_V2A11(alpha float32, xs *float32, incx uintptr, ys *float32, in
 
 func AxpyUnsafeX_V3A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -289,6 +429,10 @@ func AxpyUnsafeX_V1A12(alpha float32, xs *float32, incx uintptr, ys *float32, in
 func AxpyUnsafeX_V2A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -298,6 +442,10 @@ func AxpyUnsafeX_V2A13(alpha float32, xs *float32, incx uintptr, ys *float32, in
 
 func AxpyUnsafeX_V3A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -305,6 +453,10 @@ func AxpyUnsafeX_V1A14(alpha float32, xs *float32, incx uintptr, ys *float32, in
 func AxpyUnsafeX_V2A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -314,6 +466,10 @@ func AxpyUnsafeX_V2A15(alpha float32, xs *float32, incx uintptr, ys *float32, in
 
 func AxpyUnsafeX_V3A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -321,6 +477,10 @@ func AxpyUnsafeX_V1A16(alpha float32, xs *float32, incx uintptr, ys *float32, in
 func AxpyUnsafeX_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -330,6 +490,10 @@ func AxpyUnsafeX_V2A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, i
 
 func AxpyUnsafeX_V3A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -337,6 +501,10 @@ func AxpyUnsafeX_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, i
 func AxpyUnsafeX_V2A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -346,6 +514,10 @@ func AxpyUnsafeX_V2A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, i
 
 func AxpyUnsafeX_V3A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -353,6 +525,10 @@ func AxpyUnsafeX_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, 
 func AxpyUnsafeX_V2A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -362,6 +538,10 @@ func AxpyUnsafeX_V2A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, 
 
 func AxpyUnsafeX_V3A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -369,6 +549,10 @@ func AxpyUnsafeX_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, 
 func AxpyUnsafeX_V2A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -378,6 +562,10 @@ func AxpyUnsafeX_V2A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, 
 
 func AxpyUnsafeX_V3A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -385,6 +573,10 @@ func AxpyUnsafeX_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, 
 func AxpyUnsafeX_V2A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -394,6 +586,10 @@ func AxpyUnsafeX_V2A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, 
 
 func AxpyUnsafeX_V3A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -401,6 +597,10 @@ func AxpyUnsafeX_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, 
 func AxpyUnsafeX_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -410,6 +610,10 @@ func AxpyUnsafeX_V2A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, i
 
 func AxpyUnsafeX_V3A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -417,6 +621,10 @@ func AxpyUnsafeX_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, i
 func AxpyUnsafeX_V2A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -426,6 +634,10 @@ func AxpyUnsafeX_V2A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, i
 
 func AxpyUnsafeX_V3A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -433,6 +645,10 @@ func AxpyUnsafeX_V1A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, 
 func AxpyUnsafeX_V2A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -442,6 +658,10 @@ func AxpyUnsafeX_V2A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, 
 
 func AxpyUnsafeX_V3A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -449,6 +669,10 @@ func AxpyUnsafeX_V1A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, 
 func AxpyUnsafeX_V2A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -458,6 +682,10 @@ func AxpyUnsafeX_V2A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, 
 
 func AxpyUnsafeX_V3A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -465,6 +693,10 @@ func AxpyUnsafeX_V1A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, 
 func AxpyUnsafeX_V2A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V0A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -474,6 +706,10 @@ func AxpyUnsafeX_V2A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, 
 
 func AxpyUnsafeX_V3A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeX_V4A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeX_V0A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V1A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -481,6 +717,10 @@ func AxpyUnsafeX_V1A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, 
 func AxpyUnsafeX_V2A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeX_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V4A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeX_V5A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V0A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -490,6 +730,10 @@ func AxpyUnsafeXInterleave_V2A0R4(alpha float32, xs *float32, incx uintptr, ys *
 
 func AxpyUnsafeXInterleave_V3A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeXInterleave_V4A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeXInterleave_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -497,6 +741,10 @@ func AxpyUnsafeXInterleave_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *
 func AxpyUnsafeXInterleave_V2A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V3A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V4A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V0A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -506,6 +754,10 @@ func AxpyUnsafeXInterleave_V2A9R4(alpha float32, xs *float32, incx uintptr, ys *
 
 func AxpyUnsafeXInterleave_V3A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeXInterleave_V4A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeXInterleave_V0A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -513,6 +765,10 @@ func AxpyUnsafeXInterleave_V1A10R4(alpha float32, xs *float32, incx uintptr, ys 
 func AxpyUnsafeXInterleave_V2A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V3A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V4A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V0A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -522,6 +778,10 @@ func AxpyUnsafeXInterleave_V2A11R4(alpha float32, xs *float32, incx uintptr, ys 
 
 func AxpyUnsafeXInterleave_V3A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeXInterleave_V4A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeXInterleave_V0A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -529,6 +789,10 @@ func AxpyUnsafeXInterleave_V1A12R4(alpha float32, xs *float32, incx uintptr, ys 
 func AxpyUnsafeXInterleave_V2A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V3A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V4A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V0A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -538,6 +802,10 @@ func AxpyUnsafeXInterleave_V2A13R4(alpha float32, xs *float32, incx uintptr, ys 
 
 func AxpyUnsafeXInterleave_V3A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeXInterleave_V4A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeXInterleave_V0A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -545,6 +813,10 @@ func AxpyUnsafeXInterleave_V1A14R4(alpha float32, xs *float32, incx uintptr, ys 
 func AxpyUnsafeXInterleave_V2A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V3A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V4A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V0A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -554,6 +826,10 @@ func AxpyUnsafeXInterleave_V2A15R4(alpha float32, xs *float32, incx uintptr, ys 
 
 func AxpyUnsafeXInterleave_V3A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeXInterleave_V4A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeXInterleave_V0A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -561,6 +837,10 @@ func AxpyUnsafeXInterleave_V1A16R4(alpha float32, xs *float32, incx uintptr, ys 
 func AxpyUnsafeXInterleave_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V4A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V0A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -570,6 +850,10 @@ func AxpyUnsafeXInterleave_V2A0R8(alpha float32, xs *float32, incx uintptr, ys *
 
 func AxpyUnsafeXInterleave_V3A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeXInterleave_V4A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeXInterleave_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -577,6 +861,10 @@ func AxpyUnsafeXInterleave_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *
 func AxpyUnsafeXInterleave_V2A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V3A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V4A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V0A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -586,6 +874,10 @@ func AxpyUnsafeXInterleave_V2A9R8(alpha float32, xs *float32, incx uintptr, ys *
 
 func AxpyUnsafeXInterleave_V3A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeXInterleave_V4A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeXInterleave_V0A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V1A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -593,6 +885,10 @@ func AxpyUnsafeXInterleave_V1A10R8(alpha float32, xs *float32, incx uintptr, ys 
 func AxpyUnsafeXInterleave_V2A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V3A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V4A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V0A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -602,6 +898,10 @@ func AxpyUnsafeXInterleave_V2A11R8(alpha float32, xs *float32, incx uintptr, ys 
 
 func AxpyUnsafeXInterleave_V3A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeXInterleave_V4A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeXInterleave_V0A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V1A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -609,6 +909,10 @@ func AxpyUnsafeXInterleave_V1A12R8(alpha float32, xs *float32, incx uintptr, ys 
 func AxpyUnsafeXInterleave_V2A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V3A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V4A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V0A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -618,6 +922,10 @@ func AxpyUnsafeXInterleave_V2A13R8(alpha float32, xs *float32, incx uintptr, ys 
 
 func AxpyUnsafeXInterleave_V3A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeXInterleave_V4A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeXInterleave_V0A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V1A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -625,6 +933,10 @@ func AxpyUnsafeXInterleave_V1A14R8(alpha float32, xs *float32, incx uintptr, ys 
 func AxpyUnsafeXInterleave_V2A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V3A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V4A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V0A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -634,6 +946,10 @@ func AxpyUnsafeXInterleave_V2A15R8(alpha float32, xs *float32, incx uintptr, ys 
 
 func AxpyUnsafeXInterleave_V3A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeXInterleave_V4A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeXInterleave_V0A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V1A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -641,6 +957,10 @@ func AxpyUnsafeXInterleave_V1A16R8(alpha float32, xs *float32, incx uintptr, ys 
 func AxpyUnsafeXInterleave_V2A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeXInterleave_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V4A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeXInterleave_V5A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -650,6 +970,10 @@ func AxpyPointerLoopX_V2A0U4(alpha float32, xs *float32, incx uintptr, ys *float
 
 func AxpyPointerLoopX_V3A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -657,6 +981,10 @@ func AxpyPointerLoopX_V1A8U4(alpha float32, xs *float32, incx uintptr, ys *float
 func AxpyPointerLoopX_V2A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -666,6 +994,10 @@ func AxpyPointerLoopX_V2A9U4(alpha float32, xs *float32, incx uintptr, ys *float
 
 func AxpyPointerLoopX_V3A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -673,6 +1005,10 @@ func AxpyPointerLoopX_V1A10U4(alpha float32, xs *float32, incx uintptr, ys *floa
 func AxpyPointerLoopX_V2A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -682,6 +1018,10 @@ func AxpyPointerLoopX_V2A11U4(alpha float32, xs *float32, incx uintptr, ys *floa
 
 func AxpyPointerLoopX_V3A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -689,6 +1029,10 @@ func AxpyPointerLoopX_V1A12U4(alpha float32, xs *float32, incx uintptr, ys *floa
 func AxpyPointerLoopX_V2A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -698,6 +1042,10 @@ func AxpyPointerLoopX_V2A13U4(alpha float32, xs *float32, incx uintptr, ys *floa
 
 func AxpyPointerLoopX_V3A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -705,6 +1053,10 @@ func AxpyPointerLoopX_V1A14U4(alpha float32, xs *float32, incx uintptr, ys *floa
 func AxpyPointerLoopX_V2A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -714,6 +1066,10 @@ func AxpyPointerLoopX_V2A15U4(alpha float32, xs *float32, incx uintptr, ys *floa
 
 func AxpyPointerLoopX_V3A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -721,6 +1077,10 @@ func AxpyPointerLoopX_V1A16U4(alpha float32, xs *float32, incx uintptr, ys *floa
 func AxpyPointerLoopX_V2A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -730,6 +1090,10 @@ func AxpyPointerLoopX_V2A0U8(alpha float32, xs *float32, incx uintptr, ys *float
 
 func AxpyPointerLoopX_V3A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -737,6 +1101,10 @@ func AxpyPointerLoopX_V1A8U8(alpha float32, xs *float32, incx uintptr, ys *float
 func AxpyPointerLoopX_V2A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -746,6 +1114,10 @@ func AxpyPointerLoopX_V2A9U8(alpha float32, xs *float32, incx uintptr, ys *float
 
 func AxpyPointerLoopX_V3A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -753,6 +1125,10 @@ func AxpyPointerLoopX_V1A10U8(alpha float32, xs *float32, incx uintptr, ys *floa
 func AxpyPointerLoopX_V2A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -762,6 +1138,10 @@ func AxpyPointerLoopX_V2A11U8(alpha float32, xs *float32, incx uintptr, ys *floa
 
 func AxpyPointerLoopX_V3A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -769,6 +1149,10 @@ func AxpyPointerLoopX_V1A12U8(alpha float32, xs *float32, incx uintptr, ys *floa
 func AxpyPointerLoopX_V2A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -778,6 +1162,10 @@ func AxpyPointerLoopX_V2A13U8(alpha float32, xs *float32, incx uintptr, ys *floa
 
 func AxpyPointerLoopX_V3A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -785,6 +1173,10 @@ func AxpyPointerLoopX_V1A14U8(alpha float32, xs *float32, incx uintptr, ys *floa
 func AxpyPointerLoopX_V2A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V0A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -794,6 +1186,10 @@ func AxpyPointerLoopX_V2A15U8(alpha float32, xs *float32, incx uintptr, ys *floa
 
 func AxpyPointerLoopX_V3A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopX_V4A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopX_V0A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V1A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -801,6 +1197,10 @@ func AxpyPointerLoopX_V1A16U8(alpha float32, xs *float32, incx uintptr, ys *floa
 func AxpyPointerLoopX_V2A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopX_V3A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V4A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopX_V5A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V0A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -810,6 +1210,10 @@ func AxpyPointerLoopXInterleave_V2A0U4(alpha float32, xs *float32, incx uintptr,
 
 func AxpyPointerLoopXInterleave_V3A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopXInterleave_V4A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopXInterleave_V0A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V1A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -817,6 +1221,10 @@ func AxpyPointerLoopXInterleave_V1A8U4(alpha float32, xs *float32, incx uintptr,
 func AxpyPointerLoopXInterleave_V2A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V3A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V4A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V0A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -826,6 +1234,10 @@ func AxpyPointerLoopXInterleave_V2A9U4(alpha float32, xs *float32, incx uintptr,
 
 func AxpyPointerLoopXInterleave_V3A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopXInterleave_V4A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopXInterleave_V0A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V1A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -833,6 +1245,10 @@ func AxpyPointerLoopXInterleave_V1A10U4(alpha float32, xs *float32, incx uintptr
 func AxpyPointerLoopXInterleave_V2A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V3A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V4A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V0A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -842,6 +1258,10 @@ func AxpyPointerLoopXInterleave_V2A11U4(alpha float32, xs *float32, incx uintptr
 
 func AxpyPointerLoopXInterleave_V3A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopXInterleave_V4A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopXInterleave_V0A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V1A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -849,6 +1269,10 @@ func AxpyPointerLoopXInterleave_V1A12U4(alpha float32, xs *float32, incx uintptr
 func AxpyPointerLoopXInterleave_V2A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V3A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V4A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V0A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -858,6 +1282,10 @@ func AxpyPointerLoopXInterleave_V2A13U4(alpha float32, xs *float32, incx uintptr
 
 func AxpyPointerLoopXInterleave_V3A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopXInterleave_V4A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopXInterleave_V0A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V1A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -865,6 +1293,10 @@ func AxpyPointerLoopXInterleave_V1A14U4(alpha float32, xs *float32, incx uintptr
 func AxpyPointerLoopXInterleave_V2A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V3A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V4A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V0A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -874,6 +1306,10 @@ func AxpyPointerLoopXInterleave_V2A15U4(alpha float32, xs *float32, incx uintptr
 
 func AxpyPointerLoopXInterleave_V3A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopXInterleave_V4A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopXInterleave_V0A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V1A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -881,6 +1317,10 @@ func AxpyPointerLoopXInterleave_V1A16U4(alpha float32, xs *float32, incx uintptr
 func AxpyPointerLoopXInterleave_V2A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V3A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V4A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V0A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -890,6 +1330,10 @@ func AxpyPointerLoopXInterleave_V2A0U8(alpha float32, xs *float32, incx uintptr,
 
 func AxpyPointerLoopXInterleave_V3A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopXInterleave_V4A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopXInterleave_V0A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V1A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -897,6 +1341,10 @@ func AxpyPointerLoopXInterleave_V1A8U8(alpha float32, xs *float32, incx uintptr,
 func AxpyPointerLoopXInterleave_V2A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V3A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V4A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V0A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -906,6 +1354,10 @@ func AxpyPointerLoopXInterleave_V2A9U8(alpha float32, xs *float32, incx uintptr,
 
 func AxpyPointerLoopXInterleave_V3A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopXInterleave_V4A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopXInterleave_V0A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V1A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -913,6 +1365,10 @@ func AxpyPointerLoopXInterleave_V1A10U8(alpha float32, xs *float32, incx uintptr
 func AxpyPointerLoopXInterleave_V2A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V3A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V4A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V0A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -922,6 +1378,10 @@ func AxpyPointerLoopXInterleave_V2A11U8(alpha float32, xs *float32, incx uintptr
 
 func AxpyPointerLoopXInterleave_V3A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopXInterleave_V4A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopXInterleave_V0A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V1A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -929,6 +1389,10 @@ func AxpyPointerLoopXInterleave_V1A12U8(alpha float32, xs *float32, incx uintptr
 func AxpyPointerLoopXInterleave_V2A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V3A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V4A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V0A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -938,6 +1402,10 @@ func AxpyPointerLoopXInterleave_V2A13U8(alpha float32, xs *float32, incx uintptr
 
 func AxpyPointerLoopXInterleave_V3A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopXInterleave_V4A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopXInterleave_V0A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V1A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -945,6 +1413,10 @@ func AxpyPointerLoopXInterleave_V1A14U8(alpha float32, xs *float32, incx uintptr
 func AxpyPointerLoopXInterleave_V2A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V3A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V4A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V0A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -954,6 +1426,10 @@ func AxpyPointerLoopXInterleave_V2A15U8(alpha float32, xs *float32, incx uintptr
 
 func AxpyPointerLoopXInterleave_V3A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoopXInterleave_V4A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoopXInterleave_V0A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V1A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -961,3 +1437,7 @@ func AxpyPointerLoopXInterleave_V1A16U8(alpha float32, xs *float32, incx uintptr
 func AxpyPointerLoopXInterleave_V2A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoopXInterleave_V3A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V4A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoopXInterleave_V5A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
