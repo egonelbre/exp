@@ -17,7 +17,7 @@ var testhelp = flag.String("testhelp", "", "test helpers")
 
 func main() {
 	emitAlignments := func(emit func(align int)) {
-		for align := 8; align <= 16; align++ {
+		for align := 0; align <= 16; align++ {
 			emit(align)
 		}
 	}
@@ -93,7 +93,7 @@ func AxpyPointer(align int) {
 	ADDQ(xs.Base, end)
 	JMP(LabelRef("check_limit"))
 
-	Align(align)
+	MISALIGN(align)
 	Label("loop")
 	{
 		tmp := XMM()
@@ -131,7 +131,7 @@ func AxpyPointerLoop(align int) {
 
 	JMP(LabelRef("check_limit"))
 
-	Align(align)
+	MISALIGN(align)
 	Label("loop")
 	{
 		tmp := XMM()
@@ -174,7 +174,7 @@ func AxpyUnsafe(align int) {
 
 	JMP(LabelRef("check_limit"))
 
-	Align(align)
+	MISALIGN(align)
 	Label("loop")
 	{
 		tmp := XMM()
@@ -196,22 +196,23 @@ func AxpyUnsafe(align int) {
 	RET()
 }
 
-func Align(n int) {
-	if n < 8 {
-		panic(fmt.Sprint("alignment %v not supported", n))
+func MISALIGN(n int) {
+	if n == 0 {
+		return
 	}
 
 	nearestPowerOf2 := 8
 	for n >= nearestPowerOf2*2 {
 		nearestPowerOf2 *= 2
 	}
+	if nearestPowerOf2 >= 8 {
+		Instruction(&ir.Instruction{
+			Opcode:   "PCALIGN",
+			Operands: []Op{Imm(uint64(nearestPowerOf2))},
+		})
+		n -= nearestPowerOf2
+	}
 
-	Instruction(&ir.Instruction{
-		Opcode:   "PCALIGN",
-		Operands: []Op{Imm(uint64(nearestPowerOf2))},
-	})
-
-	n -= nearestPowerOf2
 	for i := 0; i < n; i++ {
 		NOP()
 	}

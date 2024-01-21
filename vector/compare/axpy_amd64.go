@@ -2,6 +2,22 @@
 
 package compare
 
+func AxpyPointer_A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointer_A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -20,6 +36,22 @@ func AxpyPointer_A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy
 
 func AxpyPointer_A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyPointerLoop_A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointerLoop_A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -37,6 +69,22 @@ func AxpyPointerLoop_A14(alpha float32, xs *float32, incx uintptr, ys *float32, 
 func AxpyPointerLoop_A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_A1(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_A2(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_A3(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_A4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_A5(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_A6(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_A7(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafe_A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
