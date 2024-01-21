@@ -11,6 +11,7 @@ import (
 	. "github.com/mmcloughlin/avo/build"
 	"github.com/mmcloughlin/avo/ir"
 	. "github.com/mmcloughlin/avo/operand"
+	"github.com/mmcloughlin/avo/reg"
 )
 
 var testhelp = flag.String("testhelp", "", "test helpers")
@@ -29,6 +30,8 @@ func main() {
 	emitAlignments(AxpyUnsafe)
 	emitAlignments(func(variant, align int) { AxpyUnsafeUnroll(variant, align, 4) })
 	emitAlignments(func(variant, align int) { AxpyUnsafeUnroll(variant, align, 8) })
+	emitAlignments(func(variant, align int) { AxpyUnsafeParallelUnroll(variant, align, 4) })
+	emitAlignments(func(variant, align int) { AxpyUnsafeParallelUnroll(variant, align, 8) })
 
 	Generate()
 
@@ -230,6 +233,84 @@ func AxpyUnsafeUnroll(variant, align, unroll int) {
 			MULSS(alpha, tmp)
 			ADDSS(yat, tmp)
 			MOVSS(tmp, yat)
+		}
+
+		SUBQ(Imm(uint64(unroll)), n)
+
+		LEAQ(Mem{Base: xi, Index: incx, Scale: uint8(unroll)}, xi)
+		LEAQ(Mem{Base: yi, Index: incy, Scale: uint8(unroll)}, yi)
+
+		Label("check_limit_unroll")
+
+		CMPQ(n, U8(unroll))
+		JHI(LabelRef("loop_unroll"))
+	}
+
+	JMP(LabelRef("check_limit"))
+	Label("loop")
+	{
+		tmp := XMM()
+		MOVSS(xs.Idx(xi, 4), tmp)
+		MULSS(alpha, tmp)
+		ADDSS(ys.Idx(yi, 4), tmp)
+		MOVSS(tmp, ys.Idx(yi, 4))
+
+		DECQ(n)
+		ADDQ(incx, xi)
+		ADDQ(incy, yi)
+
+		Label("check_limit")
+
+		CMPQ(n, U8(0))
+		JHI(LabelRef("loop"))
+	}
+
+	RET()
+}
+
+func AxpyUnsafeParallelUnroll(variant, align, unroll int) {
+	TEXT(fmt.Sprintf("AxpyUnsafeParallel_V%vA%vR%v", variant, align, unroll), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+
+	alpha := Load(Param("alpha"), XMM())
+
+	xs := Mem{Base: Load(Param("xs"), GP64())}
+	incx := Load(Param("incx"), GP64())
+
+	ys := Mem{Base: Load(Param("ys"), GP64())}
+	incy := Load(Param("incy"), GP64())
+
+	n := Load(Param("n"), GP64())
+
+	xi, yi := GP64(), GP64()
+	XORQ(xi, xi)
+	XORQ(yi, yi)
+
+	JMP(LabelRef("check_limit_unroll"))
+
+	MISALIGN(align)
+	Label("loop_unroll")
+	{
+		xat := make([]Mem, unroll)
+		yat := make([]Mem, unroll)
+		tmp := make([]reg.VecVirtual, unroll)
+
+		for u := range tmp {
+			xat[u] = Mem{Base: xs.Base, Index: xi, Scale: 4, Disp: 4 * u}
+			yat[u] = Mem{Base: ys.Base, Index: yi, Scale: 4, Disp: 4 * u}
+			tmp[u] = XMM()
+		}
+
+		for u := 0; u < unroll; u++ {
+			MOVSS(xat[u], tmp[u])
+		}
+		for u := 0; u < unroll; u++ {
+			MULSS(alpha, tmp[u])
+		}
+		for u := 0; u < unroll; u++ {
+			ADDSS(yat[u], tmp[u])
+		}
+		for u := 0; u < unroll; u++ {
+			MOVSS(tmp[u], yat[u])
 		}
 
 		SUBQ(Imm(uint64(unroll)), n)

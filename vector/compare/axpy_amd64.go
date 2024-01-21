@@ -451,3 +451,183 @@ func AxpyUnsafe_V2A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, i
 func AxpyUnsafe_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafe_V4A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V0A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V1A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V2A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeParallel_V4A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
