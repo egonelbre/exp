@@ -5,8 +5,7 @@ import (
 )
 
 func at[T any](xs []T, index uintptr) *T {
-	return &xs[index]
-	//return (*T)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(xs)), index*unsafe.Sizeof(xs[0])))
+	return (*T)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(xs)), index*unsafe.Sizeof(xs[0])))
 }
 
 //go:noinline
