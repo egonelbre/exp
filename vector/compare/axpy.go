@@ -48,8 +48,8 @@ func AxpyUnsafeInline(alpha float32, xs []float32, incx uintptr, ys []float32, i
 
 //go:noinline
 func AxpyPointer(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
-	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
-	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+	xp := unsafe.Pointer(unsafe.SliceData(xs))
+	yp := unsafe.Pointer(unsafe.SliceData(ys))
 	xn := unsafe.Add(xp, 4*n*incx)
 	for uintptr(xp) < uintptr(xn) {
 		*(*float32)(yp) += alpha * *(*float32)(xp)
@@ -59,8 +59,8 @@ func AxpyPointer(alpha float32, xs []float32, incx uintptr, ys []float32, incy u
 
 //go:noinline
 func AxpyPointerLoop(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
-	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
-	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+	xp := unsafe.Pointer(unsafe.SliceData(xs))
+	yp := unsafe.Pointer(unsafe.SliceData(ys))
 	for i := uintptr(0); i < n; i++ {
 		*(*float32)(yp) += alpha * *(*float32)(xp)
 		xp, yp = unsafe.Add(xp, 4*incx), unsafe.Add(yp, 4*incy)
@@ -69,8 +69,8 @@ func AxpyPointerLoop(alpha float32, xs []float32, incx uintptr, ys []float32, in
 
 //go:noinline
 func AxpyPointerLoopX(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
-	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
-	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+	xp := unsafe.Pointer(unsafe.SliceData(xs))
+	yp := unsafe.Pointer(unsafe.SliceData(ys))
 	for ; n > 0; n-- {
 		*(*float32)(yp) += alpha * *(*float32)(xp)
 		xp, yp = unsafe.Add(xp, 4*incx), unsafe.Add(yp, 4*incy)
@@ -286,8 +286,8 @@ func AxpyUnsafeInlineXR8(alpha float32, xs []float32, incx uintptr, ys []float32
 func AxpyPointerR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	const Size = unsafe.Sizeof(xs[0])
 
-	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
-	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+	xp := unsafe.Pointer(unsafe.SliceData(xs))
+	yp := unsafe.Pointer(unsafe.SliceData(ys))
 
 	xn4 := unsafe.Add(xp, (n&mask4)*incx*Size)
 	xn := unsafe.Add(xp, n*incx*Size)
@@ -308,8 +308,8 @@ func AxpyPointerR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy
 func AxpyPointerLoopR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	const Size = unsafe.Sizeof(xs[0])
 
-	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
-	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+	xp := unsafe.Pointer(unsafe.SliceData(xs))
+	yp := unsafe.Pointer(unsafe.SliceData(ys))
 
 	i := uintptr(0)
 	n4 := n & mask4
@@ -330,8 +330,8 @@ func AxpyPointerLoopR4(alpha float32, xs []float32, incx uintptr, ys []float32, 
 func AxpyPointerLoopXR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	const Size = unsafe.Sizeof(xs[0])
 
-	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
-	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+	xp := unsafe.Pointer(unsafe.SliceData(xs))
+	yp := unsafe.Pointer(unsafe.SliceData(ys))
 
 	for ; n >= 4; n -= 4 {
 		*(*float32)(unsafe.Add(yp, 0*Size)) += alpha * *(*float32)(unsafe.Add(xp, 0*Size))
@@ -350,8 +350,8 @@ func AxpyPointerLoopXR4(alpha float32, xs []float32, incx uintptr, ys []float32,
 func AxpyPointerLoopInterleaveR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	const Size = unsafe.Sizeof(xs[0])
 
-	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
-	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+	xp := unsafe.Pointer(unsafe.SliceData(xs))
+	yp := unsafe.Pointer(unsafe.SliceData(ys))
 
 	i := uintptr(0)
 	n4 := n & mask4
@@ -388,8 +388,8 @@ func AxpyPointerLoopInterleaveR4(alpha float32, xs []float32, incx uintptr, ys [
 func AxpyPointerLoopInterleaveXR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	const Size = unsafe.Sizeof(xs[0])
 
-	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
-	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+	xp := unsafe.Pointer(unsafe.SliceData(xs))
+	yp := unsafe.Pointer(unsafe.SliceData(ys))
 
 	for ; n >= 4; n -= 4 {
 		x0 := *(*float32)(unsafe.Add(xp, 0*Size))
