@@ -27,7 +27,8 @@ func main() {
 	emitAlignments(AxpyPointer)
 	emitAlignments(AxpyPointerLoop)
 	emitAlignments(AxpyUnsafe)
-	emitAlignments(AxpyUnsafeR4)
+	emitAlignments(func(variant, align int) { AxpyUnsafeUnroll(variant, align, 4) })
+	emitAlignments(func(variant, align int) { AxpyUnsafeUnroll(variant, align, 8) })
 
 	Generate()
 
@@ -198,8 +199,8 @@ func AxpyUnsafe(variant, align int) {
 	RET()
 }
 
-func AxpyUnsafeR4(variant, align int) {
-	TEXT(fmt.Sprintf("AxpyUnsafe_V%vA%vR4", variant, align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+func AxpyUnsafeUnroll(variant, align, unroll int) {
+	TEXT(fmt.Sprintf("AxpyUnsafe_V%vA%vR%v", variant, align, unroll), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
 
 	alpha := Load(Param("alpha"), XMM())
 
@@ -215,31 +216,31 @@ func AxpyUnsafeR4(variant, align int) {
 	XORQ(xi, xi)
 	XORQ(yi, yi)
 
-	JMP(LabelRef("check_limit_r4"))
+	JMP(LabelRef("check_limit_unroll"))
 
 	MISALIGN(align)
-	Label("loop_r4")
+	Label("loop_unroll")
 	{
-		for unroll := 0; unroll < 4; unroll++ {
+		for u := 0; u < unroll; u++ {
 			tmp := XMM()
 
-			xat := Mem{Base: xs.Base, Index: xi, Scale: 4, Disp: 4 * unroll}
-			yat := Mem{Base: ys.Base, Index: yi, Scale: 4, Disp: 4 * unroll}
+			xat := Mem{Base: xs.Base, Index: xi, Scale: 4, Disp: 4 * u}
+			yat := Mem{Base: ys.Base, Index: yi, Scale: 4, Disp: 4 * u}
 			MOVSS(xat, tmp)
 			MULSS(alpha, tmp)
 			ADDSS(yat, tmp)
 			MOVSS(tmp, yat)
 		}
 
-		SUBQ(Imm(4), n)
+		SUBQ(Imm(uint64(unroll)), n)
 
-		LEAQ(Mem{Base: xi, Index: incx, Scale: 4}, xi)
-		LEAQ(Mem{Base: yi, Index: incy, Scale: 4}, yi)
+		LEAQ(Mem{Base: xi, Index: incx, Scale: uint8(unroll)}, xi)
+		LEAQ(Mem{Base: yi, Index: incy, Scale: uint8(unroll)}, yi)
 
-		Label("check_limit_r4")
+		Label("check_limit_unroll")
 
-		CMPQ(n, U8(4))
-		JHI(LabelRef("loop_r4"))
+		CMPQ(n, U8(unroll))
+		JHI(LabelRef("loop_unroll"))
 	}
 
 	JMP(LabelRef("check_limit"))
