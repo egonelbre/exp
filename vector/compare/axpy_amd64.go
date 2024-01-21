@@ -2,6 +2,16 @@
 
 package compare
 
+func AxpyPointer_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V1A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointer_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyPointer_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -91,6 +101,16 @@ func AxpyPointer_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, in
 func AxpyPointer_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointer_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V1A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyPointerLoop_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyPointerLoop_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -182,6 +202,16 @@ func AxpyPointerLoop_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32
 
 func AxpyPointerLoop_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafe_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafe_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafe_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -271,6 +301,16 @@ func AxpyUnsafe_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, inc
 func AxpyUnsafe_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafe_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V0A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafe_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
@@ -362,6 +402,16 @@ func AxpyUnsafe_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, i
 
 func AxpyUnsafe_V4A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafe_V0A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V1A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V2A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V3A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafe_V4A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafe_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafe_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -452,6 +502,16 @@ func AxpyUnsafe_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, i
 
 func AxpyUnsafe_V4A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
+func AxpyUnsafeInterleave_V0A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeInterleave_V1A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeInterleave_V2A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeInterleave_V3A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeInterleave_V4A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
 func AxpyUnsafeInterleave_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeInterleave_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
@@ -541,6 +601,16 @@ func AxpyUnsafeInterleave_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *
 func AxpyUnsafeInterleave_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeInterleave_V4A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeInterleave_V0A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeInterleave_V1A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeInterleave_V2A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeInterleave_V3A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+
+func AxpyUnsafeInterleave_V4A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 
 func AxpyUnsafeInterleave_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 

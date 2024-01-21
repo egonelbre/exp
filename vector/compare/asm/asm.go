@@ -18,6 +18,9 @@ var testhelp = flag.String("testhelp", "", "test helpers")
 
 func main() {
 	emitAlignments := func(emit func(variant, align int)) {
+		for v := 0; v <= 4; v++ {
+			emit(v, 0)
+		}
 		for align := 8; align <= 16; align++ {
 			for v := 0; v <= 4; v++ {
 				emit(v, align)
