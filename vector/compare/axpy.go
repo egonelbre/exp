@@ -5,7 +5,8 @@ import (
 )
 
 func at[T any](xs []T, index uintptr) *T {
-	return (*T)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(xs)), index*unsafe.Sizeof(xs[0])))
+	return &xs[index]
+	//return (*T)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(xs)), index*unsafe.Sizeof(xs[0])))
 }
 
 //go:noinline
@@ -42,7 +43,7 @@ func AxpyPointer(alpha float32, xs []float32, incx uintptr, ys []float32, incy u
 	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
 	xn := unsafe.Add(xp, 4*n*incx)
 	for uintptr(xp) < uintptr(xn) {
-		*(*float32)(xp) += alpha * *(*float32)(yp)
+		*(*float32)(yp) += alpha * *(*float32)(xp)
 		xp, yp = unsafe.Add(xp, 4*incx), unsafe.Add(yp, 4*incy)
 	}
 }
@@ -52,12 +53,13 @@ func AxpyPointerLoop(alpha float32, xs []float32, incx uintptr, ys []float32, in
 	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
 	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
 	for i := uintptr(0); i < n; i++ {
-		*(*float32)(xp) += alpha * *(*float32)(yp)
+		*(*float32)(yp) += alpha * *(*float32)(xp)
 		xp, yp = unsafe.Add(xp, 4*incx), unsafe.Add(yp, 4*incy)
 	}
 }
 
 const mask4 = ^uintptr(3)
+const mask8 = ^uintptr(7)
 
 //go:noinline
 func AxpyBasicR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
@@ -139,9 +141,12 @@ func AxpyUnsafeXR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy
 
 //go:noinline
 func AxpyUnsafeR8(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
+	if n == 0 {
+		return
+	}
 	_, _ = xs[n*incx-1], ys[n*incy-1]
 	xi, yi := uintptr(0), uintptr(0)
-	n8 := n & (8 - 1)
+	n8 := n & mask8
 	i := uintptr(0)
 	for ; i < n8; i += 8 {
 		*at(ys, yi+0) += alpha * *at(xs, xi+0)
@@ -164,6 +169,9 @@ func AxpyUnsafeR8(alpha float32, xs []float32, incx uintptr, ys []float32, incy 
 
 //go:noinline
 func AxpyUnsafeXR8(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
+	if n == 0 {
+		return
+	}
 	_, _ = xs[n*incx-1], ys[n*incy-1]
 	xi, yi := uintptr(0), uintptr(0)
 	for ; n >= 8; n -= 8 {
@@ -190,13 +198,13 @@ func AxpyUnsafeInlineR4(alpha float32, xs []float32, incx uintptr, ys []float32,
 	i := uintptr(0)
 	n4 := n & mask4
 	for ; i < n4; i += 4 {
-		*at(ys, (i+0)*incy) = alpha * *at(xs, (i+0)*incx)
-		*at(ys, (i+1)*incy) = alpha * *at(xs, (i+1)*incx)
-		*at(ys, (i+2)*incy) = alpha * *at(xs, (i+2)*incx)
-		*at(ys, (i+3)*incy) = alpha * *at(xs, (i+3)*incx)
+		*at(ys, (i+0)*incy) += alpha * *at(xs, (i+0)*incx)
+		*at(ys, (i+1)*incy) += alpha * *at(xs, (i+1)*incx)
+		*at(ys, (i+2)*incy) += alpha * *at(xs, (i+2)*incx)
+		*at(ys, (i+3)*incy) += alpha * *at(xs, (i+3)*incx)
 	}
 	for ; i < n; i++ {
-		*at(ys, (i+0)*incy) = alpha * *at(xs, (i+0)*incx)
+		*at(ys, (i+0)*incy) += alpha * *at(xs, (i+0)*incx)
 	}
 }
 
@@ -204,32 +212,34 @@ func AxpyUnsafeInlineR4(alpha float32, xs []float32, incx uintptr, ys []float32,
 func AxpyUnsafeInlineXR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	i := uintptr(0)
 	for ; n >= 4; n -= 4 {
-		*at(ys, (i+0)*incy) = alpha * *at(xs, (i+0)*incx)
-		*at(ys, (i+1)*incy) = alpha * *at(xs, (i+1)*incx)
-		*at(ys, (i+2)*incy) = alpha * *at(xs, (i+2)*incx)
-		*at(ys, (i+3)*incy) = alpha * *at(xs, (i+3)*incx)
+		*at(ys, (i+0)*incy) += alpha * *at(xs, (i+0)*incx)
+		*at(ys, (i+1)*incy) += alpha * *at(xs, (i+1)*incx)
+		*at(ys, (i+2)*incy) += alpha * *at(xs, (i+2)*incx)
+		*at(ys, (i+3)*incy) += alpha * *at(xs, (i+3)*incx)
+		i += 4
 	}
-	for ; n > 0; i++ {
-		*at(ys, (i+0)*incy) = alpha * *at(xs, (i+0)*incx)
+	for ; n > 0; n-- {
+		*at(ys, (i+0)*incy) += alpha * *at(xs, (i+0)*incx)
+		i++
 	}
 }
 
 //go:noinline
 func AxpyUnsafeInlineR8(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	i := uintptr(0)
-	n8 := n & (8 - 1)
+	n8 := n & mask8
 	for ; i < n8; i += 8 {
-		*at(ys, (i+0)*incy) = alpha * *at(xs, (i+0)*incx)
-		*at(ys, (i+1)*incy) = alpha * *at(xs, (i+1)*incx)
-		*at(ys, (i+2)*incy) = alpha * *at(xs, (i+2)*incx)
-		*at(ys, (i+3)*incy) = alpha * *at(xs, (i+3)*incx)
-		*at(ys, (i+4)*incy) = alpha * *at(xs, (i+4)*incx)
-		*at(ys, (i+5)*incy) = alpha * *at(xs, (i+5)*incx)
-		*at(ys, (i+6)*incy) = alpha * *at(xs, (i+6)*incx)
-		*at(ys, (i+7)*incy) = alpha * *at(xs, (i+7)*incx)
+		*at(ys, (i+0)*incy) += alpha * *at(xs, (i+0)*incx)
+		*at(ys, (i+1)*incy) += alpha * *at(xs, (i+1)*incx)
+		*at(ys, (i+2)*incy) += alpha * *at(xs, (i+2)*incx)
+		*at(ys, (i+3)*incy) += alpha * *at(xs, (i+3)*incx)
+		*at(ys, (i+4)*incy) += alpha * *at(xs, (i+4)*incx)
+		*at(ys, (i+5)*incy) += alpha * *at(xs, (i+5)*incx)
+		*at(ys, (i+6)*incy) += alpha * *at(xs, (i+6)*incx)
+		*at(ys, (i+7)*incy) += alpha * *at(xs, (i+7)*incx)
 	}
 	for ; i < n; i++ {
-		*at(ys, (i+0)*incy) = alpha * *at(xs, (i+0)*incx)
+		*at(ys, (i+0)*incy) += alpha * *at(xs, (i+0)*incx)
 	}
 }
 
@@ -237,17 +247,19 @@ func AxpyUnsafeInlineR8(alpha float32, xs []float32, incx uintptr, ys []float32,
 func AxpyUnsafeInlineXR8(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	i := uintptr(0)
 	for ; n >= 8; n -= 8 {
-		*at(ys, (i+0)*incy) = alpha * *at(xs, (i+0)*incx)
-		*at(ys, (i+1)*incy) = alpha * *at(xs, (i+1)*incx)
-		*at(ys, (i+2)*incy) = alpha * *at(xs, (i+2)*incx)
-		*at(ys, (i+3)*incy) = alpha * *at(xs, (i+3)*incx)
-		*at(ys, (i+4)*incy) = alpha * *at(xs, (i+4)*incx)
-		*at(ys, (i+5)*incy) = alpha * *at(xs, (i+5)*incx)
-		*at(ys, (i+6)*incy) = alpha * *at(xs, (i+6)*incx)
-		*at(ys, (i+7)*incy) = alpha * *at(xs, (i+7)*incx)
+		*at(ys, (i+0)*incy) += alpha * *at(xs, (i+0)*incx)
+		*at(ys, (i+1)*incy) += alpha * *at(xs, (i+1)*incx)
+		*at(ys, (i+2)*incy) += alpha * *at(xs, (i+2)*incx)
+		*at(ys, (i+3)*incy) += alpha * *at(xs, (i+3)*incx)
+		*at(ys, (i+4)*incy) += alpha * *at(xs, (i+4)*incx)
+		*at(ys, (i+5)*incy) += alpha * *at(xs, (i+5)*incx)
+		*at(ys, (i+6)*incy) += alpha * *at(xs, (i+6)*incx)
+		*at(ys, (i+7)*incy) += alpha * *at(xs, (i+7)*incx)
+		i += 8
 	}
 	for ; n > 0; n-- {
-		*at(ys, (i+0)*incy) = alpha * *at(xs, (i+0)*incx)
+		*at(ys, (i+0)*incy) += alpha * *at(xs, (i+0)*incx)
+		i++
 	}
 }
 
@@ -281,7 +293,7 @@ func AxpyPointerLoopR4(alpha float32, xs []float32, incx uintptr, ys []float32, 
 	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
 
 	i := uintptr(0)
-	n4 := n &^ 3
+	n4 := n & mask4
 	for ; i < n4; i += 4 {
 		*(*float32)(unsafe.Add(yp, 0*Size)) += alpha * *(*float32)(unsafe.Add(xp, 0*Size))
 		*(*float32)(unsafe.Add(yp, 1*Size)) += alpha * *(*float32)(unsafe.Add(xp, 1*Size))
@@ -303,7 +315,7 @@ func AxpyPointerLoopInterleaveR4(alpha float32, xs []float32, incx uintptr, ys [
 	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
 
 	i := uintptr(0)
-	n4 := n &^ 3
+	n4 := n & mask4
 	for ; i < n4; i += 4 {
 		x0 := *(*float32)(unsafe.Add(xp, 0*Size))
 		x1 := *(*float32)(unsafe.Add(xp, 1*Size))
