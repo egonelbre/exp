@@ -8,7 +8,7 @@ import (
 	"unsafe"
 )
 
-func BenchmarkAsm(b *testing.B) {
+func BenchmarkAmd64(b *testing.B) {
 	for _, decl := range asmAxpyDecls {
 		b.Run(decl.name, func(b *testing.B) {
 			fn := decl.fn
@@ -19,7 +19,7 @@ func BenchmarkAsm(b *testing.B) {
 	}
 }
 
-func FuzzAsm(f *testing.F) {
+func FuzzAmd64(f *testing.F) {
 	f.Add(int64(0), uint8(0))
 	f.Fuzz(func(t *testing.T, seed1 int64, bn byte) {
 		n := int(bn) % 8
@@ -50,7 +50,7 @@ func FuzzAsm(f *testing.F) {
 	})
 }
 
-func TestAsm(t *testing.T) {
+func TestAmd64(t *testing.T) {
 	for _, axpy := range asmAxpyDecls {
 		t.Run(axpy.name, func(t *testing.T) {
 			for i, test := range axpyTestCases {
