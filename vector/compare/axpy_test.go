@@ -102,7 +102,9 @@ var goAxypDecls = []goAxpyDecl{
 	{name: "AxpyUnsafeInlineXR8", fn: AxpyUnsafeInlineXR8},
 	{name: "AxpyPointerR4", fn: AxpyPointerR4},
 	{name: "AxpyPointerLoopR4", fn: AxpyPointerLoopR4},
+	{name: "AxpyPointerLoopXR4", fn: AxpyPointerLoopXR4},
 	{name: "AxpyPointerLoopInterleaveR4", fn: AxpyPointerLoopInterleaveR4},
+	{name: "AxpyPointerLoopInterleaveXR4", fn: AxpyPointerLoopInterleaveXR4},
 	{name: "AxpyPointerR4Alt", fn: AxpyPointerR4Alt},
 }
 

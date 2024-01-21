@@ -308,6 +308,26 @@ func AxpyPointerLoopR4(alpha float32, xs []float32, incx uintptr, ys []float32, 
 }
 
 //go:noinline
+func AxpyPointerLoopXR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
+	const Size = unsafe.Sizeof(xs[0])
+
+	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
+	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+
+	for ; n >= 4; n -= 4 {
+		*(*float32)(unsafe.Add(yp, 0*Size)) += alpha * *(*float32)(unsafe.Add(xp, 0*Size))
+		*(*float32)(unsafe.Add(yp, 1*Size)) += alpha * *(*float32)(unsafe.Add(xp, 1*Size))
+		*(*float32)(unsafe.Add(yp, 2*Size)) += alpha * *(*float32)(unsafe.Add(xp, 2*Size))
+		*(*float32)(unsafe.Add(yp, 3*Size)) += alpha * *(*float32)(unsafe.Add(xp, 3*Size))
+		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
+	}
+	for ; n > 0; n-- {
+		*(*float32)(yp) += alpha * *(*float32)(xp)
+		xp, yp = unsafe.Add(xp, incx*Size), unsafe.Add(yp, incy*Size)
+	}
+}
+
+//go:noinline
 func AxpyPointerLoopInterleaveR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	const Size = unsafe.Sizeof(xs[0])
 
@@ -340,6 +360,42 @@ func AxpyPointerLoopInterleaveR4(alpha float32, xs []float32, incx uintptr, ys [
 		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
 	}
 	for ; i < n; i++ {
+		*(*float32)(yp) += alpha * *(*float32)(xp)
+		xp, yp = unsafe.Add(xp, incx*Size), unsafe.Add(yp, incy*Size)
+	}
+}
+
+//go:noinline
+func AxpyPointerLoopInterleaveXR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
+	const Size = unsafe.Sizeof(xs[0])
+
+	xp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(xs)))
+	yp := unsafe.Pointer(unsafe.Pointer(unsafe.SliceData(ys)))
+
+	for ; n >= 4; n -= 4 {
+		x0 := *(*float32)(unsafe.Add(xp, 0*Size))
+		x1 := *(*float32)(unsafe.Add(xp, 1*Size))
+		x2 := *(*float32)(unsafe.Add(xp, 2*Size))
+		x3 := *(*float32)(unsafe.Add(xp, 3*Size))
+
+		m0 := alpha * x0
+		m1 := alpha * x1
+		m2 := alpha * x2
+		m3 := alpha * x3
+
+		t0 := *(*float32)(unsafe.Add(yp, 0*Size)) + m0
+		t1 := *(*float32)(unsafe.Add(yp, 1*Size)) + m1
+		t2 := *(*float32)(unsafe.Add(yp, 2*Size)) + m2
+		t3 := *(*float32)(unsafe.Add(yp, 3*Size)) + m3
+
+		*(*float32)(unsafe.Add(yp, 0*Size)) = t0
+		*(*float32)(unsafe.Add(yp, 1*Size)) = t1
+		*(*float32)(unsafe.Add(yp, 2*Size)) = t2
+		*(*float32)(unsafe.Add(yp, 3*Size)) = t3
+
+		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
+	}
+	for ; n > 0; n-- {
 		*(*float32)(yp) += alpha * *(*float32)(xp)
 		xp, yp = unsafe.Add(xp, incx*Size), unsafe.Add(yp, incy*Size)
 	}
