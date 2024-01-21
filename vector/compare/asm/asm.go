@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"go/format"
+	"math/bits"
 	"os"
 	"regexp"
 
@@ -17,12 +18,14 @@ import (
 var testhelp = flag.String("testhelp", "", "test helpers")
 
 func main() {
+	const variants = 4
+	alignments := []int{0, 8, 9, 10, 11, 12, 13, 14, 15, 16}
+	// const variants = 1
+	// alignments := []int{0}
+
 	emitAlignments := func(emit func(variant, align int)) {
-		for v := 0; v <= 4; v++ {
-			emit(v, 0)
-		}
-		for align := 8; align <= 16; align++ {
-			for v := 0; v <= 4; v++ {
+		for _, align := range alignments {
+			for v := 0; v < variants; v++ {
 				emit(v, align)
 			}
 		}
@@ -30,11 +33,16 @@ func main() {
 
 	emitAlignments(AxpyPointer)
 	emitAlignments(AxpyPointerLoop)
-	emitAlignments(AxpyUnsafe)
-	emitAlignments(func(variant, align int) { AxpyUnsafeUnroll(variant, align, 4) })
-	emitAlignments(func(variant, align int) { AxpyUnsafeUnroll(variant, align, 8) })
-	emitAlignments(func(variant, align int) { AxpyUnsafeInterleaveUnroll(variant, align, 4) })
-	emitAlignments(func(variant, align int) { AxpyUnsafeInterleaveUnroll(variant, align, 8) })
+	emitAlignments(AxpyPointerLoopX)
+	emitAlignments(AxpyUnsafeX)
+	emitAlignments(func(variant, align int) { AxpyUnsafeXUnroll(variant, align, 4) })
+	emitAlignments(func(variant, align int) { AxpyUnsafeXUnroll(variant, align, 8) })
+	emitAlignments(func(variant, align int) { AxpyUnsafeXInterleaveUnroll(variant, align, 4) })
+	emitAlignments(func(variant, align int) { AxpyUnsafeXInterleaveUnroll(variant, align, 8) })
+	emitAlignments(func(variant, align int) { AxpyPointerLoopXUnroll(variant, align, 4) })
+	emitAlignments(func(variant, align int) { AxpyPointerLoopXUnroll(variant, align, 8) })
+	emitAlignments(func(variant, align int) { AxpyPointerLoopXInterleaveUnroll(variant, align, 4) })
+	emitAlignments(func(variant, align int) { AxpyPointerLoopXInterleaveUnroll(variant, align, 8) })
 
 	Generate()
 
@@ -164,8 +172,207 @@ func AxpyPointerLoop(variant, align int) {
 	RET()
 }
 
-func AxpyUnsafe(variant, align int) {
-	TEXT(fmt.Sprintf("AxpyUnsafe_V%vA%v", variant, align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+func AxpyPointerLoopX(variant, align int) {
+	TEXT(fmt.Sprintf("AxpyPointerLoopX_V%vA%v", variant, align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+
+	alpha := Load(Param("alpha"), XMM())
+
+	xs := Mem{Base: Load(Param("xs"), GP64())}
+	incx := Load(Param("incx"), GP64())
+
+	ys := Mem{Base: Load(Param("ys"), GP64())}
+	incy := Load(Param("incy"), GP64())
+
+	n := Load(Param("n"), GP64())
+
+	JMP(LabelRef("check_limit"))
+
+	MISALIGN(align)
+	Label("loop")
+	{
+		tmp := XMM()
+		MOVSS(xs, tmp)
+		MULSS(alpha, tmp)
+		ADDSS(ys, tmp)
+		MOVSS(tmp, ys)
+
+		DECQ(n)
+
+		LEAQ(xs.Idx(incx, 4), xs.Base)
+		LEAQ(ys.Idx(incy, 4), ys.Base)
+
+		Label("check_limit")
+
+		CMPQ(n, U8(0))
+		JHI(LabelRef("loop"))
+	}
+
+	RET()
+}
+
+func log2(v int) int {
+	if v&(v-1) != 0 {
+		panic("not a power of two")
+	}
+	return bits.TrailingZeros(uint(v))
+}
+
+func AxpyPointerLoopXUnroll(variant, align, unroll int) {
+	TEXT(fmt.Sprintf("AxpyPointerLoopX_V%vA%vU%v", variant, align, unroll), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+
+	alpha := Load(Param("alpha"), XMM())
+
+	xs := Mem{Base: Load(Param("xs"), GP64())}
+	incx := Load(Param("incx"), GP64())
+	incxunroll := GP64()
+	MOVQ(incx, incxunroll)
+	SHLQ(U8(log2(4*unroll)), incxunroll)
+
+	ys := Mem{Base: Load(Param("ys"), GP64())}
+	incy := Load(Param("incy"), GP64())
+	incyunroll := GP64()
+	MOVQ(incy, incyunroll)
+	SHLQ(U8(log2(4*unroll)), incyunroll)
+
+	n := Load(Param("n"), GP64())
+
+	JMP(LabelRef("check_limit_unroll"))
+
+	MISALIGN(align)
+	Label("loop_unroll")
+	{
+		for u := 0; u < unroll; u++ {
+			tmp := XMM()
+
+			xat := Mem{Base: xs.Base, Disp: 4 * u}
+			yat := Mem{Base: ys.Base, Disp: 4 * u}
+			MOVSS(xat, tmp)
+			MULSS(alpha, tmp)
+			ADDSS(yat, tmp)
+			MOVSS(tmp, yat)
+		}
+
+		SUBQ(Imm(uint64(unroll)), n)
+
+		// LEAQ(Mem{Base: xs.Base, Index: incx, Scale: uint8(4 * unroll)}, xs.Base)
+		// LEAQ(Mem{Base: xs.Base, Index: incy, Scale: uint8(4 * unroll)}, ys.Base)
+		ADDQ(incxunroll, xs.Base)
+		ADDQ(incyunroll, ys.Base)
+
+		Label("check_limit_unroll")
+
+		CMPQ(n, U8(unroll))
+		JHS(LabelRef("loop_unroll"))
+	}
+
+	JMP(LabelRef("check_limit"))
+	Label("loop")
+	{
+		tmp := XMM()
+		MOVSS(xs, tmp)
+		MULSS(alpha, tmp)
+		ADDSS(ys, tmp)
+		MOVSS(tmp, ys)
+
+		DECQ(n)
+
+		LEAQ(xs.Idx(incx, 4), xs.Base)
+		LEAQ(ys.Idx(incy, 4), ys.Base)
+
+		Label("check_limit")
+
+		CMPQ(n, U8(0))
+		JHI(LabelRef("loop"))
+	}
+
+	RET()
+}
+
+func AxpyPointerLoopXInterleaveUnroll(variant, align, unroll int) {
+	TEXT(fmt.Sprintf("AxpyPointerLoopXInterleave_V%vA%vU%v", variant, align, unroll), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+
+	alpha := Load(Param("alpha"), XMM())
+
+	xs := Mem{Base: Load(Param("xs"), GP64())}
+	incx := Load(Param("incx"), GP64())
+	incxunroll := GP64()
+	MOVQ(incx, incxunroll)
+	SHLQ(U8(log2(4*unroll)), incxunroll)
+
+	ys := Mem{Base: Load(Param("ys"), GP64())}
+	incy := Load(Param("incy"), GP64())
+	incyunroll := GP64()
+	MOVQ(incy, incyunroll)
+	SHLQ(U8(log2(4*unroll)), incyunroll)
+
+	n := Load(Param("n"), GP64())
+
+	JMP(LabelRef("check_limit_unroll"))
+
+	MISALIGN(align)
+	Label("loop_unroll")
+	{
+		xat := make([]Mem, unroll)
+		yat := make([]Mem, unroll)
+		tmp := make([]reg.VecVirtual, unroll)
+
+		for u := range tmp {
+			xat[u] = Mem{Base: xs.Base, Disp: 4 * u}
+			yat[u] = Mem{Base: ys.Base, Disp: 4 * u}
+			tmp[u] = XMM()
+		}
+
+		for u := 0; u < unroll; u++ {
+			MOVSS(xat[u], tmp[u])
+		}
+		for u := 0; u < unroll; u++ {
+			MULSS(alpha, tmp[u])
+		}
+		for u := 0; u < unroll; u++ {
+			ADDSS(yat[u], tmp[u])
+		}
+		for u := 0; u < unroll; u++ {
+			MOVSS(tmp[u], yat[u])
+		}
+
+		SUBQ(Imm(uint64(unroll)), n)
+
+		// LEAQ(Mem{Base: xs.Base, Index: incx, Scale: uint8(4 * unroll)}, xs.Base)
+		// LEAQ(Mem{Base: xs.Base, Index: incy, Scale: uint8(4 * unroll)}, ys.Base)
+		ADDQ(incxunroll, xs.Base)
+		ADDQ(incyunroll, ys.Base)
+
+		Label("check_limit_unroll")
+
+		CMPQ(n, U8(unroll))
+		JHS(LabelRef("loop_unroll"))
+	}
+
+	JMP(LabelRef("check_limit"))
+	Label("loop")
+	{
+		tmp := XMM()
+		MOVSS(xs, tmp)
+		MULSS(alpha, tmp)
+		ADDSS(ys, tmp)
+		MOVSS(tmp, ys)
+
+		DECQ(n)
+
+		LEAQ(xs.Idx(incx, 4), xs.Base)
+		LEAQ(ys.Idx(incy, 4), ys.Base)
+
+		Label("check_limit")
+
+		CMPQ(n, U8(0))
+		JHI(LabelRef("loop"))
+	}
+
+	RET()
+}
+
+func AxpyUnsafeX(variant, align int) {
+	TEXT(fmt.Sprintf("AxpyUnsafeX_V%vA%v", variant, align), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
 
 	alpha := Load(Param("alpha"), XMM())
 
@@ -205,8 +412,8 @@ func AxpyUnsafe(variant, align int) {
 	RET()
 }
 
-func AxpyUnsafeUnroll(variant, align, unroll int) {
-	TEXT(fmt.Sprintf("AxpyUnsafe_V%vA%vR%v", variant, align, unroll), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+func AxpyUnsafeXUnroll(variant, align, unroll int) {
+	TEXT(fmt.Sprintf("AxpyUnsafeX_V%vA%vR%v", variant, align, unroll), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
 
 	alpha := Load(Param("alpha"), XMM())
 
@@ -271,8 +478,8 @@ func AxpyUnsafeUnroll(variant, align, unroll int) {
 	RET()
 }
 
-func AxpyUnsafeInterleaveUnroll(variant, align, unroll int) {
-	TEXT(fmt.Sprintf("AxpyUnsafeInterleave_V%vA%vR%v", variant, align, unroll), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
+func AxpyUnsafeXInterleaveUnroll(variant, align, unroll int) {
+	TEXT(fmt.Sprintf("AxpyUnsafeXInterleave_V%vA%vR%v", variant, align, unroll), NOSPLIT, "func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)")
 
 	alpha := Load(Param("alpha"), XMM())
 
@@ -324,7 +531,7 @@ func AxpyUnsafeInterleaveUnroll(variant, align, unroll int) {
 		Label("check_limit_unroll")
 
 		CMPQ(n, U8(unroll))
-		JHI(LabelRef("loop_unroll"))
+		JHS(LabelRef("loop_unroll"))
 	}
 
 	JMP(LabelRef("check_limit"))

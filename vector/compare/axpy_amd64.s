@@ -110,33 +110,6 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointer_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointer_V4A0(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	SHLQ  $0x02, SI
-	IMULQ CX, SI
-	ADDQ  AX, SI
-	JMP   check_limit
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, AX
-	JHI  loop
-	RET
-
 // func AxpyPointer_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointer_V0A8(SB), NOSPLIT, $0-48
@@ -224,34 +197,6 @@ check_limit:
 // func AxpyPointer_V3A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointer_V3A8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	SHLQ  $0x02, SI
-	IMULQ CX, SI
-	ADDQ  AX, SI
-	JMP   check_limit
-	PCALIGN $0x08
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, AX
-	JHI  loop
-	RET
-
-// func AxpyPointer_V4A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointer_V4A8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -393,35 +338,6 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointer_V4A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointer_V4A9(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	SHLQ  $0x02, SI
-	IMULQ CX, SI
-	ADDQ  AX, SI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, AX
-	JHI  loop
-	RET
-
 // func AxpyPointer_V0A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointer_V0A10(SB), NOSPLIT, $0-48
@@ -515,36 +431,6 @@ check_limit:
 // func AxpyPointer_V3A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointer_V3A10(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	SHLQ  $0x02, SI
-	IMULQ CX, SI
-	ADDQ  AX, SI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, AX
-	JHI  loop
-	RET
-
-// func AxpyPointer_V4A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointer_V4A10(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -696,37 +582,6 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointer_V4A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointer_V4A11(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	SHLQ  $0x02, SI
-	IMULQ CX, SI
-	ADDQ  AX, SI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, AX
-	JHI  loop
-	RET
-
 // func AxpyPointer_V0A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointer_V0A12(SB), NOSPLIT, $0-48
@@ -826,38 +681,6 @@ check_limit:
 // func AxpyPointer_V3A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointer_V3A12(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	SHLQ  $0x02, SI
-	IMULQ CX, SI
-	ADDQ  AX, SI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, AX
-	JHI  loop
-	RET
-
-// func AxpyPointer_V4A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointer_V4A12(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -1019,39 +842,6 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointer_V4A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointer_V4A13(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	SHLQ  $0x02, SI
-	IMULQ CX, SI
-	ADDQ  AX, SI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, AX
-	JHI  loop
-	RET
-
 // func AxpyPointer_V0A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointer_V0A14(SB), NOSPLIT, $0-48
@@ -1157,40 +947,6 @@ check_limit:
 // func AxpyPointer_V3A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointer_V3A14(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	SHLQ  $0x02, SI
-	IMULQ CX, SI
-	ADDQ  AX, SI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, AX
-	JHI  loop
-	RET
-
-// func AxpyPointer_V4A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointer_V4A14(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -1362,41 +1118,6 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointer_V4A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointer_V4A15(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	SHLQ  $0x02, SI
-	IMULQ CX, SI
-	ADDQ  AX, SI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, AX
-	JHI  loop
-	RET
-
 // func AxpyPointer_V0A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointer_V0A16(SB), NOSPLIT, $0-48
@@ -1484,34 +1205,6 @@ check_limit:
 // func AxpyPointer_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointer_V3A16(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	SHLQ  $0x02, SI
-	IMULQ CX, SI
-	ADDQ  AX, SI
-	JMP   check_limit
-	PCALIGN $0x10
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, AX
-	JHI  loop
-	RET
-
-// func AxpyPointer_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointer_V4A16(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -1641,32 +1334,6 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointerLoop_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointerLoop_V4A0(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	JMP   check_limit
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	INCQ  DI
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, DI
-	JHI  loop
-	RET
-
 // func AxpyPointerLoop_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointerLoop_V0A8(SB), NOSPLIT, $0-48
@@ -1751,33 +1418,6 @@ check_limit:
 // func AxpyPointerLoop_V3A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointerLoop_V3A8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	JMP   check_limit
-	PCALIGN $0x08
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	INCQ  DI
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, DI
-	JHI  loop
-	RET
-
-// func AxpyPointerLoop_V4A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointerLoop_V4A8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -1914,34 +1554,6 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointerLoop_V4A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointerLoop_V4A9(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	INCQ  DI
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, DI
-	JHI  loop
-	RET
-
 // func AxpyPointerLoop_V0A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointerLoop_V0A10(SB), NOSPLIT, $0-48
@@ -2032,35 +1644,6 @@ check_limit:
 // func AxpyPointerLoop_V3A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointerLoop_V3A10(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	INCQ  DI
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, DI
-	JHI  loop
-	RET
-
-// func AxpyPointerLoop_V4A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointerLoop_V4A10(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -2207,36 +1790,6 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointerLoop_V4A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointerLoop_V4A11(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	INCQ  DI
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, DI
-	JHI  loop
-	RET
-
 // func AxpyPointerLoop_V0A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointerLoop_V0A12(SB), NOSPLIT, $0-48
@@ -2333,37 +1886,6 @@ check_limit:
 // func AxpyPointerLoop_V3A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointerLoop_V3A12(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	INCQ  DI
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, DI
-	JHI  loop
-	RET
-
-// func AxpyPointerLoop_V4A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointerLoop_V4A12(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -2520,38 +2042,6 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointerLoop_V4A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointerLoop_V4A13(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	INCQ  DI
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, DI
-	JHI  loop
-	RET
-
 // func AxpyPointerLoop_V0A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointerLoop_V0A14(SB), NOSPLIT, $0-48
@@ -2654,39 +2144,6 @@ check_limit:
 // func AxpyPointerLoop_V3A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointerLoop_V3A14(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	INCQ  DI
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, DI
-	JHI  loop
-	RET
-
-// func AxpyPointerLoop_V4A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointerLoop_V4A14(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -2853,40 +2310,6 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointerLoop_V4A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyPointerLoop_V4A15(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX), X1
-	MULSS X0, X1
-	ADDSS (DX), X1
-	MOVSS X1, (DX)
-	INCQ  DI
-	LEAQ  (AX)(CX*4), AX
-	LEAQ  (DX)(BX*4), DX
-
-check_limit:
-	CMPQ SI, DI
-	JHI  loop
-	RET
-
 // func AxpyPointerLoop_V0A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
 TEXT ·AxpyPointerLoop_V0A16(SB), NOSPLIT, $0-48
@@ -2995,16 +2418,1059 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyPointerLoop_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyPointerLoopX_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyPointerLoop_V4A16(SB), NOSPLIT, $0-48
+TEXT ·AxpyPointerLoopX_V0A0(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
 	MOVQ  ys+24(FP), DX
 	MOVQ  incy+32(FP), BX
 	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
+	JMP   check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A0(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A0(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A0(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A9(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A9(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A9(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A9(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A10(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A10(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A10(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A10(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A11(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A11(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A11(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A11(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A12(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A12(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A12(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A12(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A13(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A13(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A13(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A13(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A14(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A14(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A14(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A14(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A15(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A15(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A15(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A15(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A16(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
 	JMP   check_limit
 	PCALIGN $0x10
 
@@ -3013,18 +3479,96 @@ loop:
 	MULSS X0, X1
 	ADDSS (DX), X1
 	MOVSS X1, (DX)
-	INCQ  DI
+	DECQ  SI
 	LEAQ  (AX)(CX*4), AX
 	LEAQ  (DX)(BX*4), DX
 
 check_limit:
-	CMPQ SI, DI
+	CMPQ SI, $0x00
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyPointerLoopX_V1A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V0A0(SB), NOSPLIT, $0-48
+TEXT ·AxpyPointerLoopX_V1A16(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x10
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A16(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x10
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A16(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	JMP   check_limit
+	PCALIGN $0x10
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (DX), X1
+	MOVSS X1, (DX)
+	DECQ  SI
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (DX)(BX*4), DX
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyUnsafeX_V0A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyUnsafeX_V0A0(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3049,9 +3593,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A0(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A0(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3076,9 +3620,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A0(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A0(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3103,9 +3647,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A0(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A0(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3130,120 +3674,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A0(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A0(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-	PCALIGN $0x08
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V1A8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-	PCALIGN $0x08
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V2A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V2A8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-	PCALIGN $0x08
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V3A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V3A8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3269,9 +3702,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3297,9 +3730,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V0A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V0A9(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3310,7 +3743,6 @@ TEXT ·AxpyUnsafe_V0A9(SB), NOSPLIT, $0-48
 	XORQ  R8, R8
 	JMP   check_limit
 	PCALIGN $0x08
-	NOP
 
 loop:
 	MOVSS (AX)(DI*4), X1
@@ -3326,9 +3758,37 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A9(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  ys+24(FP), DX
+	MOVQ  incy+32(FP), BX
+	MOVQ  n+40(FP), SI
+	XORQ  DI, DI
+	XORQ  R8, R8
+	JMP   check_limit
+	PCALIGN $0x08
+
+loop:
+	MOVSS (AX)(DI*4), X1
+	MULSS X0, X1
+	ADDSS (DX)(R8*4), X1
+	MOVSS X1, (DX)(R8*4)
+	DECQ  SI
+	ADDQ  CX, DI
+	ADDQ  BX, R8
+
+check_limit:
+	CMPQ SI, $0x00
+	JHI  loop
+	RET
+
+// func AxpyUnsafeX_V0A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyUnsafeX_V0A9(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3355,9 +3815,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A9(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A9(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3384,9 +3844,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A9(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A9(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3413,9 +3873,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A9(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A9(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A9(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3442,9 +3902,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V0A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V0A10(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A10(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3472,9 +3932,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A10(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A10(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3502,9 +3962,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A10(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A10(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3532,9 +3992,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A10(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A10(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3562,39 +4022,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A10(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A10(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A11(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A11(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3623,9 +4053,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A11(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A11(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3654,9 +4084,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A11(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A11(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3685,9 +4115,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A11(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A11(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3716,40 +4146,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A11(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A11(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A12(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A12(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3779,9 +4178,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A12(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A12(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3811,9 +4210,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A12(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A12(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3843,9 +4242,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A12(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A12(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3875,41 +4274,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A12(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A12(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A13(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A13(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3940,9 +4307,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A13(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A13(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -3973,9 +4340,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A13(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A13(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4006,9 +4373,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A13(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A13(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4039,42 +4406,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A13(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A13(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A14(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A14(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4106,9 +4440,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A14(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A14(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4140,9 +4474,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A14(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A14(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4174,9 +4508,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A14(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A14(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4208,43 +4542,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A14(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A14(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A15(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A15(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4277,9 +4577,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A15(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A15(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4312,9 +4612,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A15(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A15(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4347,9 +4647,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A15(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A15(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4382,44 +4682,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A15(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A15(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A16(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A16(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4445,9 +4710,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A16(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A16(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4473,9 +4738,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A16(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A16(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4501,9 +4766,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A16(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A16(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4529,37 +4794,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A16(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A16(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit
-	PCALIGN $0x10
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A0R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A0R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4610,9 +4847,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A0R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A0R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4663,9 +4900,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A0R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A0R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4716,9 +4953,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A0R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A0R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4769,62 +5006,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A0R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4876,9 +5060,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4930,9 +5114,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -4984,9 +5168,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5038,63 +5222,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A8R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5147,9 +5277,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5202,9 +5332,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5257,9 +5387,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5312,64 +5442,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A9R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5423,9 +5498,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5479,9 +5554,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5535,9 +5610,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5591,65 +5666,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A10R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5704,9 +5723,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5761,9 +5780,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5818,9 +5837,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5875,66 +5894,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A11R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -5990,9 +5952,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6048,9 +6010,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6106,9 +6068,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6164,67 +6126,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A12R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6281,9 +6185,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6340,9 +6244,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6399,9 +6303,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6458,68 +6362,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A13R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6577,9 +6422,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6637,9 +6482,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6697,9 +6542,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6757,69 +6602,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A14R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6878,9 +6663,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -6939,9 +6724,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7000,9 +6785,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7061,70 +6846,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A15R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7176,9 +6900,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7230,9 +6954,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7284,9 +7008,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7338,63 +7062,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A16R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x10
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A0R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A0R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7461,9 +7131,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A0R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A0R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7530,9 +7200,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A0R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A0R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7599,9 +7269,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A0R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A0R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7668,78 +7338,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A0R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	MOVSS 16(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 16(DX)(R8*4), X1
-	MOVSS X1, 16(DX)(R8*4)
-	MOVSS 20(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 20(DX)(R8*4), X1
-	MOVSS X1, 20(DX)(R8*4)
-	MOVSS 24(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 24(DX)(R8*4), X1
-	MOVSS X1, 24(DX)(R8*4)
-	MOVSS 28(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 28(DX)(R8*4), X1
-	MOVSS X1, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7807,9 +7408,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7877,9 +7478,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -7947,9 +7548,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8017,79 +7618,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A8R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	MOVSS 16(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 16(DX)(R8*4), X1
-	MOVSS X1, 16(DX)(R8*4)
-	MOVSS 20(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 20(DX)(R8*4), X1
-	MOVSS X1, 20(DX)(R8*4)
-	MOVSS 24(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 24(DX)(R8*4), X1
-	MOVSS X1, 24(DX)(R8*4)
-	MOVSS 28(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 28(DX)(R8*4), X1
-	MOVSS X1, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8158,9 +7689,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8229,9 +7760,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8300,9 +7831,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8371,80 +7902,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A9R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	MOVSS 16(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 16(DX)(R8*4), X1
-	MOVSS X1, 16(DX)(R8*4)
-	MOVSS 20(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 20(DX)(R8*4), X1
-	MOVSS X1, 20(DX)(R8*4)
-	MOVSS 24(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 24(DX)(R8*4), X1
-	MOVSS X1, 24(DX)(R8*4)
-	MOVSS 28(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 28(DX)(R8*4), X1
-	MOVSS X1, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8514,9 +7974,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8586,9 +8046,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8658,9 +8118,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8730,81 +8190,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A10R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	MOVSS 16(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 16(DX)(R8*4), X1
-	MOVSS X1, 16(DX)(R8*4)
-	MOVSS 20(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 20(DX)(R8*4), X1
-	MOVSS X1, 20(DX)(R8*4)
-	MOVSS 24(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 24(DX)(R8*4), X1
-	MOVSS X1, 24(DX)(R8*4)
-	MOVSS 28(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 28(DX)(R8*4), X1
-	MOVSS X1, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8875,9 +8263,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -8948,9 +8336,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9021,9 +8409,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9094,82 +8482,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A11R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	MOVSS 16(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 16(DX)(R8*4), X1
-	MOVSS X1, 16(DX)(R8*4)
-	MOVSS 20(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 20(DX)(R8*4), X1
-	MOVSS X1, 20(DX)(R8*4)
-	MOVSS 24(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 24(DX)(R8*4), X1
-	MOVSS X1, 24(DX)(R8*4)
-	MOVSS 28(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 28(DX)(R8*4), X1
-	MOVSS X1, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9241,9 +8556,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9315,9 +8630,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9389,9 +8704,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9463,83 +8778,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A12R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	MOVSS 16(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 16(DX)(R8*4), X1
-	MOVSS X1, 16(DX)(R8*4)
-	MOVSS 20(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 20(DX)(R8*4), X1
-	MOVSS X1, 20(DX)(R8*4)
-	MOVSS 24(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 24(DX)(R8*4), X1
-	MOVSS X1, 24(DX)(R8*4)
-	MOVSS 28(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 28(DX)(R8*4), X1
-	MOVSS X1, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9612,9 +8853,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9687,9 +8928,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9762,9 +9003,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9837,84 +9078,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A13R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	MOVSS 16(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 16(DX)(R8*4), X1
-	MOVSS X1, 16(DX)(R8*4)
-	MOVSS 20(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 20(DX)(R8*4), X1
-	MOVSS X1, 20(DX)(R8*4)
-	MOVSS 24(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 24(DX)(R8*4), X1
-	MOVSS X1, 24(DX)(R8*4)
-	MOVSS 28(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 28(DX)(R8*4), X1
-	MOVSS X1, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -9988,9 +9154,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10064,9 +9230,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10140,9 +9306,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10216,85 +9382,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A14R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	MOVSS 16(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 16(DX)(R8*4), X1
-	MOVSS X1, 16(DX)(R8*4)
-	MOVSS 20(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 20(DX)(R8*4), X1
-	MOVSS X1, 20(DX)(R8*4)
-	MOVSS 24(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 24(DX)(R8*4), X1
-	MOVSS X1, 24(DX)(R8*4)
-	MOVSS 28(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 28(DX)(R8*4), X1
-	MOVSS X1, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10369,9 +9459,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10446,9 +9536,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10523,9 +9613,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10600,86 +9690,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V0A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A15R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	MOVSS 16(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 16(DX)(R8*4), X1
-	MOVSS X1, 16(DX)(R8*4)
-	MOVSS 20(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 20(DX)(R8*4), X1
-	MOVSS X1, 20(DX)(R8*4)
-	MOVSS 24(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 24(DX)(R8*4), X1
-	MOVSS X1, 24(DX)(R8*4)
-	MOVSS 28(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 28(DX)(R8*4), X1
-	MOVSS X1, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafe_V0A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafe_V0A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V0A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10747,9 +9760,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V1A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V1A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V1A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V1A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10817,9 +9830,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V2A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V2A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V2A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V2A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10887,9 +9900,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeX_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V3A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeX_V3A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -10957,79 +9970,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafe_V4A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafe_V4A16R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x10
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	MOVSS 4(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 4(DX)(R8*4), X1
-	MOVSS X1, 4(DX)(R8*4)
-	MOVSS 8(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 8(DX)(R8*4), X1
-	MOVSS X1, 8(DX)(R8*4)
-	MOVSS 12(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 12(DX)(R8*4), X1
-	MOVSS X1, 12(DX)(R8*4)
-	MOVSS 16(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 16(DX)(R8*4), X1
-	MOVSS X1, 16(DX)(R8*4)
-	MOVSS 20(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 20(DX)(R8*4), X1
-	MOVSS X1, 20(DX)(R8*4)
-	MOVSS 24(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 24(DX)(R8*4), X1
-	MOVSS X1, 24(DX)(R8*4)
-	MOVSS 28(AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS 28(DX)(R8*4), X1
-	MOVSS X1, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A0R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A0R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11063,7 +10006,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11080,9 +10023,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A0R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A0R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11116,7 +10059,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11133,9 +10076,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A0R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A0R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11169,7 +10112,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11186,9 +10129,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A0R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A0R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11222,7 +10165,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11239,62 +10182,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A0R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A0R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11329,7 +10219,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11346,9 +10236,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11383,7 +10273,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11400,9 +10290,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11437,7 +10327,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11454,9 +10344,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A8R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A8R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11491,7 +10381,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11508,63 +10398,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A8R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A8R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11600,7 +10436,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11617,9 +10453,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11655,7 +10491,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11672,9 +10508,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11710,7 +10546,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11727,9 +10563,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A9R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A9R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11765,7 +10601,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11782,64 +10618,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A9R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A9R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11876,7 +10657,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11893,9 +10674,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11932,7 +10713,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -11949,9 +10730,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -11988,7 +10769,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12005,9 +10786,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A10R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A10R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12044,7 +10825,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12061,65 +10842,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A10R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A10R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12157,7 +10882,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12174,9 +10899,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12214,7 +10939,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12231,9 +10956,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12271,7 +10996,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12288,9 +11013,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A11R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A11R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12328,7 +11053,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12345,66 +11070,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A11R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A11R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12443,7 +11111,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12460,9 +11128,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12501,7 +11169,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12518,9 +11186,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12559,7 +11227,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12576,9 +11244,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A12R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A12R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12617,7 +11285,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12634,67 +11302,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A12R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A12R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12734,7 +11344,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12751,9 +11361,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12793,7 +11403,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12810,9 +11420,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12852,7 +11462,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12869,9 +11479,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A13R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A13R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -12911,7 +11521,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -12928,68 +11538,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A13R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A13R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13030,7 +11581,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13047,9 +11598,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13090,7 +11641,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13107,9 +11658,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13150,7 +11701,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13167,9 +11718,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A14R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A14R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13210,7 +11761,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13227,69 +11778,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A14R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A14R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13331,7 +11822,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13348,9 +11839,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13392,7 +11883,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13409,9 +11900,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13453,7 +11944,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13470,9 +11961,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A15R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A15R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13514,7 +12005,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13531,70 +12022,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A15R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A15R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13629,7 +12059,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13646,9 +12076,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13683,7 +12113,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13700,9 +12130,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13737,7 +12167,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13754,9 +12184,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A16R4(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A16R4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13791,7 +12221,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x04
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13808,63 +12238,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A16R4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A16R4(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x10
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	SUBQ  $0x04, SI
-	LEAQ  (DI)(CX*4), DI
-	LEAQ  (R8)(BX*4), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x04
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A0R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A0R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13914,7 +12290,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -13931,9 +12307,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A0R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A0R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -13983,7 +12359,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14000,9 +12376,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A0R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A0R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14052,7 +12428,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14069,9 +12445,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A0R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A0R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14121,7 +12497,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14138,78 +12514,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A0R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A0R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	MULSS X0, X5
-	MULSS X0, X6
-	MULSS X0, X7
-	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14260,7 +12567,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14277,9 +12584,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14330,7 +12637,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14347,9 +12654,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14400,7 +12707,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14417,9 +12724,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A8R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A8R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14470,7 +12777,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14487,79 +12794,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A8R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A8R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	MULSS X0, X5
-	MULSS X0, X6
-	MULSS X0, X7
-	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14611,7 +12848,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14628,9 +12865,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14682,7 +12919,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14699,9 +12936,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14753,7 +12990,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14770,9 +13007,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A9R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A9R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14824,7 +13061,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14841,80 +13078,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A9R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A9R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	MULSS X0, X5
-	MULSS X0, X6
-	MULSS X0, X7
-	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -14967,7 +13133,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -14984,9 +13150,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15039,7 +13205,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15056,9 +13222,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15111,7 +13277,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15128,9 +13294,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A10R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A10R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15183,7 +13349,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15200,81 +13366,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A10R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A10R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	MULSS X0, X5
-	MULSS X0, X6
-	MULSS X0, X7
-	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15328,7 +13422,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15345,9 +13439,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15401,7 +13495,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15418,9 +13512,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15474,7 +13568,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15491,9 +13585,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A11R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A11R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15547,7 +13641,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15564,82 +13658,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A11R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A11R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	MULSS X0, X5
-	MULSS X0, X6
-	MULSS X0, X7
-	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15694,7 +13715,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15711,9 +13732,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15768,7 +13789,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15785,9 +13806,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15842,7 +13863,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15859,9 +13880,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A12R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A12R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -15916,7 +13937,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -15933,83 +13954,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A12R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A12R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	MULSS X0, X5
-	MULSS X0, X6
-	MULSS X0, X7
-	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16065,7 +14012,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16082,9 +14029,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16140,7 +14087,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16157,9 +14104,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16215,7 +14162,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16232,9 +14179,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A13R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A13R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16290,7 +14237,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16307,84 +14254,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A13R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A13R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	MULSS X0, X5
-	MULSS X0, X6
-	MULSS X0, X7
-	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16441,7 +14313,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16458,9 +14330,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16517,7 +14389,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16534,9 +14406,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16593,7 +14465,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16610,9 +14482,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A14R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A14R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16669,7 +14541,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16686,85 +14558,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A14R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A14R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	MULSS X0, X5
-	MULSS X0, X6
-	MULSS X0, X7
-	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16822,7 +14618,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16839,9 +14635,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16899,7 +14695,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16916,9 +14712,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -16976,7 +14772,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -16993,9 +14789,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A15R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A15R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -17053,7 +14849,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -17070,86 +14866,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A15R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V0A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A15R8(SB), NOSPLIT, $0-48
-	MOVSS alpha+0(FP), X0
-	MOVQ  xs+8(FP), AX
-	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
-	JMP   check_limit_unroll
-	PCALIGN $0x08
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-
-loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
-	MULSS X0, X1
-	MULSS X0, X2
-	MULSS X0, X3
-	MULSS X0, X4
-	MULSS X0, X5
-	MULSS X0, X6
-	MULSS X0, X7
-	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
-
-check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
-	JMP  check_limit
-
-loop:
-	MOVSS (AX)(DI*4), X1
-	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
-
-check_limit:
-	CMPQ SI, $0x00
-	JHI  loop
-	RET
-
-// func AxpyUnsafeInterleave_V0A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
-// Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V0A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V0A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -17200,7 +14919,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -17217,9 +14936,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V1A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V1A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V1A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V1A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -17270,7 +14989,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -17287,9 +15006,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V2A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V2A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V2A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V2A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -17340,7 +15059,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -17357,9 +15076,9 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyUnsafeXInterleave_V3A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V3A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyUnsafeXInterleave_V3A16R8(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
@@ -17410,7 +15129,7 @@ loop_unroll:
 
 check_limit_unroll:
 	CMPQ SI, $0x08
-	JHI  loop_unroll
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
@@ -17427,29 +15146,7714 @@ check_limit:
 	JHI  loop
 	RET
 
-// func AxpyUnsafeInterleave_V4A16R8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// func AxpyPointerLoopX_V0A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 // Requires: SSE
-TEXT ·AxpyUnsafeInterleave_V4A16R8(SB), NOSPLIT, $0-48
+TEXT ·AxpyPointerLoopX_V0A0U4(SB), NOSPLIT, $0-48
 	MOVSS alpha+0(FP), X0
 	MOVQ  xs+8(FP), AX
 	MOVQ  incx+16(FP), CX
-	MOVQ  ys+24(FP), DX
-	MOVQ  incy+32(FP), BX
-	MOVQ  n+40(FP), SI
-	XORQ  DI, DI
-	XORQ  R8, R8
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A0U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A0U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A0U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A8U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A8U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A8U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A8U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A9U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A9U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A9U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A9U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A10U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A10U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A10U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A10U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A11U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A11U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A11U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A11U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A12U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A12U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A12U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A12U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A13U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A13U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A13U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A13U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A14U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A14U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A14U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A14U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A15U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A15U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A15U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A15U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A16U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
 	JMP   check_limit_unroll
 	PCALIGN $0x10
 
 loop_unroll:
-	MOVSS (AX)(DI*4), X1
-	MOVSS 4(AX)(DI*4), X2
-	MOVSS 8(AX)(DI*4), X3
-	MOVSS 12(AX)(DI*4), X4
-	MOVSS 16(AX)(DI*4), X5
-	MOVSS 20(AX)(DI*4), X6
-	MOVSS 24(AX)(DI*4), X7
-	MOVSS 28(AX)(DI*4), X8
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A16U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A16U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A16U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A0U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A0U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A0U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A0U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A8U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A8U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A8U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A8U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A9U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A9U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A9U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A9U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A10U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A10U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A10U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A10U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A11U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A11U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A11U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A11U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A12U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A12U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A12U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A12U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A13U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A13U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A13U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A13U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A14U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A14U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A14U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A14U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A15U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A15U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A15U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A15U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V0A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V0A16U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V1A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V1A16U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V2A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V2A16U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopX_V3A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopX_V3A16U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	MOVSS 4(AX), X1
+	MULSS X0, X1
+	ADDSS 4(BX), X1
+	MOVSS X1, 4(BX)
+	MOVSS 8(AX), X1
+	MULSS X0, X1
+	ADDSS 8(BX), X1
+	MOVSS X1, 8(BX)
+	MOVSS 12(AX), X1
+	MULSS X0, X1
+	ADDSS 12(BX), X1
+	MOVSS X1, 12(BX)
+	MOVSS 16(AX), X1
+	MULSS X0, X1
+	ADDSS 16(BX), X1
+	MOVSS X1, 16(BX)
+	MOVSS 20(AX), X1
+	MULSS X0, X1
+	ADDSS 20(BX), X1
+	MOVSS X1, 20(BX)
+	MOVSS 24(AX), X1
+	MULSS X0, X1
+	ADDSS 24(BX), X1
+	MOVSS X1, 24(BX)
+	MOVSS 28(AX), X1
+	MULSS X0, X1
+	ADDSS 28(BX), X1
+	MOVSS X1, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A0U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A0U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A0U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A0U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A0U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A8U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A8U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A8U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A8U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A8U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A9U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A9U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A9U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A9U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A9U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A10U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A10U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A10U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A10U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A10U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A11U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A11U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A11U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A11U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A11U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A12U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A12U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A12U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A12U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A12U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A13U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A13U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A13U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A13U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A13U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A14U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A14U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A14U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A14U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A14U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A15U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A15U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A15U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A15U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A15U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A16U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A16U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A16U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A16U4(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A16U4(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x04, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x04, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	SUBQ  $0x04, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x04
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A0U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
 	MULSS X0, X1
 	MULSS X0, X2
 	MULSS X0, X3
@@ -17458,41 +22862,2958 @@ loop_unroll:
 	MULSS X0, X6
 	MULSS X0, X7
 	MULSS X0, X8
-	ADDSS (DX)(R8*4), X1
-	ADDSS 4(DX)(R8*4), X2
-	ADDSS 8(DX)(R8*4), X3
-	ADDSS 12(DX)(R8*4), X4
-	ADDSS 16(DX)(R8*4), X5
-	ADDSS 20(DX)(R8*4), X6
-	ADDSS 24(DX)(R8*4), X7
-	ADDSS 28(DX)(R8*4), X8
-	MOVSS X1, (DX)(R8*4)
-	MOVSS X2, 4(DX)(R8*4)
-	MOVSS X3, 8(DX)(R8*4)
-	MOVSS X4, 12(DX)(R8*4)
-	MOVSS X5, 16(DX)(R8*4)
-	MOVSS X6, 20(DX)(R8*4)
-	MOVSS X7, 24(DX)(R8*4)
-	MOVSS X8, 28(DX)(R8*4)
-	SUBQ  $0x08, SI
-	LEAQ  (DI)(CX*8), DI
-	LEAQ  (R8)(BX*8), R8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
 
 check_limit_unroll:
-	CMPQ SI, $0x08
-	JHI  loop_unroll
+	CMPQ R8, $0x08
+	JHS  loop_unroll
 	JMP  check_limit
 
 loop:
-	MOVSS (AX)(DI*4), X1
+	MOVSS (AX), X1
 	MULSS X0, X1
-	ADDSS (DX)(R8*4), X1
-	MOVSS X1, (DX)(R8*4)
-	DECQ  SI
-	ADDQ  CX, DI
-	ADDQ  BX, R8
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
 
 check_limit:
-	CMPQ SI, $0x00
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A0U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A0U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A0U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A0U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A8U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A8U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A8U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A8U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A8U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A9U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A9U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A9U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A9U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A9U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A10U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A10U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A10U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A10U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A10U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A11U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A11U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A11U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A11U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A11U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A12U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A12U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A12U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A12U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A12U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A13U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A13U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A13U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A13U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A13U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A14U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A14U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A14U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A14U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A14U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A15U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A15U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A15U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A15U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A15U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x08
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V0A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V0A16U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V1A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V1A16U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V2A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V2A16U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
+	JHI  loop
+	RET
+
+// func AxpyPointerLoopXInterleave_V3A16U8(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
+// Requires: SSE
+TEXT ·AxpyPointerLoopXInterleave_V3A16U8(SB), NOSPLIT, $0-48
+	MOVSS alpha+0(FP), X0
+	MOVQ  xs+8(FP), AX
+	MOVQ  incx+16(FP), CX
+	MOVQ  CX, DX
+	SHLQ  $0x05, DX
+	MOVQ  ys+24(FP), BX
+	MOVQ  incy+32(FP), SI
+	MOVQ  SI, DI
+	SHLQ  $0x05, DI
+	MOVQ  n+40(FP), R8
+	JMP   check_limit_unroll
+	PCALIGN $0x10
+
+loop_unroll:
+	MOVSS (AX), X1
+	MOVSS 4(AX), X2
+	MOVSS 8(AX), X3
+	MOVSS 12(AX), X4
+	MOVSS 16(AX), X5
+	MOVSS 20(AX), X6
+	MOVSS 24(AX), X7
+	MOVSS 28(AX), X8
+	MULSS X0, X1
+	MULSS X0, X2
+	MULSS X0, X3
+	MULSS X0, X4
+	MULSS X0, X5
+	MULSS X0, X6
+	MULSS X0, X7
+	MULSS X0, X8
+	ADDSS (BX), X1
+	ADDSS 4(BX), X2
+	ADDSS 8(BX), X3
+	ADDSS 12(BX), X4
+	ADDSS 16(BX), X5
+	ADDSS 20(BX), X6
+	ADDSS 24(BX), X7
+	ADDSS 28(BX), X8
+	MOVSS X1, (BX)
+	MOVSS X2, 4(BX)
+	MOVSS X3, 8(BX)
+	MOVSS X4, 12(BX)
+	MOVSS X5, 16(BX)
+	MOVSS X6, 20(BX)
+	MOVSS X7, 24(BX)
+	MOVSS X8, 28(BX)
+	SUBQ  $0x08, R8
+	ADDQ  DX, AX
+	ADDQ  DI, BX
+
+check_limit_unroll:
+	CMPQ R8, $0x08
+	JHS  loop_unroll
+	JMP  check_limit
+
+loop:
+	MOVSS (AX), X1
+	MULSS X0, X1
+	ADDSS (BX), X1
+	MOVSS X1, (BX)
+	DECQ  R8
+	LEAQ  (AX)(CX*4), AX
+	LEAQ  (BX)(SI*4), BX
+
+check_limit:
+	CMPQ R8, $0x00
 	JHI  loop
 	RET
