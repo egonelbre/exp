@@ -86,10 +86,10 @@ func AxpyBasicR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy u
 	i := uintptr(0)
 	n4 := n & mask4
 	for ; i < n4; i += 4 {
-		ys[yi+0] += alpha * xs[xi+0]
-		ys[yi+1] += alpha * xs[xi+1]
-		ys[yi+2] += alpha * xs[xi+2]
-		ys[yi+3] += alpha * xs[xi+3]
+		ys[yi+0*incy] += alpha * xs[xi+0*incx]
+		ys[yi+1*incy] += alpha * xs[xi+1*incx]
+		ys[yi+2*incy] += alpha * xs[xi+2*incx]
+		ys[yi+3*incy] += alpha * xs[xi+3*incx]
 
 		xi += incx * 4
 		yi += incy * 4
@@ -107,10 +107,10 @@ func AxpyUnsafeR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy 
 	i := uintptr(0)
 	n4 := n & mask4
 	for ; i < n4; i += 4 {
-		*at(ys, yi+0) += alpha * *at(xs, xi+0)
-		*at(ys, yi+1) += alpha * *at(xs, xi+1)
-		*at(ys, yi+2) += alpha * *at(xs, xi+2)
-		*at(ys, yi+3) += alpha * *at(xs, xi+3)
+		*at(ys, yi+0*incy) += alpha * *at(xs, xi+0*incx)
+		*at(ys, yi+1*incy) += alpha * *at(xs, xi+1*incx)
+		*at(ys, yi+2*incy) += alpha * *at(xs, xi+2*incx)
+		*at(ys, yi+3*incy) += alpha * *at(xs, xi+3*incx)
 		xi += incx * 4
 		yi += incy * 4
 	}
@@ -125,10 +125,10 @@ func AxpyUnsafeR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy 
 func AxpyBasicXR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	xi, yi := uintptr(0), uintptr(0)
 	for ; n >= 4; n -= 4 {
-		ys[yi+0] += alpha * xs[xi+0]
-		ys[yi+1] += alpha * xs[xi+1]
-		ys[yi+2] += alpha * xs[xi+2]
-		ys[yi+3] += alpha * xs[xi+3]
+		ys[yi+0*incy] += alpha * xs[xi+0*incx]
+		ys[yi+1*incy] += alpha * xs[xi+1*incx]
+		ys[yi+2*incy] += alpha * xs[xi+2*incx]
+		ys[yi+3*incy] += alpha * xs[xi+3*incx]
 
 		xi += incx * 4
 		yi += incy * 4
@@ -144,10 +144,10 @@ func AxpyBasicXR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy 
 func AxpyUnsafeXR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy uintptr, n uintptr) {
 	xi, yi := uintptr(0), uintptr(0)
 	for ; n >= 4; n -= 4 {
-		*at(ys, yi+0) += alpha * *at(xs, xi+0)
-		*at(ys, yi+1) += alpha * *at(xs, xi+1)
-		*at(ys, yi+2) += alpha * *at(xs, xi+2)
-		*at(ys, yi+3) += alpha * *at(xs, xi+3)
+		*at(ys, yi+0*incy) += alpha * *at(xs, xi+0*incx)
+		*at(ys, yi+1*incy) += alpha * *at(xs, xi+1*incx)
+		*at(ys, yi+2*incy) += alpha * *at(xs, xi+2*incx)
+		*at(ys, yi+3*incy) += alpha * *at(xs, xi+3*incx)
 		xi += incx * 4
 		yi += incy * 4
 	}
@@ -163,19 +163,19 @@ func AxpyUnsafeR8(alpha float32, xs []float32, incx uintptr, ys []float32, incy 
 	if n == 0 {
 		return
 	}
-	_, _ = xs[n*incx-1], ys[n*incy-1]
+	_, _ = xs[(n-1)*incx], ys[(n-1)*incy]
 	xi, yi := uintptr(0), uintptr(0)
 	n8 := n & mask8
 	i := uintptr(0)
 	for ; i < n8; i += 8 {
-		*at(ys, yi+0) += alpha * *at(xs, xi+0)
-		*at(ys, yi+1) += alpha * *at(xs, xi+1)
-		*at(ys, yi+2) += alpha * *at(xs, xi+2)
-		*at(ys, yi+3) += alpha * *at(xs, xi+3)
-		*at(ys, yi+4) += alpha * *at(xs, xi+4)
-		*at(ys, yi+5) += alpha * *at(xs, xi+5)
-		*at(ys, yi+6) += alpha * *at(xs, xi+6)
-		*at(ys, yi+7) += alpha * *at(xs, xi+7)
+		*at(ys, yi+0*incy) += alpha * *at(xs, xi+0*incx)
+		*at(ys, yi+1*incy) += alpha * *at(xs, xi+1*incx)
+		*at(ys, yi+2*incy) += alpha * *at(xs, xi+2*incx)
+		*at(ys, yi+3*incy) += alpha * *at(xs, xi+3*incx)
+		*at(ys, yi+4*incy) += alpha * *at(xs, xi+4*incx)
+		*at(ys, yi+5*incy) += alpha * *at(xs, xi+5*incx)
+		*at(ys, yi+6*incy) += alpha * *at(xs, xi+6*incx)
+		*at(ys, yi+7*incy) += alpha * *at(xs, xi+7*incx)
 		xi += incx * 8
 		yi += incy * 8
 	}
@@ -191,17 +191,17 @@ func AxpyUnsafeXR8(alpha float32, xs []float32, incx uintptr, ys []float32, incy
 	if n == 0 {
 		return
 	}
-	_, _ = xs[n*incx-1], ys[n*incy-1]
+	_, _ = xs[(n-1)*incx], ys[(n-1)*incy]
 	xi, yi := uintptr(0), uintptr(0)
 	for ; n >= 8; n -= 8 {
-		*at(ys, yi+0) += alpha * *at(xs, xi+0)
-		*at(ys, yi+1) += alpha * *at(xs, xi+1)
-		*at(ys, yi+2) += alpha * *at(xs, xi+2)
-		*at(ys, yi+3) += alpha * *at(xs, xi+3)
-		*at(ys, yi+4) += alpha * *at(xs, xi+4)
-		*at(ys, yi+5) += alpha * *at(xs, xi+5)
-		*at(ys, yi+6) += alpha * *at(xs, xi+6)
-		*at(ys, yi+7) += alpha * *at(xs, xi+7)
+		*at(ys, yi+0*incy) += alpha * *at(xs, xi+0*incx)
+		*at(ys, yi+1*incy) += alpha * *at(xs, xi+1*incx)
+		*at(ys, yi+2*incy) += alpha * *at(xs, xi+2*incx)
+		*at(ys, yi+3*incy) += alpha * *at(xs, xi+3*incx)
+		*at(ys, yi+4*incy) += alpha * *at(xs, xi+4*incx)
+		*at(ys, yi+5*incy) += alpha * *at(xs, xi+5*incx)
+		*at(ys, yi+6*incy) += alpha * *at(xs, xi+6*incx)
+		*at(ys, yi+7*incy) += alpha * *at(xs, xi+7*incx)
 		xi += incx * 8
 		yi += incy * 8
 	}
@@ -292,10 +292,10 @@ func AxpyPointerR4(alpha float32, xs []float32, incx uintptr, ys []float32, incy
 	xn4 := unsafe.Add(xp, (n&mask4)*incx*Size)
 	xn := unsafe.Add(xp, n*incx*Size)
 	for uintptr(xp) < uintptr(xn4) {
-		*(*float32)(unsafe.Add(yp, 0*Size)) += alpha * *(*float32)(unsafe.Add(xp, 0*Size))
-		*(*float32)(unsafe.Add(yp, 1*Size)) += alpha * *(*float32)(unsafe.Add(xp, 1*Size))
-		*(*float32)(unsafe.Add(yp, 2*Size)) += alpha * *(*float32)(unsafe.Add(xp, 2*Size))
-		*(*float32)(unsafe.Add(yp, 3*Size)) += alpha * *(*float32)(unsafe.Add(xp, 3*Size))
+		*(*float32)(unsafe.Add(yp, 0*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 0*Size*incx))
+		*(*float32)(unsafe.Add(yp, 1*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 1*Size*incx))
+		*(*float32)(unsafe.Add(yp, 2*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 2*Size*incx))
+		*(*float32)(unsafe.Add(yp, 3*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 3*Size*incx))
 		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
 	}
 	for uintptr(xp) < uintptr(xn) {
@@ -314,10 +314,10 @@ func AxpyPointerLoopR4(alpha float32, xs []float32, incx uintptr, ys []float32, 
 	i := uintptr(0)
 	n4 := n & mask4
 	for ; i < n4; i += 4 {
-		*(*float32)(unsafe.Add(yp, 0*Size)) += alpha * *(*float32)(unsafe.Add(xp, 0*Size))
-		*(*float32)(unsafe.Add(yp, 1*Size)) += alpha * *(*float32)(unsafe.Add(xp, 1*Size))
-		*(*float32)(unsafe.Add(yp, 2*Size)) += alpha * *(*float32)(unsafe.Add(xp, 2*Size))
-		*(*float32)(unsafe.Add(yp, 3*Size)) += alpha * *(*float32)(unsafe.Add(xp, 3*Size))
+		*(*float32)(unsafe.Add(yp, 0*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 0*Size*incx))
+		*(*float32)(unsafe.Add(yp, 1*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 1*Size*incx))
+		*(*float32)(unsafe.Add(yp, 2*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 2*Size*incx))
+		*(*float32)(unsafe.Add(yp, 3*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 3*Size*incx))
 		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
 	}
 	for ; i < n; i++ {
@@ -334,10 +334,10 @@ func AxpyPointerLoopXR4(alpha float32, xs []float32, incx uintptr, ys []float32,
 	yp := unsafe.Pointer(unsafe.SliceData(ys))
 
 	for ; n >= 4; n -= 4 {
-		*(*float32)(unsafe.Add(yp, 0*Size)) += alpha * *(*float32)(unsafe.Add(xp, 0*Size))
-		*(*float32)(unsafe.Add(yp, 1*Size)) += alpha * *(*float32)(unsafe.Add(xp, 1*Size))
-		*(*float32)(unsafe.Add(yp, 2*Size)) += alpha * *(*float32)(unsafe.Add(xp, 2*Size))
-		*(*float32)(unsafe.Add(yp, 3*Size)) += alpha * *(*float32)(unsafe.Add(xp, 3*Size))
+		*(*float32)(unsafe.Add(yp, 0*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 0*Size*incx))
+		*(*float32)(unsafe.Add(yp, 1*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 1*Size*incx))
+		*(*float32)(unsafe.Add(yp, 2*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 2*Size*incx))
+		*(*float32)(unsafe.Add(yp, 3*Size*incy)) += alpha * *(*float32)(unsafe.Add(xp, 3*Size*incx))
 		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
 	}
 	for ; n > 0; n-- {
@@ -356,25 +356,25 @@ func AxpyPointerLoopInterleaveR4(alpha float32, xs []float32, incx uintptr, ys [
 	i := uintptr(0)
 	n4 := n & mask4
 	for ; i < n4; i += 4 {
-		x0 := *(*float32)(unsafe.Add(xp, 0*Size))
-		x1 := *(*float32)(unsafe.Add(xp, 1*Size))
-		x2 := *(*float32)(unsafe.Add(xp, 2*Size))
-		x3 := *(*float32)(unsafe.Add(xp, 3*Size))
+		x0 := *(*float32)(unsafe.Add(xp, 0*Size*incx))
+		x1 := *(*float32)(unsafe.Add(xp, 1*Size*incx))
+		x2 := *(*float32)(unsafe.Add(xp, 2*Size*incx))
+		x3 := *(*float32)(unsafe.Add(xp, 3*Size*incx))
 
 		m0 := alpha * x0
 		m1 := alpha * x1
 		m2 := alpha * x2
 		m3 := alpha * x3
 
-		t0 := *(*float32)(unsafe.Add(yp, 0*Size)) + m0
-		t1 := *(*float32)(unsafe.Add(yp, 1*Size)) + m1
-		t2 := *(*float32)(unsafe.Add(yp, 2*Size)) + m2
-		t3 := *(*float32)(unsafe.Add(yp, 3*Size)) + m3
+		t0 := *(*float32)(unsafe.Add(yp, 0*Size*incy)) + m0
+		t1 := *(*float32)(unsafe.Add(yp, 1*Size*incy)) + m1
+		t2 := *(*float32)(unsafe.Add(yp, 2*Size*incy)) + m2
+		t3 := *(*float32)(unsafe.Add(yp, 3*Size*incy)) + m3
 
-		*(*float32)(unsafe.Add(yp, 0*Size)) = t0
-		*(*float32)(unsafe.Add(yp, 1*Size)) = t1
-		*(*float32)(unsafe.Add(yp, 2*Size)) = t2
-		*(*float32)(unsafe.Add(yp, 3*Size)) = t3
+		*(*float32)(unsafe.Add(yp, 0*Size*incy)) = t0
+		*(*float32)(unsafe.Add(yp, 1*Size*incy)) = t1
+		*(*float32)(unsafe.Add(yp, 2*Size*incy)) = t2
+		*(*float32)(unsafe.Add(yp, 3*Size*incy)) = t3
 
 		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
 	}
@@ -392,25 +392,25 @@ func AxpyPointerLoopInterleaveXR4(alpha float32, xs []float32, incx uintptr, ys 
 	yp := unsafe.Pointer(unsafe.SliceData(ys))
 
 	for ; n >= 4; n -= 4 {
-		x0 := *(*float32)(unsafe.Add(xp, 0*Size))
-		x1 := *(*float32)(unsafe.Add(xp, 1*Size))
-		x2 := *(*float32)(unsafe.Add(xp, 2*Size))
-		x3 := *(*float32)(unsafe.Add(xp, 3*Size))
+		x0 := *(*float32)(unsafe.Add(xp, 0*Size*incx))
+		x1 := *(*float32)(unsafe.Add(xp, 1*Size*incx))
+		x2 := *(*float32)(unsafe.Add(xp, 2*Size*incx))
+		x3 := *(*float32)(unsafe.Add(xp, 3*Size*incx))
 
 		m0 := alpha * x0
 		m1 := alpha * x1
 		m2 := alpha * x2
 		m3 := alpha * x3
 
-		t0 := *(*float32)(unsafe.Add(yp, 0*Size)) + m0
-		t1 := *(*float32)(unsafe.Add(yp, 1*Size)) + m1
-		t2 := *(*float32)(unsafe.Add(yp, 2*Size)) + m2
-		t3 := *(*float32)(unsafe.Add(yp, 3*Size)) + m3
+		t0 := *(*float32)(unsafe.Add(yp, 0*Size*incy)) + m0
+		t1 := *(*float32)(unsafe.Add(yp, 1*Size*incy)) + m1
+		t2 := *(*float32)(unsafe.Add(yp, 2*Size*incy)) + m2
+		t3 := *(*float32)(unsafe.Add(yp, 3*Size*incy)) + m3
 
-		*(*float32)(unsafe.Add(yp, 0*Size)) = t0
-		*(*float32)(unsafe.Add(yp, 1*Size)) = t1
-		*(*float32)(unsafe.Add(yp, 2*Size)) = t2
-		*(*float32)(unsafe.Add(yp, 3*Size)) = t3
+		*(*float32)(unsafe.Add(yp, 0*Size*incy)) = t0
+		*(*float32)(unsafe.Add(yp, 1*Size*incy)) = t1
+		*(*float32)(unsafe.Add(yp, 2*Size*incy)) = t2
+		*(*float32)(unsafe.Add(yp, 3*Size*incy)) = t3
 
 		xp, yp = unsafe.Add(xp, 4*incx*Size), unsafe.Add(yp, 4*incy*Size)
 	}
@@ -429,10 +429,10 @@ func AxpyPointerR4Alt(alpha float32, xs []float32, incx uintptr, ys []float32, i
 	xn4 := offset(xp, (n&mask4)*incx)
 
 	for less(xp, xn4) {
-		*offset(yp, 0) += alpha * *offset(xp, 0)
-		*offset(yp, 1) += alpha * *offset(xp, 1)
-		*offset(yp, 2) += alpha * *offset(xp, 2)
-		*offset(yp, 3) += alpha * *offset(xp, 3)
+		*offset(yp, 0*incy) += alpha * *offset(xp, 0*incx)
+		*offset(yp, 1*incy) += alpha * *offset(xp, 1*incx)
+		*offset(yp, 2*incy) += alpha * *offset(xp, 2*incx)
+		*offset(yp, 3*incy) += alpha * *offset(xp, 3*incx)
 		xp, yp = offset(xp, 4*incx), offset(yp, 4*incy)
 	}
 	for less(xp, xn) {

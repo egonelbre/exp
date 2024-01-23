@@ -20,11 +20,19 @@ type goAxpyDecl struct {
 
 type axpyTestCase struct {
 	alpha  float32
+	n      uintptr
 	xs     []float32
 	incx   uintptr
 	ys     []float32
 	incy   uintptr
 	expect []float32
+}
+
+func (t axpyTestCase) N() uintptr {
+	if t.n == 0 {
+		return uintptr(len(t.xs)) / t.incx
+	}
+	return t.n
 }
 
 var axpyTestCases = []axpyTestCase{
@@ -60,23 +68,50 @@ var axpyTestCases = []axpyTestCase{
 	},
 	5: {
 		alpha: 3,
+		xs:    []float32{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, incx: 1,
+		ys: []float32{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, incy: 1,
+		expect: []float32{4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+	},
+	6: {
+		alpha: 3,
+		n:     6,
+		xs:    []float32{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, incx: 2,
+		ys: []float32{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, incy: 2,
+		expect: []float32{4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4},
+	},
+	7: {
+		alpha: 3,
+		n:     6,
+		xs:    []float32{1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0}, incx: 1,
+		ys: []float32{1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1}, incy: 2,
+		expect: []float32{4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4},
+	},
+	8: {
+		alpha: 3,
+		n:     6,
+		xs:    []float32{1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1}, incx: 2,
+		ys: []float32{1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0}, incy: 1,
+		expect: []float32{4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0},
+	},
+	9: {
+		alpha: 3,
 		xs:    []float32{1, 2, 3, 5}, incx: 1,
 		ys: []float32{-7, -11, -13, -17}, incy: 1,
 		expect: []float32{-4, -5, -4, -2},
 	},
-	6: {
+	10: {
 		alpha: 2.3,
 		xs:    []float32{-4691.1084, 1844.69, 1986.0142, 3274.4463, 4433.3447}, incx: 1,
 		ys: []float32{2613.8955, -355.9663, 898.40283, 2144.5698, 4446.6465}, incy: 1,
 		expect: []float32{-8175.6533, 3886.8203, 5466.2354, 9675.796, 14643.339},
 	},
-	7: {
+	11: {
 		alpha: 3,
 		xs:    []float32{1, 2, 3, 5, 1, 2, 3, 5}, incx: 1,
 		ys: []float32{-7, -11, -13, -17, -7, -11, -13, -17}, incy: 1,
 		expect: []float32{-4, -5, -4, -2, -4, -5, -4, -2},
 	},
-	8: {
+	12: {
 		alpha: 3,
 		xs:    []float32{0, 1, 2, 3, 5, 1, 2, 3, 5}, incx: 1,
 		ys: []float32{0, -7, -11, -13, -17, -7, -11, -13, -17}, incy: 1,
@@ -129,7 +164,7 @@ func TestGo(t *testing.T) {
 					lxs := slices.Clone(test.xs)
 					lys := slices.Clone(test.ys)
 
-					axpy.fn(test.alpha, lxs, test.incx, lys, test.incy, uintptr(len(lxs)))
+					axpy.fn(test.alpha, lxs, test.incx, lys, test.incy, test.N())
 
 					if !equalFloats(lys, test.expect) {
 						t.Errorf("wrong result\n\tgot=%v\n\texp=%v\n\tal=%v\n\txs=%v\n\tys=%v", lys, test.expect, test.alpha, test.xs, test.ys)

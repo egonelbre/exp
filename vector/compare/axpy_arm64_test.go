@@ -58,7 +58,7 @@ func TestArm64(t *testing.T) {
 					lxs := slices.Clone(test.xs)
 					lys := slices.Clone(test.ys)
 
-					axpy.fn(test.alpha, unsafe.SliceData(lxs), test.incx, unsafe.SliceData(lys), test.incy, uintptr(len(lxs)))
+					axpy.fn(test.alpha, unsafe.SliceData(lxs), test.incx, unsafe.SliceData(lys), test.incy, test.N())
 
 					if !equalFloats(lys, test.expect) {
 						t.Errorf("wrong result\n\tgot=%v\n\texp=%v\n\tal=%v\n\txs=%v\n\tys=%v", lys, test.expect, test.alpha, test.xs, test.ys)
