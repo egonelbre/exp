@@ -77,7 +77,7 @@ func generateTestHelp(stubs, out string) {
 	pf("	fn   func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)\n")
 	pf("}\n\n")
 
-	pf("var amdAxpyDecls = []asmAxpyDecl{\n")
+	pf("var amdAxpyDecls = []amdAxpyDecl{\n")
 	for _, fn := range fns {
 		pf("	{name: %q, fn: %v},\n", strings.TrimPrefix(fn, "Amd"), fn)
 	}

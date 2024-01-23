@@ -7,7 +7,7 @@ type amdAxpyDecl struct {
 	fn   func(alpha float32, xs *float32, incx uintptr, ys *float32, incy uintptr, n uintptr)
 }
 
-var amdAxpyDecls = []asmAxpyDecl{
+var amdAxpyDecls = []amdAxpyDecl{
 	{name: "AxpyPointer_V0A0", fn: AmdAxpyPointer_V0A0},
 	{name: "AxpyPointer_V1A0", fn: AmdAxpyPointer_V1A0},
 	{name: "AxpyPointer_V2A0", fn: AmdAxpyPointer_V2A0},
