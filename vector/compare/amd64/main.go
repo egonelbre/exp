@@ -225,15 +225,9 @@ func AxpyPointerLoopXUnroll(variant, align, unroll int) {
 
 	xs := Mem{Base: Load(Param("xs"), GP64())}
 	incx := Load(Param("incx"), GP64())
-	incxunroll := GP64()
-	MOVQ(incx, incxunroll)
-	SHLQ(U8(log2(4*unroll)), incxunroll)
 
 	ys := Mem{Base: Load(Param("ys"), GP64())}
 	incy := Load(Param("incy"), GP64())
-	incyunroll := GP64()
-	MOVQ(incy, incyunroll)
-	SHLQ(U8(log2(4*unroll)), incyunroll)
 
 	n := Load(Param("n"), GP64())
 
@@ -245,20 +239,16 @@ func AxpyPointerLoopXUnroll(variant, align, unroll int) {
 		for u := 0; u < unroll; u++ {
 			tmp := XMM()
 
-			xat := Mem{Base: xs.Base, Disp: 4 * u}
-			yat := Mem{Base: ys.Base, Disp: 4 * u}
-			MOVSS(xat, tmp)
+			MOVSS(xs, tmp)
 			MULSS(alpha, tmp)
-			ADDSS(yat, tmp)
-			MOVSS(tmp, yat)
+			ADDSS(ys, tmp)
+			MOVSS(tmp, ys)
+
+			LEAQ(xs.Idx(incx, 4), xs.Base)
+			LEAQ(ys.Idx(incy, 4), ys.Base)
 		}
 
 		SUBQ(Imm(uint64(unroll)), n)
-
-		// LEAQ(Mem{Base: xs.Base, Index: incx, Scale: uint8(4 * unroll)}, xs.Base)
-		// LEAQ(Mem{Base: xs.Base, Index: incy, Scale: uint8(4 * unroll)}, ys.Base)
-		ADDQ(incxunroll, xs.Base)
-		ADDQ(incyunroll, ys.Base)
 
 		Label("check_limit_unroll")
 
@@ -313,35 +303,26 @@ func AxpyPointerLoopXInterleaveUnroll(variant, align, unroll int) {
 	MISALIGN(align)
 	Label("loop_unroll")
 	{
-		xat := make([]Mem, unroll)
-		yat := make([]Mem, unroll)
 		tmp := make([]reg.VecVirtual, unroll)
 
 		for u := range tmp {
-			xat[u] = Mem{Base: xs.Base, Disp: 4 * u}
-			yat[u] = Mem{Base: ys.Base, Disp: 4 * u}
 			tmp[u] = XMM()
 		}
 
 		for u := 0; u < unroll; u++ {
-			MOVSS(xat[u], tmp[u])
+			MOVSS(xs, tmp[u])
+			LEAQ(xs.Idx(incx, 4), xs.Base)
 		}
 		for u := 0; u < unroll; u++ {
 			MULSS(alpha, tmp[u])
 		}
 		for u := 0; u < unroll; u++ {
-			ADDSS(yat[u], tmp[u])
-		}
-		for u := 0; u < unroll; u++ {
-			MOVSS(tmp[u], yat[u])
+			ADDSS(ys, tmp[u])
+			MOVSS(tmp[u], ys)
+			LEAQ(ys.Idx(incy, 4), ys.Base)
 		}
 
 		SUBQ(Imm(uint64(unroll)), n)
-
-		// LEAQ(Mem{Base: xs.Base, Index: incx, Scale: uint8(4 * unroll)}, xs.Base)
-		// LEAQ(Mem{Base: xs.Base, Index: incy, Scale: uint8(4 * unroll)}, ys.Base)
-		ADDQ(incxunroll, xs.Base)
-		ADDQ(incyunroll, ys.Base)
 
 		Label("check_limit_unroll")
 
@@ -438,18 +419,18 @@ func AxpyUnsafeXUnroll(variant, align, unroll int) {
 		for u := 0; u < unroll; u++ {
 			tmp := XMM()
 
-			xat := Mem{Base: xs.Base, Index: xi, Scale: 4, Disp: 4 * u}
-			yat := Mem{Base: ys.Base, Index: yi, Scale: 4, Disp: 4 * u}
+			xat := Mem{Base: xs.Base, Index: xi, Scale: 4, Disp: 0}
+			yat := Mem{Base: ys.Base, Index: yi, Scale: 4, Disp: 0}
 			MOVSS(xat, tmp)
 			MULSS(alpha, tmp)
 			ADDSS(yat, tmp)
 			MOVSS(tmp, yat)
+
+			ADDQ(incx, xi)
+			ADDQ(incy, yi)
 		}
 
 		SUBQ(Imm(uint64(unroll)), n)
-
-		LEAQ(Mem{Base: xi, Index: incx, Scale: uint8(unroll)}, xi)
-		LEAQ(Mem{Base: yi, Index: incy, Scale: uint8(unroll)}, yi)
 
 		Label("check_limit_unroll")
 
@@ -501,33 +482,25 @@ func AxpyUnsafeXInterleaveUnroll(variant, align, unroll int) {
 	MISALIGN(align)
 	Label("loop_unroll")
 	{
-		xat := make([]Mem, unroll)
-		yat := make([]Mem, unroll)
 		tmp := make([]reg.VecVirtual, unroll)
-
 		for u := range tmp {
-			xat[u] = Mem{Base: xs.Base, Index: xi, Scale: 4, Disp: 4 * u}
-			yat[u] = Mem{Base: ys.Base, Index: yi, Scale: 4, Disp: 4 * u}
 			tmp[u] = XMM()
 		}
 
 		for u := 0; u < unroll; u++ {
-			MOVSS(xat[u], tmp[u])
+			MOVSS(xs.Idx(xi, 4), tmp[u])
+			ADDQ(incx, xi)
 		}
 		for u := 0; u < unroll; u++ {
 			MULSS(alpha, tmp[u])
 		}
 		for u := 0; u < unroll; u++ {
-			ADDSS(yat[u], tmp[u])
-		}
-		for u := 0; u < unroll; u++ {
-			MOVSS(tmp[u], yat[u])
+			ADDSS(ys.Idx(yi, 4), tmp[u])
+			MOVSS(tmp[u], ys.Idx(yi, 4))
+			ADDQ(incy, yi)
 		}
 
 		SUBQ(Imm(uint64(unroll)), n)
-
-		LEAQ(Mem{Base: xi, Index: incx, Scale: uint8(unroll)}, xi)
-		LEAQ(Mem{Base: yi, Index: incy, Scale: uint8(unroll)}, yi)
 
 		Label("check_limit_unroll")
 
