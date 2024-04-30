@@ -62,7 +62,8 @@ func CutByte3(s string, sep byte) (before, after string, found bool) {
 	return s, "", false
 }
 
-var x, y, z any
+var before, after string
+var found bool
 
 func BenchmarkCut0(b *testing.B) {
 	b.ReportAllocs()
@@ -71,13 +72,13 @@ func BenchmarkCut0(b *testing.B) {
 		s := strings.Repeat(strings.Repeat(" ", skip)+"a"+strings.Repeat(" ", skip), 1<<16/skip)
 		b.Run(fmt.Sprintf("func=Cut/skip=%d", skip), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				x, y, z = Cut0(s, "a")
+				before, after, found = Cut0(s, "a")
 			}
 		})
 
 		b.Run(fmt.Sprintf("func=CutByte/skip=%d", skip), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				x, y, z = CutByte0(s, 'a')
+				before, after, found = CutByte0(s, 'a')
 			}
 		})
 	}
@@ -89,13 +90,13 @@ func BenchmarkCut1(b *testing.B) {
 		s := strings.Repeat(strings.Repeat(" ", skip)+"a"+strings.Repeat(" ", skip), 1<<16/skip)
 		b.Run(fmt.Sprintf("func=Cut/skip=%d", skip), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				x, y, z = Cut1(s, "a")
+				before, after, found = Cut1(s, "a")
 			}
 		})
 
 		b.Run(fmt.Sprintf("func=CutByte/skip=%d", skip), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				x, y, z = CutByte1(s, 'a')
+				before, after, found = CutByte1(s, 'a')
 			}
 		})
 	}
@@ -108,13 +109,13 @@ func BenchmarkCut2(b *testing.B) {
 		s := strings.Repeat(strings.Repeat(" ", skip)+"a"+strings.Repeat(" ", skip), 1<<16/skip)
 		b.Run(fmt.Sprintf("func=Cut/skip=%d", skip), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				x, y, z = Cut2(s, "a")
+				before, after, found = Cut2(s, "a")
 			}
 		})
 
 		b.Run(fmt.Sprintf("func=CutByte/skip=%d", skip), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				x, y, z = CutByte2(s, 'a')
+				before, after, found = CutByte2(s, 'a')
 			}
 		})
 	}
@@ -127,13 +128,13 @@ func BenchmarkCut3(b *testing.B) {
 		s := strings.Repeat(strings.Repeat(" ", skip)+"a"+strings.Repeat(" ", skip), 1<<16/skip)
 		b.Run(fmt.Sprintf("func=Cut/skip=%d", skip), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				x, y, z = Cut3(s, "a")
+				before, after, found = Cut3(s, "a")
 			}
 		})
 
 		b.Run(fmt.Sprintf("func=CutByte/skip=%d", skip), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				x, y, z = CutByte3(s, 'a')
+				before, after, found = CutByte3(s, 'a')
 			}
 		})
 	}
