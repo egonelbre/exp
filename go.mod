@@ -1,6 +1,6 @@
 module github.com/egonelbre/exp
 
-go 1.21.3
+go 1.22.3
 
 require (
 	github.com/apaxa-go/helper v0.0.0-20180607175117-61d31b1c31c3
