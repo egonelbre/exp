@@ -47,7 +47,7 @@ func main() {
 
 			ray.DrawModelEx(propeller,
 				ray.NewVector3(0, 5, 8.5),
-				ray.NewVector3(0, 0, 1), ray.GetTime()*1000,
+				ray.NewVector3(0, 0, 1), float32(ray.GetTime()*1000),
 				ray.NewVector3(1, 7, 0.1),
 				ray.Orange,
 			)
