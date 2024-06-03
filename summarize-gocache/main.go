@@ -1,4 +1,4 @@
-// gocachesummary parses build files in `go env GOCACHE` folder and summarizes
+// summarize-gocache parses build files in `go env GOCACHE` folder and summarizes
 // how much space is used for a package builds.
 package main
 
