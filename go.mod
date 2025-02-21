@@ -10,7 +10,7 @@ require (
 	github.com/go-gl/gl v0.0.0-20190320180904-bf2b1f2f34d7
 	github.com/go-gl/glfw v0.0.0-20201108214237-06ea97f0c265
 	github.com/go-gl/mathgl v1.0.0
-	github.com/jackc/pgx/v5 v5.4.3
+	github.com/jackc/pgx/v5 v5.7.2
 	github.com/jackc/pgxutil v0.0.0-20230722221055-3c9f5efec167
 	github.com/loov/combiner v0.1.0
 	github.com/loov/hrtime v1.0.3
@@ -21,9 +21,9 @@ require (
 	github.com/shawnsmithdev/zermelo v1.0.3
 	github.com/zeebo/mwc v0.0.4
 	github.com/zeebo/pcg v1.0.0
-	golang.org/x/crypto v0.12.0
-	golang.org/x/exp v0.0.0-20230213192124-5e25df0256eb
-	golang.org/x/exp/shiny v0.0.0-20230817173708-d852ddb80c63
+	golang.org/x/crypto v0.33.0
+	golang.org/x/exp v0.0.0-20250218142911-aa4b98e5adaa
+	golang.org/x/exp/shiny v0.0.0-20250218142911-aa4b98e5adaa
 	golang.org/x/image v0.24.0
 	golang.org/x/mobile v0.0.0-20250218173827-cd096645fcd3
 	golang.org/x/sync v0.11.0
@@ -36,11 +36,11 @@ require (
 require (
 	dmitri.shuralyov.com/gpu/mtl v0.0.0-20221208032759-85de2813cf6b // indirect
 	github.com/dchest/siphash v1.2.2 // indirect
-	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20200222043503-6f7a984d4dc4 // indirect
+	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20231223183121-56fa3ac82ce7 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
-	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
-	github.com/jackc/puddle/v2 v2.2.1 // indirect
-	github.com/jezek/xgb v1.0.0 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
+	github.com/jackc/puddle/v2 v2.2.2 // indirect
+	github.com/jezek/xgb v1.1.1 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	golang.org/x/mod v0.23.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
