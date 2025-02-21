@@ -6,9 +6,9 @@ import (
 	"go/ast"
 	"go/types"
 	"os"
+	"maps"
+	"slices"
 
-	"golang.org/x/exp/maps"
-	"golang.org/x/exp/slices"
 	"golang.org/x/tools/go/packages"
 )
 
