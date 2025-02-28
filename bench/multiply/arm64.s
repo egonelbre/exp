@@ -102,7 +102,7 @@ loop:
 	MUL     R1, R5, R5
 	MUL     R1, R6, R6
 	//MUL     R1, R7, R7
-	ADD     R7<<3, R7, R14
+	SUB     R7<<3, R7, R14
 	ADD     R14<<1, R7, R7
 	MUL     R1, R8, R8
 	MUL     R1, R9, R9
@@ -126,4 +126,41 @@ loop:
 
 	SUB	$1, R0, R0
 	CBNZ	R0, loop
+	RET
+
+
+
+TEXT ·OptA(SB),0,$0-0
+	MOVD	$65536, R2
+	MOVD	$218643, R0
+
+	PCALIGN $16
+loop:
+	MOVD    $7, R1
+	MUL     R1, R0, R0
+	SUB     $1, R2, R2
+	CBNZ    R2, loop
+	RET
+
+TEXT ·OptB(SB),0,$0-0
+	MOVD    $65536, R2
+	MOVD    $218643, R0
+
+	PCALIGN $16
+loop:
+	SUB     R0<<3, R0, R0
+	SUB     $1, R2, R2
+	CBNZ    R2, loop
+	RET
+
+TEXT ·OptC(SB),0,$0-0
+	MOVD    $65536, R2
+	MOVD    $218643, R0
+
+	PCALIGN $16
+loop:
+	LSL     $3, R0, R1
+	SUB     R1, R0, R0
+	SUB     $1, R2, R2
+	CBNZ    R2, loop
 	RET

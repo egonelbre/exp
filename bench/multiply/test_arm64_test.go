@@ -31,3 +31,25 @@ func BenchmarkManyMul19shift(b *testing.B) {
 		ManyMul19shift()
 	}
 }
+
+func OptA()
+func OptB()
+func OptC()
+
+func BenchmarkOptA(b *testing.B) {
+	for b.Loop() {
+		OptA()
+	}
+}
+
+func BenchmarkOptB(b *testing.B) {
+	for b.Loop() {
+		OptB()
+	}
+}
+
+func BenchmarkOptC(b *testing.B) {
+	for b.Loop() {
+		OptC()
+	}
+}
