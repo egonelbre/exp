@@ -198,10 +198,11 @@ func Uint64x4_ConvertToUint32(in simd.Uint64x4) simd.Uint32x4 {
 func Uint32x8_MulEvenOddWiden(a, b simd.Uint32x8) (even, odd simd.Uint64x4) {
 	even = a.MulEvenWiden(b)
 
-	ashift := a.AsUint64x4().ShiftAllRight(32).AsUint32x8()
-	bshift := b.AsUint64x4().ShiftAllRight(32).AsUint32x8()
+	//ashift := a.AsUint64x4().ShiftAllRight(32).AsUint32x8()
+	//bshift := b.AsUint64x4().ShiftAllRight(32).AsUint32x8()
+	ashift := a.PermuteConstantGrouped(0xB1)
+	bshift := b.PermuteConstantGrouped(0xB1)
 	odd = ashift.MulEvenWiden(bshift)
-
 	return even, odd
 }
 
