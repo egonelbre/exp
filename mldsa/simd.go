@@ -6,7 +6,6 @@ package mldsa
 
 import (
 	"simd"
-	"unsafe"
 )
 
 type FieldElement8 = simd.Uint32x8
@@ -49,42 +48,50 @@ func NTT8(f RingElement) NTTElement {
 }
 
 func InverseNTT8(f NTTElement) RingElement {
-	pf := (*[n]uint32)(unsafe.Pointer(&f[0]))
 	m := byte(255)
-	for len := 1; len < 256; len *= 2 {
+	for len := 1; len < 8; len *= 2 {
 		for start := 0; start < 256; start += 2 * len {
 			zeta := zetas[m]
 			m--
-			zeta8 := simd.BroadcastUint32x8(uint32(zeta))
 
-			f, flen := pf[start:start+len], pf[start+len:start+len+len]
-
-			j := 0
-			len8 := (len / 8) * 8
-			for ; j < len8; j += 8 {
-				t := simd.LoadUint32x8Slice(f[j:])
-				tlen := simd.LoadUint32x8Slice(flen[j:])
-				FieldAdd8(t, tlen).StoreSlice(f[j:])
-				// -z * (t - flen[j]) = z * (flen[j] - t)
-				FieldMontgomeryMulSub8(zeta8, tlen, t).StoreSlice(flen[j:])
-			}
-
-			// TODO: does this benefit from unroll by 4 as well?
-
-			for ; j < len; j += 1 {
-				t := FieldElement(f[j])
-				f[j] = uint32(FieldAdd(t, FieldElement(flen[j])))
-				// -z * (t - flen[j]) = z * (flen[j] - t)
-				flen[j] = uint32(FieldMontgomeryMulSub(FieldElement(zeta), FieldElement(flen[j]), t))
+			xs, ys := f[start:start+len], f[start+len:start+len+len]
+			for j := 0; j < len; j += 1 {
+				t := FieldElement(xs[j])
+				xs[j] = FieldAdd(t, ys[j])
+				// -z * (t - ys[j]) = z * (ys[j] - t)
+				ys[j] = FieldMontgomeryMulSub(zeta, ys[j], t)
 			}
 		}
 	}
 
+	for len := 8; len < 256; len *= 2 {
+		for start := 0; start < 256; start += 2 * len {
+			zeta := BroadcastUint32x8(zetas[m])
+			m--
+
+			xs, ys := f[start:start+len], f[start+len:start+len+len]
+			for j := 0; j < len; j += 8 {
+				x := LoadUint32x8Slice(xs[j:])
+				y := LoadUint32x8Slice(ys[j:])
+
+				r := FieldAdd8(x, y)
+				StoreUint32x8Slice(r, xs[j:])
+
+				// -z * (x - ys[j]) = z * (ys[j] - x)
+				r2 := FieldMontgomeryMulSub8(zeta, y, x)
+				StoreUint32x8Slice(r2, ys[j:])
+			}
+		}
+	}
+
+	// Scaling by 256^-1
 	c16382 := simd.BroadcastUint32x8(16382)
 	for i := 0; i < len(f); i += 8 {
-		t := simd.LoadUint32x8Slice(pf[i:])
-		FieldMontgomeryMul8(t, c16382).StoreSlice(pf[i:])
+		t := LoadUint32x8Slice(f[i:])
+		r := FieldMontgomeryMul8(t, c16382)
+		StoreUint32x8Slice(r, f[i:])
 	}
+
 	return RingElement(f)
 }
 
