@@ -100,17 +100,17 @@ func NTTMul8(a, b NTTElement) (p NTTElement) {
 }
 
 func FieldReduceOnce4(a simd.Uint32x4) FieldElement4 {
-	reg := simd.BroadcastUint32x4(q)
-	x := a.Sub(reg)
-	carry := a.Less(reg)
-	return x.Add(reg.Masked(carry))
+	qv := simd.BroadcastUint32x4(q)
+	c := a.Add(qv).Sub(qv)
+	cminusq := c.Sub(qv)
+	return c.Min(cminusq)
 }
 
 func FieldReduceOnce8(a simd.Uint32x8) FieldElement8 {
-	reg := simd.BroadcastUint32x8(q)
-	x := a.Sub(reg)
-	carry := a.Less(reg)
-	return x.Add(reg.Masked(carry))
+	qv := simd.BroadcastUint32x8(q)
+	c := a.Add(qv).Sub(qv)
+	cminusq := c.Sub(qv)
+	return c.Min(cminusq)
 }
 
 func FieldAdd4(a, b FieldElement4) FieldElement4 {
