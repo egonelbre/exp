@@ -89,14 +89,11 @@ func InverseNTT8(f NTTElement) RingElement {
 }
 
 func NTTMul8(a, b NTTElement) (p NTTElement) {
-	ap := (*[n]uint32)(unsafe.Pointer(&a[0]))
-	bp := (*[n]uint32)(unsafe.Pointer(&b[0]))
-	pp := (*[n]uint32)(unsafe.Pointer(&p[0]))
 	for i := 0; i < len(p); i += 8 {
-		x := simd.LoadUint32x8Slice(ap[i:])
-		y := simd.LoadUint32x8Slice(bp[i:])
+		x := LoadUint32x8Slice(a[i:])
+		y := LoadUint32x8Slice(b[i:])
 		r := FieldMontgomeryMul8(x, y)
-		r.StoreSlice(pp[i:])
+		StoreUint32x8Slice(r, p[i:])
 	}
 	return p
 }
