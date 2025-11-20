@@ -13,36 +13,38 @@ type FieldElement8 = simd.Uint32x8
 type FieldElement4 = simd.Uint32x4
 
 func NTT8(f RingElement) NTTElement {
-	pf := (*[n]uint32)(unsafe.Pointer(&f[0]))
-
 	m := byte(0)
-	for len := 128; len >= 1; len /= 2 {
+
+	for len := 128; len >= 8; len /= 2 {
 		for start := 0; start < 256; start += 2 * len {
 			m++
-			zeta := zetas[m]
-			zeta8 := simd.BroadcastUint32x8(uint32(zeta))
+			zeta := BroadcastUint32x8(zetas[m])
 
-			f, flen := pf[start:start+len], pf[start+len:start+len+len]
+			xs, ys := f[start:start+len], f[start+len:start+len+len]
+			for j := 0; j < len; j += 8 {
+				y := LoadUint32x8Slice(ys[j:])
+				t := FieldMontgomeryMul8(zeta, y)
 
-			j := 0
-			len8 := (len / 8) * 8
-			for ; j < len8; j += 8 {
-				tlen := simd.LoadUint32x8Slice(flen[j:])
-				t := FieldMontgomeryMul8(zeta8, tlen)
-				fj := simd.LoadUint32x8Slice(f[j:])
-				FieldSub8(fj, t).StoreSlice(flen[j:])
-				FieldAdd8(fj, t).StoreSlice(f[j:])
-			}
-
-			// TODO: does this benefit from unroll by 4 as well?
-
-			for ; j < len; j++ {
-				t := FieldMontgomeryMul(zeta, FieldElement(flen[j]))
-				flen[j] = uint32(FieldSub(FieldElement(f[j]), t))
-				f[j] = uint32(FieldAdd(FieldElement(f[j]), t))
+				x := LoadUint32x8Slice(xs[j:])
+				StoreUint32x8Slice(FieldSub8(x, t), ys[j:])
+				StoreUint32x8Slice(FieldAdd8(x, t), xs[j:])
 			}
 		}
 	}
+
+	for len := 4; len >= 1; len /= 2 {
+		for start := 0; start < 256; start += 2 * len {
+			m++
+			zeta := zetas[m]
+			xs, ys := f[start:start+len], f[start+len:start+len+len]
+			for j := 0; j < len; j++ {
+				t := FieldMontgomeryMul(zeta, ys[j])
+				ys[j] = FieldSub(xs[j], t)
+				xs[j] = FieldAdd(xs[j], t)
+			}
+		}
+	}
+
 	return NTTElement(f)
 }
 
@@ -99,13 +101,6 @@ func NTTMul8(a, b NTTElement) (p NTTElement) {
 	return p
 }
 
-func FieldReduceOnce4(a simd.Uint32x4) FieldElement4 {
-	qv := simd.BroadcastUint32x4(q)
-	c := a.Add(qv).Sub(qv)
-	cminusq := c.Sub(qv)
-	return c.Min(cminusq)
-}
-
 func FieldReduceOnce8(a simd.Uint32x8) FieldElement8 {
 	qv := simd.BroadcastUint32x8(q)
 	c := a.Add(qv).Sub(qv)
@@ -113,30 +108,14 @@ func FieldReduceOnce8(a simd.Uint32x8) FieldElement8 {
 	return c.Min(cminusq)
 }
 
-func FieldAdd4(a, b FieldElement4) FieldElement4 {
-	return FieldReduceOnce4(a.Add(b))
-}
-
 func FieldAdd8(a, b FieldElement8) FieldElement8 {
 	return FieldReduceOnce8(a.Add(b))
-}
-
-func FieldSub4(a, b FieldElement4) FieldElement4 {
-	q4 := simd.BroadcastUint32x4(q)
-	x := a.Sub(b).Add(q4)
-	return FieldReduceOnce4(x)
 }
 
 func FieldSub8(a, b FieldElement8) FieldElement8 {
 	q8 := simd.BroadcastUint32x8(q)
 	x := a.Sub(b).Add(q8)
 	return FieldReduceOnce8(x)
-}
-
-func FieldMontgomeryMul4(a, b FieldElement4) FieldElement4 {
-	aw, bw := Uint32x4_Spread(a), Uint32x4_Spread(b)
-	r := aw.MulEvenWiden(bw)
-	return FieldMontgomeryReduce4(r)
 }
 
 func FieldMontgomeryMul8(a, b FieldElement8) FieldElement8 {
@@ -151,16 +130,8 @@ func FieldMontgomeryMul8(a, b FieldElement8) FieldElement8 {
 	return FieldReduceOnce8(r)
 }
 
-func FieldMontgomeryMulSub4(a, b, c FieldElement4) FieldElement4 {
-	return FieldMontgomeryMul4(a, b.Sub(c).Add(simd.BroadcastUint32x4(q)))
-}
-
 func FieldMontgomeryMulSub8(a, b, c FieldElement8) FieldElement8 {
 	return FieldMontgomeryMul8(a, b.Sub(c).Add(simd.BroadcastUint32x8(q)))
-}
-
-func FieldMontgomeryReduce4(x simd.Uint64x4) FieldElement4 {
-	return FieldReduceOnce4(Uint64x4_ConvertToUint32(fieldMontgomeryReduce4Unpacked(x)))
 }
 
 func fieldMontgomeryReduce4Unpacked(x simd.Uint64x4) simd.Uint64x4 {
@@ -178,22 +149,6 @@ func fieldMontgomeryReduce4Unpacked(x simd.Uint64x4) simd.Uint64x4 {
 
 // Utilities
 
-// Uint32x4_Spread spreads 4 elements into 8, interleaving with zeros.
-func Uint32x4_Spread(a simd.Uint32x4) simd.Uint32x8 {
-	zeros := simd.Uint32x4{}
-	var r simd.Uint32x8
-	r = r.SetLo(zeros.InterleaveLo(a))
-	r = r.SetHi(zeros.InterleaveHi(a))
-	return r
-}
-
-// Uint64x4_ConvertToUint32 converts 4 uint64s to 4 uint32s by keeping the low 32 bits.
-func Uint64x4_ConvertToUint32(in simd.Uint64x4) simd.Uint32x4 {
-	gatherLowIndices := simd.LoadUint32x8(&[8]uint32{0, 2, 4, 6, 0, 0, 0, 0})
-	permuted := in.AsUint32x8().Permute(gatherLowIndices)
-	return permuted.GetLo()
-}
-
 // Uint32x8_MulEvenOddWiden multiplies even and odd elements separately, widening to uint64.
 func Uint32x8_MulEvenOddWiden(a, b simd.Uint32x8) (even, odd simd.Uint64x4) {
 	even = a.MulEvenWiden(b)
@@ -203,11 +158,4 @@ func Uint32x8_MulEvenOddWiden(a, b simd.Uint32x8) (even, odd simd.Uint64x4) {
 	odd = ashift.MulEvenWiden(bshift)
 
 	return even, odd
-}
-
-// Uint32x4_Interleave interleaves two Uint32x4 vectors into one Uint32x8.
-func Uint32x4_Interleave(even, odd simd.Uint32x4) (r simd.Uint32x8) {
-	r = r.SetLo(even.InterleaveLo(odd))
-	r = r.SetHi(even.InterleaveHi(odd))
-	return r
 }
