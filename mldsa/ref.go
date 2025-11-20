@@ -85,8 +85,12 @@ const (
 // an integer x in [0, q) such that x ≡ n * R (mod q) where R = 2³².
 type FieldElement uint32
 
-// FieldReduceOnce reduces a value a < 2q.
 func FieldReduceOnce(a uint32) FieldElement {
+	return FieldElement(min(a, a-q))
+}
+
+// FieldReduceOnceRef reduces a value a < 2q.
+func FieldReduceOnceRef(a uint32) FieldElement {
 	x, b := bits.Sub64(uint64(a), uint64(q), 0)
 	return FieldElement(x + b*q)
 }

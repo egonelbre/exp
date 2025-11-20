@@ -27,6 +27,17 @@ func FuzzFieldReduceOnce8(f *testing.F) {
 		}
 	})
 }
+func FuzzFieldReduceOnceRef(f *testing.F) {
+	var z uint32
+	f.Add(z)
+	f.Fuzz(func(t *testing.T, a0 uint32) {
+		exp := FieldReduceOnce(a0)
+		got := FieldReduceOnceRef(a0)
+		if exp != got {
+			t.Fatalf("wrong result a:%v exp:%v got:%v", a0, exp, got)
+		}
+	})
+}
 
 func FuzzFieldAdd8(f *testing.F) {
 	var z uint32

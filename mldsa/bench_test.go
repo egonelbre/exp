@@ -116,6 +116,16 @@ func BenchmarkFieldReduceOnce(b *testing.B) {
 		runtime.KeepAlive(x)
 	})
 
+	b.Run("Ref", func(b *testing.B) {
+		x := x
+		for range b.N {
+			for i := range x {
+				x[i] = FieldReduceOnceRef(uint32(x[i]))
+			}
+		}
+		runtime.KeepAlive(x)
+	})
+
 	b.Run("SIMD", func(b *testing.B) {
 		x := FieldElement8FromArray(x)
 		for range b.N {
