@@ -1,7 +1,7 @@
 package mldsa
 
 import (
-	"simd"
+	simd "simd/archsimd"
 	"unsafe"
 )
 

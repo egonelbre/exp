@@ -5,11 +5,13 @@
 package mldsa
 
 import (
-	"simd"
+	simd "simd/archsimd"
 )
 
-type FieldElement8 = simd.Uint32x8
-type FieldElement4 = simd.Uint32x4
+type (
+	FieldElement8 = simd.Uint32x8
+	FieldElement4 = simd.Uint32x4
+)
 
 func NTT8(f RingElement) NTTElement {
 	m := byte(0)

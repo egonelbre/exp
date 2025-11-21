@@ -2,7 +2,7 @@ package mldsa
 
 import (
 	"math/rand/v2"
-	"simd"
+	simd "simd/archsimd"
 	"testing"
 	"unsafe"
 )
