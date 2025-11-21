@@ -85,6 +85,7 @@ func inversentt() {
 		}
 	}
 
+	pf("\n")
 	for i := range n {
 		pf("f[%d] = FieldMontgomeryMul(f[%d], 16382)\n", i, i)
 	}

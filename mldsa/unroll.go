@@ -8196,6 +8196,7 @@ func InverseNTTUnroll(f NTTElement) RingElement {
 	t = f[127]
 	f[127] = FieldAdd(t, f[255])
 	f[255] = FieldMontgomeryMulSub(25847, f[255], t)
+
 	f[0] = FieldMontgomeryMul(f[0], 16382)
 	f[1] = FieldMontgomeryMul(f[1], 16382)
 	f[2] = FieldMontgomeryMul(f[2], 16382)
