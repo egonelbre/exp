@@ -120,6 +120,13 @@ func FieldMontgomeryReduce(x uint64) FieldElement {
 	return FieldReduceOnce(uint32(u))
 }
 
+// FieldMontgomeryReducePartial returns x * R⁻¹ mod q for x < q * R.
+func FieldMontgomeryReducePartial(x uint64) FieldElement {
+	t := uint32(x) * qNegInv
+	u := (x + uint64(t)*q) >> 32
+	return FieldElement(u)
+}
+
 // FieldMontgomeryMulSub returns a * (b - c). This operation is fused to save a
 // fieldReduceOnce after the subtraction.
 func FieldMontgomeryMulSub(a, b, c FieldElement) FieldElement {
