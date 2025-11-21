@@ -6152,6145 +6152,6145 @@ func InverseNTTUnroll(f NTTElement) RingElement {
 		t := f[0]
 		f[0] = FieldAdd(t, f[1])
 		x := uint64(1976782) * uint64(f[1]-t+q)
-		f[1] = FieldMontgomeryReduce(x)
+		f[1] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[2]
 		f[2] = FieldAdd(t, f[3])
 		x := uint64(7534263) * uint64(f[3]-t+q)
-		f[3] = FieldMontgomeryReduce(x)
+		f[3] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[4]
 		f[4] = FieldAdd(t, f[5])
 		x := uint64(1400424) * uint64(f[5]-t+q)
-		f[5] = FieldMontgomeryReduce(x)
+		f[5] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[6]
 		f[6] = FieldAdd(t, f[7])
 		x := uint64(3937738) * uint64(f[7]-t+q)
-		f[7] = FieldMontgomeryReduce(x)
+		f[7] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[8]
 		f[8] = FieldAdd(t, f[9])
 		x := uint64(7018208) * uint64(f[9]-t+q)
-		f[9] = FieldMontgomeryReduce(x)
+		f[9] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[10]
 		f[10] = FieldAdd(t, f[11])
 		x := uint64(8332111) * uint64(f[11]-t+q)
-		f[11] = FieldMontgomeryReduce(x)
+		f[11] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[12]
 		f[12] = FieldAdd(t, f[13])
 		x := uint64(3919660) * uint64(f[13]-t+q)
-		f[13] = FieldMontgomeryReduce(x)
+		f[13] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[14]
 		f[14] = FieldAdd(t, f[15])
 		x := uint64(7826001) * uint64(f[15]-t+q)
-		f[15] = FieldMontgomeryReduce(x)
+		f[15] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[16]
 		f[16] = FieldAdd(t, f[17])
 		x := uint64(4834730) * uint64(f[17]-t+q)
-		f[17] = FieldMontgomeryReduce(x)
+		f[17] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[18]
 		f[18] = FieldAdd(t, f[19])
 		x := uint64(1612842) * uint64(f[19]-t+q)
-		f[19] = FieldMontgomeryReduce(x)
+		f[19] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[20]
 		f[20] = FieldAdd(t, f[21])
 		x := uint64(7403526) * uint64(f[21]-t+q)
-		f[21] = FieldMontgomeryReduce(x)
+		f[21] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[22]
 		f[22] = FieldAdd(t, f[23])
 		x := uint64(183443) * uint64(f[23]-t+q)
-		f[23] = FieldMontgomeryReduce(x)
+		f[23] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[24]
 		f[24] = FieldAdd(t, f[25])
 		x := uint64(6094090) * uint64(f[25]-t+q)
-		f[25] = FieldMontgomeryReduce(x)
+		f[25] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[26]
 		f[26] = FieldAdd(t, f[27])
 		x := uint64(7959518) * uint64(f[27]-t+q)
-		f[27] = FieldMontgomeryReduce(x)
+		f[27] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[28]
 		f[28] = FieldAdd(t, f[29])
 		x := uint64(6144432) * uint64(f[29]-t+q)
-		f[29] = FieldMontgomeryReduce(x)
+		f[29] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[30]
 		f[30] = FieldAdd(t, f[31])
 		x := uint64(5441381) * uint64(f[31]-t+q)
-		f[31] = FieldMontgomeryReduce(x)
+		f[31] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[32]
 		f[32] = FieldAdd(t, f[33])
 		x := uint64(4546524) * uint64(f[33]-t+q)
-		f[33] = FieldMontgomeryReduce(x)
+		f[33] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[34]
 		f[34] = FieldAdd(t, f[35])
 		x := uint64(8119771) * uint64(f[35]-t+q)
-		f[35] = FieldMontgomeryReduce(x)
+		f[35] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[36]
 		f[36] = FieldAdd(t, f[37])
 		x := uint64(7276084) * uint64(f[37]-t+q)
-		f[37] = FieldMontgomeryReduce(x)
+		f[37] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[38]
 		f[38] = FieldAdd(t, f[39])
 		x := uint64(6712985) * uint64(f[39]-t+q)
-		f[39] = FieldMontgomeryReduce(x)
+		f[39] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[40]
 		f[40] = FieldAdd(t, f[41])
 		x := uint64(1910376) * uint64(f[41]-t+q)
-		f[41] = FieldMontgomeryReduce(x)
+		f[41] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[42]
 		f[42] = FieldAdd(t, f[43])
 		x := uint64(6577327) * uint64(f[43]-t+q)
-		f[43] = FieldMontgomeryReduce(x)
+		f[43] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[44]
 		f[44] = FieldAdd(t, f[45])
 		x := uint64(1723600) * uint64(f[45]-t+q)
-		f[45] = FieldMontgomeryReduce(x)
+		f[45] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[46]
 		f[46] = FieldAdd(t, f[47])
 		x := uint64(7953734) * uint64(f[47]-t+q)
-		f[47] = FieldMontgomeryReduce(x)
+		f[47] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[48]
 		f[48] = FieldAdd(t, f[49])
 		x := uint64(472078) * uint64(f[49]-t+q)
-		f[49] = FieldMontgomeryReduce(x)
+		f[49] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[50]
 		f[50] = FieldAdd(t, f[51])
 		x := uint64(1717735) * uint64(f[51]-t+q)
-		f[51] = FieldMontgomeryReduce(x)
+		f[51] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[52]
 		f[52] = FieldAdd(t, f[53])
 		x := uint64(7404533) * uint64(f[53]-t+q)
-		f[53] = FieldMontgomeryReduce(x)
+		f[53] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[54]
 		f[54] = FieldAdd(t, f[55])
 		x := uint64(2213111) * uint64(f[55]-t+q)
-		f[55] = FieldMontgomeryReduce(x)
+		f[55] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[56]
 		f[56] = FieldAdd(t, f[57])
 		x := uint64(269760) * uint64(f[57]-t+q)
-		f[57] = FieldMontgomeryReduce(x)
+		f[57] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[58]
 		f[58] = FieldAdd(t, f[59])
 		x := uint64(3866901) * uint64(f[59]-t+q)
-		f[59] = FieldMontgomeryReduce(x)
+		f[59] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[60]
 		f[60] = FieldAdd(t, f[61])
 		x := uint64(3523897) * uint64(f[61]-t+q)
-		f[61] = FieldMontgomeryReduce(x)
+		f[61] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[62]
 		f[62] = FieldAdd(t, f[63])
 		x := uint64(5341501) * uint64(f[63]-t+q)
-		f[63] = FieldMontgomeryReduce(x)
+		f[63] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[64]
 		f[64] = FieldAdd(t, f[65])
 		x := uint64(6581310) * uint64(f[65]-t+q)
-		f[65] = FieldMontgomeryReduce(x)
+		f[65] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[66]
 		f[66] = FieldAdd(t, f[67])
 		x := uint64(4686184) * uint64(f[67]-t+q)
-		f[67] = FieldMontgomeryReduce(x)
+		f[67] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[68]
 		f[68] = FieldAdd(t, f[69])
 		x := uint64(1652634) * uint64(f[69]-t+q)
-		f[69] = FieldMontgomeryReduce(x)
+		f[69] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[70]
 		f[70] = FieldAdd(t, f[71])
 		x := uint64(810149) * uint64(f[71]-t+q)
-		f[71] = FieldMontgomeryReduce(x)
+		f[71] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[72]
 		f[72] = FieldAdd(t, f[73])
 		x := uint64(3014001) * uint64(f[73]-t+q)
-		f[73] = FieldMontgomeryReduce(x)
+		f[73] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[74]
 		f[74] = FieldAdd(t, f[75])
 		x := uint64(1616392) * uint64(f[75]-t+q)
-		f[75] = FieldMontgomeryReduce(x)
+		f[75] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[76]
 		f[76] = FieldAdd(t, f[77])
 		x := uint64(162844) * uint64(f[77]-t+q)
-		f[77] = FieldMontgomeryReduce(x)
+		f[77] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[78]
 		f[78] = FieldAdd(t, f[79])
 		x := uint64(5196991) * uint64(f[79]-t+q)
-		f[79] = FieldMontgomeryReduce(x)
+		f[79] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[80]
 		f[80] = FieldAdd(t, f[81])
 		x := uint64(7173032) * uint64(f[81]-t+q)
-		f[81] = FieldMontgomeryReduce(x)
+		f[81] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[82]
 		f[82] = FieldAdd(t, f[83])
 		x := uint64(185531) * uint64(f[83]-t+q)
-		f[83] = FieldMontgomeryReduce(x)
+		f[83] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[84]
 		f[84] = FieldAdd(t, f[85])
 		x := uint64(3369112) * uint64(f[85]-t+q)
-		f[85] = FieldMontgomeryReduce(x)
+		f[85] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[86]
 		f[86] = FieldAdd(t, f[87])
 		x := uint64(1957272) * uint64(f[87]-t+q)
-		f[87] = FieldMontgomeryReduce(x)
+		f[87] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[88]
 		f[88] = FieldAdd(t, f[89])
 		x := uint64(8215696) * uint64(f[89]-t+q)
-		f[89] = FieldMontgomeryReduce(x)
+		f[89] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[90]
 		f[90] = FieldAdd(t, f[91])
 		x := uint64(2454455) * uint64(f[91]-t+q)
-		f[91] = FieldMontgomeryReduce(x)
+		f[91] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[92]
 		f[92] = FieldAdd(t, f[93])
 		x := uint64(2432395) * uint64(f[93]-t+q)
-		f[93] = FieldMontgomeryReduce(x)
+		f[93] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[94]
 		f[94] = FieldAdd(t, f[95])
 		x := uint64(6366809) * uint64(f[95]-t+q)
-		f[95] = FieldMontgomeryReduce(x)
+		f[95] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[96]
 		f[96] = FieldAdd(t, f[97])
 		x := uint64(4603424) * uint64(f[97]-t+q)
-		f[97] = FieldMontgomeryReduce(x)
+		f[97] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[98]
 		f[98] = FieldAdd(t, f[99])
 		x := uint64(594136) * uint64(f[99]-t+q)
-		f[99] = FieldMontgomeryReduce(x)
+		f[99] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[100]
 		f[100] = FieldAdd(t, f[101])
 		x := uint64(4656147) * uint64(f[101]-t+q)
-		f[101] = FieldMontgomeryReduce(x)
+		f[101] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[102]
 		f[102] = FieldAdd(t, f[103])
 		x := uint64(5796124) * uint64(f[103]-t+q)
-		f[103] = FieldMontgomeryReduce(x)
+		f[103] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[104]
 		f[104] = FieldAdd(t, f[105])
 		x := uint64(6533464) * uint64(f[105]-t+q)
-		f[105] = FieldMontgomeryReduce(x)
+		f[105] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[106]
 		f[106] = FieldAdd(t, f[107])
 		x := uint64(6709241) * uint64(f[107]-t+q)
-		f[107] = FieldMontgomeryReduce(x)
+		f[107] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[108]
 		f[108] = FieldAdd(t, f[109])
 		x := uint64(5548557) * uint64(f[109]-t+q)
-		f[109] = FieldMontgomeryReduce(x)
+		f[109] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[110]
 		f[110] = FieldAdd(t, f[111])
 		x := uint64(7838005) * uint64(f[111]-t+q)
-		f[111] = FieldMontgomeryReduce(x)
+		f[111] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[112]
 		f[112] = FieldAdd(t, f[113])
 		x := uint64(3406031) * uint64(f[113]-t+q)
-		f[113] = FieldMontgomeryReduce(x)
+		f[113] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[114]
 		f[114] = FieldAdd(t, f[115])
 		x := uint64(2235880) * uint64(f[115]-t+q)
-		f[115] = FieldMontgomeryReduce(x)
+		f[115] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[116]
 		f[116] = FieldAdd(t, f[117])
 		x := uint64(777191) * uint64(f[117]-t+q)
-		f[117] = FieldMontgomeryReduce(x)
+		f[117] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[118]
 		f[118] = FieldAdd(t, f[119])
 		x := uint64(1500165) * uint64(f[119]-t+q)
-		f[119] = FieldMontgomeryReduce(x)
+		f[119] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[120]
 		f[120] = FieldAdd(t, f[121])
 		x := uint64(7005614) * uint64(f[121]-t+q)
-		f[121] = FieldMontgomeryReduce(x)
+		f[121] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[122]
 		f[122] = FieldAdd(t, f[123])
 		x := uint64(5834105) * uint64(f[123]-t+q)
-		f[123] = FieldMontgomeryReduce(x)
+		f[123] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[124]
 		f[124] = FieldAdd(t, f[125])
 		x := uint64(1917081) * uint64(f[125]-t+q)
-		f[125] = FieldMontgomeryReduce(x)
+		f[125] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[126]
 		f[126] = FieldAdd(t, f[127])
 		x := uint64(7100756) * uint64(f[127]-t+q)
-		f[127] = FieldMontgomeryReduce(x)
+		f[127] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[128]
 		f[128] = FieldAdd(t, f[129])
 		x := uint64(6417775) * uint64(f[129]-t+q)
-		f[129] = FieldMontgomeryReduce(x)
+		f[129] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[130]
 		f[130] = FieldAdd(t, f[131])
 		x := uint64(3306115) * uint64(f[131]-t+q)
-		f[131] = FieldMontgomeryReduce(x)
+		f[131] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[132]
 		f[132] = FieldAdd(t, f[133])
 		x := uint64(1312455) * uint64(f[133]-t+q)
-		f[133] = FieldMontgomeryReduce(x)
+		f[133] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[134]
 		f[134] = FieldAdd(t, f[135])
 		x := uint64(7929317) * uint64(f[135]-t+q)
-		f[135] = FieldMontgomeryReduce(x)
+		f[135] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[136]
 		f[136] = FieldAdd(t, f[137])
 		x := uint64(6950192) * uint64(f[137]-t+q)
-		f[137] = FieldMontgomeryReduce(x)
+		f[137] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[138]
 		f[138] = FieldAdd(t, f[139])
 		x := uint64(5062207) * uint64(f[139]-t+q)
-		f[139] = FieldMontgomeryReduce(x)
+		f[139] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[140]
 		f[140] = FieldAdd(t, f[141])
 		x := uint64(1237275) * uint64(f[141]-t+q)
-		f[141] = FieldMontgomeryReduce(x)
+		f[141] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[142]
 		f[142] = FieldAdd(t, f[143])
 		x := uint64(7047359) * uint64(f[143]-t+q)
-		f[143] = FieldMontgomeryReduce(x)
+		f[143] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[144]
 		f[144] = FieldAdd(t, f[145])
 		x := uint64(7329447) * uint64(f[145]-t+q)
-		f[145] = FieldMontgomeryReduce(x)
+		f[145] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[146]
 		f[146] = FieldAdd(t, f[147])
 		x := uint64(1903435) * uint64(f[147]-t+q)
-		f[147] = FieldMontgomeryReduce(x)
+		f[147] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[148]
 		f[148] = FieldAdd(t, f[149])
 		x := uint64(1869119) * uint64(f[149]-t+q)
-		f[149] = FieldMontgomeryReduce(x)
+		f[149] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[150]
 		f[150] = FieldAdd(t, f[151])
 		x := uint64(5386378) * uint64(f[151]-t+q)
-		f[151] = FieldMontgomeryReduce(x)
+		f[151] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[152]
 		f[152] = FieldAdd(t, f[153])
 		x := uint64(4832145) * uint64(f[153]-t+q)
-		f[153] = FieldMontgomeryReduce(x)
+		f[153] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[154]
 		f[154] = FieldAdd(t, f[155])
 		x := uint64(2635921) * uint64(f[155]-t+q)
-		f[155] = FieldMontgomeryReduce(x)
+		f[155] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[156]
 		f[156] = FieldAdd(t, f[157])
 		x := uint64(1250494) * uint64(f[157]-t+q)
-		f[157] = FieldMontgomeryReduce(x)
+		f[157] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[158]
 		f[158] = FieldAdd(t, f[159])
 		x := uint64(4613401) * uint64(f[159]-t+q)
-		f[159] = FieldMontgomeryReduce(x)
+		f[159] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[160]
 		f[160] = FieldAdd(t, f[161])
 		x := uint64(1595974) * uint64(f[161]-t+q)
-		f[161] = FieldMontgomeryReduce(x)
+		f[161] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[162]
 		f[162] = FieldAdd(t, f[163])
 		x := uint64(2486353) * uint64(f[163]-t+q)
-		f[163] = FieldMontgomeryReduce(x)
+		f[163] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[164]
 		f[164] = FieldAdd(t, f[165])
 		x := uint64(1247620) * uint64(f[165]-t+q)
-		f[165] = FieldMontgomeryReduce(x)
+		f[165] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[166]
 		f[166] = FieldAdd(t, f[167])
 		x := uint64(4055324) * uint64(f[167]-t+q)
-		f[167] = FieldMontgomeryReduce(x)
+		f[167] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[168]
 		f[168] = FieldAdd(t, f[169])
 		x := uint64(1265009) * uint64(f[169]-t+q)
-		f[169] = FieldMontgomeryReduce(x)
+		f[169] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[170]
 		f[170] = FieldAdd(t, f[171])
 		x := uint64(5790267) * uint64(f[171]-t+q)
-		f[171] = FieldMontgomeryReduce(x)
+		f[171] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[172]
 		f[172] = FieldAdd(t, f[173])
 		x := uint64(2691481) * uint64(f[173]-t+q)
-		f[173] = FieldMontgomeryReduce(x)
+		f[173] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[174]
 		f[174] = FieldAdd(t, f[175])
 		x := uint64(2842341) * uint64(f[175]-t+q)
-		f[175] = FieldMontgomeryReduce(x)
+		f[175] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[176]
 		f[176] = FieldAdd(t, f[177])
 		x := uint64(203044) * uint64(f[177]-t+q)
-		f[177] = FieldMontgomeryReduce(x)
+		f[177] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[178]
 		f[178] = FieldAdd(t, f[179])
 		x := uint64(1735879) * uint64(f[179]-t+q)
-		f[179] = FieldMontgomeryReduce(x)
+		f[179] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[180]
 		f[180] = FieldAdd(t, f[181])
 		x := uint64(5038140) * uint64(f[181]-t+q)
-		f[181] = FieldMontgomeryReduce(x)
+		f[181] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[182]
 		f[182] = FieldAdd(t, f[183])
 		x := uint64(3437287) * uint64(f[183]-t+q)
-		f[183] = FieldMontgomeryReduce(x)
+		f[183] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[184]
 		f[184] = FieldAdd(t, f[185])
 		x := uint64(4108315) * uint64(f[185]-t+q)
-		f[185] = FieldMontgomeryReduce(x)
+		f[185] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[186]
 		f[186] = FieldAdd(t, f[187])
 		x := uint64(5942594) * uint64(f[187]-t+q)
-		f[187] = FieldMontgomeryReduce(x)
+		f[187] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[188]
 		f[188] = FieldAdd(t, f[189])
 		x := uint64(286988) * uint64(f[189]-t+q)
-		f[189] = FieldMontgomeryReduce(x)
+		f[189] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[190]
 		f[190] = FieldAdd(t, f[191])
 		x := uint64(342297) * uint64(f[191]-t+q)
-		f[191] = FieldMontgomeryReduce(x)
+		f[191] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[192]
 		f[192] = FieldAdd(t, f[193])
 		x := uint64(4784579) * uint64(f[193]-t+q)
-		f[193] = FieldMontgomeryReduce(x)
+		f[193] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[194]
 		f[194] = FieldAdd(t, f[195])
 		x := uint64(7611795) * uint64(f[195]-t+q)
-		f[195] = FieldMontgomeryReduce(x)
+		f[195] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[196]
 		f[196] = FieldAdd(t, f[197])
 		x := uint64(7855319) * uint64(f[197]-t+q)
-		f[197] = FieldMontgomeryReduce(x)
+		f[197] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[198]
 		f[198] = FieldAdd(t, f[199])
 		x := uint64(4823422) * uint64(f[199]-t+q)
-		f[199] = FieldMontgomeryReduce(x)
+		f[199] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[200]
 		f[200] = FieldAdd(t, f[201])
 		x := uint64(3207046) * uint64(f[201]-t+q)
-		f[201] = FieldMontgomeryReduce(x)
+		f[201] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[202]
 		f[202] = FieldAdd(t, f[203])
 		x := uint64(2031748) * uint64(f[203]-t+q)
-		f[203] = FieldMontgomeryReduce(x)
+		f[203] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[204]
 		f[204] = FieldAdd(t, f[205])
 		x := uint64(5257975) * uint64(f[205]-t+q)
-		f[205] = FieldMontgomeryReduce(x)
+		f[205] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[206]
 		f[206] = FieldAdd(t, f[207])
 		x := uint64(7725090) * uint64(f[207]-t+q)
-		f[207] = FieldMontgomeryReduce(x)
+		f[207] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[208]
 		f[208] = FieldAdd(t, f[209])
 		x := uint64(7857917) * uint64(f[209]-t+q)
-		f[209] = FieldMontgomeryReduce(x)
+		f[209] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[210]
 		f[210] = FieldAdd(t, f[211])
 		x := uint64(8337157) * uint64(f[211]-t+q)
-		f[211] = FieldMontgomeryReduce(x)
+		f[211] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[212]
 		f[212] = FieldAdd(t, f[213])
 		x := uint64(6767243) * uint64(f[213]-t+q)
-		f[213] = FieldMontgomeryReduce(x)
+		f[213] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[214]
 		f[214] = FieldAdd(t, f[215])
 		x := uint64(495491) * uint64(f[215]-t+q)
-		f[215] = FieldMontgomeryReduce(x)
+		f[215] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[216]
 		f[216] = FieldAdd(t, f[217])
 		x := uint64(819034) * uint64(f[217]-t+q)
-		f[217] = FieldMontgomeryReduce(x)
+		f[217] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[218]
 		f[218] = FieldAdd(t, f[219])
 		x := uint64(909542) * uint64(f[219]-t+q)
-		f[219] = FieldMontgomeryReduce(x)
+		f[219] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[220]
 		f[220] = FieldAdd(t, f[221])
 		x := uint64(1859098) * uint64(f[221]-t+q)
-		f[221] = FieldMontgomeryReduce(x)
+		f[221] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[222]
 		f[222] = FieldAdd(t, f[223])
 		x := uint64(900702) * uint64(f[223]-t+q)
-		f[223] = FieldMontgomeryReduce(x)
+		f[223] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[224]
 		f[224] = FieldAdd(t, f[225])
 		x := uint64(5187039) * uint64(f[225]-t+q)
-		f[225] = FieldMontgomeryReduce(x)
+		f[225] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[226]
 		f[226] = FieldAdd(t, f[227])
 		x := uint64(7183191) * uint64(f[227]-t+q)
-		f[227] = FieldMontgomeryReduce(x)
+		f[227] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[228]
 		f[228] = FieldAdd(t, f[229])
 		x := uint64(4621053) * uint64(f[229]-t+q)
-		f[229] = FieldMontgomeryReduce(x)
+		f[229] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[230]
 		f[230] = FieldAdd(t, f[231])
 		x := uint64(4860065) * uint64(f[231]-t+q)
-		f[231] = FieldMontgomeryReduce(x)
+		f[231] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[232]
 		f[232] = FieldAdd(t, f[233])
 		x := uint64(3513181) * uint64(f[233]-t+q)
-		f[233] = FieldMontgomeryReduce(x)
+		f[233] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[234]
 		f[234] = FieldAdd(t, f[235])
 		x := uint64(7144689) * uint64(f[235]-t+q)
-		f[235] = FieldMontgomeryReduce(x)
+		f[235] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[236]
 		f[236] = FieldAdd(t, f[237])
 		x := uint64(2434439) * uint64(f[237]-t+q)
-		f[237] = FieldMontgomeryReduce(x)
+		f[237] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[238]
 		f[238] = FieldAdd(t, f[239])
 		x := uint64(266997) * uint64(f[239]-t+q)
-		f[239] = FieldMontgomeryReduce(x)
+		f[239] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[240]
 		f[240] = FieldAdd(t, f[241])
 		x := uint64(4817955) * uint64(f[241]-t+q)
-		f[241] = FieldMontgomeryReduce(x)
+		f[241] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[242]
 		f[242] = FieldAdd(t, f[243])
 		x := uint64(5933984) * uint64(f[243]-t+q)
-		f[243] = FieldMontgomeryReduce(x)
+		f[243] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[244]
 		f[244] = FieldAdd(t, f[245])
 		x := uint64(2244091) * uint64(f[245]-t+q)
-		f[245] = FieldMontgomeryReduce(x)
+		f[245] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[246]
 		f[246] = FieldAdd(t, f[247])
 		x := uint64(5037939) * uint64(f[247]-t+q)
-		f[247] = FieldMontgomeryReduce(x)
+		f[247] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[248]
 		f[248] = FieldAdd(t, f[249])
 		x := uint64(3817976) * uint64(f[249]-t+q)
-		f[249] = FieldMontgomeryReduce(x)
+		f[249] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[250]
 		f[250] = FieldAdd(t, f[251])
 		x := uint64(2316500) * uint64(f[251]-t+q)
-		f[251] = FieldMontgomeryReduce(x)
+		f[251] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[252]
 		f[252] = FieldAdd(t, f[253])
 		x := uint64(3407706) * uint64(f[253]-t+q)
-		f[253] = FieldMontgomeryReduce(x)
+		f[253] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[254]
 		f[254] = FieldAdd(t, f[255])
 		x := uint64(2091667) * uint64(f[255]-t+q)
-		f[255] = FieldMontgomeryReduce(x)
+		f[255] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[0]
 		f[0] = FieldAdd(t, f[2])
 		x := uint64(3839961) * uint64(f[2]-t+q)
-		f[2] = FieldMontgomeryReduce(x)
+		f[2] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[1]
 		f[1] = FieldAdd(t, f[3])
 		x := uint64(3839961) * uint64(f[3]-t+q)
-		f[3] = FieldMontgomeryReduce(x)
+		f[3] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[4]
 		f[4] = FieldAdd(t, f[6])
 		x := uint64(4751448) * uint64(f[6]-t+q)
-		f[6] = FieldMontgomeryReduce(x)
+		f[6] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[5]
 		f[5] = FieldAdd(t, f[7])
 		x := uint64(4751448) * uint64(f[7]-t+q)
-		f[7] = FieldMontgomeryReduce(x)
+		f[7] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[8]
 		f[8] = FieldAdd(t, f[10])
 		x := uint64(4499357) * uint64(f[10]-t+q)
-		f[10] = FieldMontgomeryReduce(x)
+		f[10] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[9]
 		f[9] = FieldAdd(t, f[11])
 		x := uint64(4499357) * uint64(f[11]-t+q)
-		f[11] = FieldMontgomeryReduce(x)
+		f[11] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[12]
 		f[12] = FieldAdd(t, f[14])
 		x := uint64(5361315) * uint64(f[14]-t+q)
-		f[14] = FieldMontgomeryReduce(x)
+		f[14] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[13]
 		f[13] = FieldAdd(t, f[15])
 		x := uint64(5361315) * uint64(f[15]-t+q)
-		f[15] = FieldMontgomeryReduce(x)
+		f[15] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[16]
 		f[16] = FieldAdd(t, f[18])
 		x := uint64(6940675) * uint64(f[18]-t+q)
-		f[18] = FieldMontgomeryReduce(x)
+		f[18] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[17]
 		f[17] = FieldAdd(t, f[19])
 		x := uint64(6940675) * uint64(f[19]-t+q)
-		f[19] = FieldMontgomeryReduce(x)
+		f[19] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[20]
 		f[20] = FieldAdd(t, f[22])
 		x := uint64(7567685) * uint64(f[22]-t+q)
-		f[22] = FieldMontgomeryReduce(x)
+		f[22] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[21]
 		f[21] = FieldAdd(t, f[23])
 		x := uint64(7567685) * uint64(f[23]-t+q)
-		f[23] = FieldMontgomeryReduce(x)
+		f[23] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[24]
 		f[24] = FieldAdd(t, f[26])
 		x := uint64(6795489) * uint64(f[26]-t+q)
-		f[26] = FieldMontgomeryReduce(x)
+		f[26] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[25]
 		f[25] = FieldAdd(t, f[27])
 		x := uint64(6795489) * uint64(f[27]-t+q)
-		f[27] = FieldMontgomeryReduce(x)
+		f[27] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[28]
 		f[28] = FieldAdd(t, f[30])
 		x := uint64(1285669) * uint64(f[30]-t+q)
-		f[30] = FieldMontgomeryReduce(x)
+		f[30] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[29]
 		f[29] = FieldAdd(t, f[31])
 		x := uint64(1285669) * uint64(f[31]-t+q)
-		f[31] = FieldMontgomeryReduce(x)
+		f[31] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[32]
 		f[32] = FieldAdd(t, f[34])
 		x := uint64(1341330) * uint64(f[34]-t+q)
-		f[34] = FieldMontgomeryReduce(x)
+		f[34] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[33]
 		f[33] = FieldAdd(t, f[35])
 		x := uint64(1341330) * uint64(f[35]-t+q)
-		f[35] = FieldMontgomeryReduce(x)
+		f[35] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[36]
 		f[36] = FieldAdd(t, f[38])
 		x := uint64(1315589) * uint64(f[38]-t+q)
-		f[38] = FieldMontgomeryReduce(x)
+		f[38] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[37]
 		f[37] = FieldAdd(t, f[39])
 		x := uint64(1315589) * uint64(f[39]-t+q)
-		f[39] = FieldMontgomeryReduce(x)
+		f[39] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[40]
 		f[40] = FieldAdd(t, f[42])
 		x := uint64(8202977) * uint64(f[42]-t+q)
-		f[42] = FieldMontgomeryReduce(x)
+		f[42] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[41]
 		f[41] = FieldAdd(t, f[43])
 		x := uint64(8202977) * uint64(f[43]-t+q)
-		f[43] = FieldMontgomeryReduce(x)
+		f[43] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[44]
 		f[44] = FieldAdd(t, f[46])
 		x := uint64(5971092) * uint64(f[46]-t+q)
-		f[46] = FieldMontgomeryReduce(x)
+		f[46] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[45]
 		f[45] = FieldAdd(t, f[47])
 		x := uint64(5971092) * uint64(f[47]-t+q)
-		f[47] = FieldMontgomeryReduce(x)
+		f[47] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[48]
 		f[48] = FieldAdd(t, f[50])
 		x := uint64(6529015) * uint64(f[50]-t+q)
-		f[50] = FieldMontgomeryReduce(x)
+		f[50] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[49]
 		f[49] = FieldAdd(t, f[51])
 		x := uint64(6529015) * uint64(f[51]-t+q)
-		f[51] = FieldMontgomeryReduce(x)
+		f[51] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[52]
 		f[52] = FieldAdd(t, f[54])
 		x := uint64(3159746) * uint64(f[54]-t+q)
-		f[54] = FieldMontgomeryReduce(x)
+		f[54] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[53]
 		f[53] = FieldAdd(t, f[55])
 		x := uint64(3159746) * uint64(f[55]-t+q)
-		f[55] = FieldMontgomeryReduce(x)
+		f[55] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[56]
 		f[56] = FieldAdd(t, f[58])
 		x := uint64(4827145) * uint64(f[58]-t+q)
-		f[58] = FieldMontgomeryReduce(x)
+		f[58] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[57]
 		f[57] = FieldAdd(t, f[59])
 		x := uint64(4827145) * uint64(f[59]-t+q)
-		f[59] = FieldMontgomeryReduce(x)
+		f[59] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[60]
 		f[60] = FieldAdd(t, f[62])
 		x := uint64(189548) * uint64(f[62]-t+q)
-		f[62] = FieldMontgomeryReduce(x)
+		f[62] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[61]
 		f[61] = FieldAdd(t, f[63])
 		x := uint64(189548) * uint64(f[63]-t+q)
-		f[63] = FieldMontgomeryReduce(x)
+		f[63] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[64]
 		f[64] = FieldAdd(t, f[66])
 		x := uint64(7063561) * uint64(f[66]-t+q)
-		f[66] = FieldMontgomeryReduce(x)
+		f[66] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[65]
 		f[65] = FieldAdd(t, f[67])
 		x := uint64(7063561) * uint64(f[67]-t+q)
-		f[67] = FieldMontgomeryReduce(x)
+		f[67] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[68]
 		f[68] = FieldAdd(t, f[70])
 		x := uint64(759969) * uint64(f[70]-t+q)
-		f[70] = FieldMontgomeryReduce(x)
+		f[70] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[69]
 		f[69] = FieldAdd(t, f[71])
 		x := uint64(759969) * uint64(f[71]-t+q)
-		f[71] = FieldMontgomeryReduce(x)
+		f[71] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[72]
 		f[72] = FieldAdd(t, f[74])
 		x := uint64(8169440) * uint64(f[74]-t+q)
-		f[74] = FieldMontgomeryReduce(x)
+		f[74] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[73]
 		f[73] = FieldAdd(t, f[75])
 		x := uint64(8169440) * uint64(f[75]-t+q)
-		f[75] = FieldMontgomeryReduce(x)
+		f[75] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[76]
 		f[76] = FieldAdd(t, f[78])
 		x := uint64(2389356) * uint64(f[78]-t+q)
-		f[78] = FieldMontgomeryReduce(x)
+		f[78] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[77]
 		f[77] = FieldAdd(t, f[79])
 		x := uint64(2389356) * uint64(f[79]-t+q)
-		f[79] = FieldMontgomeryReduce(x)
+		f[79] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[80]
 		f[80] = FieldAdd(t, f[82])
 		x := uint64(5130689) * uint64(f[82]-t+q)
-		f[82] = FieldMontgomeryReduce(x)
+		f[82] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[81]
 		f[81] = FieldAdd(t, f[83])
 		x := uint64(5130689) * uint64(f[83]-t+q)
-		f[83] = FieldMontgomeryReduce(x)
+		f[83] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[84]
 		f[84] = FieldAdd(t, f[86])
 		x := uint64(1653064) * uint64(f[86]-t+q)
-		f[86] = FieldMontgomeryReduce(x)
+		f[86] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[85]
 		f[85] = FieldAdd(t, f[87])
 		x := uint64(1653064) * uint64(f[87]-t+q)
-		f[87] = FieldMontgomeryReduce(x)
+		f[87] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[88]
 		f[88] = FieldAdd(t, f[90])
 		x := uint64(8371839) * uint64(f[90]-t+q)
-		f[90] = FieldMontgomeryReduce(x)
+		f[90] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[89]
 		f[89] = FieldAdd(t, f[91])
 		x := uint64(8371839) * uint64(f[91]-t+q)
-		f[91] = FieldMontgomeryReduce(x)
+		f[91] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[92]
 		f[92] = FieldAdd(t, f[94])
 		x := uint64(4656075) * uint64(f[94]-t+q)
-		f[94] = FieldMontgomeryReduce(x)
+		f[94] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[93]
 		f[93] = FieldAdd(t, f[95])
 		x := uint64(4656075) * uint64(f[95]-t+q)
-		f[95] = FieldMontgomeryReduce(x)
+		f[95] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[96]
 		f[96] = FieldAdd(t, f[98])
 		x := uint64(3958618) * uint64(f[98]-t+q)
-		f[98] = FieldMontgomeryReduce(x)
+		f[98] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[97]
 		f[97] = FieldAdd(t, f[99])
 		x := uint64(3958618) * uint64(f[99]-t+q)
-		f[99] = FieldMontgomeryReduce(x)
+		f[99] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[100]
 		f[100] = FieldAdd(t, f[102])
 		x := uint64(904516) * uint64(f[102]-t+q)
-		f[102] = FieldMontgomeryReduce(x)
+		f[102] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[101]
 		f[101] = FieldAdd(t, f[103])
 		x := uint64(904516) * uint64(f[103]-t+q)
-		f[103] = FieldMontgomeryReduce(x)
+		f[103] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[104]
 		f[104] = FieldAdd(t, f[106])
 		x := uint64(7280319) * uint64(f[106]-t+q)
-		f[106] = FieldMontgomeryReduce(x)
+		f[106] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[105]
 		f[105] = FieldAdd(t, f[107])
 		x := uint64(7280319) * uint64(f[107]-t+q)
-		f[107] = FieldMontgomeryReduce(x)
+		f[107] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[108]
 		f[108] = FieldAdd(t, f[110])
 		x := uint64(44288) * uint64(f[110]-t+q)
-		f[110] = FieldMontgomeryReduce(x)
+		f[110] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[109]
 		f[109] = FieldAdd(t, f[111])
 		x := uint64(44288) * uint64(f[111]-t+q)
-		f[111] = FieldMontgomeryReduce(x)
+		f[111] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[112]
 		f[112] = FieldAdd(t, f[114])
 		x := uint64(3097992) * uint64(f[114]-t+q)
-		f[114] = FieldMontgomeryReduce(x)
+		f[114] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[113]
 		f[113] = FieldAdd(t, f[115])
 		x := uint64(3097992) * uint64(f[115]-t+q)
-		f[115] = FieldMontgomeryReduce(x)
+		f[115] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[116]
 		f[116] = FieldAdd(t, f[118])
 		x := uint64(508951) * uint64(f[118]-t+q)
-		f[118] = FieldMontgomeryReduce(x)
+		f[118] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[117]
 		f[117] = FieldAdd(t, f[119])
 		x := uint64(508951) * uint64(f[119]-t+q)
-		f[119] = FieldMontgomeryReduce(x)
+		f[119] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[120]
 		f[120] = FieldAdd(t, f[122])
 		x := uint64(264944) * uint64(f[122]-t+q)
-		f[122] = FieldMontgomeryReduce(x)
+		f[122] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[121]
 		f[121] = FieldAdd(t, f[123])
 		x := uint64(264944) * uint64(f[123]-t+q)
-		f[123] = FieldMontgomeryReduce(x)
+		f[123] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[124]
 		f[124] = FieldAdd(t, f[126])
 		x := uint64(5037034) * uint64(f[126]-t+q)
-		f[126] = FieldMontgomeryReduce(x)
+		f[126] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[125]
 		f[125] = FieldAdd(t, f[127])
 		x := uint64(5037034) * uint64(f[127]-t+q)
-		f[127] = FieldMontgomeryReduce(x)
+		f[127] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[128]
 		f[128] = FieldAdd(t, f[130])
 		x := uint64(6949987) * uint64(f[130]-t+q)
-		f[130] = FieldMontgomeryReduce(x)
+		f[130] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[129]
 		f[129] = FieldAdd(t, f[131])
 		x := uint64(6949987) * uint64(f[131]-t+q)
-		f[131] = FieldMontgomeryReduce(x)
+		f[131] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[132]
 		f[132] = FieldAdd(t, f[134])
 		x := uint64(1852771) * uint64(f[134]-t+q)
-		f[134] = FieldMontgomeryReduce(x)
+		f[134] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[133]
 		f[133] = FieldAdd(t, f[135])
 		x := uint64(1852771) * uint64(f[135]-t+q)
-		f[135] = FieldMontgomeryReduce(x)
+		f[135] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[136]
 		f[136] = FieldAdd(t, f[138])
 		x := uint64(1349076) * uint64(f[138]-t+q)
-		f[138] = FieldMontgomeryReduce(x)
+		f[138] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[137]
 		f[137] = FieldAdd(t, f[139])
 		x := uint64(1349076) * uint64(f[139]-t+q)
-		f[139] = FieldMontgomeryReduce(x)
+		f[139] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[140]
 		f[140] = FieldAdd(t, f[142])
 		x := uint64(7998430) * uint64(f[142]-t+q)
-		f[142] = FieldMontgomeryReduce(x)
+		f[142] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[141]
 		f[141] = FieldAdd(t, f[143])
 		x := uint64(7998430) * uint64(f[143]-t+q)
-		f[143] = FieldMontgomeryReduce(x)
+		f[143] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[144]
 		f[144] = FieldAdd(t, f[146])
 		x := uint64(7072248) * uint64(f[146]-t+q)
-		f[146] = FieldMontgomeryReduce(x)
+		f[146] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[145]
 		f[145] = FieldAdd(t, f[147])
 		x := uint64(7072248) * uint64(f[147]-t+q)
-		f[147] = FieldMontgomeryReduce(x)
+		f[147] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[148]
 		f[148] = FieldAdd(t, f[150])
 		x := uint64(8357436) * uint64(f[150]-t+q)
-		f[150] = FieldMontgomeryReduce(x)
+		f[150] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[149]
 		f[149] = FieldAdd(t, f[151])
 		x := uint64(8357436) * uint64(f[151]-t+q)
-		f[151] = FieldMontgomeryReduce(x)
+		f[151] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[152]
 		f[152] = FieldAdd(t, f[154])
 		x := uint64(7151892) * uint64(f[154]-t+q)
-		f[154] = FieldMontgomeryReduce(x)
+		f[154] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[153]
 		f[153] = FieldAdd(t, f[155])
 		x := uint64(7151892) * uint64(f[155]-t+q)
-		f[155] = FieldMontgomeryReduce(x)
+		f[155] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[156]
 		f[156] = FieldAdd(t, f[158])
 		x := uint64(7709315) * uint64(f[158]-t+q)
-		f[158] = FieldMontgomeryReduce(x)
+		f[158] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[157]
 		f[157] = FieldAdd(t, f[159])
 		x := uint64(7709315) * uint64(f[159]-t+q)
-		f[159] = FieldMontgomeryReduce(x)
+		f[159] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[160]
 		f[160] = FieldAdd(t, f[162])
 		x := uint64(5903370) * uint64(f[162]-t+q)
-		f[162] = FieldMontgomeryReduce(x)
+		f[162] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[161]
 		f[161] = FieldAdd(t, f[163])
 		x := uint64(5903370) * uint64(f[163]-t+q)
-		f[163] = FieldMontgomeryReduce(x)
+		f[163] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[164]
 		f[164] = FieldAdd(t, f[166])
 		x := uint64(7969390) * uint64(f[166]-t+q)
-		f[166] = FieldMontgomeryReduce(x)
+		f[166] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[165]
 		f[165] = FieldAdd(t, f[167])
 		x := uint64(7969390) * uint64(f[167]-t+q)
-		f[167] = FieldMontgomeryReduce(x)
+		f[167] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[168]
 		f[168] = FieldAdd(t, f[170])
 		x := uint64(4686924) * uint64(f[170]-t+q)
-		f[170] = FieldMontgomeryReduce(x)
+		f[170] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[169]
 		f[169] = FieldAdd(t, f[171])
 		x := uint64(4686924) * uint64(f[171]-t+q)
-		f[171] = FieldMontgomeryReduce(x)
+		f[171] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[172]
 		f[172] = FieldAdd(t, f[174])
 		x := uint64(5412772) * uint64(f[174]-t+q)
-		f[174] = FieldMontgomeryReduce(x)
+		f[174] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[173]
 		f[173] = FieldAdd(t, f[175])
 		x := uint64(5412772) * uint64(f[175]-t+q)
-		f[175] = FieldMontgomeryReduce(x)
+		f[175] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[176]
 		f[176] = FieldAdd(t, f[178])
 		x := uint64(2715295) * uint64(f[178]-t+q)
-		f[178] = FieldMontgomeryReduce(x)
+		f[178] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[177]
 		f[177] = FieldAdd(t, f[179])
 		x := uint64(2715295) * uint64(f[179]-t+q)
-		f[179] = FieldMontgomeryReduce(x)
+		f[179] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[180]
 		f[180] = FieldAdd(t, f[182])
 		x := uint64(2147896) * uint64(f[182]-t+q)
-		f[182] = FieldMontgomeryReduce(x)
+		f[182] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[181]
 		f[181] = FieldAdd(t, f[183])
 		x := uint64(2147896) * uint64(f[183]-t+q)
-		f[183] = FieldMontgomeryReduce(x)
+		f[183] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[184]
 		f[184] = FieldAdd(t, f[186])
 		x := uint64(7396998) * uint64(f[186]-t+q)
-		f[186] = FieldMontgomeryReduce(x)
+		f[186] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[185]
 		f[185] = FieldAdd(t, f[187])
 		x := uint64(7396998) * uint64(f[187]-t+q)
-		f[187] = FieldMontgomeryReduce(x)
+		f[187] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[188]
 		f[188] = FieldAdd(t, f[190])
 		x := uint64(3412210) * uint64(f[190]-t+q)
-		f[190] = FieldMontgomeryReduce(x)
+		f[190] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[189]
 		f[189] = FieldAdd(t, f[191])
 		x := uint64(3412210) * uint64(f[191]-t+q)
-		f[191] = FieldMontgomeryReduce(x)
+		f[191] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[192]
 		f[192] = FieldAdd(t, f[194])
 		x := uint64(126922) * uint64(f[194]-t+q)
-		f[194] = FieldMontgomeryReduce(x)
+		f[194] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[193]
 		f[193] = FieldAdd(t, f[195])
 		x := uint64(126922) * uint64(f[195]-t+q)
-		f[195] = FieldMontgomeryReduce(x)
+		f[195] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[196]
 		f[196] = FieldAdd(t, f[198])
 		x := uint64(4747489) * uint64(f[198]-t+q)
-		f[198] = FieldMontgomeryReduce(x)
+		f[198] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[197]
 		f[197] = FieldAdd(t, f[199])
 		x := uint64(4747489) * uint64(f[199]-t+q)
-		f[199] = FieldMontgomeryReduce(x)
+		f[199] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[200]
 		f[200] = FieldAdd(t, f[202])
 		x := uint64(5223087) * uint64(f[202]-t+q)
-		f[202] = FieldMontgomeryReduce(x)
+		f[202] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[201]
 		f[201] = FieldAdd(t, f[203])
 		x := uint64(5223087) * uint64(f[203]-t+q)
-		f[203] = FieldMontgomeryReduce(x)
+		f[203] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[204]
 		f[204] = FieldAdd(t, f[206])
 		x := uint64(5190273) * uint64(f[206]-t+q)
-		f[206] = FieldMontgomeryReduce(x)
+		f[206] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[205]
 		f[205] = FieldAdd(t, f[207])
 		x := uint64(5190273) * uint64(f[207]-t+q)
-		f[207] = FieldMontgomeryReduce(x)
+		f[207] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[208]
 		f[208] = FieldAdd(t, f[210])
 		x := uint64(7380215) * uint64(f[210]-t+q)
-		f[210] = FieldMontgomeryReduce(x)
+		f[210] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[209]
 		f[209] = FieldAdd(t, f[211])
 		x := uint64(7380215) * uint64(f[211]-t+q)
-		f[211] = FieldMontgomeryReduce(x)
+		f[211] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[212]
 		f[212] = FieldAdd(t, f[214])
 		x := uint64(4296819) * uint64(f[214]-t+q)
-		f[214] = FieldMontgomeryReduce(x)
+		f[214] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[213]
 		f[213] = FieldAdd(t, f[215])
 		x := uint64(4296819) * uint64(f[215]-t+q)
-		f[215] = FieldMontgomeryReduce(x)
+		f[215] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[216]
 		f[216] = FieldAdd(t, f[218])
 		x := uint64(1939314) * uint64(f[218]-t+q)
-		f[218] = FieldMontgomeryReduce(x)
+		f[218] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[217]
 		f[217] = FieldAdd(t, f[219])
 		x := uint64(1939314) * uint64(f[219]-t+q)
-		f[219] = FieldMontgomeryReduce(x)
+		f[219] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[220]
 		f[220] = FieldAdd(t, f[222])
 		x := uint64(7122806) * uint64(f[222]-t+q)
-		f[222] = FieldMontgomeryReduce(x)
+		f[222] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[221]
 		f[221] = FieldAdd(t, f[223])
 		x := uint64(7122806) * uint64(f[223]-t+q)
-		f[223] = FieldMontgomeryReduce(x)
+		f[223] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[224]
 		f[224] = FieldAdd(t, f[226])
 		x := uint64(6795196) * uint64(f[226]-t+q)
-		f[226] = FieldMontgomeryReduce(x)
+		f[226] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[225]
 		f[225] = FieldAdd(t, f[227])
 		x := uint64(6795196) * uint64(f[227]-t+q)
-		f[227] = FieldMontgomeryReduce(x)
+		f[227] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[228]
 		f[228] = FieldAdd(t, f[230])
 		x := uint64(2176455) * uint64(f[230]-t+q)
-		f[230] = FieldMontgomeryReduce(x)
+		f[230] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[229]
 		f[229] = FieldAdd(t, f[231])
 		x := uint64(2176455) * uint64(f[231]-t+q)
-		f[231] = FieldMontgomeryReduce(x)
+		f[231] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[232]
 		f[232] = FieldAdd(t, f[234])
 		x := uint64(3475950) * uint64(f[234]-t+q)
-		f[234] = FieldMontgomeryReduce(x)
+		f[234] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[233]
 		f[233] = FieldAdd(t, f[235])
 		x := uint64(3475950) * uint64(f[235]-t+q)
-		f[235] = FieldMontgomeryReduce(x)
+		f[235] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[236]
 		f[236] = FieldAdd(t, f[238])
 		x := uint64(6927966) * uint64(f[238]-t+q)
-		f[238] = FieldMontgomeryReduce(x)
+		f[238] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[237]
 		f[237] = FieldAdd(t, f[239])
 		x := uint64(6927966) * uint64(f[239]-t+q)
-		f[239] = FieldMontgomeryReduce(x)
+		f[239] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[240]
 		f[240] = FieldAdd(t, f[242])
 		x := uint64(5339162) * uint64(f[242]-t+q)
-		f[242] = FieldMontgomeryReduce(x)
+		f[242] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[241]
 		f[241] = FieldAdd(t, f[243])
 		x := uint64(5339162) * uint64(f[243]-t+q)
-		f[243] = FieldMontgomeryReduce(x)
+		f[243] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[244]
 		f[244] = FieldAdd(t, f[246])
 		x := uint64(4702672) * uint64(f[246]-t+q)
-		f[246] = FieldMontgomeryReduce(x)
+		f[246] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[245]
 		f[245] = FieldAdd(t, f[247])
 		x := uint64(4702672) * uint64(f[247]-t+q)
-		f[247] = FieldMontgomeryReduce(x)
+		f[247] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[248]
 		f[248] = FieldAdd(t, f[250])
 		x := uint64(6851714) * uint64(f[250]-t+q)
-		f[250] = FieldMontgomeryReduce(x)
+		f[250] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[249]
 		f[249] = FieldAdd(t, f[251])
 		x := uint64(6851714) * uint64(f[251]-t+q)
-		f[251] = FieldMontgomeryReduce(x)
+		f[251] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[252]
 		f[252] = FieldAdd(t, f[254])
 		x := uint64(4450022) * uint64(f[254]-t+q)
-		f[254] = FieldMontgomeryReduce(x)
+		f[254] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[253]
 		f[253] = FieldAdd(t, f[255])
 		x := uint64(4450022) * uint64(f[255]-t+q)
-		f[255] = FieldMontgomeryReduce(x)
+		f[255] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[0]
 		f[0] = FieldAdd(t, f[4])
 		x := uint64(5582638) * uint64(f[4]-t+q)
-		f[4] = FieldMontgomeryReduce(x)
+		f[4] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[1]
 		f[1] = FieldAdd(t, f[5])
 		x := uint64(5582638) * uint64(f[5]-t+q)
-		f[5] = FieldMontgomeryReduce(x)
+		f[5] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[2]
 		f[2] = FieldAdd(t, f[6])
 		x := uint64(5582638) * uint64(f[6]-t+q)
-		f[6] = FieldMontgomeryReduce(x)
+		f[6] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[3]
 		f[3] = FieldAdd(t, f[7])
 		x := uint64(5582638) * uint64(f[7]-t+q)
-		f[7] = FieldMontgomeryReduce(x)
+		f[7] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[8]
 		f[8] = FieldAdd(t, f[12])
 		x := uint64(2071892) * uint64(f[12]-t+q)
-		f[12] = FieldMontgomeryReduce(x)
+		f[12] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[9]
 		f[9] = FieldAdd(t, f[13])
 		x := uint64(2071892) * uint64(f[13]-t+q)
-		f[13] = FieldMontgomeryReduce(x)
+		f[13] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[10]
 		f[10] = FieldAdd(t, f[14])
 		x := uint64(2071892) * uint64(f[14]-t+q)
-		f[14] = FieldMontgomeryReduce(x)
+		f[14] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[11]
 		f[11] = FieldAdd(t, f[15])
 		x := uint64(2071892) * uint64(f[15]-t+q)
-		f[15] = FieldMontgomeryReduce(x)
+		f[15] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[16]
 		f[16] = FieldAdd(t, f[20])
 		x := uint64(5823537) * uint64(f[20]-t+q)
-		f[20] = FieldMontgomeryReduce(x)
+		f[20] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[17]
 		f[17] = FieldAdd(t, f[21])
 		x := uint64(5823537) * uint64(f[21]-t+q)
-		f[21] = FieldMontgomeryReduce(x)
+		f[21] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[18]
 		f[18] = FieldAdd(t, f[22])
 		x := uint64(5823537) * uint64(f[22]-t+q)
-		f[22] = FieldMontgomeryReduce(x)
+		f[22] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[19]
 		f[19] = FieldAdd(t, f[23])
 		x := uint64(5823537) * uint64(f[23]-t+q)
-		f[23] = FieldMontgomeryReduce(x)
+		f[23] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[24]
 		f[24] = FieldAdd(t, f[28])
 		x := uint64(3900724) * uint64(f[28]-t+q)
-		f[28] = FieldMontgomeryReduce(x)
+		f[28] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[25]
 		f[25] = FieldAdd(t, f[29])
 		x := uint64(3900724) * uint64(f[29]-t+q)
-		f[29] = FieldMontgomeryReduce(x)
+		f[29] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[26]
 		f[26] = FieldAdd(t, f[30])
 		x := uint64(3900724) * uint64(f[30]-t+q)
-		f[30] = FieldMontgomeryReduce(x)
+		f[30] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[27]
 		f[27] = FieldAdd(t, f[31])
 		x := uint64(3900724) * uint64(f[31]-t+q)
-		f[31] = FieldMontgomeryReduce(x)
+		f[31] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[32]
 		f[32] = FieldAdd(t, f[36])
 		x := uint64(3881043) * uint64(f[36]-t+q)
-		f[36] = FieldMontgomeryReduce(x)
+		f[36] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[33]
 		f[33] = FieldAdd(t, f[37])
 		x := uint64(3881043) * uint64(f[37]-t+q)
-		f[37] = FieldMontgomeryReduce(x)
+		f[37] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[34]
 		f[34] = FieldAdd(t, f[38])
 		x := uint64(3881043) * uint64(f[38]-t+q)
-		f[38] = FieldMontgomeryReduce(x)
+		f[38] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[35]
 		f[35] = FieldAdd(t, f[39])
 		x := uint64(3881043) * uint64(f[39]-t+q)
-		f[39] = FieldMontgomeryReduce(x)
+		f[39] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[40]
 		f[40] = FieldAdd(t, f[44])
 		x := uint64(954230) * uint64(f[44]-t+q)
-		f[44] = FieldMontgomeryReduce(x)
+		f[44] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[41]
 		f[41] = FieldAdd(t, f[45])
 		x := uint64(954230) * uint64(f[45]-t+q)
-		f[45] = FieldMontgomeryReduce(x)
+		f[45] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[42]
 		f[42] = FieldAdd(t, f[46])
 		x := uint64(954230) * uint64(f[46]-t+q)
-		f[46] = FieldMontgomeryReduce(x)
+		f[46] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[43]
 		f[43] = FieldAdd(t, f[47])
 		x := uint64(954230) * uint64(f[47]-t+q)
-		f[47] = FieldMontgomeryReduce(x)
+		f[47] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[48]
 		f[48] = FieldAdd(t, f[52])
 		x := uint64(531354) * uint64(f[52]-t+q)
-		f[52] = FieldMontgomeryReduce(x)
+		f[52] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[49]
 		f[49] = FieldAdd(t, f[53])
 		x := uint64(531354) * uint64(f[53]-t+q)
-		f[53] = FieldMontgomeryReduce(x)
+		f[53] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[50]
 		f[50] = FieldAdd(t, f[54])
 		x := uint64(531354) * uint64(f[54]-t+q)
-		f[54] = FieldMontgomeryReduce(x)
+		f[54] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[51]
 		f[51] = FieldAdd(t, f[55])
 		x := uint64(531354) * uint64(f[55]-t+q)
-		f[55] = FieldMontgomeryReduce(x)
+		f[55] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[56]
 		f[56] = FieldAdd(t, f[60])
 		x := uint64(811944) * uint64(f[60]-t+q)
-		f[60] = FieldMontgomeryReduce(x)
+		f[60] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[57]
 		f[57] = FieldAdd(t, f[61])
 		x := uint64(811944) * uint64(f[61]-t+q)
-		f[61] = FieldMontgomeryReduce(x)
+		f[61] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[58]
 		f[58] = FieldAdd(t, f[62])
 		x := uint64(811944) * uint64(f[62]-t+q)
-		f[62] = FieldMontgomeryReduce(x)
+		f[62] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[59]
 		f[59] = FieldAdd(t, f[63])
 		x := uint64(811944) * uint64(f[63]-t+q)
-		f[63] = FieldMontgomeryReduce(x)
+		f[63] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[64]
 		f[64] = FieldAdd(t, f[68])
 		x := uint64(3699596) * uint64(f[68]-t+q)
-		f[68] = FieldMontgomeryReduce(x)
+		f[68] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[65]
 		f[65] = FieldAdd(t, f[69])
 		x := uint64(3699596) * uint64(f[69]-t+q)
-		f[69] = FieldMontgomeryReduce(x)
+		f[69] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[66]
 		f[66] = FieldAdd(t, f[70])
 		x := uint64(3699596) * uint64(f[70]-t+q)
-		f[70] = FieldMontgomeryReduce(x)
+		f[70] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[67]
 		f[67] = FieldAdd(t, f[71])
 		x := uint64(3699596) * uint64(f[71]-t+q)
-		f[71] = FieldMontgomeryReduce(x)
+		f[71] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[72]
 		f[72] = FieldAdd(t, f[76])
 		x := uint64(6779997) * uint64(f[76]-t+q)
-		f[76] = FieldMontgomeryReduce(x)
+		f[76] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[73]
 		f[73] = FieldAdd(t, f[77])
 		x := uint64(6779997) * uint64(f[77]-t+q)
-		f[77] = FieldMontgomeryReduce(x)
+		f[77] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[74]
 		f[74] = FieldAdd(t, f[78])
 		x := uint64(6779997) * uint64(f[78]-t+q)
-		f[78] = FieldMontgomeryReduce(x)
+		f[78] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[75]
 		f[75] = FieldAdd(t, f[79])
 		x := uint64(6779997) * uint64(f[79]-t+q)
-		f[79] = FieldMontgomeryReduce(x)
+		f[79] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[80]
 		f[80] = FieldAdd(t, f[84])
 		x := uint64(6239768) * uint64(f[84]-t+q)
-		f[84] = FieldMontgomeryReduce(x)
+		f[84] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[81]
 		f[81] = FieldAdd(t, f[85])
 		x := uint64(6239768) * uint64(f[85]-t+q)
-		f[85] = FieldMontgomeryReduce(x)
+		f[85] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[82]
 		f[82] = FieldAdd(t, f[86])
 		x := uint64(6239768) * uint64(f[86]-t+q)
-		f[86] = FieldMontgomeryReduce(x)
+		f[86] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[83]
 		f[83] = FieldAdd(t, f[87])
 		x := uint64(6239768) * uint64(f[87]-t+q)
-		f[87] = FieldMontgomeryReduce(x)
+		f[87] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[88]
 		f[88] = FieldAdd(t, f[92])
 		x := uint64(3507263) * uint64(f[92]-t+q)
-		f[92] = FieldMontgomeryReduce(x)
+		f[92] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[89]
 		f[89] = FieldAdd(t, f[93])
 		x := uint64(3507263) * uint64(f[93]-t+q)
-		f[93] = FieldMontgomeryReduce(x)
+		f[93] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[90]
 		f[90] = FieldAdd(t, f[94])
 		x := uint64(3507263) * uint64(f[94]-t+q)
-		f[94] = FieldMontgomeryReduce(x)
+		f[94] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[91]
 		f[91] = FieldAdd(t, f[95])
 		x := uint64(3507263) * uint64(f[95]-t+q)
-		f[95] = FieldMontgomeryReduce(x)
+		f[95] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[96]
 		f[96] = FieldAdd(t, f[100])
 		x := uint64(4558682) * uint64(f[100]-t+q)
-		f[100] = FieldMontgomeryReduce(x)
+		f[100] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[97]
 		f[97] = FieldAdd(t, f[101])
 		x := uint64(4558682) * uint64(f[101]-t+q)
-		f[101] = FieldMontgomeryReduce(x)
+		f[101] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[98]
 		f[98] = FieldAdd(t, f[102])
 		x := uint64(4558682) * uint64(f[102]-t+q)
-		f[102] = FieldMontgomeryReduce(x)
+		f[102] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[99]
 		f[99] = FieldAdd(t, f[103])
 		x := uint64(4558682) * uint64(f[103]-t+q)
-		f[103] = FieldMontgomeryReduce(x)
+		f[103] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[104]
 		f[104] = FieldAdd(t, f[108])
 		x := uint64(3505694) * uint64(f[108]-t+q)
-		f[108] = FieldMontgomeryReduce(x)
+		f[108] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[105]
 		f[105] = FieldAdd(t, f[109])
 		x := uint64(3505694) * uint64(f[109]-t+q)
-		f[109] = FieldMontgomeryReduce(x)
+		f[109] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[106]
 		f[106] = FieldAdd(t, f[110])
 		x := uint64(3505694) * uint64(f[110]-t+q)
-		f[110] = FieldMontgomeryReduce(x)
+		f[110] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[107]
 		f[107] = FieldAdd(t, f[111])
 		x := uint64(3505694) * uint64(f[111]-t+q)
-		f[111] = FieldMontgomeryReduce(x)
+		f[111] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[112]
 		f[112] = FieldAdd(t, f[116])
 		x := uint64(6736599) * uint64(f[116]-t+q)
-		f[116] = FieldMontgomeryReduce(x)
+		f[116] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[113]
 		f[113] = FieldAdd(t, f[117])
 		x := uint64(6736599) * uint64(f[117]-t+q)
-		f[117] = FieldMontgomeryReduce(x)
+		f[117] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[114]
 		f[114] = FieldAdd(t, f[118])
 		x := uint64(6736599) * uint64(f[118]-t+q)
-		f[118] = FieldMontgomeryReduce(x)
+		f[118] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[115]
 		f[115] = FieldAdd(t, f[119])
 		x := uint64(6736599) * uint64(f[119]-t+q)
-		f[119] = FieldMontgomeryReduce(x)
+		f[119] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[120]
 		f[120] = FieldAdd(t, f[124])
 		x := uint64(6681150) * uint64(f[124]-t+q)
-		f[124] = FieldMontgomeryReduce(x)
+		f[124] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[121]
 		f[121] = FieldAdd(t, f[125])
 		x := uint64(6681150) * uint64(f[125]-t+q)
-		f[125] = FieldMontgomeryReduce(x)
+		f[125] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[122]
 		f[122] = FieldAdd(t, f[126])
 		x := uint64(6681150) * uint64(f[126]-t+q)
-		f[126] = FieldMontgomeryReduce(x)
+		f[126] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[123]
 		f[123] = FieldAdd(t, f[127])
 		x := uint64(6681150) * uint64(f[127]-t+q)
-		f[127] = FieldMontgomeryReduce(x)
+		f[127] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[128]
 		f[128] = FieldAdd(t, f[132])
 		x := uint64(7841118) * uint64(f[132]-t+q)
-		f[132] = FieldMontgomeryReduce(x)
+		f[132] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[129]
 		f[129] = FieldAdd(t, f[133])
 		x := uint64(7841118) * uint64(f[133]-t+q)
-		f[133] = FieldMontgomeryReduce(x)
+		f[133] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[130]
 		f[130] = FieldAdd(t, f[134])
 		x := uint64(7841118) * uint64(f[134]-t+q)
-		f[134] = FieldMontgomeryReduce(x)
+		f[134] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[131]
 		f[131] = FieldAdd(t, f[135])
 		x := uint64(7841118) * uint64(f[135]-t+q)
-		f[135] = FieldMontgomeryReduce(x)
+		f[135] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[136]
 		f[136] = FieldAdd(t, f[140])
 		x := uint64(2348700) * uint64(f[140]-t+q)
-		f[140] = FieldMontgomeryReduce(x)
+		f[140] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[137]
 		f[137] = FieldAdd(t, f[141])
 		x := uint64(2348700) * uint64(f[141]-t+q)
-		f[141] = FieldMontgomeryReduce(x)
+		f[141] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[138]
 		f[138] = FieldAdd(t, f[142])
 		x := uint64(2348700) * uint64(f[142]-t+q)
-		f[142] = FieldMontgomeryReduce(x)
+		f[142] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[139]
 		f[139] = FieldAdd(t, f[143])
 		x := uint64(2348700) * uint64(f[143]-t+q)
-		f[143] = FieldMontgomeryReduce(x)
+		f[143] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[144]
 		f[144] = FieldAdd(t, f[148])
 		x := uint64(8079950) * uint64(f[148]-t+q)
-		f[148] = FieldMontgomeryReduce(x)
+		f[148] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[145]
 		f[145] = FieldAdd(t, f[149])
 		x := uint64(8079950) * uint64(f[149]-t+q)
-		f[149] = FieldMontgomeryReduce(x)
+		f[149] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[146]
 		f[146] = FieldAdd(t, f[150])
 		x := uint64(8079950) * uint64(f[150]-t+q)
-		f[150] = FieldMontgomeryReduce(x)
+		f[150] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[147]
 		f[147] = FieldAdd(t, f[151])
 		x := uint64(8079950) * uint64(f[151]-t+q)
-		f[151] = FieldMontgomeryReduce(x)
+		f[151] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[152]
 		f[152] = FieldAdd(t, f[156])
 		x := uint64(3539968) * uint64(f[156]-t+q)
-		f[156] = FieldMontgomeryReduce(x)
+		f[156] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[153]
 		f[153] = FieldAdd(t, f[157])
 		x := uint64(3539968) * uint64(f[157]-t+q)
-		f[157] = FieldMontgomeryReduce(x)
+		f[157] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[154]
 		f[154] = FieldAdd(t, f[158])
 		x := uint64(3539968) * uint64(f[158]-t+q)
-		f[158] = FieldMontgomeryReduce(x)
+		f[158] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[155]
 		f[155] = FieldAdd(t, f[159])
 		x := uint64(3539968) * uint64(f[159]-t+q)
-		f[159] = FieldMontgomeryReduce(x)
+		f[159] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[160]
 		f[160] = FieldAdd(t, f[164])
 		x := uint64(5512770) * uint64(f[164]-t+q)
-		f[164] = FieldMontgomeryReduce(x)
+		f[164] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[161]
 		f[161] = FieldAdd(t, f[165])
 		x := uint64(5512770) * uint64(f[165]-t+q)
-		f[165] = FieldMontgomeryReduce(x)
+		f[165] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[162]
 		f[162] = FieldAdd(t, f[166])
 		x := uint64(5512770) * uint64(f[166]-t+q)
-		f[166] = FieldMontgomeryReduce(x)
+		f[166] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[163]
 		f[163] = FieldAdd(t, f[167])
 		x := uint64(5512770) * uint64(f[167]-t+q)
-		f[167] = FieldMontgomeryReduce(x)
+		f[167] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[168]
 		f[168] = FieldAdd(t, f[172])
 		x := uint64(3574422) * uint64(f[172]-t+q)
-		f[172] = FieldMontgomeryReduce(x)
+		f[172] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[169]
 		f[169] = FieldAdd(t, f[173])
 		x := uint64(3574422) * uint64(f[173]-t+q)
-		f[173] = FieldMontgomeryReduce(x)
+		f[173] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[170]
 		f[170] = FieldAdd(t, f[174])
 		x := uint64(3574422) * uint64(f[174]-t+q)
-		f[174] = FieldMontgomeryReduce(x)
+		f[174] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[171]
 		f[171] = FieldAdd(t, f[175])
 		x := uint64(3574422) * uint64(f[175]-t+q)
-		f[175] = FieldMontgomeryReduce(x)
+		f[175] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[176]
 		f[176] = FieldAdd(t, f[180])
 		x := uint64(5336701) * uint64(f[180]-t+q)
-		f[180] = FieldMontgomeryReduce(x)
+		f[180] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[177]
 		f[177] = FieldAdd(t, f[181])
 		x := uint64(5336701) * uint64(f[181]-t+q)
-		f[181] = FieldMontgomeryReduce(x)
+		f[181] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[178]
 		f[178] = FieldAdd(t, f[182])
 		x := uint64(5336701) * uint64(f[182]-t+q)
-		f[182] = FieldMontgomeryReduce(x)
+		f[182] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[179]
 		f[179] = FieldAdd(t, f[183])
 		x := uint64(5336701) * uint64(f[183]-t+q)
-		f[183] = FieldMontgomeryReduce(x)
+		f[183] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[184]
 		f[184] = FieldAdd(t, f[188])
 		x := uint64(4519302) * uint64(f[188]-t+q)
-		f[188] = FieldMontgomeryReduce(x)
+		f[188] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[185]
 		f[185] = FieldAdd(t, f[189])
 		x := uint64(4519302) * uint64(f[189]-t+q)
-		f[189] = FieldMontgomeryReduce(x)
+		f[189] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[186]
 		f[186] = FieldAdd(t, f[190])
 		x := uint64(4519302) * uint64(f[190]-t+q)
-		f[190] = FieldMontgomeryReduce(x)
+		f[190] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[187]
 		f[187] = FieldAdd(t, f[191])
 		x := uint64(4519302) * uint64(f[191]-t+q)
-		f[191] = FieldMontgomeryReduce(x)
+		f[191] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[192]
 		f[192] = FieldAdd(t, f[196])
 		x := uint64(3915439) * uint64(f[196]-t+q)
-		f[196] = FieldMontgomeryReduce(x)
+		f[196] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[193]
 		f[193] = FieldAdd(t, f[197])
 		x := uint64(3915439) * uint64(f[197]-t+q)
-		f[197] = FieldMontgomeryReduce(x)
+		f[197] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[194]
 		f[194] = FieldAdd(t, f[198])
 		x := uint64(3915439) * uint64(f[198]-t+q)
-		f[198] = FieldMontgomeryReduce(x)
+		f[198] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[195]
 		f[195] = FieldAdd(t, f[199])
 		x := uint64(3915439) * uint64(f[199]-t+q)
-		f[199] = FieldMontgomeryReduce(x)
+		f[199] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[200]
 		f[200] = FieldAdd(t, f[204])
 		x := uint64(5842901) * uint64(f[204]-t+q)
-		f[204] = FieldMontgomeryReduce(x)
+		f[204] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[201]
 		f[201] = FieldAdd(t, f[205])
 		x := uint64(5842901) * uint64(f[205]-t+q)
-		f[205] = FieldMontgomeryReduce(x)
+		f[205] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[202]
 		f[202] = FieldAdd(t, f[206])
 		x := uint64(5842901) * uint64(f[206]-t+q)
-		f[206] = FieldMontgomeryReduce(x)
+		f[206] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[203]
 		f[203] = FieldAdd(t, f[207])
 		x := uint64(5842901) * uint64(f[207]-t+q)
-		f[207] = FieldMontgomeryReduce(x)
+		f[207] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[208]
 		f[208] = FieldAdd(t, f[212])
 		x := uint64(4788269) * uint64(f[212]-t+q)
-		f[212] = FieldMontgomeryReduce(x)
+		f[212] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[209]
 		f[209] = FieldAdd(t, f[213])
 		x := uint64(4788269) * uint64(f[213]-t+q)
-		f[213] = FieldMontgomeryReduce(x)
+		f[213] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[210]
 		f[210] = FieldAdd(t, f[214])
 		x := uint64(4788269) * uint64(f[214]-t+q)
-		f[214] = FieldMontgomeryReduce(x)
+		f[214] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[211]
 		f[211] = FieldAdd(t, f[215])
 		x := uint64(4788269) * uint64(f[215]-t+q)
-		f[215] = FieldMontgomeryReduce(x)
+		f[215] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[216]
 		f[216] = FieldAdd(t, f[220])
 		x := uint64(6718724) * uint64(f[220]-t+q)
-		f[220] = FieldMontgomeryReduce(x)
+		f[220] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[217]
 		f[217] = FieldAdd(t, f[221])
 		x := uint64(6718724) * uint64(f[221]-t+q)
-		f[221] = FieldMontgomeryReduce(x)
+		f[221] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[218]
 		f[218] = FieldAdd(t, f[222])
 		x := uint64(6718724) * uint64(f[222]-t+q)
-		f[222] = FieldMontgomeryReduce(x)
+		f[222] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[219]
 		f[219] = FieldAdd(t, f[223])
 		x := uint64(6718724) * uint64(f[223]-t+q)
-		f[223] = FieldMontgomeryReduce(x)
+		f[223] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[224]
 		f[224] = FieldAdd(t, f[228])
 		x := uint64(3530437) * uint64(f[228]-t+q)
-		f[228] = FieldMontgomeryReduce(x)
+		f[228] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[225]
 		f[225] = FieldAdd(t, f[229])
 		x := uint64(3530437) * uint64(f[229]-t+q)
-		f[229] = FieldMontgomeryReduce(x)
+		f[229] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[226]
 		f[226] = FieldAdd(t, f[230])
 		x := uint64(3530437) * uint64(f[230]-t+q)
-		f[230] = FieldMontgomeryReduce(x)
+		f[230] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[227]
 		f[227] = FieldAdd(t, f[231])
 		x := uint64(3530437) * uint64(f[231]-t+q)
-		f[231] = FieldMontgomeryReduce(x)
+		f[231] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[232]
 		f[232] = FieldAdd(t, f[236])
 		x := uint64(3077325) * uint64(f[236]-t+q)
-		f[236] = FieldMontgomeryReduce(x)
+		f[236] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[233]
 		f[233] = FieldAdd(t, f[237])
 		x := uint64(3077325) * uint64(f[237]-t+q)
-		f[237] = FieldMontgomeryReduce(x)
+		f[237] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[234]
 		f[234] = FieldAdd(t, f[238])
 		x := uint64(3077325) * uint64(f[238]-t+q)
-		f[238] = FieldMontgomeryReduce(x)
+		f[238] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[235]
 		f[235] = FieldAdd(t, f[239])
 		x := uint64(3077325) * uint64(f[239]-t+q)
-		f[239] = FieldMontgomeryReduce(x)
+		f[239] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[240]
 		f[240] = FieldAdd(t, f[244])
 		x := uint64(95776) * uint64(f[244]-t+q)
-		f[244] = FieldMontgomeryReduce(x)
+		f[244] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[241]
 		f[241] = FieldAdd(t, f[245])
 		x := uint64(95776) * uint64(f[245]-t+q)
-		f[245] = FieldMontgomeryReduce(x)
+		f[245] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[242]
 		f[242] = FieldAdd(t, f[246])
 		x := uint64(95776) * uint64(f[246]-t+q)
-		f[246] = FieldMontgomeryReduce(x)
+		f[246] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[243]
 		f[243] = FieldAdd(t, f[247])
 		x := uint64(95776) * uint64(f[247]-t+q)
-		f[247] = FieldMontgomeryReduce(x)
+		f[247] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[248]
 		f[248] = FieldAdd(t, f[252])
 		x := uint64(2706023) * uint64(f[252]-t+q)
-		f[252] = FieldMontgomeryReduce(x)
+		f[252] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[249]
 		f[249] = FieldAdd(t, f[253])
 		x := uint64(2706023) * uint64(f[253]-t+q)
-		f[253] = FieldMontgomeryReduce(x)
+		f[253] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[250]
 		f[250] = FieldAdd(t, f[254])
 		x := uint64(2706023) * uint64(f[254]-t+q)
-		f[254] = FieldMontgomeryReduce(x)
+		f[254] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[251]
 		f[251] = FieldAdd(t, f[255])
 		x := uint64(2706023) * uint64(f[255]-t+q)
-		f[255] = FieldMontgomeryReduce(x)
+		f[255] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[0]
 		f[0] = FieldAdd(t, f[8])
 		x := uint64(280005) * uint64(f[8]-t+q)
-		f[8] = FieldMontgomeryReduce(x)
+		f[8] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[1]
 		f[1] = FieldAdd(t, f[9])
 		x := uint64(280005) * uint64(f[9]-t+q)
-		f[9] = FieldMontgomeryReduce(x)
+		f[9] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[2]
 		f[2] = FieldAdd(t, f[10])
 		x := uint64(280005) * uint64(f[10]-t+q)
-		f[10] = FieldMontgomeryReduce(x)
+		f[10] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[3]
 		f[3] = FieldAdd(t, f[11])
 		x := uint64(280005) * uint64(f[11]-t+q)
-		f[11] = FieldMontgomeryReduce(x)
+		f[11] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[4]
 		f[4] = FieldAdd(t, f[12])
 		x := uint64(280005) * uint64(f[12]-t+q)
-		f[12] = FieldMontgomeryReduce(x)
+		f[12] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[5]
 		f[5] = FieldAdd(t, f[13])
 		x := uint64(280005) * uint64(f[13]-t+q)
-		f[13] = FieldMontgomeryReduce(x)
+		f[13] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[6]
 		f[6] = FieldAdd(t, f[14])
 		x := uint64(280005) * uint64(f[14]-t+q)
-		f[14] = FieldMontgomeryReduce(x)
+		f[14] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[7]
 		f[7] = FieldAdd(t, f[15])
 		x := uint64(280005) * uint64(f[15]-t+q)
-		f[15] = FieldMontgomeryReduce(x)
+		f[15] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[16]
 		f[16] = FieldAdd(t, f[24])
 		x := uint64(4010497) * uint64(f[24]-t+q)
-		f[24] = FieldMontgomeryReduce(x)
+		f[24] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[17]
 		f[17] = FieldAdd(t, f[25])
 		x := uint64(4010497) * uint64(f[25]-t+q)
-		f[25] = FieldMontgomeryReduce(x)
+		f[25] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[18]
 		f[18] = FieldAdd(t, f[26])
 		x := uint64(4010497) * uint64(f[26]-t+q)
-		f[26] = FieldMontgomeryReduce(x)
+		f[26] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[19]
 		f[19] = FieldAdd(t, f[27])
 		x := uint64(4010497) * uint64(f[27]-t+q)
-		f[27] = FieldMontgomeryReduce(x)
+		f[27] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[20]
 		f[20] = FieldAdd(t, f[28])
 		x := uint64(4010497) * uint64(f[28]-t+q)
-		f[28] = FieldMontgomeryReduce(x)
+		f[28] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[21]
 		f[21] = FieldAdd(t, f[29])
 		x := uint64(4010497) * uint64(f[29]-t+q)
-		f[29] = FieldMontgomeryReduce(x)
+		f[29] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[22]
 		f[22] = FieldAdd(t, f[30])
 		x := uint64(4010497) * uint64(f[30]-t+q)
-		f[30] = FieldMontgomeryReduce(x)
+		f[30] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[23]
 		f[23] = FieldAdd(t, f[31])
 		x := uint64(4010497) * uint64(f[31]-t+q)
-		f[31] = FieldMontgomeryReduce(x)
+		f[31] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[32]
 		f[32] = FieldAdd(t, f[40])
 		x := uint64(8360995) * uint64(f[40]-t+q)
-		f[40] = FieldMontgomeryReduce(x)
+		f[40] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[33]
 		f[33] = FieldAdd(t, f[41])
 		x := uint64(8360995) * uint64(f[41]-t+q)
-		f[41] = FieldMontgomeryReduce(x)
+		f[41] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[34]
 		f[34] = FieldAdd(t, f[42])
 		x := uint64(8360995) * uint64(f[42]-t+q)
-		f[42] = FieldMontgomeryReduce(x)
+		f[42] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[35]
 		f[35] = FieldAdd(t, f[43])
 		x := uint64(8360995) * uint64(f[43]-t+q)
-		f[43] = FieldMontgomeryReduce(x)
+		f[43] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[36]
 		f[36] = FieldAdd(t, f[44])
 		x := uint64(8360995) * uint64(f[44]-t+q)
-		f[44] = FieldMontgomeryReduce(x)
+		f[44] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[37]
 		f[37] = FieldAdd(t, f[45])
 		x := uint64(8360995) * uint64(f[45]-t+q)
-		f[45] = FieldMontgomeryReduce(x)
+		f[45] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[38]
 		f[38] = FieldAdd(t, f[46])
 		x := uint64(8360995) * uint64(f[46]-t+q)
-		f[46] = FieldMontgomeryReduce(x)
+		f[46] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[39]
 		f[39] = FieldAdd(t, f[47])
 		x := uint64(8360995) * uint64(f[47]-t+q)
-		f[47] = FieldMontgomeryReduce(x)
+		f[47] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[48]
 		f[48] = FieldAdd(t, f[56])
 		x := uint64(1757237) * uint64(f[56]-t+q)
-		f[56] = FieldMontgomeryReduce(x)
+		f[56] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[49]
 		f[49] = FieldAdd(t, f[57])
 		x := uint64(1757237) * uint64(f[57]-t+q)
-		f[57] = FieldMontgomeryReduce(x)
+		f[57] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[50]
 		f[50] = FieldAdd(t, f[58])
 		x := uint64(1757237) * uint64(f[58]-t+q)
-		f[58] = FieldMontgomeryReduce(x)
+		f[58] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[51]
 		f[51] = FieldAdd(t, f[59])
 		x := uint64(1757237) * uint64(f[59]-t+q)
-		f[59] = FieldMontgomeryReduce(x)
+		f[59] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[52]
 		f[52] = FieldAdd(t, f[60])
 		x := uint64(1757237) * uint64(f[60]-t+q)
-		f[60] = FieldMontgomeryReduce(x)
+		f[60] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[53]
 		f[53] = FieldAdd(t, f[61])
 		x := uint64(1757237) * uint64(f[61]-t+q)
-		f[61] = FieldMontgomeryReduce(x)
+		f[61] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[54]
 		f[54] = FieldAdd(t, f[62])
 		x := uint64(1757237) * uint64(f[62]-t+q)
-		f[62] = FieldMontgomeryReduce(x)
+		f[62] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[55]
 		f[55] = FieldAdd(t, f[63])
 		x := uint64(1757237) * uint64(f[63]-t+q)
-		f[63] = FieldMontgomeryReduce(x)
+		f[63] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[64]
 		f[64] = FieldAdd(t, f[72])
 		x := uint64(5102745) * uint64(f[72]-t+q)
-		f[72] = FieldMontgomeryReduce(x)
+		f[72] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[65]
 		f[65] = FieldAdd(t, f[73])
 		x := uint64(5102745) * uint64(f[73]-t+q)
-		f[73] = FieldMontgomeryReduce(x)
+		f[73] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[66]
 		f[66] = FieldAdd(t, f[74])
 		x := uint64(5102745) * uint64(f[74]-t+q)
-		f[74] = FieldMontgomeryReduce(x)
+		f[74] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[67]
 		f[67] = FieldAdd(t, f[75])
 		x := uint64(5102745) * uint64(f[75]-t+q)
-		f[75] = FieldMontgomeryReduce(x)
+		f[75] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[68]
 		f[68] = FieldAdd(t, f[76])
 		x := uint64(5102745) * uint64(f[76]-t+q)
-		f[76] = FieldMontgomeryReduce(x)
+		f[76] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[69]
 		f[69] = FieldAdd(t, f[77])
 		x := uint64(5102745) * uint64(f[77]-t+q)
-		f[77] = FieldMontgomeryReduce(x)
+		f[77] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[70]
 		f[70] = FieldAdd(t, f[78])
 		x := uint64(5102745) * uint64(f[78]-t+q)
-		f[78] = FieldMontgomeryReduce(x)
+		f[78] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[71]
 		f[71] = FieldAdd(t, f[79])
 		x := uint64(5102745) * uint64(f[79]-t+q)
-		f[79] = FieldMontgomeryReduce(x)
+		f[79] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[80]
 		f[80] = FieldAdd(t, f[88])
 		x := uint64(6980856) * uint64(f[88]-t+q)
-		f[88] = FieldMontgomeryReduce(x)
+		f[88] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[81]
 		f[81] = FieldAdd(t, f[89])
 		x := uint64(6980856) * uint64(f[89]-t+q)
-		f[89] = FieldMontgomeryReduce(x)
+		f[89] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[82]
 		f[82] = FieldAdd(t, f[90])
 		x := uint64(6980856) * uint64(f[90]-t+q)
-		f[90] = FieldMontgomeryReduce(x)
+		f[90] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[83]
 		f[83] = FieldAdd(t, f[91])
 		x := uint64(6980856) * uint64(f[91]-t+q)
-		f[91] = FieldMontgomeryReduce(x)
+		f[91] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[84]
 		f[84] = FieldAdd(t, f[92])
 		x := uint64(6980856) * uint64(f[92]-t+q)
-		f[92] = FieldMontgomeryReduce(x)
+		f[92] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[85]
 		f[85] = FieldAdd(t, f[93])
 		x := uint64(6980856) * uint64(f[93]-t+q)
-		f[93] = FieldMontgomeryReduce(x)
+		f[93] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[86]
 		f[86] = FieldAdd(t, f[94])
 		x := uint64(6980856) * uint64(f[94]-t+q)
-		f[94] = FieldMontgomeryReduce(x)
+		f[94] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[87]
 		f[87] = FieldAdd(t, f[95])
 		x := uint64(6980856) * uint64(f[95]-t+q)
-		f[95] = FieldMontgomeryReduce(x)
+		f[95] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[96]
 		f[96] = FieldAdd(t, f[104])
 		x := uint64(4520680) * uint64(f[104]-t+q)
-		f[104] = FieldMontgomeryReduce(x)
+		f[104] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[97]
 		f[97] = FieldAdd(t, f[105])
 		x := uint64(4520680) * uint64(f[105]-t+q)
-		f[105] = FieldMontgomeryReduce(x)
+		f[105] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[98]
 		f[98] = FieldAdd(t, f[106])
 		x := uint64(4520680) * uint64(f[106]-t+q)
-		f[106] = FieldMontgomeryReduce(x)
+		f[106] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[99]
 		f[99] = FieldAdd(t, f[107])
 		x := uint64(4520680) * uint64(f[107]-t+q)
-		f[107] = FieldMontgomeryReduce(x)
+		f[107] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[100]
 		f[100] = FieldAdd(t, f[108])
 		x := uint64(4520680) * uint64(f[108]-t+q)
-		f[108] = FieldMontgomeryReduce(x)
+		f[108] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[101]
 		f[101] = FieldAdd(t, f[109])
 		x := uint64(4520680) * uint64(f[109]-t+q)
-		f[109] = FieldMontgomeryReduce(x)
+		f[109] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[102]
 		f[102] = FieldAdd(t, f[110])
 		x := uint64(4520680) * uint64(f[110]-t+q)
-		f[110] = FieldMontgomeryReduce(x)
+		f[110] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[103]
 		f[103] = FieldAdd(t, f[111])
 		x := uint64(4520680) * uint64(f[111]-t+q)
-		f[111] = FieldMontgomeryReduce(x)
+		f[111] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[112]
 		f[112] = FieldAdd(t, f[120])
 		x := uint64(6262231) * uint64(f[120]-t+q)
-		f[120] = FieldMontgomeryReduce(x)
+		f[120] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[113]
 		f[113] = FieldAdd(t, f[121])
 		x := uint64(6262231) * uint64(f[121]-t+q)
-		f[121] = FieldMontgomeryReduce(x)
+		f[121] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[114]
 		f[114] = FieldAdd(t, f[122])
 		x := uint64(6262231) * uint64(f[122]-t+q)
-		f[122] = FieldMontgomeryReduce(x)
+		f[122] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[115]
 		f[115] = FieldAdd(t, f[123])
 		x := uint64(6262231) * uint64(f[123]-t+q)
-		f[123] = FieldMontgomeryReduce(x)
+		f[123] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[116]
 		f[116] = FieldAdd(t, f[124])
 		x := uint64(6262231) * uint64(f[124]-t+q)
-		f[124] = FieldMontgomeryReduce(x)
+		f[124] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[117]
 		f[117] = FieldAdd(t, f[125])
 		x := uint64(6262231) * uint64(f[125]-t+q)
-		f[125] = FieldMontgomeryReduce(x)
+		f[125] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[118]
 		f[118] = FieldAdd(t, f[126])
 		x := uint64(6262231) * uint64(f[126]-t+q)
-		f[126] = FieldMontgomeryReduce(x)
+		f[126] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[119]
 		f[119] = FieldAdd(t, f[127])
 		x := uint64(6262231) * uint64(f[127]-t+q)
-		f[127] = FieldMontgomeryReduce(x)
+		f[127] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[128]
 		f[128] = FieldAdd(t, f[136])
 		x := uint64(6271868) * uint64(f[136]-t+q)
-		f[136] = FieldMontgomeryReduce(x)
+		f[136] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[129]
 		f[129] = FieldAdd(t, f[137])
 		x := uint64(6271868) * uint64(f[137]-t+q)
-		f[137] = FieldMontgomeryReduce(x)
+		f[137] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[130]
 		f[130] = FieldAdd(t, f[138])
 		x := uint64(6271868) * uint64(f[138]-t+q)
-		f[138] = FieldMontgomeryReduce(x)
+		f[138] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[131]
 		f[131] = FieldAdd(t, f[139])
 		x := uint64(6271868) * uint64(f[139]-t+q)
-		f[139] = FieldMontgomeryReduce(x)
+		f[139] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[132]
 		f[132] = FieldAdd(t, f[140])
 		x := uint64(6271868) * uint64(f[140]-t+q)
-		f[140] = FieldMontgomeryReduce(x)
+		f[140] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[133]
 		f[133] = FieldAdd(t, f[141])
 		x := uint64(6271868) * uint64(f[141]-t+q)
-		f[141] = FieldMontgomeryReduce(x)
+		f[141] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[134]
 		f[134] = FieldAdd(t, f[142])
 		x := uint64(6271868) * uint64(f[142]-t+q)
-		f[142] = FieldMontgomeryReduce(x)
+		f[142] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[135]
 		f[135] = FieldAdd(t, f[143])
 		x := uint64(6271868) * uint64(f[143]-t+q)
-		f[143] = FieldMontgomeryReduce(x)
+		f[143] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[144]
 		f[144] = FieldAdd(t, f[152])
 		x := uint64(2619752) * uint64(f[152]-t+q)
-		f[152] = FieldMontgomeryReduce(x)
+		f[152] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[145]
 		f[145] = FieldAdd(t, f[153])
 		x := uint64(2619752) * uint64(f[153]-t+q)
-		f[153] = FieldMontgomeryReduce(x)
+		f[153] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[146]
 		f[146] = FieldAdd(t, f[154])
 		x := uint64(2619752) * uint64(f[154]-t+q)
-		f[154] = FieldMontgomeryReduce(x)
+		f[154] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[147]
 		f[147] = FieldAdd(t, f[155])
 		x := uint64(2619752) * uint64(f[155]-t+q)
-		f[155] = FieldMontgomeryReduce(x)
+		f[155] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[148]
 		f[148] = FieldAdd(t, f[156])
 		x := uint64(2619752) * uint64(f[156]-t+q)
-		f[156] = FieldMontgomeryReduce(x)
+		f[156] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[149]
 		f[149] = FieldAdd(t, f[157])
 		x := uint64(2619752) * uint64(f[157]-t+q)
-		f[157] = FieldMontgomeryReduce(x)
+		f[157] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[150]
 		f[150] = FieldAdd(t, f[158])
 		x := uint64(2619752) * uint64(f[158]-t+q)
-		f[158] = FieldMontgomeryReduce(x)
+		f[158] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[151]
 		f[151] = FieldAdd(t, f[159])
 		x := uint64(2619752) * uint64(f[159]-t+q)
-		f[159] = FieldMontgomeryReduce(x)
+		f[159] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[160]
 		f[160] = FieldAdd(t, f[168])
 		x := uint64(7260833) * uint64(f[168]-t+q)
-		f[168] = FieldMontgomeryReduce(x)
+		f[168] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[161]
 		f[161] = FieldAdd(t, f[169])
 		x := uint64(7260833) * uint64(f[169]-t+q)
-		f[169] = FieldMontgomeryReduce(x)
+		f[169] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[162]
 		f[162] = FieldAdd(t, f[170])
 		x := uint64(7260833) * uint64(f[170]-t+q)
-		f[170] = FieldMontgomeryReduce(x)
+		f[170] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[163]
 		f[163] = FieldAdd(t, f[171])
 		x := uint64(7260833) * uint64(f[171]-t+q)
-		f[171] = FieldMontgomeryReduce(x)
+		f[171] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[164]
 		f[164] = FieldAdd(t, f[172])
 		x := uint64(7260833) * uint64(f[172]-t+q)
-		f[172] = FieldMontgomeryReduce(x)
+		f[172] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[165]
 		f[165] = FieldAdd(t, f[173])
 		x := uint64(7260833) * uint64(f[173]-t+q)
-		f[173] = FieldMontgomeryReduce(x)
+		f[173] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[166]
 		f[166] = FieldAdd(t, f[174])
 		x := uint64(7260833) * uint64(f[174]-t+q)
-		f[174] = FieldMontgomeryReduce(x)
+		f[174] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[167]
 		f[167] = FieldAdd(t, f[175])
 		x := uint64(7260833) * uint64(f[175]-t+q)
-		f[175] = FieldMontgomeryReduce(x)
+		f[175] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[176]
 		f[176] = FieldAdd(t, f[184])
 		x := uint64(7830929) * uint64(f[184]-t+q)
-		f[184] = FieldMontgomeryReduce(x)
+		f[184] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[177]
 		f[177] = FieldAdd(t, f[185])
 		x := uint64(7830929) * uint64(f[185]-t+q)
-		f[185] = FieldMontgomeryReduce(x)
+		f[185] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[178]
 		f[178] = FieldAdd(t, f[186])
 		x := uint64(7830929) * uint64(f[186]-t+q)
-		f[186] = FieldMontgomeryReduce(x)
+		f[186] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[179]
 		f[179] = FieldAdd(t, f[187])
 		x := uint64(7830929) * uint64(f[187]-t+q)
-		f[187] = FieldMontgomeryReduce(x)
+		f[187] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[180]
 		f[180] = FieldAdd(t, f[188])
 		x := uint64(7830929) * uint64(f[188]-t+q)
-		f[188] = FieldMontgomeryReduce(x)
+		f[188] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[181]
 		f[181] = FieldAdd(t, f[189])
 		x := uint64(7830929) * uint64(f[189]-t+q)
-		f[189] = FieldMontgomeryReduce(x)
+		f[189] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[182]
 		f[182] = FieldAdd(t, f[190])
 		x := uint64(7830929) * uint64(f[190]-t+q)
-		f[190] = FieldMontgomeryReduce(x)
+		f[190] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[183]
 		f[183] = FieldAdd(t, f[191])
 		x := uint64(7830929) * uint64(f[191]-t+q)
-		f[191] = FieldMontgomeryReduce(x)
+		f[191] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[192]
 		f[192] = FieldAdd(t, f[200])
 		x := uint64(3585928) * uint64(f[200]-t+q)
-		f[200] = FieldMontgomeryReduce(x)
+		f[200] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[193]
 		f[193] = FieldAdd(t, f[201])
 		x := uint64(3585928) * uint64(f[201]-t+q)
-		f[201] = FieldMontgomeryReduce(x)
+		f[201] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[194]
 		f[194] = FieldAdd(t, f[202])
 		x := uint64(3585928) * uint64(f[202]-t+q)
-		f[202] = FieldMontgomeryReduce(x)
+		f[202] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[195]
 		f[195] = FieldAdd(t, f[203])
 		x := uint64(3585928) * uint64(f[203]-t+q)
-		f[203] = FieldMontgomeryReduce(x)
+		f[203] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[196]
 		f[196] = FieldAdd(t, f[204])
 		x := uint64(3585928) * uint64(f[204]-t+q)
-		f[204] = FieldMontgomeryReduce(x)
+		f[204] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[197]
 		f[197] = FieldAdd(t, f[205])
 		x := uint64(3585928) * uint64(f[205]-t+q)
-		f[205] = FieldMontgomeryReduce(x)
+		f[205] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[198]
 		f[198] = FieldAdd(t, f[206])
 		x := uint64(3585928) * uint64(f[206]-t+q)
-		f[206] = FieldMontgomeryReduce(x)
+		f[206] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[199]
 		f[199] = FieldAdd(t, f[207])
 		x := uint64(3585928) * uint64(f[207]-t+q)
-		f[207] = FieldMontgomeryReduce(x)
+		f[207] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[208]
 		f[208] = FieldAdd(t, f[216])
 		x := uint64(7300517) * uint64(f[216]-t+q)
-		f[216] = FieldMontgomeryReduce(x)
+		f[216] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[209]
 		f[209] = FieldAdd(t, f[217])
 		x := uint64(7300517) * uint64(f[217]-t+q)
-		f[217] = FieldMontgomeryReduce(x)
+		f[217] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[210]
 		f[210] = FieldAdd(t, f[218])
 		x := uint64(7300517) * uint64(f[218]-t+q)
-		f[218] = FieldMontgomeryReduce(x)
+		f[218] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[211]
 		f[211] = FieldAdd(t, f[219])
 		x := uint64(7300517) * uint64(f[219]-t+q)
-		f[219] = FieldMontgomeryReduce(x)
+		f[219] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[212]
 		f[212] = FieldAdd(t, f[220])
 		x := uint64(7300517) * uint64(f[220]-t+q)
-		f[220] = FieldMontgomeryReduce(x)
+		f[220] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[213]
 		f[213] = FieldAdd(t, f[221])
 		x := uint64(7300517) * uint64(f[221]-t+q)
-		f[221] = FieldMontgomeryReduce(x)
+		f[221] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[214]
 		f[214] = FieldAdd(t, f[222])
 		x := uint64(7300517) * uint64(f[222]-t+q)
-		f[222] = FieldMontgomeryReduce(x)
+		f[222] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[215]
 		f[215] = FieldAdd(t, f[223])
 		x := uint64(7300517) * uint64(f[223]-t+q)
-		f[223] = FieldMontgomeryReduce(x)
+		f[223] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[224]
 		f[224] = FieldAdd(t, f[232])
 		x := uint64(1024112) * uint64(f[232]-t+q)
-		f[232] = FieldMontgomeryReduce(x)
+		f[232] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[225]
 		f[225] = FieldAdd(t, f[233])
 		x := uint64(1024112) * uint64(f[233]-t+q)
-		f[233] = FieldMontgomeryReduce(x)
+		f[233] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[226]
 		f[226] = FieldAdd(t, f[234])
 		x := uint64(1024112) * uint64(f[234]-t+q)
-		f[234] = FieldMontgomeryReduce(x)
+		f[234] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[227]
 		f[227] = FieldAdd(t, f[235])
 		x := uint64(1024112) * uint64(f[235]-t+q)
-		f[235] = FieldMontgomeryReduce(x)
+		f[235] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[228]
 		f[228] = FieldAdd(t, f[236])
 		x := uint64(1024112) * uint64(f[236]-t+q)
-		f[236] = FieldMontgomeryReduce(x)
+		f[236] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[229]
 		f[229] = FieldAdd(t, f[237])
 		x := uint64(1024112) * uint64(f[237]-t+q)
-		f[237] = FieldMontgomeryReduce(x)
+		f[237] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[230]
 		f[230] = FieldAdd(t, f[238])
 		x := uint64(1024112) * uint64(f[238]-t+q)
-		f[238] = FieldMontgomeryReduce(x)
+		f[238] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[231]
 		f[231] = FieldAdd(t, f[239])
 		x := uint64(1024112) * uint64(f[239]-t+q)
-		f[239] = FieldMontgomeryReduce(x)
+		f[239] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[240]
 		f[240] = FieldAdd(t, f[248])
 		x := uint64(2725464) * uint64(f[248]-t+q)
-		f[248] = FieldMontgomeryReduce(x)
+		f[248] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[241]
 		f[241] = FieldAdd(t, f[249])
 		x := uint64(2725464) * uint64(f[249]-t+q)
-		f[249] = FieldMontgomeryReduce(x)
+		f[249] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[242]
 		f[242] = FieldAdd(t, f[250])
 		x := uint64(2725464) * uint64(f[250]-t+q)
-		f[250] = FieldMontgomeryReduce(x)
+		f[250] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[243]
 		f[243] = FieldAdd(t, f[251])
 		x := uint64(2725464) * uint64(f[251]-t+q)
-		f[251] = FieldMontgomeryReduce(x)
+		f[251] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[244]
 		f[244] = FieldAdd(t, f[252])
 		x := uint64(2725464) * uint64(f[252]-t+q)
-		f[252] = FieldMontgomeryReduce(x)
+		f[252] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[245]
 		f[245] = FieldAdd(t, f[253])
 		x := uint64(2725464) * uint64(f[253]-t+q)
-		f[253] = FieldMontgomeryReduce(x)
+		f[253] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[246]
 		f[246] = FieldAdd(t, f[254])
 		x := uint64(2725464) * uint64(f[254]-t+q)
-		f[254] = FieldMontgomeryReduce(x)
+		f[254] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[247]
 		f[247] = FieldAdd(t, f[255])
 		x := uint64(2725464) * uint64(f[255]-t+q)
-		f[255] = FieldMontgomeryReduce(x)
+		f[255] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[0]
 		f[0] = FieldAdd(t, f[16])
 		x := uint64(2680103) * uint64(f[16]-t+q)
-		f[16] = FieldMontgomeryReduce(x)
+		f[16] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[1]
 		f[1] = FieldAdd(t, f[17])
 		x := uint64(2680103) * uint64(f[17]-t+q)
-		f[17] = FieldMontgomeryReduce(x)
+		f[17] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[2]
 		f[2] = FieldAdd(t, f[18])
 		x := uint64(2680103) * uint64(f[18]-t+q)
-		f[18] = FieldMontgomeryReduce(x)
+		f[18] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[3]
 		f[3] = FieldAdd(t, f[19])
 		x := uint64(2680103) * uint64(f[19]-t+q)
-		f[19] = FieldMontgomeryReduce(x)
+		f[19] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[4]
 		f[4] = FieldAdd(t, f[20])
 		x := uint64(2680103) * uint64(f[20]-t+q)
-		f[20] = FieldMontgomeryReduce(x)
+		f[20] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[5]
 		f[5] = FieldAdd(t, f[21])
 		x := uint64(2680103) * uint64(f[21]-t+q)
-		f[21] = FieldMontgomeryReduce(x)
+		f[21] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[6]
 		f[6] = FieldAdd(t, f[22])
 		x := uint64(2680103) * uint64(f[22]-t+q)
-		f[22] = FieldMontgomeryReduce(x)
+		f[22] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[7]
 		f[7] = FieldAdd(t, f[23])
 		x := uint64(2680103) * uint64(f[23]-t+q)
-		f[23] = FieldMontgomeryReduce(x)
+		f[23] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[8]
 		f[8] = FieldAdd(t, f[24])
 		x := uint64(2680103) * uint64(f[24]-t+q)
-		f[24] = FieldMontgomeryReduce(x)
+		f[24] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[9]
 		f[9] = FieldAdd(t, f[25])
 		x := uint64(2680103) * uint64(f[25]-t+q)
-		f[25] = FieldMontgomeryReduce(x)
+		f[25] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[10]
 		f[10] = FieldAdd(t, f[26])
 		x := uint64(2680103) * uint64(f[26]-t+q)
-		f[26] = FieldMontgomeryReduce(x)
+		f[26] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[11]
 		f[11] = FieldAdd(t, f[27])
 		x := uint64(2680103) * uint64(f[27]-t+q)
-		f[27] = FieldMontgomeryReduce(x)
+		f[27] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[12]
 		f[12] = FieldAdd(t, f[28])
 		x := uint64(2680103) * uint64(f[28]-t+q)
-		f[28] = FieldMontgomeryReduce(x)
+		f[28] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[13]
 		f[13] = FieldAdd(t, f[29])
 		x := uint64(2680103) * uint64(f[29]-t+q)
-		f[29] = FieldMontgomeryReduce(x)
+		f[29] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[14]
 		f[14] = FieldAdd(t, f[30])
 		x := uint64(2680103) * uint64(f[30]-t+q)
-		f[30] = FieldMontgomeryReduce(x)
+		f[30] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[15]
 		f[15] = FieldAdd(t, f[31])
 		x := uint64(2680103) * uint64(f[31]-t+q)
-		f[31] = FieldMontgomeryReduce(x)
+		f[31] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[32]
 		f[32] = FieldAdd(t, f[48])
 		x := uint64(3111497) * uint64(f[48]-t+q)
-		f[48] = FieldMontgomeryReduce(x)
+		f[48] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[33]
 		f[33] = FieldAdd(t, f[49])
 		x := uint64(3111497) * uint64(f[49]-t+q)
-		f[49] = FieldMontgomeryReduce(x)
+		f[49] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[34]
 		f[34] = FieldAdd(t, f[50])
 		x := uint64(3111497) * uint64(f[50]-t+q)
-		f[50] = FieldMontgomeryReduce(x)
+		f[50] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[35]
 		f[35] = FieldAdd(t, f[51])
 		x := uint64(3111497) * uint64(f[51]-t+q)
-		f[51] = FieldMontgomeryReduce(x)
+		f[51] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[36]
 		f[36] = FieldAdd(t, f[52])
 		x := uint64(3111497) * uint64(f[52]-t+q)
-		f[52] = FieldMontgomeryReduce(x)
+		f[52] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[37]
 		f[37] = FieldAdd(t, f[53])
 		x := uint64(3111497) * uint64(f[53]-t+q)
-		f[53] = FieldMontgomeryReduce(x)
+		f[53] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[38]
 		f[38] = FieldAdd(t, f[54])
 		x := uint64(3111497) * uint64(f[54]-t+q)
-		f[54] = FieldMontgomeryReduce(x)
+		f[54] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[39]
 		f[39] = FieldAdd(t, f[55])
 		x := uint64(3111497) * uint64(f[55]-t+q)
-		f[55] = FieldMontgomeryReduce(x)
+		f[55] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[40]
 		f[40] = FieldAdd(t, f[56])
 		x := uint64(3111497) * uint64(f[56]-t+q)
-		f[56] = FieldMontgomeryReduce(x)
+		f[56] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[41]
 		f[41] = FieldAdd(t, f[57])
 		x := uint64(3111497) * uint64(f[57]-t+q)
-		f[57] = FieldMontgomeryReduce(x)
+		f[57] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[42]
 		f[42] = FieldAdd(t, f[58])
 		x := uint64(3111497) * uint64(f[58]-t+q)
-		f[58] = FieldMontgomeryReduce(x)
+		f[58] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[43]
 		f[43] = FieldAdd(t, f[59])
 		x := uint64(3111497) * uint64(f[59]-t+q)
-		f[59] = FieldMontgomeryReduce(x)
+		f[59] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[44]
 		f[44] = FieldAdd(t, f[60])
 		x := uint64(3111497) * uint64(f[60]-t+q)
-		f[60] = FieldMontgomeryReduce(x)
+		f[60] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[45]
 		f[45] = FieldAdd(t, f[61])
 		x := uint64(3111497) * uint64(f[61]-t+q)
-		f[61] = FieldMontgomeryReduce(x)
+		f[61] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[46]
 		f[46] = FieldAdd(t, f[62])
 		x := uint64(3111497) * uint64(f[62]-t+q)
-		f[62] = FieldMontgomeryReduce(x)
+		f[62] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[47]
 		f[47] = FieldAdd(t, f[63])
 		x := uint64(3111497) * uint64(f[63]-t+q)
-		f[63] = FieldMontgomeryReduce(x)
+		f[63] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[64]
 		f[64] = FieldAdd(t, f[80])
 		x := uint64(5495562) * uint64(f[80]-t+q)
-		f[80] = FieldMontgomeryReduce(x)
+		f[80] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[65]
 		f[65] = FieldAdd(t, f[81])
 		x := uint64(5495562) * uint64(f[81]-t+q)
-		f[81] = FieldMontgomeryReduce(x)
+		f[81] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[66]
 		f[66] = FieldAdd(t, f[82])
 		x := uint64(5495562) * uint64(f[82]-t+q)
-		f[82] = FieldMontgomeryReduce(x)
+		f[82] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[67]
 		f[67] = FieldAdd(t, f[83])
 		x := uint64(5495562) * uint64(f[83]-t+q)
-		f[83] = FieldMontgomeryReduce(x)
+		f[83] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[68]
 		f[68] = FieldAdd(t, f[84])
 		x := uint64(5495562) * uint64(f[84]-t+q)
-		f[84] = FieldMontgomeryReduce(x)
+		f[84] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[69]
 		f[69] = FieldAdd(t, f[85])
 		x := uint64(5495562) * uint64(f[85]-t+q)
-		f[85] = FieldMontgomeryReduce(x)
+		f[85] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[70]
 		f[70] = FieldAdd(t, f[86])
 		x := uint64(5495562) * uint64(f[86]-t+q)
-		f[86] = FieldMontgomeryReduce(x)
+		f[86] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[71]
 		f[71] = FieldAdd(t, f[87])
 		x := uint64(5495562) * uint64(f[87]-t+q)
-		f[87] = FieldMontgomeryReduce(x)
+		f[87] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[72]
 		f[72] = FieldAdd(t, f[88])
 		x := uint64(5495562) * uint64(f[88]-t+q)
-		f[88] = FieldMontgomeryReduce(x)
+		f[88] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[73]
 		f[73] = FieldAdd(t, f[89])
 		x := uint64(5495562) * uint64(f[89]-t+q)
-		f[89] = FieldMontgomeryReduce(x)
+		f[89] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[74]
 		f[74] = FieldAdd(t, f[90])
 		x := uint64(5495562) * uint64(f[90]-t+q)
-		f[90] = FieldMontgomeryReduce(x)
+		f[90] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[75]
 		f[75] = FieldAdd(t, f[91])
 		x := uint64(5495562) * uint64(f[91]-t+q)
-		f[91] = FieldMontgomeryReduce(x)
+		f[91] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[76]
 		f[76] = FieldAdd(t, f[92])
 		x := uint64(5495562) * uint64(f[92]-t+q)
-		f[92] = FieldMontgomeryReduce(x)
+		f[92] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[77]
 		f[77] = FieldAdd(t, f[93])
 		x := uint64(5495562) * uint64(f[93]-t+q)
-		f[93] = FieldMontgomeryReduce(x)
+		f[93] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[78]
 		f[78] = FieldAdd(t, f[94])
 		x := uint64(5495562) * uint64(f[94]-t+q)
-		f[94] = FieldMontgomeryReduce(x)
+		f[94] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[79]
 		f[79] = FieldAdd(t, f[95])
 		x := uint64(5495562) * uint64(f[95]-t+q)
-		f[95] = FieldMontgomeryReduce(x)
+		f[95] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[96]
 		f[96] = FieldAdd(t, f[112])
 		x := uint64(3119733) * uint64(f[112]-t+q)
-		f[112] = FieldMontgomeryReduce(x)
+		f[112] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[97]
 		f[97] = FieldAdd(t, f[113])
 		x := uint64(3119733) * uint64(f[113]-t+q)
-		f[113] = FieldMontgomeryReduce(x)
+		f[113] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[98]
 		f[98] = FieldAdd(t, f[114])
 		x := uint64(3119733) * uint64(f[114]-t+q)
-		f[114] = FieldMontgomeryReduce(x)
+		f[114] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[99]
 		f[99] = FieldAdd(t, f[115])
 		x := uint64(3119733) * uint64(f[115]-t+q)
-		f[115] = FieldMontgomeryReduce(x)
+		f[115] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[100]
 		f[100] = FieldAdd(t, f[116])
 		x := uint64(3119733) * uint64(f[116]-t+q)
-		f[116] = FieldMontgomeryReduce(x)
+		f[116] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[101]
 		f[101] = FieldAdd(t, f[117])
 		x := uint64(3119733) * uint64(f[117]-t+q)
-		f[117] = FieldMontgomeryReduce(x)
+		f[117] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[102]
 		f[102] = FieldAdd(t, f[118])
 		x := uint64(3119733) * uint64(f[118]-t+q)
-		f[118] = FieldMontgomeryReduce(x)
+		f[118] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[103]
 		f[103] = FieldAdd(t, f[119])
 		x := uint64(3119733) * uint64(f[119]-t+q)
-		f[119] = FieldMontgomeryReduce(x)
+		f[119] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[104]
 		f[104] = FieldAdd(t, f[120])
 		x := uint64(3119733) * uint64(f[120]-t+q)
-		f[120] = FieldMontgomeryReduce(x)
+		f[120] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[105]
 		f[105] = FieldAdd(t, f[121])
 		x := uint64(3119733) * uint64(f[121]-t+q)
-		f[121] = FieldMontgomeryReduce(x)
+		f[121] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[106]
 		f[106] = FieldAdd(t, f[122])
 		x := uint64(3119733) * uint64(f[122]-t+q)
-		f[122] = FieldMontgomeryReduce(x)
+		f[122] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[107]
 		f[107] = FieldAdd(t, f[123])
 		x := uint64(3119733) * uint64(f[123]-t+q)
-		f[123] = FieldMontgomeryReduce(x)
+		f[123] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[108]
 		f[108] = FieldAdd(t, f[124])
 		x := uint64(3119733) * uint64(f[124]-t+q)
-		f[124] = FieldMontgomeryReduce(x)
+		f[124] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[109]
 		f[109] = FieldAdd(t, f[125])
 		x := uint64(3119733) * uint64(f[125]-t+q)
-		f[125] = FieldMontgomeryReduce(x)
+		f[125] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[110]
 		f[110] = FieldAdd(t, f[126])
 		x := uint64(3119733) * uint64(f[126]-t+q)
-		f[126] = FieldMontgomeryReduce(x)
+		f[126] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[111]
 		f[111] = FieldAdd(t, f[127])
 		x := uint64(3119733) * uint64(f[127]-t+q)
-		f[127] = FieldMontgomeryReduce(x)
+		f[127] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[128]
 		f[128] = FieldAdd(t, f[144])
 		x := uint64(6288512) * uint64(f[144]-t+q)
-		f[144] = FieldMontgomeryReduce(x)
+		f[144] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[129]
 		f[129] = FieldAdd(t, f[145])
 		x := uint64(6288512) * uint64(f[145]-t+q)
-		f[145] = FieldMontgomeryReduce(x)
+		f[145] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[130]
 		f[130] = FieldAdd(t, f[146])
 		x := uint64(6288512) * uint64(f[146]-t+q)
-		f[146] = FieldMontgomeryReduce(x)
+		f[146] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[131]
 		f[131] = FieldAdd(t, f[147])
 		x := uint64(6288512) * uint64(f[147]-t+q)
-		f[147] = FieldMontgomeryReduce(x)
+		f[147] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[132]
 		f[132] = FieldAdd(t, f[148])
 		x := uint64(6288512) * uint64(f[148]-t+q)
-		f[148] = FieldMontgomeryReduce(x)
+		f[148] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[133]
 		f[133] = FieldAdd(t, f[149])
 		x := uint64(6288512) * uint64(f[149]-t+q)
-		f[149] = FieldMontgomeryReduce(x)
+		f[149] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[134]
 		f[134] = FieldAdd(t, f[150])
 		x := uint64(6288512) * uint64(f[150]-t+q)
-		f[150] = FieldMontgomeryReduce(x)
+		f[150] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[135]
 		f[135] = FieldAdd(t, f[151])
 		x := uint64(6288512) * uint64(f[151]-t+q)
-		f[151] = FieldMontgomeryReduce(x)
+		f[151] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[136]
 		f[136] = FieldAdd(t, f[152])
 		x := uint64(6288512) * uint64(f[152]-t+q)
-		f[152] = FieldMontgomeryReduce(x)
+		f[152] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[137]
 		f[137] = FieldAdd(t, f[153])
 		x := uint64(6288512) * uint64(f[153]-t+q)
-		f[153] = FieldMontgomeryReduce(x)
+		f[153] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[138]
 		f[138] = FieldAdd(t, f[154])
 		x := uint64(6288512) * uint64(f[154]-t+q)
-		f[154] = FieldMontgomeryReduce(x)
+		f[154] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[139]
 		f[139] = FieldAdd(t, f[155])
 		x := uint64(6288512) * uint64(f[155]-t+q)
-		f[155] = FieldMontgomeryReduce(x)
+		f[155] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[140]
 		f[140] = FieldAdd(t, f[156])
 		x := uint64(6288512) * uint64(f[156]-t+q)
-		f[156] = FieldMontgomeryReduce(x)
+		f[156] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[141]
 		f[141] = FieldAdd(t, f[157])
 		x := uint64(6288512) * uint64(f[157]-t+q)
-		f[157] = FieldMontgomeryReduce(x)
+		f[157] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[142]
 		f[142] = FieldAdd(t, f[158])
 		x := uint64(6288512) * uint64(f[158]-t+q)
-		f[158] = FieldMontgomeryReduce(x)
+		f[158] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[143]
 		f[143] = FieldAdd(t, f[159])
 		x := uint64(6288512) * uint64(f[159]-t+q)
-		f[159] = FieldMontgomeryReduce(x)
+		f[159] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[160]
 		f[160] = FieldAdd(t, f[176])
 		x := uint64(8021166) * uint64(f[176]-t+q)
-		f[176] = FieldMontgomeryReduce(x)
+		f[176] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[161]
 		f[161] = FieldAdd(t, f[177])
 		x := uint64(8021166) * uint64(f[177]-t+q)
-		f[177] = FieldMontgomeryReduce(x)
+		f[177] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[162]
 		f[162] = FieldAdd(t, f[178])
 		x := uint64(8021166) * uint64(f[178]-t+q)
-		f[178] = FieldMontgomeryReduce(x)
+		f[178] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[163]
 		f[163] = FieldAdd(t, f[179])
 		x := uint64(8021166) * uint64(f[179]-t+q)
-		f[179] = FieldMontgomeryReduce(x)
+		f[179] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[164]
 		f[164] = FieldAdd(t, f[180])
 		x := uint64(8021166) * uint64(f[180]-t+q)
-		f[180] = FieldMontgomeryReduce(x)
+		f[180] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[165]
 		f[165] = FieldAdd(t, f[181])
 		x := uint64(8021166) * uint64(f[181]-t+q)
-		f[181] = FieldMontgomeryReduce(x)
+		f[181] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[166]
 		f[166] = FieldAdd(t, f[182])
 		x := uint64(8021166) * uint64(f[182]-t+q)
-		f[182] = FieldMontgomeryReduce(x)
+		f[182] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[167]
 		f[167] = FieldAdd(t, f[183])
 		x := uint64(8021166) * uint64(f[183]-t+q)
-		f[183] = FieldMontgomeryReduce(x)
+		f[183] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[168]
 		f[168] = FieldAdd(t, f[184])
 		x := uint64(8021166) * uint64(f[184]-t+q)
-		f[184] = FieldMontgomeryReduce(x)
+		f[184] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[169]
 		f[169] = FieldAdd(t, f[185])
 		x := uint64(8021166) * uint64(f[185]-t+q)
-		f[185] = FieldMontgomeryReduce(x)
+		f[185] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[170]
 		f[170] = FieldAdd(t, f[186])
 		x := uint64(8021166) * uint64(f[186]-t+q)
-		f[186] = FieldMontgomeryReduce(x)
+		f[186] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[171]
 		f[171] = FieldAdd(t, f[187])
 		x := uint64(8021166) * uint64(f[187]-t+q)
-		f[187] = FieldMontgomeryReduce(x)
+		f[187] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[172]
 		f[172] = FieldAdd(t, f[188])
 		x := uint64(8021166) * uint64(f[188]-t+q)
-		f[188] = FieldMontgomeryReduce(x)
+		f[188] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[173]
 		f[173] = FieldAdd(t, f[189])
 		x := uint64(8021166) * uint64(f[189]-t+q)
-		f[189] = FieldMontgomeryReduce(x)
+		f[189] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[174]
 		f[174] = FieldAdd(t, f[190])
 		x := uint64(8021166) * uint64(f[190]-t+q)
-		f[190] = FieldMontgomeryReduce(x)
+		f[190] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[175]
 		f[175] = FieldAdd(t, f[191])
 		x := uint64(8021166) * uint64(f[191]-t+q)
-		f[191] = FieldMontgomeryReduce(x)
+		f[191] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[192]
 		f[192] = FieldAdd(t, f[208])
 		x := uint64(2353451) * uint64(f[208]-t+q)
-		f[208] = FieldMontgomeryReduce(x)
+		f[208] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[193]
 		f[193] = FieldAdd(t, f[209])
 		x := uint64(2353451) * uint64(f[209]-t+q)
-		f[209] = FieldMontgomeryReduce(x)
+		f[209] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[194]
 		f[194] = FieldAdd(t, f[210])
 		x := uint64(2353451) * uint64(f[210]-t+q)
-		f[210] = FieldMontgomeryReduce(x)
+		f[210] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[195]
 		f[195] = FieldAdd(t, f[211])
 		x := uint64(2353451) * uint64(f[211]-t+q)
-		f[211] = FieldMontgomeryReduce(x)
+		f[211] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[196]
 		f[196] = FieldAdd(t, f[212])
 		x := uint64(2353451) * uint64(f[212]-t+q)
-		f[212] = FieldMontgomeryReduce(x)
+		f[212] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[197]
 		f[197] = FieldAdd(t, f[213])
 		x := uint64(2353451) * uint64(f[213]-t+q)
-		f[213] = FieldMontgomeryReduce(x)
+		f[213] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[198]
 		f[198] = FieldAdd(t, f[214])
 		x := uint64(2353451) * uint64(f[214]-t+q)
-		f[214] = FieldMontgomeryReduce(x)
+		f[214] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[199]
 		f[199] = FieldAdd(t, f[215])
 		x := uint64(2353451) * uint64(f[215]-t+q)
-		f[215] = FieldMontgomeryReduce(x)
+		f[215] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[200]
 		f[200] = FieldAdd(t, f[216])
 		x := uint64(2353451) * uint64(f[216]-t+q)
-		f[216] = FieldMontgomeryReduce(x)
+		f[216] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[201]
 		f[201] = FieldAdd(t, f[217])
 		x := uint64(2353451) * uint64(f[217]-t+q)
-		f[217] = FieldMontgomeryReduce(x)
+		f[217] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[202]
 		f[202] = FieldAdd(t, f[218])
 		x := uint64(2353451) * uint64(f[218]-t+q)
-		f[218] = FieldMontgomeryReduce(x)
+		f[218] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[203]
 		f[203] = FieldAdd(t, f[219])
 		x := uint64(2353451) * uint64(f[219]-t+q)
-		f[219] = FieldMontgomeryReduce(x)
+		f[219] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[204]
 		f[204] = FieldAdd(t, f[220])
 		x := uint64(2353451) * uint64(f[220]-t+q)
-		f[220] = FieldMontgomeryReduce(x)
+		f[220] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[205]
 		f[205] = FieldAdd(t, f[221])
 		x := uint64(2353451) * uint64(f[221]-t+q)
-		f[221] = FieldMontgomeryReduce(x)
+		f[221] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[206]
 		f[206] = FieldAdd(t, f[222])
 		x := uint64(2353451) * uint64(f[222]-t+q)
-		f[222] = FieldMontgomeryReduce(x)
+		f[222] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[207]
 		f[207] = FieldAdd(t, f[223])
 		x := uint64(2353451) * uint64(f[223]-t+q)
-		f[223] = FieldMontgomeryReduce(x)
+		f[223] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[224]
 		f[224] = FieldAdd(t, f[240])
 		x := uint64(1826347) * uint64(f[240]-t+q)
-		f[240] = FieldMontgomeryReduce(x)
+		f[240] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[225]
 		f[225] = FieldAdd(t, f[241])
 		x := uint64(1826347) * uint64(f[241]-t+q)
-		f[241] = FieldMontgomeryReduce(x)
+		f[241] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[226]
 		f[226] = FieldAdd(t, f[242])
 		x := uint64(1826347) * uint64(f[242]-t+q)
-		f[242] = FieldMontgomeryReduce(x)
+		f[242] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[227]
 		f[227] = FieldAdd(t, f[243])
 		x := uint64(1826347) * uint64(f[243]-t+q)
-		f[243] = FieldMontgomeryReduce(x)
+		f[243] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[228]
 		f[228] = FieldAdd(t, f[244])
 		x := uint64(1826347) * uint64(f[244]-t+q)
-		f[244] = FieldMontgomeryReduce(x)
+		f[244] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[229]
 		f[229] = FieldAdd(t, f[245])
 		x := uint64(1826347) * uint64(f[245]-t+q)
-		f[245] = FieldMontgomeryReduce(x)
+		f[245] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[230]
 		f[230] = FieldAdd(t, f[246])
 		x := uint64(1826347) * uint64(f[246]-t+q)
-		f[246] = FieldMontgomeryReduce(x)
+		f[246] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[231]
 		f[231] = FieldAdd(t, f[247])
 		x := uint64(1826347) * uint64(f[247]-t+q)
-		f[247] = FieldMontgomeryReduce(x)
+		f[247] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[232]
 		f[232] = FieldAdd(t, f[248])
 		x := uint64(1826347) * uint64(f[248]-t+q)
-		f[248] = FieldMontgomeryReduce(x)
+		f[248] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[233]
 		f[233] = FieldAdd(t, f[249])
 		x := uint64(1826347) * uint64(f[249]-t+q)
-		f[249] = FieldMontgomeryReduce(x)
+		f[249] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[234]
 		f[234] = FieldAdd(t, f[250])
 		x := uint64(1826347) * uint64(f[250]-t+q)
-		f[250] = FieldMontgomeryReduce(x)
+		f[250] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[235]
 		f[235] = FieldAdd(t, f[251])
 		x := uint64(1826347) * uint64(f[251]-t+q)
-		f[251] = FieldMontgomeryReduce(x)
+		f[251] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[236]
 		f[236] = FieldAdd(t, f[252])
 		x := uint64(1826347) * uint64(f[252]-t+q)
-		f[252] = FieldMontgomeryReduce(x)
+		f[252] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[237]
 		f[237] = FieldAdd(t, f[253])
 		x := uint64(1826347) * uint64(f[253]-t+q)
-		f[253] = FieldMontgomeryReduce(x)
+		f[253] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[238]
 		f[238] = FieldAdd(t, f[254])
 		x := uint64(1826347) * uint64(f[254]-t+q)
-		f[254] = FieldMontgomeryReduce(x)
+		f[254] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[239]
 		f[239] = FieldAdd(t, f[255])
 		x := uint64(1826347) * uint64(f[255]-t+q)
-		f[255] = FieldMontgomeryReduce(x)
+		f[255] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[0]
 		f[0] = FieldAdd(t, f[32])
 		x := uint64(466468) * uint64(f[32]-t+q)
-		f[32] = FieldMontgomeryReduce(x)
+		f[32] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[1]
 		f[1] = FieldAdd(t, f[33])
 		x := uint64(466468) * uint64(f[33]-t+q)
-		f[33] = FieldMontgomeryReduce(x)
+		f[33] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[2]
 		f[2] = FieldAdd(t, f[34])
 		x := uint64(466468) * uint64(f[34]-t+q)
-		f[34] = FieldMontgomeryReduce(x)
+		f[34] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[3]
 		f[3] = FieldAdd(t, f[35])
 		x := uint64(466468) * uint64(f[35]-t+q)
-		f[35] = FieldMontgomeryReduce(x)
+		f[35] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[4]
 		f[4] = FieldAdd(t, f[36])
 		x := uint64(466468) * uint64(f[36]-t+q)
-		f[36] = FieldMontgomeryReduce(x)
+		f[36] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[5]
 		f[5] = FieldAdd(t, f[37])
 		x := uint64(466468) * uint64(f[37]-t+q)
-		f[37] = FieldMontgomeryReduce(x)
+		f[37] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[6]
 		f[6] = FieldAdd(t, f[38])
 		x := uint64(466468) * uint64(f[38]-t+q)
-		f[38] = FieldMontgomeryReduce(x)
+		f[38] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[7]
 		f[7] = FieldAdd(t, f[39])
 		x := uint64(466468) * uint64(f[39]-t+q)
-		f[39] = FieldMontgomeryReduce(x)
+		f[39] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[8]
 		f[8] = FieldAdd(t, f[40])
 		x := uint64(466468) * uint64(f[40]-t+q)
-		f[40] = FieldMontgomeryReduce(x)
+		f[40] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[9]
 		f[9] = FieldAdd(t, f[41])
 		x := uint64(466468) * uint64(f[41]-t+q)
-		f[41] = FieldMontgomeryReduce(x)
+		f[41] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[10]
 		f[10] = FieldAdd(t, f[42])
 		x := uint64(466468) * uint64(f[42]-t+q)
-		f[42] = FieldMontgomeryReduce(x)
+		f[42] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[11]
 		f[11] = FieldAdd(t, f[43])
 		x := uint64(466468) * uint64(f[43]-t+q)
-		f[43] = FieldMontgomeryReduce(x)
+		f[43] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[12]
 		f[12] = FieldAdd(t, f[44])
 		x := uint64(466468) * uint64(f[44]-t+q)
-		f[44] = FieldMontgomeryReduce(x)
+		f[44] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[13]
 		f[13] = FieldAdd(t, f[45])
 		x := uint64(466468) * uint64(f[45]-t+q)
-		f[45] = FieldMontgomeryReduce(x)
+		f[45] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[14]
 		f[14] = FieldAdd(t, f[46])
 		x := uint64(466468) * uint64(f[46]-t+q)
-		f[46] = FieldMontgomeryReduce(x)
+		f[46] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[15]
 		f[15] = FieldAdd(t, f[47])
 		x := uint64(466468) * uint64(f[47]-t+q)
-		f[47] = FieldMontgomeryReduce(x)
+		f[47] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[16]
 		f[16] = FieldAdd(t, f[48])
 		x := uint64(466468) * uint64(f[48]-t+q)
-		f[48] = FieldMontgomeryReduce(x)
+		f[48] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[17]
 		f[17] = FieldAdd(t, f[49])
 		x := uint64(466468) * uint64(f[49]-t+q)
-		f[49] = FieldMontgomeryReduce(x)
+		f[49] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[18]
 		f[18] = FieldAdd(t, f[50])
 		x := uint64(466468) * uint64(f[50]-t+q)
-		f[50] = FieldMontgomeryReduce(x)
+		f[50] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[19]
 		f[19] = FieldAdd(t, f[51])
 		x := uint64(466468) * uint64(f[51]-t+q)
-		f[51] = FieldMontgomeryReduce(x)
+		f[51] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[20]
 		f[20] = FieldAdd(t, f[52])
 		x := uint64(466468) * uint64(f[52]-t+q)
-		f[52] = FieldMontgomeryReduce(x)
+		f[52] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[21]
 		f[21] = FieldAdd(t, f[53])
 		x := uint64(466468) * uint64(f[53]-t+q)
-		f[53] = FieldMontgomeryReduce(x)
+		f[53] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[22]
 		f[22] = FieldAdd(t, f[54])
 		x := uint64(466468) * uint64(f[54]-t+q)
-		f[54] = FieldMontgomeryReduce(x)
+		f[54] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[23]
 		f[23] = FieldAdd(t, f[55])
 		x := uint64(466468) * uint64(f[55]-t+q)
-		f[55] = FieldMontgomeryReduce(x)
+		f[55] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[24]
 		f[24] = FieldAdd(t, f[56])
 		x := uint64(466468) * uint64(f[56]-t+q)
-		f[56] = FieldMontgomeryReduce(x)
+		f[56] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[25]
 		f[25] = FieldAdd(t, f[57])
 		x := uint64(466468) * uint64(f[57]-t+q)
-		f[57] = FieldMontgomeryReduce(x)
+		f[57] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[26]
 		f[26] = FieldAdd(t, f[58])
 		x := uint64(466468) * uint64(f[58]-t+q)
-		f[58] = FieldMontgomeryReduce(x)
+		f[58] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[27]
 		f[27] = FieldAdd(t, f[59])
 		x := uint64(466468) * uint64(f[59]-t+q)
-		f[59] = FieldMontgomeryReduce(x)
+		f[59] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[28]
 		f[28] = FieldAdd(t, f[60])
 		x := uint64(466468) * uint64(f[60]-t+q)
-		f[60] = FieldMontgomeryReduce(x)
+		f[60] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[29]
 		f[29] = FieldAdd(t, f[61])
 		x := uint64(466468) * uint64(f[61]-t+q)
-		f[61] = FieldMontgomeryReduce(x)
+		f[61] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[30]
 		f[30] = FieldAdd(t, f[62])
 		x := uint64(466468) * uint64(f[62]-t+q)
-		f[62] = FieldMontgomeryReduce(x)
+		f[62] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[31]
 		f[31] = FieldAdd(t, f[63])
 		x := uint64(466468) * uint64(f[63]-t+q)
-		f[63] = FieldMontgomeryReduce(x)
+		f[63] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[64]
 		f[64] = FieldAdd(t, f[96])
 		x := uint64(7504169) * uint64(f[96]-t+q)
-		f[96] = FieldMontgomeryReduce(x)
+		f[96] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[65]
 		f[65] = FieldAdd(t, f[97])
 		x := uint64(7504169) * uint64(f[97]-t+q)
-		f[97] = FieldMontgomeryReduce(x)
+		f[97] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[66]
 		f[66] = FieldAdd(t, f[98])
 		x := uint64(7504169) * uint64(f[98]-t+q)
-		f[98] = FieldMontgomeryReduce(x)
+		f[98] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[67]
 		f[67] = FieldAdd(t, f[99])
 		x := uint64(7504169) * uint64(f[99]-t+q)
-		f[99] = FieldMontgomeryReduce(x)
+		f[99] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[68]
 		f[68] = FieldAdd(t, f[100])
 		x := uint64(7504169) * uint64(f[100]-t+q)
-		f[100] = FieldMontgomeryReduce(x)
+		f[100] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[69]
 		f[69] = FieldAdd(t, f[101])
 		x := uint64(7504169) * uint64(f[101]-t+q)
-		f[101] = FieldMontgomeryReduce(x)
+		f[101] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[70]
 		f[70] = FieldAdd(t, f[102])
 		x := uint64(7504169) * uint64(f[102]-t+q)
-		f[102] = FieldMontgomeryReduce(x)
+		f[102] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[71]
 		f[71] = FieldAdd(t, f[103])
 		x := uint64(7504169) * uint64(f[103]-t+q)
-		f[103] = FieldMontgomeryReduce(x)
+		f[103] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[72]
 		f[72] = FieldAdd(t, f[104])
 		x := uint64(7504169) * uint64(f[104]-t+q)
-		f[104] = FieldMontgomeryReduce(x)
+		f[104] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[73]
 		f[73] = FieldAdd(t, f[105])
 		x := uint64(7504169) * uint64(f[105]-t+q)
-		f[105] = FieldMontgomeryReduce(x)
+		f[105] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[74]
 		f[74] = FieldAdd(t, f[106])
 		x := uint64(7504169) * uint64(f[106]-t+q)
-		f[106] = FieldMontgomeryReduce(x)
+		f[106] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[75]
 		f[75] = FieldAdd(t, f[107])
 		x := uint64(7504169) * uint64(f[107]-t+q)
-		f[107] = FieldMontgomeryReduce(x)
+		f[107] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[76]
 		f[76] = FieldAdd(t, f[108])
 		x := uint64(7504169) * uint64(f[108]-t+q)
-		f[108] = FieldMontgomeryReduce(x)
+		f[108] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[77]
 		f[77] = FieldAdd(t, f[109])
 		x := uint64(7504169) * uint64(f[109]-t+q)
-		f[109] = FieldMontgomeryReduce(x)
+		f[109] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[78]
 		f[78] = FieldAdd(t, f[110])
 		x := uint64(7504169) * uint64(f[110]-t+q)
-		f[110] = FieldMontgomeryReduce(x)
+		f[110] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[79]
 		f[79] = FieldAdd(t, f[111])
 		x := uint64(7504169) * uint64(f[111]-t+q)
-		f[111] = FieldMontgomeryReduce(x)
+		f[111] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[80]
 		f[80] = FieldAdd(t, f[112])
 		x := uint64(7504169) * uint64(f[112]-t+q)
-		f[112] = FieldMontgomeryReduce(x)
+		f[112] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[81]
 		f[81] = FieldAdd(t, f[113])
 		x := uint64(7504169) * uint64(f[113]-t+q)
-		f[113] = FieldMontgomeryReduce(x)
+		f[113] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[82]
 		f[82] = FieldAdd(t, f[114])
 		x := uint64(7504169) * uint64(f[114]-t+q)
-		f[114] = FieldMontgomeryReduce(x)
+		f[114] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[83]
 		f[83] = FieldAdd(t, f[115])
 		x := uint64(7504169) * uint64(f[115]-t+q)
-		f[115] = FieldMontgomeryReduce(x)
+		f[115] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[84]
 		f[84] = FieldAdd(t, f[116])
 		x := uint64(7504169) * uint64(f[116]-t+q)
-		f[116] = FieldMontgomeryReduce(x)
+		f[116] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[85]
 		f[85] = FieldAdd(t, f[117])
 		x := uint64(7504169) * uint64(f[117]-t+q)
-		f[117] = FieldMontgomeryReduce(x)
+		f[117] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[86]
 		f[86] = FieldAdd(t, f[118])
 		x := uint64(7504169) * uint64(f[118]-t+q)
-		f[118] = FieldMontgomeryReduce(x)
+		f[118] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[87]
 		f[87] = FieldAdd(t, f[119])
 		x := uint64(7504169) * uint64(f[119]-t+q)
-		f[119] = FieldMontgomeryReduce(x)
+		f[119] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[88]
 		f[88] = FieldAdd(t, f[120])
 		x := uint64(7504169) * uint64(f[120]-t+q)
-		f[120] = FieldMontgomeryReduce(x)
+		f[120] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[89]
 		f[89] = FieldAdd(t, f[121])
 		x := uint64(7504169) * uint64(f[121]-t+q)
-		f[121] = FieldMontgomeryReduce(x)
+		f[121] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[90]
 		f[90] = FieldAdd(t, f[122])
 		x := uint64(7504169) * uint64(f[122]-t+q)
-		f[122] = FieldMontgomeryReduce(x)
+		f[122] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[91]
 		f[91] = FieldAdd(t, f[123])
 		x := uint64(7504169) * uint64(f[123]-t+q)
-		f[123] = FieldMontgomeryReduce(x)
+		f[123] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[92]
 		f[92] = FieldAdd(t, f[124])
 		x := uint64(7504169) * uint64(f[124]-t+q)
-		f[124] = FieldMontgomeryReduce(x)
+		f[124] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[93]
 		f[93] = FieldAdd(t, f[125])
 		x := uint64(7504169) * uint64(f[125]-t+q)
-		f[125] = FieldMontgomeryReduce(x)
+		f[125] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[94]
 		f[94] = FieldAdd(t, f[126])
 		x := uint64(7504169) * uint64(f[126]-t+q)
-		f[126] = FieldMontgomeryReduce(x)
+		f[126] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[95]
 		f[95] = FieldAdd(t, f[127])
 		x := uint64(7504169) * uint64(f[127]-t+q)
-		f[127] = FieldMontgomeryReduce(x)
+		f[127] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[128]
 		f[128] = FieldAdd(t, f[160])
 		x := uint64(7602457) * uint64(f[160]-t+q)
-		f[160] = FieldMontgomeryReduce(x)
+		f[160] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[129]
 		f[129] = FieldAdd(t, f[161])
 		x := uint64(7602457) * uint64(f[161]-t+q)
-		f[161] = FieldMontgomeryReduce(x)
+		f[161] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[130]
 		f[130] = FieldAdd(t, f[162])
 		x := uint64(7602457) * uint64(f[162]-t+q)
-		f[162] = FieldMontgomeryReduce(x)
+		f[162] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[131]
 		f[131] = FieldAdd(t, f[163])
 		x := uint64(7602457) * uint64(f[163]-t+q)
-		f[163] = FieldMontgomeryReduce(x)
+		f[163] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[132]
 		f[132] = FieldAdd(t, f[164])
 		x := uint64(7602457) * uint64(f[164]-t+q)
-		f[164] = FieldMontgomeryReduce(x)
+		f[164] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[133]
 		f[133] = FieldAdd(t, f[165])
 		x := uint64(7602457) * uint64(f[165]-t+q)
-		f[165] = FieldMontgomeryReduce(x)
+		f[165] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[134]
 		f[134] = FieldAdd(t, f[166])
 		x := uint64(7602457) * uint64(f[166]-t+q)
-		f[166] = FieldMontgomeryReduce(x)
+		f[166] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[135]
 		f[135] = FieldAdd(t, f[167])
 		x := uint64(7602457) * uint64(f[167]-t+q)
-		f[167] = FieldMontgomeryReduce(x)
+		f[167] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[136]
 		f[136] = FieldAdd(t, f[168])
 		x := uint64(7602457) * uint64(f[168]-t+q)
-		f[168] = FieldMontgomeryReduce(x)
+		f[168] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[137]
 		f[137] = FieldAdd(t, f[169])
 		x := uint64(7602457) * uint64(f[169]-t+q)
-		f[169] = FieldMontgomeryReduce(x)
+		f[169] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[138]
 		f[138] = FieldAdd(t, f[170])
 		x := uint64(7602457) * uint64(f[170]-t+q)
-		f[170] = FieldMontgomeryReduce(x)
+		f[170] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[139]
 		f[139] = FieldAdd(t, f[171])
 		x := uint64(7602457) * uint64(f[171]-t+q)
-		f[171] = FieldMontgomeryReduce(x)
+		f[171] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[140]
 		f[140] = FieldAdd(t, f[172])
 		x := uint64(7602457) * uint64(f[172]-t+q)
-		f[172] = FieldMontgomeryReduce(x)
+		f[172] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[141]
 		f[141] = FieldAdd(t, f[173])
 		x := uint64(7602457) * uint64(f[173]-t+q)
-		f[173] = FieldMontgomeryReduce(x)
+		f[173] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[142]
 		f[142] = FieldAdd(t, f[174])
 		x := uint64(7602457) * uint64(f[174]-t+q)
-		f[174] = FieldMontgomeryReduce(x)
+		f[174] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[143]
 		f[143] = FieldAdd(t, f[175])
 		x := uint64(7602457) * uint64(f[175]-t+q)
-		f[175] = FieldMontgomeryReduce(x)
+		f[175] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[144]
 		f[144] = FieldAdd(t, f[176])
 		x := uint64(7602457) * uint64(f[176]-t+q)
-		f[176] = FieldMontgomeryReduce(x)
+		f[176] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[145]
 		f[145] = FieldAdd(t, f[177])
 		x := uint64(7602457) * uint64(f[177]-t+q)
-		f[177] = FieldMontgomeryReduce(x)
+		f[177] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[146]
 		f[146] = FieldAdd(t, f[178])
 		x := uint64(7602457) * uint64(f[178]-t+q)
-		f[178] = FieldMontgomeryReduce(x)
+		f[178] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[147]
 		f[147] = FieldAdd(t, f[179])
 		x := uint64(7602457) * uint64(f[179]-t+q)
-		f[179] = FieldMontgomeryReduce(x)
+		f[179] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[148]
 		f[148] = FieldAdd(t, f[180])
 		x := uint64(7602457) * uint64(f[180]-t+q)
-		f[180] = FieldMontgomeryReduce(x)
+		f[180] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[149]
 		f[149] = FieldAdd(t, f[181])
 		x := uint64(7602457) * uint64(f[181]-t+q)
-		f[181] = FieldMontgomeryReduce(x)
+		f[181] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[150]
 		f[150] = FieldAdd(t, f[182])
 		x := uint64(7602457) * uint64(f[182]-t+q)
-		f[182] = FieldMontgomeryReduce(x)
+		f[182] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[151]
 		f[151] = FieldAdd(t, f[183])
 		x := uint64(7602457) * uint64(f[183]-t+q)
-		f[183] = FieldMontgomeryReduce(x)
+		f[183] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[152]
 		f[152] = FieldAdd(t, f[184])
 		x := uint64(7602457) * uint64(f[184]-t+q)
-		f[184] = FieldMontgomeryReduce(x)
+		f[184] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[153]
 		f[153] = FieldAdd(t, f[185])
 		x := uint64(7602457) * uint64(f[185]-t+q)
-		f[185] = FieldMontgomeryReduce(x)
+		f[185] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[154]
 		f[154] = FieldAdd(t, f[186])
 		x := uint64(7602457) * uint64(f[186]-t+q)
-		f[186] = FieldMontgomeryReduce(x)
+		f[186] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[155]
 		f[155] = FieldAdd(t, f[187])
 		x := uint64(7602457) * uint64(f[187]-t+q)
-		f[187] = FieldMontgomeryReduce(x)
+		f[187] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[156]
 		f[156] = FieldAdd(t, f[188])
 		x := uint64(7602457) * uint64(f[188]-t+q)
-		f[188] = FieldMontgomeryReduce(x)
+		f[188] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[157]
 		f[157] = FieldAdd(t, f[189])
 		x := uint64(7602457) * uint64(f[189]-t+q)
-		f[189] = FieldMontgomeryReduce(x)
+		f[189] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[158]
 		f[158] = FieldAdd(t, f[190])
 		x := uint64(7602457) * uint64(f[190]-t+q)
-		f[190] = FieldMontgomeryReduce(x)
+		f[190] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[159]
 		f[159] = FieldAdd(t, f[191])
 		x := uint64(7602457) * uint64(f[191]-t+q)
-		f[191] = FieldMontgomeryReduce(x)
+		f[191] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[192]
 		f[192] = FieldAdd(t, f[224])
 		x := uint64(237124) * uint64(f[224]-t+q)
-		f[224] = FieldMontgomeryReduce(x)
+		f[224] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[193]
 		f[193] = FieldAdd(t, f[225])
 		x := uint64(237124) * uint64(f[225]-t+q)
-		f[225] = FieldMontgomeryReduce(x)
+		f[225] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[194]
 		f[194] = FieldAdd(t, f[226])
 		x := uint64(237124) * uint64(f[226]-t+q)
-		f[226] = FieldMontgomeryReduce(x)
+		f[226] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[195]
 		f[195] = FieldAdd(t, f[227])
 		x := uint64(237124) * uint64(f[227]-t+q)
-		f[227] = FieldMontgomeryReduce(x)
+		f[227] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[196]
 		f[196] = FieldAdd(t, f[228])
 		x := uint64(237124) * uint64(f[228]-t+q)
-		f[228] = FieldMontgomeryReduce(x)
+		f[228] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[197]
 		f[197] = FieldAdd(t, f[229])
 		x := uint64(237124) * uint64(f[229]-t+q)
-		f[229] = FieldMontgomeryReduce(x)
+		f[229] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[198]
 		f[198] = FieldAdd(t, f[230])
 		x := uint64(237124) * uint64(f[230]-t+q)
-		f[230] = FieldMontgomeryReduce(x)
+		f[230] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[199]
 		f[199] = FieldAdd(t, f[231])
 		x := uint64(237124) * uint64(f[231]-t+q)
-		f[231] = FieldMontgomeryReduce(x)
+		f[231] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[200]
 		f[200] = FieldAdd(t, f[232])
 		x := uint64(237124) * uint64(f[232]-t+q)
-		f[232] = FieldMontgomeryReduce(x)
+		f[232] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[201]
 		f[201] = FieldAdd(t, f[233])
 		x := uint64(237124) * uint64(f[233]-t+q)
-		f[233] = FieldMontgomeryReduce(x)
+		f[233] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[202]
 		f[202] = FieldAdd(t, f[234])
 		x := uint64(237124) * uint64(f[234]-t+q)
-		f[234] = FieldMontgomeryReduce(x)
+		f[234] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[203]
 		f[203] = FieldAdd(t, f[235])
 		x := uint64(237124) * uint64(f[235]-t+q)
-		f[235] = FieldMontgomeryReduce(x)
+		f[235] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[204]
 		f[204] = FieldAdd(t, f[236])
 		x := uint64(237124) * uint64(f[236]-t+q)
-		f[236] = FieldMontgomeryReduce(x)
+		f[236] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[205]
 		f[205] = FieldAdd(t, f[237])
 		x := uint64(237124) * uint64(f[237]-t+q)
-		f[237] = FieldMontgomeryReduce(x)
+		f[237] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[206]
 		f[206] = FieldAdd(t, f[238])
 		x := uint64(237124) * uint64(f[238]-t+q)
-		f[238] = FieldMontgomeryReduce(x)
+		f[238] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[207]
 		f[207] = FieldAdd(t, f[239])
 		x := uint64(237124) * uint64(f[239]-t+q)
-		f[239] = FieldMontgomeryReduce(x)
+		f[239] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[208]
 		f[208] = FieldAdd(t, f[240])
 		x := uint64(237124) * uint64(f[240]-t+q)
-		f[240] = FieldMontgomeryReduce(x)
+		f[240] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[209]
 		f[209] = FieldAdd(t, f[241])
 		x := uint64(237124) * uint64(f[241]-t+q)
-		f[241] = FieldMontgomeryReduce(x)
+		f[241] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[210]
 		f[210] = FieldAdd(t, f[242])
 		x := uint64(237124) * uint64(f[242]-t+q)
-		f[242] = FieldMontgomeryReduce(x)
+		f[242] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[211]
 		f[211] = FieldAdd(t, f[243])
 		x := uint64(237124) * uint64(f[243]-t+q)
-		f[243] = FieldMontgomeryReduce(x)
+		f[243] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[212]
 		f[212] = FieldAdd(t, f[244])
 		x := uint64(237124) * uint64(f[244]-t+q)
-		f[244] = FieldMontgomeryReduce(x)
+		f[244] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[213]
 		f[213] = FieldAdd(t, f[245])
 		x := uint64(237124) * uint64(f[245]-t+q)
-		f[245] = FieldMontgomeryReduce(x)
+		f[245] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[214]
 		f[214] = FieldAdd(t, f[246])
 		x := uint64(237124) * uint64(f[246]-t+q)
-		f[246] = FieldMontgomeryReduce(x)
+		f[246] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[215]
 		f[215] = FieldAdd(t, f[247])
 		x := uint64(237124) * uint64(f[247]-t+q)
-		f[247] = FieldMontgomeryReduce(x)
+		f[247] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[216]
 		f[216] = FieldAdd(t, f[248])
 		x := uint64(237124) * uint64(f[248]-t+q)
-		f[248] = FieldMontgomeryReduce(x)
+		f[248] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[217]
 		f[217] = FieldAdd(t, f[249])
 		x := uint64(237124) * uint64(f[249]-t+q)
-		f[249] = FieldMontgomeryReduce(x)
+		f[249] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[218]
 		f[218] = FieldAdd(t, f[250])
 		x := uint64(237124) * uint64(f[250]-t+q)
-		f[250] = FieldMontgomeryReduce(x)
+		f[250] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[219]
 		f[219] = FieldAdd(t, f[251])
 		x := uint64(237124) * uint64(f[251]-t+q)
-		f[251] = FieldMontgomeryReduce(x)
+		f[251] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[220]
 		f[220] = FieldAdd(t, f[252])
 		x := uint64(237124) * uint64(f[252]-t+q)
-		f[252] = FieldMontgomeryReduce(x)
+		f[252] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[221]
 		f[221] = FieldAdd(t, f[253])
 		x := uint64(237124) * uint64(f[253]-t+q)
-		f[253] = FieldMontgomeryReduce(x)
+		f[253] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[222]
 		f[222] = FieldAdd(t, f[254])
 		x := uint64(237124) * uint64(f[254]-t+q)
-		f[254] = FieldMontgomeryReduce(x)
+		f[254] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[223]
 		f[223] = FieldAdd(t, f[255])
 		x := uint64(237124) * uint64(f[255]-t+q)
-		f[255] = FieldMontgomeryReduce(x)
+		f[255] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[0]
 		f[0] = FieldAdd(t, f[64])
 		x := uint64(7861508) * uint64(f[64]-t+q)
-		f[64] = FieldMontgomeryReduce(x)
+		f[64] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[1]
 		f[1] = FieldAdd(t, f[65])
 		x := uint64(7861508) * uint64(f[65]-t+q)
-		f[65] = FieldMontgomeryReduce(x)
+		f[65] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[2]
 		f[2] = FieldAdd(t, f[66])
 		x := uint64(7861508) * uint64(f[66]-t+q)
-		f[66] = FieldMontgomeryReduce(x)
+		f[66] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[3]
 		f[3] = FieldAdd(t, f[67])
 		x := uint64(7861508) * uint64(f[67]-t+q)
-		f[67] = FieldMontgomeryReduce(x)
+		f[67] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[4]
 		f[4] = FieldAdd(t, f[68])
 		x := uint64(7861508) * uint64(f[68]-t+q)
-		f[68] = FieldMontgomeryReduce(x)
+		f[68] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[5]
 		f[5] = FieldAdd(t, f[69])
 		x := uint64(7861508) * uint64(f[69]-t+q)
-		f[69] = FieldMontgomeryReduce(x)
+		f[69] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[6]
 		f[6] = FieldAdd(t, f[70])
 		x := uint64(7861508) * uint64(f[70]-t+q)
-		f[70] = FieldMontgomeryReduce(x)
+		f[70] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[7]
 		f[7] = FieldAdd(t, f[71])
 		x := uint64(7861508) * uint64(f[71]-t+q)
-		f[71] = FieldMontgomeryReduce(x)
+		f[71] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[8]
 		f[8] = FieldAdd(t, f[72])
 		x := uint64(7861508) * uint64(f[72]-t+q)
-		f[72] = FieldMontgomeryReduce(x)
+		f[72] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[9]
 		f[9] = FieldAdd(t, f[73])
 		x := uint64(7861508) * uint64(f[73]-t+q)
-		f[73] = FieldMontgomeryReduce(x)
+		f[73] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[10]
 		f[10] = FieldAdd(t, f[74])
 		x := uint64(7861508) * uint64(f[74]-t+q)
-		f[74] = FieldMontgomeryReduce(x)
+		f[74] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[11]
 		f[11] = FieldAdd(t, f[75])
 		x := uint64(7861508) * uint64(f[75]-t+q)
-		f[75] = FieldMontgomeryReduce(x)
+		f[75] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[12]
 		f[12] = FieldAdd(t, f[76])
 		x := uint64(7861508) * uint64(f[76]-t+q)
-		f[76] = FieldMontgomeryReduce(x)
+		f[76] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[13]
 		f[13] = FieldAdd(t, f[77])
 		x := uint64(7861508) * uint64(f[77]-t+q)
-		f[77] = FieldMontgomeryReduce(x)
+		f[77] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[14]
 		f[14] = FieldAdd(t, f[78])
 		x := uint64(7861508) * uint64(f[78]-t+q)
-		f[78] = FieldMontgomeryReduce(x)
+		f[78] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[15]
 		f[15] = FieldAdd(t, f[79])
 		x := uint64(7861508) * uint64(f[79]-t+q)
-		f[79] = FieldMontgomeryReduce(x)
+		f[79] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[16]
 		f[16] = FieldAdd(t, f[80])
 		x := uint64(7861508) * uint64(f[80]-t+q)
-		f[80] = FieldMontgomeryReduce(x)
+		f[80] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[17]
 		f[17] = FieldAdd(t, f[81])
 		x := uint64(7861508) * uint64(f[81]-t+q)
-		f[81] = FieldMontgomeryReduce(x)
+		f[81] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[18]
 		f[18] = FieldAdd(t, f[82])
 		x := uint64(7861508) * uint64(f[82]-t+q)
-		f[82] = FieldMontgomeryReduce(x)
+		f[82] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[19]
 		f[19] = FieldAdd(t, f[83])
 		x := uint64(7861508) * uint64(f[83]-t+q)
-		f[83] = FieldMontgomeryReduce(x)
+		f[83] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[20]
 		f[20] = FieldAdd(t, f[84])
 		x := uint64(7861508) * uint64(f[84]-t+q)
-		f[84] = FieldMontgomeryReduce(x)
+		f[84] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[21]
 		f[21] = FieldAdd(t, f[85])
 		x := uint64(7861508) * uint64(f[85]-t+q)
-		f[85] = FieldMontgomeryReduce(x)
+		f[85] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[22]
 		f[22] = FieldAdd(t, f[86])
 		x := uint64(7861508) * uint64(f[86]-t+q)
-		f[86] = FieldMontgomeryReduce(x)
+		f[86] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[23]
 		f[23] = FieldAdd(t, f[87])
 		x := uint64(7861508) * uint64(f[87]-t+q)
-		f[87] = FieldMontgomeryReduce(x)
+		f[87] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[24]
 		f[24] = FieldAdd(t, f[88])
 		x := uint64(7861508) * uint64(f[88]-t+q)
-		f[88] = FieldMontgomeryReduce(x)
+		f[88] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[25]
 		f[25] = FieldAdd(t, f[89])
 		x := uint64(7861508) * uint64(f[89]-t+q)
-		f[89] = FieldMontgomeryReduce(x)
+		f[89] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[26]
 		f[26] = FieldAdd(t, f[90])
 		x := uint64(7861508) * uint64(f[90]-t+q)
-		f[90] = FieldMontgomeryReduce(x)
+		f[90] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[27]
 		f[27] = FieldAdd(t, f[91])
 		x := uint64(7861508) * uint64(f[91]-t+q)
-		f[91] = FieldMontgomeryReduce(x)
+		f[91] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[28]
 		f[28] = FieldAdd(t, f[92])
 		x := uint64(7861508) * uint64(f[92]-t+q)
-		f[92] = FieldMontgomeryReduce(x)
+		f[92] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[29]
 		f[29] = FieldAdd(t, f[93])
 		x := uint64(7861508) * uint64(f[93]-t+q)
-		f[93] = FieldMontgomeryReduce(x)
+		f[93] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[30]
 		f[30] = FieldAdd(t, f[94])
 		x := uint64(7861508) * uint64(f[94]-t+q)
-		f[94] = FieldMontgomeryReduce(x)
+		f[94] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[31]
 		f[31] = FieldAdd(t, f[95])
 		x := uint64(7861508) * uint64(f[95]-t+q)
-		f[95] = FieldMontgomeryReduce(x)
+		f[95] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[32]
 		f[32] = FieldAdd(t, f[96])
 		x := uint64(7861508) * uint64(f[96]-t+q)
-		f[96] = FieldMontgomeryReduce(x)
+		f[96] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[33]
 		f[33] = FieldAdd(t, f[97])
 		x := uint64(7861508) * uint64(f[97]-t+q)
-		f[97] = FieldMontgomeryReduce(x)
+		f[97] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[34]
 		f[34] = FieldAdd(t, f[98])
 		x := uint64(7861508) * uint64(f[98]-t+q)
-		f[98] = FieldMontgomeryReduce(x)
+		f[98] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[35]
 		f[35] = FieldAdd(t, f[99])
 		x := uint64(7861508) * uint64(f[99]-t+q)
-		f[99] = FieldMontgomeryReduce(x)
+		f[99] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[36]
 		f[36] = FieldAdd(t, f[100])
 		x := uint64(7861508) * uint64(f[100]-t+q)
-		f[100] = FieldMontgomeryReduce(x)
+		f[100] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[37]
 		f[37] = FieldAdd(t, f[101])
 		x := uint64(7861508) * uint64(f[101]-t+q)
-		f[101] = FieldMontgomeryReduce(x)
+		f[101] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[38]
 		f[38] = FieldAdd(t, f[102])
 		x := uint64(7861508) * uint64(f[102]-t+q)
-		f[102] = FieldMontgomeryReduce(x)
+		f[102] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[39]
 		f[39] = FieldAdd(t, f[103])
 		x := uint64(7861508) * uint64(f[103]-t+q)
-		f[103] = FieldMontgomeryReduce(x)
+		f[103] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[40]
 		f[40] = FieldAdd(t, f[104])
 		x := uint64(7861508) * uint64(f[104]-t+q)
-		f[104] = FieldMontgomeryReduce(x)
+		f[104] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[41]
 		f[41] = FieldAdd(t, f[105])
 		x := uint64(7861508) * uint64(f[105]-t+q)
-		f[105] = FieldMontgomeryReduce(x)
+		f[105] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[42]
 		f[42] = FieldAdd(t, f[106])
 		x := uint64(7861508) * uint64(f[106]-t+q)
-		f[106] = FieldMontgomeryReduce(x)
+		f[106] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[43]
 		f[43] = FieldAdd(t, f[107])
 		x := uint64(7861508) * uint64(f[107]-t+q)
-		f[107] = FieldMontgomeryReduce(x)
+		f[107] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[44]
 		f[44] = FieldAdd(t, f[108])
 		x := uint64(7861508) * uint64(f[108]-t+q)
-		f[108] = FieldMontgomeryReduce(x)
+		f[108] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[45]
 		f[45] = FieldAdd(t, f[109])
 		x := uint64(7861508) * uint64(f[109]-t+q)
-		f[109] = FieldMontgomeryReduce(x)
+		f[109] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[46]
 		f[46] = FieldAdd(t, f[110])
 		x := uint64(7861508) * uint64(f[110]-t+q)
-		f[110] = FieldMontgomeryReduce(x)
+		f[110] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[47]
 		f[47] = FieldAdd(t, f[111])
 		x := uint64(7861508) * uint64(f[111]-t+q)
-		f[111] = FieldMontgomeryReduce(x)
+		f[111] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[48]
 		f[48] = FieldAdd(t, f[112])
 		x := uint64(7861508) * uint64(f[112]-t+q)
-		f[112] = FieldMontgomeryReduce(x)
+		f[112] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[49]
 		f[49] = FieldAdd(t, f[113])
 		x := uint64(7861508) * uint64(f[113]-t+q)
-		f[113] = FieldMontgomeryReduce(x)
+		f[113] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[50]
 		f[50] = FieldAdd(t, f[114])
 		x := uint64(7861508) * uint64(f[114]-t+q)
-		f[114] = FieldMontgomeryReduce(x)
+		f[114] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[51]
 		f[51] = FieldAdd(t, f[115])
 		x := uint64(7861508) * uint64(f[115]-t+q)
-		f[115] = FieldMontgomeryReduce(x)
+		f[115] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[52]
 		f[52] = FieldAdd(t, f[116])
 		x := uint64(7861508) * uint64(f[116]-t+q)
-		f[116] = FieldMontgomeryReduce(x)
+		f[116] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[53]
 		f[53] = FieldAdd(t, f[117])
 		x := uint64(7861508) * uint64(f[117]-t+q)
-		f[117] = FieldMontgomeryReduce(x)
+		f[117] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[54]
 		f[54] = FieldAdd(t, f[118])
 		x := uint64(7861508) * uint64(f[118]-t+q)
-		f[118] = FieldMontgomeryReduce(x)
+		f[118] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[55]
 		f[55] = FieldAdd(t, f[119])
 		x := uint64(7861508) * uint64(f[119]-t+q)
-		f[119] = FieldMontgomeryReduce(x)
+		f[119] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[56]
 		f[56] = FieldAdd(t, f[120])
 		x := uint64(7861508) * uint64(f[120]-t+q)
-		f[120] = FieldMontgomeryReduce(x)
+		f[120] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[57]
 		f[57] = FieldAdd(t, f[121])
 		x := uint64(7861508) * uint64(f[121]-t+q)
-		f[121] = FieldMontgomeryReduce(x)
+		f[121] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[58]
 		f[58] = FieldAdd(t, f[122])
 		x := uint64(7861508) * uint64(f[122]-t+q)
-		f[122] = FieldMontgomeryReduce(x)
+		f[122] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[59]
 		f[59] = FieldAdd(t, f[123])
 		x := uint64(7861508) * uint64(f[123]-t+q)
-		f[123] = FieldMontgomeryReduce(x)
+		f[123] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[60]
 		f[60] = FieldAdd(t, f[124])
 		x := uint64(7861508) * uint64(f[124]-t+q)
-		f[124] = FieldMontgomeryReduce(x)
+		f[124] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[61]
 		f[61] = FieldAdd(t, f[125])
 		x := uint64(7861508) * uint64(f[125]-t+q)
-		f[125] = FieldMontgomeryReduce(x)
+		f[125] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[62]
 		f[62] = FieldAdd(t, f[126])
 		x := uint64(7861508) * uint64(f[126]-t+q)
-		f[126] = FieldMontgomeryReduce(x)
+		f[126] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[63]
 		f[63] = FieldAdd(t, f[127])
 		x := uint64(7861508) * uint64(f[127]-t+q)
-		f[127] = FieldMontgomeryReduce(x)
+		f[127] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[128]
 		f[128] = FieldAdd(t, f[192])
 		x := uint64(5771523) * uint64(f[192]-t+q)
-		f[192] = FieldMontgomeryReduce(x)
+		f[192] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[129]
 		f[129] = FieldAdd(t, f[193])
 		x := uint64(5771523) * uint64(f[193]-t+q)
-		f[193] = FieldMontgomeryReduce(x)
+		f[193] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[130]
 		f[130] = FieldAdd(t, f[194])
 		x := uint64(5771523) * uint64(f[194]-t+q)
-		f[194] = FieldMontgomeryReduce(x)
+		f[194] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[131]
 		f[131] = FieldAdd(t, f[195])
 		x := uint64(5771523) * uint64(f[195]-t+q)
-		f[195] = FieldMontgomeryReduce(x)
+		f[195] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[132]
 		f[132] = FieldAdd(t, f[196])
 		x := uint64(5771523) * uint64(f[196]-t+q)
-		f[196] = FieldMontgomeryReduce(x)
+		f[196] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[133]
 		f[133] = FieldAdd(t, f[197])
 		x := uint64(5771523) * uint64(f[197]-t+q)
-		f[197] = FieldMontgomeryReduce(x)
+		f[197] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[134]
 		f[134] = FieldAdd(t, f[198])
 		x := uint64(5771523) * uint64(f[198]-t+q)
-		f[198] = FieldMontgomeryReduce(x)
+		f[198] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[135]
 		f[135] = FieldAdd(t, f[199])
 		x := uint64(5771523) * uint64(f[199]-t+q)
-		f[199] = FieldMontgomeryReduce(x)
+		f[199] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[136]
 		f[136] = FieldAdd(t, f[200])
 		x := uint64(5771523) * uint64(f[200]-t+q)
-		f[200] = FieldMontgomeryReduce(x)
+		f[200] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[137]
 		f[137] = FieldAdd(t, f[201])
 		x := uint64(5771523) * uint64(f[201]-t+q)
-		f[201] = FieldMontgomeryReduce(x)
+		f[201] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[138]
 		f[138] = FieldAdd(t, f[202])
 		x := uint64(5771523) * uint64(f[202]-t+q)
-		f[202] = FieldMontgomeryReduce(x)
+		f[202] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[139]
 		f[139] = FieldAdd(t, f[203])
 		x := uint64(5771523) * uint64(f[203]-t+q)
-		f[203] = FieldMontgomeryReduce(x)
+		f[203] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[140]
 		f[140] = FieldAdd(t, f[204])
 		x := uint64(5771523) * uint64(f[204]-t+q)
-		f[204] = FieldMontgomeryReduce(x)
+		f[204] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[141]
 		f[141] = FieldAdd(t, f[205])
 		x := uint64(5771523) * uint64(f[205]-t+q)
-		f[205] = FieldMontgomeryReduce(x)
+		f[205] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[142]
 		f[142] = FieldAdd(t, f[206])
 		x := uint64(5771523) * uint64(f[206]-t+q)
-		f[206] = FieldMontgomeryReduce(x)
+		f[206] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[143]
 		f[143] = FieldAdd(t, f[207])
 		x := uint64(5771523) * uint64(f[207]-t+q)
-		f[207] = FieldMontgomeryReduce(x)
+		f[207] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[144]
 		f[144] = FieldAdd(t, f[208])
 		x := uint64(5771523) * uint64(f[208]-t+q)
-		f[208] = FieldMontgomeryReduce(x)
+		f[208] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[145]
 		f[145] = FieldAdd(t, f[209])
 		x := uint64(5771523) * uint64(f[209]-t+q)
-		f[209] = FieldMontgomeryReduce(x)
+		f[209] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[146]
 		f[146] = FieldAdd(t, f[210])
 		x := uint64(5771523) * uint64(f[210]-t+q)
-		f[210] = FieldMontgomeryReduce(x)
+		f[210] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[147]
 		f[147] = FieldAdd(t, f[211])
 		x := uint64(5771523) * uint64(f[211]-t+q)
-		f[211] = FieldMontgomeryReduce(x)
+		f[211] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[148]
 		f[148] = FieldAdd(t, f[212])
 		x := uint64(5771523) * uint64(f[212]-t+q)
-		f[212] = FieldMontgomeryReduce(x)
+		f[212] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[149]
 		f[149] = FieldAdd(t, f[213])
 		x := uint64(5771523) * uint64(f[213]-t+q)
-		f[213] = FieldMontgomeryReduce(x)
+		f[213] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[150]
 		f[150] = FieldAdd(t, f[214])
 		x := uint64(5771523) * uint64(f[214]-t+q)
-		f[214] = FieldMontgomeryReduce(x)
+		f[214] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[151]
 		f[151] = FieldAdd(t, f[215])
 		x := uint64(5771523) * uint64(f[215]-t+q)
-		f[215] = FieldMontgomeryReduce(x)
+		f[215] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[152]
 		f[152] = FieldAdd(t, f[216])
 		x := uint64(5771523) * uint64(f[216]-t+q)
-		f[216] = FieldMontgomeryReduce(x)
+		f[216] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[153]
 		f[153] = FieldAdd(t, f[217])
 		x := uint64(5771523) * uint64(f[217]-t+q)
-		f[217] = FieldMontgomeryReduce(x)
+		f[217] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[154]
 		f[154] = FieldAdd(t, f[218])
 		x := uint64(5771523) * uint64(f[218]-t+q)
-		f[218] = FieldMontgomeryReduce(x)
+		f[218] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[155]
 		f[155] = FieldAdd(t, f[219])
 		x := uint64(5771523) * uint64(f[219]-t+q)
-		f[219] = FieldMontgomeryReduce(x)
+		f[219] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[156]
 		f[156] = FieldAdd(t, f[220])
 		x := uint64(5771523) * uint64(f[220]-t+q)
-		f[220] = FieldMontgomeryReduce(x)
+		f[220] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[157]
 		f[157] = FieldAdd(t, f[221])
 		x := uint64(5771523) * uint64(f[221]-t+q)
-		f[221] = FieldMontgomeryReduce(x)
+		f[221] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[158]
 		f[158] = FieldAdd(t, f[222])
 		x := uint64(5771523) * uint64(f[222]-t+q)
-		f[222] = FieldMontgomeryReduce(x)
+		f[222] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[159]
 		f[159] = FieldAdd(t, f[223])
 		x := uint64(5771523) * uint64(f[223]-t+q)
-		f[223] = FieldMontgomeryReduce(x)
+		f[223] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[160]
 		f[160] = FieldAdd(t, f[224])
 		x := uint64(5771523) * uint64(f[224]-t+q)
-		f[224] = FieldMontgomeryReduce(x)
+		f[224] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[161]
 		f[161] = FieldAdd(t, f[225])
 		x := uint64(5771523) * uint64(f[225]-t+q)
-		f[225] = FieldMontgomeryReduce(x)
+		f[225] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[162]
 		f[162] = FieldAdd(t, f[226])
 		x := uint64(5771523) * uint64(f[226]-t+q)
-		f[226] = FieldMontgomeryReduce(x)
+		f[226] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[163]
 		f[163] = FieldAdd(t, f[227])
 		x := uint64(5771523) * uint64(f[227]-t+q)
-		f[227] = FieldMontgomeryReduce(x)
+		f[227] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[164]
 		f[164] = FieldAdd(t, f[228])
 		x := uint64(5771523) * uint64(f[228]-t+q)
-		f[228] = FieldMontgomeryReduce(x)
+		f[228] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[165]
 		f[165] = FieldAdd(t, f[229])
 		x := uint64(5771523) * uint64(f[229]-t+q)
-		f[229] = FieldMontgomeryReduce(x)
+		f[229] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[166]
 		f[166] = FieldAdd(t, f[230])
 		x := uint64(5771523) * uint64(f[230]-t+q)
-		f[230] = FieldMontgomeryReduce(x)
+		f[230] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[167]
 		f[167] = FieldAdd(t, f[231])
 		x := uint64(5771523) * uint64(f[231]-t+q)
-		f[231] = FieldMontgomeryReduce(x)
+		f[231] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[168]
 		f[168] = FieldAdd(t, f[232])
 		x := uint64(5771523) * uint64(f[232]-t+q)
-		f[232] = FieldMontgomeryReduce(x)
+		f[232] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[169]
 		f[169] = FieldAdd(t, f[233])
 		x := uint64(5771523) * uint64(f[233]-t+q)
-		f[233] = FieldMontgomeryReduce(x)
+		f[233] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[170]
 		f[170] = FieldAdd(t, f[234])
 		x := uint64(5771523) * uint64(f[234]-t+q)
-		f[234] = FieldMontgomeryReduce(x)
+		f[234] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[171]
 		f[171] = FieldAdd(t, f[235])
 		x := uint64(5771523) * uint64(f[235]-t+q)
-		f[235] = FieldMontgomeryReduce(x)
+		f[235] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[172]
 		f[172] = FieldAdd(t, f[236])
 		x := uint64(5771523) * uint64(f[236]-t+q)
-		f[236] = FieldMontgomeryReduce(x)
+		f[236] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[173]
 		f[173] = FieldAdd(t, f[237])
 		x := uint64(5771523) * uint64(f[237]-t+q)
-		f[237] = FieldMontgomeryReduce(x)
+		f[237] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[174]
 		f[174] = FieldAdd(t, f[238])
 		x := uint64(5771523) * uint64(f[238]-t+q)
-		f[238] = FieldMontgomeryReduce(x)
+		f[238] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[175]
 		f[175] = FieldAdd(t, f[239])
 		x := uint64(5771523) * uint64(f[239]-t+q)
-		f[239] = FieldMontgomeryReduce(x)
+		f[239] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[176]
 		f[176] = FieldAdd(t, f[240])
 		x := uint64(5771523) * uint64(f[240]-t+q)
-		f[240] = FieldMontgomeryReduce(x)
+		f[240] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[177]
 		f[177] = FieldAdd(t, f[241])
 		x := uint64(5771523) * uint64(f[241]-t+q)
-		f[241] = FieldMontgomeryReduce(x)
+		f[241] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[178]
 		f[178] = FieldAdd(t, f[242])
 		x := uint64(5771523) * uint64(f[242]-t+q)
-		f[242] = FieldMontgomeryReduce(x)
+		f[242] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[179]
 		f[179] = FieldAdd(t, f[243])
 		x := uint64(5771523) * uint64(f[243]-t+q)
-		f[243] = FieldMontgomeryReduce(x)
+		f[243] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[180]
 		f[180] = FieldAdd(t, f[244])
 		x := uint64(5771523) * uint64(f[244]-t+q)
-		f[244] = FieldMontgomeryReduce(x)
+		f[244] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[181]
 		f[181] = FieldAdd(t, f[245])
 		x := uint64(5771523) * uint64(f[245]-t+q)
-		f[245] = FieldMontgomeryReduce(x)
+		f[245] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[182]
 		f[182] = FieldAdd(t, f[246])
 		x := uint64(5771523) * uint64(f[246]-t+q)
-		f[246] = FieldMontgomeryReduce(x)
+		f[246] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[183]
 		f[183] = FieldAdd(t, f[247])
 		x := uint64(5771523) * uint64(f[247]-t+q)
-		f[247] = FieldMontgomeryReduce(x)
+		f[247] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[184]
 		f[184] = FieldAdd(t, f[248])
 		x := uint64(5771523) * uint64(f[248]-t+q)
-		f[248] = FieldMontgomeryReduce(x)
+		f[248] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[185]
 		f[185] = FieldAdd(t, f[249])
 		x := uint64(5771523) * uint64(f[249]-t+q)
-		f[249] = FieldMontgomeryReduce(x)
+		f[249] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[186]
 		f[186] = FieldAdd(t, f[250])
 		x := uint64(5771523) * uint64(f[250]-t+q)
-		f[250] = FieldMontgomeryReduce(x)
+		f[250] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[187]
 		f[187] = FieldAdd(t, f[251])
 		x := uint64(5771523) * uint64(f[251]-t+q)
-		f[251] = FieldMontgomeryReduce(x)
+		f[251] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[188]
 		f[188] = FieldAdd(t, f[252])
 		x := uint64(5771523) * uint64(f[252]-t+q)
-		f[252] = FieldMontgomeryReduce(x)
+		f[252] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[189]
 		f[189] = FieldAdd(t, f[253])
 		x := uint64(5771523) * uint64(f[253]-t+q)
-		f[253] = FieldMontgomeryReduce(x)
+		f[253] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[190]
 		f[190] = FieldAdd(t, f[254])
 		x := uint64(5771523) * uint64(f[254]-t+q)
-		f[254] = FieldMontgomeryReduce(x)
+		f[254] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[191]
 		f[191] = FieldAdd(t, f[255])
 		x := uint64(5771523) * uint64(f[255]-t+q)
-		f[255] = FieldMontgomeryReduce(x)
+		f[255] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[0]
 		f[0] = FieldAdd(t, f[128])
 		x := uint64(25847) * uint64(f[128]-t+q)
-		f[128] = FieldMontgomeryReduce(x)
+		f[128] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[1]
 		f[1] = FieldAdd(t, f[129])
 		x := uint64(25847) * uint64(f[129]-t+q)
-		f[129] = FieldMontgomeryReduce(x)
+		f[129] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[2]
 		f[2] = FieldAdd(t, f[130])
 		x := uint64(25847) * uint64(f[130]-t+q)
-		f[130] = FieldMontgomeryReduce(x)
+		f[130] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[3]
 		f[3] = FieldAdd(t, f[131])
 		x := uint64(25847) * uint64(f[131]-t+q)
-		f[131] = FieldMontgomeryReduce(x)
+		f[131] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[4]
 		f[4] = FieldAdd(t, f[132])
 		x := uint64(25847) * uint64(f[132]-t+q)
-		f[132] = FieldMontgomeryReduce(x)
+		f[132] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[5]
 		f[5] = FieldAdd(t, f[133])
 		x := uint64(25847) * uint64(f[133]-t+q)
-		f[133] = FieldMontgomeryReduce(x)
+		f[133] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[6]
 		f[6] = FieldAdd(t, f[134])
 		x := uint64(25847) * uint64(f[134]-t+q)
-		f[134] = FieldMontgomeryReduce(x)
+		f[134] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[7]
 		f[7] = FieldAdd(t, f[135])
 		x := uint64(25847) * uint64(f[135]-t+q)
-		f[135] = FieldMontgomeryReduce(x)
+		f[135] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[8]
 		f[8] = FieldAdd(t, f[136])
 		x := uint64(25847) * uint64(f[136]-t+q)
-		f[136] = FieldMontgomeryReduce(x)
+		f[136] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[9]
 		f[9] = FieldAdd(t, f[137])
 		x := uint64(25847) * uint64(f[137]-t+q)
-		f[137] = FieldMontgomeryReduce(x)
+		f[137] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[10]
 		f[10] = FieldAdd(t, f[138])
 		x := uint64(25847) * uint64(f[138]-t+q)
-		f[138] = FieldMontgomeryReduce(x)
+		f[138] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[11]
 		f[11] = FieldAdd(t, f[139])
 		x := uint64(25847) * uint64(f[139]-t+q)
-		f[139] = FieldMontgomeryReduce(x)
+		f[139] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[12]
 		f[12] = FieldAdd(t, f[140])
 		x := uint64(25847) * uint64(f[140]-t+q)
-		f[140] = FieldMontgomeryReduce(x)
+		f[140] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[13]
 		f[13] = FieldAdd(t, f[141])
 		x := uint64(25847) * uint64(f[141]-t+q)
-		f[141] = FieldMontgomeryReduce(x)
+		f[141] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[14]
 		f[14] = FieldAdd(t, f[142])
 		x := uint64(25847) * uint64(f[142]-t+q)
-		f[142] = FieldMontgomeryReduce(x)
+		f[142] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[15]
 		f[15] = FieldAdd(t, f[143])
 		x := uint64(25847) * uint64(f[143]-t+q)
-		f[143] = FieldMontgomeryReduce(x)
+		f[143] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[16]
 		f[16] = FieldAdd(t, f[144])
 		x := uint64(25847) * uint64(f[144]-t+q)
-		f[144] = FieldMontgomeryReduce(x)
+		f[144] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[17]
 		f[17] = FieldAdd(t, f[145])
 		x := uint64(25847) * uint64(f[145]-t+q)
-		f[145] = FieldMontgomeryReduce(x)
+		f[145] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[18]
 		f[18] = FieldAdd(t, f[146])
 		x := uint64(25847) * uint64(f[146]-t+q)
-		f[146] = FieldMontgomeryReduce(x)
+		f[146] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[19]
 		f[19] = FieldAdd(t, f[147])
 		x := uint64(25847) * uint64(f[147]-t+q)
-		f[147] = FieldMontgomeryReduce(x)
+		f[147] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[20]
 		f[20] = FieldAdd(t, f[148])
 		x := uint64(25847) * uint64(f[148]-t+q)
-		f[148] = FieldMontgomeryReduce(x)
+		f[148] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[21]
 		f[21] = FieldAdd(t, f[149])
 		x := uint64(25847) * uint64(f[149]-t+q)
-		f[149] = FieldMontgomeryReduce(x)
+		f[149] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[22]
 		f[22] = FieldAdd(t, f[150])
 		x := uint64(25847) * uint64(f[150]-t+q)
-		f[150] = FieldMontgomeryReduce(x)
+		f[150] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[23]
 		f[23] = FieldAdd(t, f[151])
 		x := uint64(25847) * uint64(f[151]-t+q)
-		f[151] = FieldMontgomeryReduce(x)
+		f[151] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[24]
 		f[24] = FieldAdd(t, f[152])
 		x := uint64(25847) * uint64(f[152]-t+q)
-		f[152] = FieldMontgomeryReduce(x)
+		f[152] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[25]
 		f[25] = FieldAdd(t, f[153])
 		x := uint64(25847) * uint64(f[153]-t+q)
-		f[153] = FieldMontgomeryReduce(x)
+		f[153] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[26]
 		f[26] = FieldAdd(t, f[154])
 		x := uint64(25847) * uint64(f[154]-t+q)
-		f[154] = FieldMontgomeryReduce(x)
+		f[154] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[27]
 		f[27] = FieldAdd(t, f[155])
 		x := uint64(25847) * uint64(f[155]-t+q)
-		f[155] = FieldMontgomeryReduce(x)
+		f[155] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[28]
 		f[28] = FieldAdd(t, f[156])
 		x := uint64(25847) * uint64(f[156]-t+q)
-		f[156] = FieldMontgomeryReduce(x)
+		f[156] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[29]
 		f[29] = FieldAdd(t, f[157])
 		x := uint64(25847) * uint64(f[157]-t+q)
-		f[157] = FieldMontgomeryReduce(x)
+		f[157] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[30]
 		f[30] = FieldAdd(t, f[158])
 		x := uint64(25847) * uint64(f[158]-t+q)
-		f[158] = FieldMontgomeryReduce(x)
+		f[158] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[31]
 		f[31] = FieldAdd(t, f[159])
 		x := uint64(25847) * uint64(f[159]-t+q)
-		f[159] = FieldMontgomeryReduce(x)
+		f[159] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[32]
 		f[32] = FieldAdd(t, f[160])
 		x := uint64(25847) * uint64(f[160]-t+q)
-		f[160] = FieldMontgomeryReduce(x)
+		f[160] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[33]
 		f[33] = FieldAdd(t, f[161])
 		x := uint64(25847) * uint64(f[161]-t+q)
-		f[161] = FieldMontgomeryReduce(x)
+		f[161] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[34]
 		f[34] = FieldAdd(t, f[162])
 		x := uint64(25847) * uint64(f[162]-t+q)
-		f[162] = FieldMontgomeryReduce(x)
+		f[162] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[35]
 		f[35] = FieldAdd(t, f[163])
 		x := uint64(25847) * uint64(f[163]-t+q)
-		f[163] = FieldMontgomeryReduce(x)
+		f[163] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[36]
 		f[36] = FieldAdd(t, f[164])
 		x := uint64(25847) * uint64(f[164]-t+q)
-		f[164] = FieldMontgomeryReduce(x)
+		f[164] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[37]
 		f[37] = FieldAdd(t, f[165])
 		x := uint64(25847) * uint64(f[165]-t+q)
-		f[165] = FieldMontgomeryReduce(x)
+		f[165] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[38]
 		f[38] = FieldAdd(t, f[166])
 		x := uint64(25847) * uint64(f[166]-t+q)
-		f[166] = FieldMontgomeryReduce(x)
+		f[166] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[39]
 		f[39] = FieldAdd(t, f[167])
 		x := uint64(25847) * uint64(f[167]-t+q)
-		f[167] = FieldMontgomeryReduce(x)
+		f[167] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[40]
 		f[40] = FieldAdd(t, f[168])
 		x := uint64(25847) * uint64(f[168]-t+q)
-		f[168] = FieldMontgomeryReduce(x)
+		f[168] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[41]
 		f[41] = FieldAdd(t, f[169])
 		x := uint64(25847) * uint64(f[169]-t+q)
-		f[169] = FieldMontgomeryReduce(x)
+		f[169] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[42]
 		f[42] = FieldAdd(t, f[170])
 		x := uint64(25847) * uint64(f[170]-t+q)
-		f[170] = FieldMontgomeryReduce(x)
+		f[170] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[43]
 		f[43] = FieldAdd(t, f[171])
 		x := uint64(25847) * uint64(f[171]-t+q)
-		f[171] = FieldMontgomeryReduce(x)
+		f[171] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[44]
 		f[44] = FieldAdd(t, f[172])
 		x := uint64(25847) * uint64(f[172]-t+q)
-		f[172] = FieldMontgomeryReduce(x)
+		f[172] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[45]
 		f[45] = FieldAdd(t, f[173])
 		x := uint64(25847) * uint64(f[173]-t+q)
-		f[173] = FieldMontgomeryReduce(x)
+		f[173] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[46]
 		f[46] = FieldAdd(t, f[174])
 		x := uint64(25847) * uint64(f[174]-t+q)
-		f[174] = FieldMontgomeryReduce(x)
+		f[174] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[47]
 		f[47] = FieldAdd(t, f[175])
 		x := uint64(25847) * uint64(f[175]-t+q)
-		f[175] = FieldMontgomeryReduce(x)
+		f[175] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[48]
 		f[48] = FieldAdd(t, f[176])
 		x := uint64(25847) * uint64(f[176]-t+q)
-		f[176] = FieldMontgomeryReduce(x)
+		f[176] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[49]
 		f[49] = FieldAdd(t, f[177])
 		x := uint64(25847) * uint64(f[177]-t+q)
-		f[177] = FieldMontgomeryReduce(x)
+		f[177] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[50]
 		f[50] = FieldAdd(t, f[178])
 		x := uint64(25847) * uint64(f[178]-t+q)
-		f[178] = FieldMontgomeryReduce(x)
+		f[178] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[51]
 		f[51] = FieldAdd(t, f[179])
 		x := uint64(25847) * uint64(f[179]-t+q)
-		f[179] = FieldMontgomeryReduce(x)
+		f[179] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[52]
 		f[52] = FieldAdd(t, f[180])
 		x := uint64(25847) * uint64(f[180]-t+q)
-		f[180] = FieldMontgomeryReduce(x)
+		f[180] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[53]
 		f[53] = FieldAdd(t, f[181])
 		x := uint64(25847) * uint64(f[181]-t+q)
-		f[181] = FieldMontgomeryReduce(x)
+		f[181] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[54]
 		f[54] = FieldAdd(t, f[182])
 		x := uint64(25847) * uint64(f[182]-t+q)
-		f[182] = FieldMontgomeryReduce(x)
+		f[182] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[55]
 		f[55] = FieldAdd(t, f[183])
 		x := uint64(25847) * uint64(f[183]-t+q)
-		f[183] = FieldMontgomeryReduce(x)
+		f[183] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[56]
 		f[56] = FieldAdd(t, f[184])
 		x := uint64(25847) * uint64(f[184]-t+q)
-		f[184] = FieldMontgomeryReduce(x)
+		f[184] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[57]
 		f[57] = FieldAdd(t, f[185])
 		x := uint64(25847) * uint64(f[185]-t+q)
-		f[185] = FieldMontgomeryReduce(x)
+		f[185] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[58]
 		f[58] = FieldAdd(t, f[186])
 		x := uint64(25847) * uint64(f[186]-t+q)
-		f[186] = FieldMontgomeryReduce(x)
+		f[186] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[59]
 		f[59] = FieldAdd(t, f[187])
 		x := uint64(25847) * uint64(f[187]-t+q)
-		f[187] = FieldMontgomeryReduce(x)
+		f[187] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[60]
 		f[60] = FieldAdd(t, f[188])
 		x := uint64(25847) * uint64(f[188]-t+q)
-		f[188] = FieldMontgomeryReduce(x)
+		f[188] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[61]
 		f[61] = FieldAdd(t, f[189])
 		x := uint64(25847) * uint64(f[189]-t+q)
-		f[189] = FieldMontgomeryReduce(x)
+		f[189] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[62]
 		f[62] = FieldAdd(t, f[190])
 		x := uint64(25847) * uint64(f[190]-t+q)
-		f[190] = FieldMontgomeryReduce(x)
+		f[190] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[63]
 		f[63] = FieldAdd(t, f[191])
 		x := uint64(25847) * uint64(f[191]-t+q)
-		f[191] = FieldMontgomeryReduce(x)
+		f[191] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[64]
 		f[64] = FieldAdd(t, f[192])
 		x := uint64(25847) * uint64(f[192]-t+q)
-		f[192] = FieldMontgomeryReduce(x)
+		f[192] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[65]
 		f[65] = FieldAdd(t, f[193])
 		x := uint64(25847) * uint64(f[193]-t+q)
-		f[193] = FieldMontgomeryReduce(x)
+		f[193] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[66]
 		f[66] = FieldAdd(t, f[194])
 		x := uint64(25847) * uint64(f[194]-t+q)
-		f[194] = FieldMontgomeryReduce(x)
+		f[194] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[67]
 		f[67] = FieldAdd(t, f[195])
 		x := uint64(25847) * uint64(f[195]-t+q)
-		f[195] = FieldMontgomeryReduce(x)
+		f[195] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[68]
 		f[68] = FieldAdd(t, f[196])
 		x := uint64(25847) * uint64(f[196]-t+q)
-		f[196] = FieldMontgomeryReduce(x)
+		f[196] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[69]
 		f[69] = FieldAdd(t, f[197])
 		x := uint64(25847) * uint64(f[197]-t+q)
-		f[197] = FieldMontgomeryReduce(x)
+		f[197] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[70]
 		f[70] = FieldAdd(t, f[198])
 		x := uint64(25847) * uint64(f[198]-t+q)
-		f[198] = FieldMontgomeryReduce(x)
+		f[198] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[71]
 		f[71] = FieldAdd(t, f[199])
 		x := uint64(25847) * uint64(f[199]-t+q)
-		f[199] = FieldMontgomeryReduce(x)
+		f[199] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[72]
 		f[72] = FieldAdd(t, f[200])
 		x := uint64(25847) * uint64(f[200]-t+q)
-		f[200] = FieldMontgomeryReduce(x)
+		f[200] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[73]
 		f[73] = FieldAdd(t, f[201])
 		x := uint64(25847) * uint64(f[201]-t+q)
-		f[201] = FieldMontgomeryReduce(x)
+		f[201] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[74]
 		f[74] = FieldAdd(t, f[202])
 		x := uint64(25847) * uint64(f[202]-t+q)
-		f[202] = FieldMontgomeryReduce(x)
+		f[202] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[75]
 		f[75] = FieldAdd(t, f[203])
 		x := uint64(25847) * uint64(f[203]-t+q)
-		f[203] = FieldMontgomeryReduce(x)
+		f[203] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[76]
 		f[76] = FieldAdd(t, f[204])
 		x := uint64(25847) * uint64(f[204]-t+q)
-		f[204] = FieldMontgomeryReduce(x)
+		f[204] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[77]
 		f[77] = FieldAdd(t, f[205])
 		x := uint64(25847) * uint64(f[205]-t+q)
-		f[205] = FieldMontgomeryReduce(x)
+		f[205] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[78]
 		f[78] = FieldAdd(t, f[206])
 		x := uint64(25847) * uint64(f[206]-t+q)
-		f[206] = FieldMontgomeryReduce(x)
+		f[206] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[79]
 		f[79] = FieldAdd(t, f[207])
 		x := uint64(25847) * uint64(f[207]-t+q)
-		f[207] = FieldMontgomeryReduce(x)
+		f[207] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[80]
 		f[80] = FieldAdd(t, f[208])
 		x := uint64(25847) * uint64(f[208]-t+q)
-		f[208] = FieldMontgomeryReduce(x)
+		f[208] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[81]
 		f[81] = FieldAdd(t, f[209])
 		x := uint64(25847) * uint64(f[209]-t+q)
-		f[209] = FieldMontgomeryReduce(x)
+		f[209] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[82]
 		f[82] = FieldAdd(t, f[210])
 		x := uint64(25847) * uint64(f[210]-t+q)
-		f[210] = FieldMontgomeryReduce(x)
+		f[210] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[83]
 		f[83] = FieldAdd(t, f[211])
 		x := uint64(25847) * uint64(f[211]-t+q)
-		f[211] = FieldMontgomeryReduce(x)
+		f[211] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[84]
 		f[84] = FieldAdd(t, f[212])
 		x := uint64(25847) * uint64(f[212]-t+q)
-		f[212] = FieldMontgomeryReduce(x)
+		f[212] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[85]
 		f[85] = FieldAdd(t, f[213])
 		x := uint64(25847) * uint64(f[213]-t+q)
-		f[213] = FieldMontgomeryReduce(x)
+		f[213] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[86]
 		f[86] = FieldAdd(t, f[214])
 		x := uint64(25847) * uint64(f[214]-t+q)
-		f[214] = FieldMontgomeryReduce(x)
+		f[214] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[87]
 		f[87] = FieldAdd(t, f[215])
 		x := uint64(25847) * uint64(f[215]-t+q)
-		f[215] = FieldMontgomeryReduce(x)
+		f[215] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[88]
 		f[88] = FieldAdd(t, f[216])
 		x := uint64(25847) * uint64(f[216]-t+q)
-		f[216] = FieldMontgomeryReduce(x)
+		f[216] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[89]
 		f[89] = FieldAdd(t, f[217])
 		x := uint64(25847) * uint64(f[217]-t+q)
-		f[217] = FieldMontgomeryReduce(x)
+		f[217] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[90]
 		f[90] = FieldAdd(t, f[218])
 		x := uint64(25847) * uint64(f[218]-t+q)
-		f[218] = FieldMontgomeryReduce(x)
+		f[218] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[91]
 		f[91] = FieldAdd(t, f[219])
 		x := uint64(25847) * uint64(f[219]-t+q)
-		f[219] = FieldMontgomeryReduce(x)
+		f[219] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[92]
 		f[92] = FieldAdd(t, f[220])
 		x := uint64(25847) * uint64(f[220]-t+q)
-		f[220] = FieldMontgomeryReduce(x)
+		f[220] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[93]
 		f[93] = FieldAdd(t, f[221])
 		x := uint64(25847) * uint64(f[221]-t+q)
-		f[221] = FieldMontgomeryReduce(x)
+		f[221] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[94]
 		f[94] = FieldAdd(t, f[222])
 		x := uint64(25847) * uint64(f[222]-t+q)
-		f[222] = FieldMontgomeryReduce(x)
+		f[222] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[95]
 		f[95] = FieldAdd(t, f[223])
 		x := uint64(25847) * uint64(f[223]-t+q)
-		f[223] = FieldMontgomeryReduce(x)
+		f[223] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[96]
 		f[96] = FieldAdd(t, f[224])
 		x := uint64(25847) * uint64(f[224]-t+q)
-		f[224] = FieldMontgomeryReduce(x)
+		f[224] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[97]
 		f[97] = FieldAdd(t, f[225])
 		x := uint64(25847) * uint64(f[225]-t+q)
-		f[225] = FieldMontgomeryReduce(x)
+		f[225] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[98]
 		f[98] = FieldAdd(t, f[226])
 		x := uint64(25847) * uint64(f[226]-t+q)
-		f[226] = FieldMontgomeryReduce(x)
+		f[226] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[99]
 		f[99] = FieldAdd(t, f[227])
 		x := uint64(25847) * uint64(f[227]-t+q)
-		f[227] = FieldMontgomeryReduce(x)
+		f[227] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[100]
 		f[100] = FieldAdd(t, f[228])
 		x := uint64(25847) * uint64(f[228]-t+q)
-		f[228] = FieldMontgomeryReduce(x)
+		f[228] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[101]
 		f[101] = FieldAdd(t, f[229])
 		x := uint64(25847) * uint64(f[229]-t+q)
-		f[229] = FieldMontgomeryReduce(x)
+		f[229] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[102]
 		f[102] = FieldAdd(t, f[230])
 		x := uint64(25847) * uint64(f[230]-t+q)
-		f[230] = FieldMontgomeryReduce(x)
+		f[230] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[103]
 		f[103] = FieldAdd(t, f[231])
 		x := uint64(25847) * uint64(f[231]-t+q)
-		f[231] = FieldMontgomeryReduce(x)
+		f[231] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[104]
 		f[104] = FieldAdd(t, f[232])
 		x := uint64(25847) * uint64(f[232]-t+q)
-		f[232] = FieldMontgomeryReduce(x)
+		f[232] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[105]
 		f[105] = FieldAdd(t, f[233])
 		x := uint64(25847) * uint64(f[233]-t+q)
-		f[233] = FieldMontgomeryReduce(x)
+		f[233] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[106]
 		f[106] = FieldAdd(t, f[234])
 		x := uint64(25847) * uint64(f[234]-t+q)
-		f[234] = FieldMontgomeryReduce(x)
+		f[234] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[107]
 		f[107] = FieldAdd(t, f[235])
 		x := uint64(25847) * uint64(f[235]-t+q)
-		f[235] = FieldMontgomeryReduce(x)
+		f[235] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[108]
 		f[108] = FieldAdd(t, f[236])
 		x := uint64(25847) * uint64(f[236]-t+q)
-		f[236] = FieldMontgomeryReduce(x)
+		f[236] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[109]
 		f[109] = FieldAdd(t, f[237])
 		x := uint64(25847) * uint64(f[237]-t+q)
-		f[237] = FieldMontgomeryReduce(x)
+		f[237] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[110]
 		f[110] = FieldAdd(t, f[238])
 		x := uint64(25847) * uint64(f[238]-t+q)
-		f[238] = FieldMontgomeryReduce(x)
+		f[238] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[111]
 		f[111] = FieldAdd(t, f[239])
 		x := uint64(25847) * uint64(f[239]-t+q)
-		f[239] = FieldMontgomeryReduce(x)
+		f[239] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[112]
 		f[112] = FieldAdd(t, f[240])
 		x := uint64(25847) * uint64(f[240]-t+q)
-		f[240] = FieldMontgomeryReduce(x)
+		f[240] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[113]
 		f[113] = FieldAdd(t, f[241])
 		x := uint64(25847) * uint64(f[241]-t+q)
-		f[241] = FieldMontgomeryReduce(x)
+		f[241] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[114]
 		f[114] = FieldAdd(t, f[242])
 		x := uint64(25847) * uint64(f[242]-t+q)
-		f[242] = FieldMontgomeryReduce(x)
+		f[242] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[115]
 		f[115] = FieldAdd(t, f[243])
 		x := uint64(25847) * uint64(f[243]-t+q)
-		f[243] = FieldMontgomeryReduce(x)
+		f[243] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[116]
 		f[116] = FieldAdd(t, f[244])
 		x := uint64(25847) * uint64(f[244]-t+q)
-		f[244] = FieldMontgomeryReduce(x)
+		f[244] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[117]
 		f[117] = FieldAdd(t, f[245])
 		x := uint64(25847) * uint64(f[245]-t+q)
-		f[245] = FieldMontgomeryReduce(x)
+		f[245] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[118]
 		f[118] = FieldAdd(t, f[246])
 		x := uint64(25847) * uint64(f[246]-t+q)
-		f[246] = FieldMontgomeryReduce(x)
+		f[246] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[119]
 		f[119] = FieldAdd(t, f[247])
 		x := uint64(25847) * uint64(f[247]-t+q)
-		f[247] = FieldMontgomeryReduce(x)
+		f[247] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[120]
 		f[120] = FieldAdd(t, f[248])
 		x := uint64(25847) * uint64(f[248]-t+q)
-		f[248] = FieldMontgomeryReduce(x)
+		f[248] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[121]
 		f[121] = FieldAdd(t, f[249])
 		x := uint64(25847) * uint64(f[249]-t+q)
-		f[249] = FieldMontgomeryReduce(x)
+		f[249] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[122]
 		f[122] = FieldAdd(t, f[250])
 		x := uint64(25847) * uint64(f[250]-t+q)
-		f[250] = FieldMontgomeryReduce(x)
+		f[250] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[123]
 		f[123] = FieldAdd(t, f[251])
 		x := uint64(25847) * uint64(f[251]-t+q)
-		f[251] = FieldMontgomeryReduce(x)
+		f[251] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[124]
 		f[124] = FieldAdd(t, f[252])
 		x := uint64(25847) * uint64(f[252]-t+q)
-		f[252] = FieldMontgomeryReduce(x)
+		f[252] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[125]
 		f[125] = FieldAdd(t, f[253])
 		x := uint64(25847) * uint64(f[253]-t+q)
-		f[253] = FieldMontgomeryReduce(x)
+		f[253] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[126]
 		f[126] = FieldAdd(t, f[254])
 		x := uint64(25847) * uint64(f[254]-t+q)
-		f[254] = FieldMontgomeryReduce(x)
+		f[254] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	{
 		t := f[127]
 		f[127] = FieldAdd(t, f[255])
 		x := uint64(25847) * uint64(f[255]-t+q)
-		f[255] = FieldMontgomeryReduce(x)
+		f[255] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 
 	f[0] = FieldMontgomeryMul(f[0], 16382)
@@ -14348,1531 +14348,1531 @@ func InverseNTTUnroll2(f NTTElement) RingElement {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[1+k])
 		x := uint64(1976782) * uint64(f[1+k]-t+q)
-		f[1+k] = FieldMontgomeryReduce(x)
+		f[1+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[2+k]
 		f[2+k] = FieldAdd(t, f[3+k])
 		x := uint64(7534263) * uint64(f[3+k]-t+q)
-		f[3+k] = FieldMontgomeryReduce(x)
+		f[3+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[4+k]
 		f[4+k] = FieldAdd(t, f[5+k])
 		x := uint64(1400424) * uint64(f[5+k]-t+q)
-		f[5+k] = FieldMontgomeryReduce(x)
+		f[5+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[6+k]
 		f[6+k] = FieldAdd(t, f[7+k])
 		x := uint64(3937738) * uint64(f[7+k]-t+q)
-		f[7+k] = FieldMontgomeryReduce(x)
+		f[7+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[8+k]
 		f[8+k] = FieldAdd(t, f[9+k])
 		x := uint64(7018208) * uint64(f[9+k]-t+q)
-		f[9+k] = FieldMontgomeryReduce(x)
+		f[9+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[10+k]
 		f[10+k] = FieldAdd(t, f[11+k])
 		x := uint64(8332111) * uint64(f[11+k]-t+q)
-		f[11+k] = FieldMontgomeryReduce(x)
+		f[11+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[12+k]
 		f[12+k] = FieldAdd(t, f[13+k])
 		x := uint64(3919660) * uint64(f[13+k]-t+q)
-		f[13+k] = FieldMontgomeryReduce(x)
+		f[13+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[14+k]
 		f[14+k] = FieldAdd(t, f[15+k])
 		x := uint64(7826001) * uint64(f[15+k]-t+q)
-		f[15+k] = FieldMontgomeryReduce(x)
+		f[15+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[16+k]
 		f[16+k] = FieldAdd(t, f[17+k])
 		x := uint64(4834730) * uint64(f[17+k]-t+q)
-		f[17+k] = FieldMontgomeryReduce(x)
+		f[17+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[18+k]
 		f[18+k] = FieldAdd(t, f[19+k])
 		x := uint64(1612842) * uint64(f[19+k]-t+q)
-		f[19+k] = FieldMontgomeryReduce(x)
+		f[19+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[20+k]
 		f[20+k] = FieldAdd(t, f[21+k])
 		x := uint64(7403526) * uint64(f[21+k]-t+q)
-		f[21+k] = FieldMontgomeryReduce(x)
+		f[21+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[22+k]
 		f[22+k] = FieldAdd(t, f[23+k])
 		x := uint64(183443) * uint64(f[23+k]-t+q)
-		f[23+k] = FieldMontgomeryReduce(x)
+		f[23+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[24+k]
 		f[24+k] = FieldAdd(t, f[25+k])
 		x := uint64(6094090) * uint64(f[25+k]-t+q)
-		f[25+k] = FieldMontgomeryReduce(x)
+		f[25+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[26+k]
 		f[26+k] = FieldAdd(t, f[27+k])
 		x := uint64(7959518) * uint64(f[27+k]-t+q)
-		f[27+k] = FieldMontgomeryReduce(x)
+		f[27+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[28+k]
 		f[28+k] = FieldAdd(t, f[29+k])
 		x := uint64(6144432) * uint64(f[29+k]-t+q)
-		f[29+k] = FieldMontgomeryReduce(x)
+		f[29+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[30+k]
 		f[30+k] = FieldAdd(t, f[31+k])
 		x := uint64(5441381) * uint64(f[31+k]-t+q)
-		f[31+k] = FieldMontgomeryReduce(x)
+		f[31+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[32+k]
 		f[32+k] = FieldAdd(t, f[33+k])
 		x := uint64(4546524) * uint64(f[33+k]-t+q)
-		f[33+k] = FieldMontgomeryReduce(x)
+		f[33+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[34+k]
 		f[34+k] = FieldAdd(t, f[35+k])
 		x := uint64(8119771) * uint64(f[35+k]-t+q)
-		f[35+k] = FieldMontgomeryReduce(x)
+		f[35+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[36+k]
 		f[36+k] = FieldAdd(t, f[37+k])
 		x := uint64(7276084) * uint64(f[37+k]-t+q)
-		f[37+k] = FieldMontgomeryReduce(x)
+		f[37+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[38+k]
 		f[38+k] = FieldAdd(t, f[39+k])
 		x := uint64(6712985) * uint64(f[39+k]-t+q)
-		f[39+k] = FieldMontgomeryReduce(x)
+		f[39+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[40+k]
 		f[40+k] = FieldAdd(t, f[41+k])
 		x := uint64(1910376) * uint64(f[41+k]-t+q)
-		f[41+k] = FieldMontgomeryReduce(x)
+		f[41+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[42+k]
 		f[42+k] = FieldAdd(t, f[43+k])
 		x := uint64(6577327) * uint64(f[43+k]-t+q)
-		f[43+k] = FieldMontgomeryReduce(x)
+		f[43+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[44+k]
 		f[44+k] = FieldAdd(t, f[45+k])
 		x := uint64(1723600) * uint64(f[45+k]-t+q)
-		f[45+k] = FieldMontgomeryReduce(x)
+		f[45+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[46+k]
 		f[46+k] = FieldAdd(t, f[47+k])
 		x := uint64(7953734) * uint64(f[47+k]-t+q)
-		f[47+k] = FieldMontgomeryReduce(x)
+		f[47+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[48+k]
 		f[48+k] = FieldAdd(t, f[49+k])
 		x := uint64(472078) * uint64(f[49+k]-t+q)
-		f[49+k] = FieldMontgomeryReduce(x)
+		f[49+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[50+k]
 		f[50+k] = FieldAdd(t, f[51+k])
 		x := uint64(1717735) * uint64(f[51+k]-t+q)
-		f[51+k] = FieldMontgomeryReduce(x)
+		f[51+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[52+k]
 		f[52+k] = FieldAdd(t, f[53+k])
 		x := uint64(7404533) * uint64(f[53+k]-t+q)
-		f[53+k] = FieldMontgomeryReduce(x)
+		f[53+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[54+k]
 		f[54+k] = FieldAdd(t, f[55+k])
 		x := uint64(2213111) * uint64(f[55+k]-t+q)
-		f[55+k] = FieldMontgomeryReduce(x)
+		f[55+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[56+k]
 		f[56+k] = FieldAdd(t, f[57+k])
 		x := uint64(269760) * uint64(f[57+k]-t+q)
-		f[57+k] = FieldMontgomeryReduce(x)
+		f[57+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[58+k]
 		f[58+k] = FieldAdd(t, f[59+k])
 		x := uint64(3866901) * uint64(f[59+k]-t+q)
-		f[59+k] = FieldMontgomeryReduce(x)
+		f[59+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[60+k]
 		f[60+k] = FieldAdd(t, f[61+k])
 		x := uint64(3523897) * uint64(f[61+k]-t+q)
-		f[61+k] = FieldMontgomeryReduce(x)
+		f[61+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[62+k]
 		f[62+k] = FieldAdd(t, f[63+k])
 		x := uint64(5341501) * uint64(f[63+k]-t+q)
-		f[63+k] = FieldMontgomeryReduce(x)
+		f[63+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[65+k])
 		x := uint64(6581310) * uint64(f[65+k]-t+q)
-		f[65+k] = FieldMontgomeryReduce(x)
+		f[65+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[66+k]
 		f[66+k] = FieldAdd(t, f[67+k])
 		x := uint64(4686184) * uint64(f[67+k]-t+q)
-		f[67+k] = FieldMontgomeryReduce(x)
+		f[67+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[68+k]
 		f[68+k] = FieldAdd(t, f[69+k])
 		x := uint64(1652634) * uint64(f[69+k]-t+q)
-		f[69+k] = FieldMontgomeryReduce(x)
+		f[69+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[70+k]
 		f[70+k] = FieldAdd(t, f[71+k])
 		x := uint64(810149) * uint64(f[71+k]-t+q)
-		f[71+k] = FieldMontgomeryReduce(x)
+		f[71+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[72+k]
 		f[72+k] = FieldAdd(t, f[73+k])
 		x := uint64(3014001) * uint64(f[73+k]-t+q)
-		f[73+k] = FieldMontgomeryReduce(x)
+		f[73+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[74+k]
 		f[74+k] = FieldAdd(t, f[75+k])
 		x := uint64(1616392) * uint64(f[75+k]-t+q)
-		f[75+k] = FieldMontgomeryReduce(x)
+		f[75+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[76+k]
 		f[76+k] = FieldAdd(t, f[77+k])
 		x := uint64(162844) * uint64(f[77+k]-t+q)
-		f[77+k] = FieldMontgomeryReduce(x)
+		f[77+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[78+k]
 		f[78+k] = FieldAdd(t, f[79+k])
 		x := uint64(5196991) * uint64(f[79+k]-t+q)
-		f[79+k] = FieldMontgomeryReduce(x)
+		f[79+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[80+k]
 		f[80+k] = FieldAdd(t, f[81+k])
 		x := uint64(7173032) * uint64(f[81+k]-t+q)
-		f[81+k] = FieldMontgomeryReduce(x)
+		f[81+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[82+k]
 		f[82+k] = FieldAdd(t, f[83+k])
 		x := uint64(185531) * uint64(f[83+k]-t+q)
-		f[83+k] = FieldMontgomeryReduce(x)
+		f[83+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[84+k]
 		f[84+k] = FieldAdd(t, f[85+k])
 		x := uint64(3369112) * uint64(f[85+k]-t+q)
-		f[85+k] = FieldMontgomeryReduce(x)
+		f[85+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[86+k]
 		f[86+k] = FieldAdd(t, f[87+k])
 		x := uint64(1957272) * uint64(f[87+k]-t+q)
-		f[87+k] = FieldMontgomeryReduce(x)
+		f[87+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[88+k]
 		f[88+k] = FieldAdd(t, f[89+k])
 		x := uint64(8215696) * uint64(f[89+k]-t+q)
-		f[89+k] = FieldMontgomeryReduce(x)
+		f[89+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[90+k]
 		f[90+k] = FieldAdd(t, f[91+k])
 		x := uint64(2454455) * uint64(f[91+k]-t+q)
-		f[91+k] = FieldMontgomeryReduce(x)
+		f[91+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[92+k]
 		f[92+k] = FieldAdd(t, f[93+k])
 		x := uint64(2432395) * uint64(f[93+k]-t+q)
-		f[93+k] = FieldMontgomeryReduce(x)
+		f[93+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[94+k]
 		f[94+k] = FieldAdd(t, f[95+k])
 		x := uint64(6366809) * uint64(f[95+k]-t+q)
-		f[95+k] = FieldMontgomeryReduce(x)
+		f[95+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[96+k]
 		f[96+k] = FieldAdd(t, f[97+k])
 		x := uint64(4603424) * uint64(f[97+k]-t+q)
-		f[97+k] = FieldMontgomeryReduce(x)
+		f[97+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[98+k]
 		f[98+k] = FieldAdd(t, f[99+k])
 		x := uint64(594136) * uint64(f[99+k]-t+q)
-		f[99+k] = FieldMontgomeryReduce(x)
+		f[99+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[100+k]
 		f[100+k] = FieldAdd(t, f[101+k])
 		x := uint64(4656147) * uint64(f[101+k]-t+q)
-		f[101+k] = FieldMontgomeryReduce(x)
+		f[101+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[102+k]
 		f[102+k] = FieldAdd(t, f[103+k])
 		x := uint64(5796124) * uint64(f[103+k]-t+q)
-		f[103+k] = FieldMontgomeryReduce(x)
+		f[103+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[104+k]
 		f[104+k] = FieldAdd(t, f[105+k])
 		x := uint64(6533464) * uint64(f[105+k]-t+q)
-		f[105+k] = FieldMontgomeryReduce(x)
+		f[105+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[106+k]
 		f[106+k] = FieldAdd(t, f[107+k])
 		x := uint64(6709241) * uint64(f[107+k]-t+q)
-		f[107+k] = FieldMontgomeryReduce(x)
+		f[107+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[108+k]
 		f[108+k] = FieldAdd(t, f[109+k])
 		x := uint64(5548557) * uint64(f[109+k]-t+q)
-		f[109+k] = FieldMontgomeryReduce(x)
+		f[109+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[110+k]
 		f[110+k] = FieldAdd(t, f[111+k])
 		x := uint64(7838005) * uint64(f[111+k]-t+q)
-		f[111+k] = FieldMontgomeryReduce(x)
+		f[111+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[112+k]
 		f[112+k] = FieldAdd(t, f[113+k])
 		x := uint64(3406031) * uint64(f[113+k]-t+q)
-		f[113+k] = FieldMontgomeryReduce(x)
+		f[113+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[114+k]
 		f[114+k] = FieldAdd(t, f[115+k])
 		x := uint64(2235880) * uint64(f[115+k]-t+q)
-		f[115+k] = FieldMontgomeryReduce(x)
+		f[115+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[116+k]
 		f[116+k] = FieldAdd(t, f[117+k])
 		x := uint64(777191) * uint64(f[117+k]-t+q)
-		f[117+k] = FieldMontgomeryReduce(x)
+		f[117+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[118+k]
 		f[118+k] = FieldAdd(t, f[119+k])
 		x := uint64(1500165) * uint64(f[119+k]-t+q)
-		f[119+k] = FieldMontgomeryReduce(x)
+		f[119+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[120+k]
 		f[120+k] = FieldAdd(t, f[121+k])
 		x := uint64(7005614) * uint64(f[121+k]-t+q)
-		f[121+k] = FieldMontgomeryReduce(x)
+		f[121+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[122+k]
 		f[122+k] = FieldAdd(t, f[123+k])
 		x := uint64(5834105) * uint64(f[123+k]-t+q)
-		f[123+k] = FieldMontgomeryReduce(x)
+		f[123+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[124+k]
 		f[124+k] = FieldAdd(t, f[125+k])
 		x := uint64(1917081) * uint64(f[125+k]-t+q)
-		f[125+k] = FieldMontgomeryReduce(x)
+		f[125+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[126+k]
 		f[126+k] = FieldAdd(t, f[127+k])
 		x := uint64(7100756) * uint64(f[127+k]-t+q)
-		f[127+k] = FieldMontgomeryReduce(x)
+		f[127+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[129+k])
 		x := uint64(6417775) * uint64(f[129+k]-t+q)
-		f[129+k] = FieldMontgomeryReduce(x)
+		f[129+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[130+k]
 		f[130+k] = FieldAdd(t, f[131+k])
 		x := uint64(3306115) * uint64(f[131+k]-t+q)
-		f[131+k] = FieldMontgomeryReduce(x)
+		f[131+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[132+k]
 		f[132+k] = FieldAdd(t, f[133+k])
 		x := uint64(1312455) * uint64(f[133+k]-t+q)
-		f[133+k] = FieldMontgomeryReduce(x)
+		f[133+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[134+k]
 		f[134+k] = FieldAdd(t, f[135+k])
 		x := uint64(7929317) * uint64(f[135+k]-t+q)
-		f[135+k] = FieldMontgomeryReduce(x)
+		f[135+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[136+k]
 		f[136+k] = FieldAdd(t, f[137+k])
 		x := uint64(6950192) * uint64(f[137+k]-t+q)
-		f[137+k] = FieldMontgomeryReduce(x)
+		f[137+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[138+k]
 		f[138+k] = FieldAdd(t, f[139+k])
 		x := uint64(5062207) * uint64(f[139+k]-t+q)
-		f[139+k] = FieldMontgomeryReduce(x)
+		f[139+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[140+k]
 		f[140+k] = FieldAdd(t, f[141+k])
 		x := uint64(1237275) * uint64(f[141+k]-t+q)
-		f[141+k] = FieldMontgomeryReduce(x)
+		f[141+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[142+k]
 		f[142+k] = FieldAdd(t, f[143+k])
 		x := uint64(7047359) * uint64(f[143+k]-t+q)
-		f[143+k] = FieldMontgomeryReduce(x)
+		f[143+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[144+k]
 		f[144+k] = FieldAdd(t, f[145+k])
 		x := uint64(7329447) * uint64(f[145+k]-t+q)
-		f[145+k] = FieldMontgomeryReduce(x)
+		f[145+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[146+k]
 		f[146+k] = FieldAdd(t, f[147+k])
 		x := uint64(1903435) * uint64(f[147+k]-t+q)
-		f[147+k] = FieldMontgomeryReduce(x)
+		f[147+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[148+k]
 		f[148+k] = FieldAdd(t, f[149+k])
 		x := uint64(1869119) * uint64(f[149+k]-t+q)
-		f[149+k] = FieldMontgomeryReduce(x)
+		f[149+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[150+k]
 		f[150+k] = FieldAdd(t, f[151+k])
 		x := uint64(5386378) * uint64(f[151+k]-t+q)
-		f[151+k] = FieldMontgomeryReduce(x)
+		f[151+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[152+k]
 		f[152+k] = FieldAdd(t, f[153+k])
 		x := uint64(4832145) * uint64(f[153+k]-t+q)
-		f[153+k] = FieldMontgomeryReduce(x)
+		f[153+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[154+k]
 		f[154+k] = FieldAdd(t, f[155+k])
 		x := uint64(2635921) * uint64(f[155+k]-t+q)
-		f[155+k] = FieldMontgomeryReduce(x)
+		f[155+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[156+k]
 		f[156+k] = FieldAdd(t, f[157+k])
 		x := uint64(1250494) * uint64(f[157+k]-t+q)
-		f[157+k] = FieldMontgomeryReduce(x)
+		f[157+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[158+k]
 		f[158+k] = FieldAdd(t, f[159+k])
 		x := uint64(4613401) * uint64(f[159+k]-t+q)
-		f[159+k] = FieldMontgomeryReduce(x)
+		f[159+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[160+k]
 		f[160+k] = FieldAdd(t, f[161+k])
 		x := uint64(1595974) * uint64(f[161+k]-t+q)
-		f[161+k] = FieldMontgomeryReduce(x)
+		f[161+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[162+k]
 		f[162+k] = FieldAdd(t, f[163+k])
 		x := uint64(2486353) * uint64(f[163+k]-t+q)
-		f[163+k] = FieldMontgomeryReduce(x)
+		f[163+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[164+k]
 		f[164+k] = FieldAdd(t, f[165+k])
 		x := uint64(1247620) * uint64(f[165+k]-t+q)
-		f[165+k] = FieldMontgomeryReduce(x)
+		f[165+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[166+k]
 		f[166+k] = FieldAdd(t, f[167+k])
 		x := uint64(4055324) * uint64(f[167+k]-t+q)
-		f[167+k] = FieldMontgomeryReduce(x)
+		f[167+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[168+k]
 		f[168+k] = FieldAdd(t, f[169+k])
 		x := uint64(1265009) * uint64(f[169+k]-t+q)
-		f[169+k] = FieldMontgomeryReduce(x)
+		f[169+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[170+k]
 		f[170+k] = FieldAdd(t, f[171+k])
 		x := uint64(5790267) * uint64(f[171+k]-t+q)
-		f[171+k] = FieldMontgomeryReduce(x)
+		f[171+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[172+k]
 		f[172+k] = FieldAdd(t, f[173+k])
 		x := uint64(2691481) * uint64(f[173+k]-t+q)
-		f[173+k] = FieldMontgomeryReduce(x)
+		f[173+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[174+k]
 		f[174+k] = FieldAdd(t, f[175+k])
 		x := uint64(2842341) * uint64(f[175+k]-t+q)
-		f[175+k] = FieldMontgomeryReduce(x)
+		f[175+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[176+k]
 		f[176+k] = FieldAdd(t, f[177+k])
 		x := uint64(203044) * uint64(f[177+k]-t+q)
-		f[177+k] = FieldMontgomeryReduce(x)
+		f[177+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[178+k]
 		f[178+k] = FieldAdd(t, f[179+k])
 		x := uint64(1735879) * uint64(f[179+k]-t+q)
-		f[179+k] = FieldMontgomeryReduce(x)
+		f[179+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[180+k]
 		f[180+k] = FieldAdd(t, f[181+k])
 		x := uint64(5038140) * uint64(f[181+k]-t+q)
-		f[181+k] = FieldMontgomeryReduce(x)
+		f[181+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[182+k]
 		f[182+k] = FieldAdd(t, f[183+k])
 		x := uint64(3437287) * uint64(f[183+k]-t+q)
-		f[183+k] = FieldMontgomeryReduce(x)
+		f[183+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[184+k]
 		f[184+k] = FieldAdd(t, f[185+k])
 		x := uint64(4108315) * uint64(f[185+k]-t+q)
-		f[185+k] = FieldMontgomeryReduce(x)
+		f[185+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[186+k]
 		f[186+k] = FieldAdd(t, f[187+k])
 		x := uint64(5942594) * uint64(f[187+k]-t+q)
-		f[187+k] = FieldMontgomeryReduce(x)
+		f[187+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[188+k]
 		f[188+k] = FieldAdd(t, f[189+k])
 		x := uint64(286988) * uint64(f[189+k]-t+q)
-		f[189+k] = FieldMontgomeryReduce(x)
+		f[189+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[190+k]
 		f[190+k] = FieldAdd(t, f[191+k])
 		x := uint64(342297) * uint64(f[191+k]-t+q)
-		f[191+k] = FieldMontgomeryReduce(x)
+		f[191+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[193+k])
 		x := uint64(4784579) * uint64(f[193+k]-t+q)
-		f[193+k] = FieldMontgomeryReduce(x)
+		f[193+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[194+k]
 		f[194+k] = FieldAdd(t, f[195+k])
 		x := uint64(7611795) * uint64(f[195+k]-t+q)
-		f[195+k] = FieldMontgomeryReduce(x)
+		f[195+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[196+k]
 		f[196+k] = FieldAdd(t, f[197+k])
 		x := uint64(7855319) * uint64(f[197+k]-t+q)
-		f[197+k] = FieldMontgomeryReduce(x)
+		f[197+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[198+k]
 		f[198+k] = FieldAdd(t, f[199+k])
 		x := uint64(4823422) * uint64(f[199+k]-t+q)
-		f[199+k] = FieldMontgomeryReduce(x)
+		f[199+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[200+k]
 		f[200+k] = FieldAdd(t, f[201+k])
 		x := uint64(3207046) * uint64(f[201+k]-t+q)
-		f[201+k] = FieldMontgomeryReduce(x)
+		f[201+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[202+k]
 		f[202+k] = FieldAdd(t, f[203+k])
 		x := uint64(2031748) * uint64(f[203+k]-t+q)
-		f[203+k] = FieldMontgomeryReduce(x)
+		f[203+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[204+k]
 		f[204+k] = FieldAdd(t, f[205+k])
 		x := uint64(5257975) * uint64(f[205+k]-t+q)
-		f[205+k] = FieldMontgomeryReduce(x)
+		f[205+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[206+k]
 		f[206+k] = FieldAdd(t, f[207+k])
 		x := uint64(7725090) * uint64(f[207+k]-t+q)
-		f[207+k] = FieldMontgomeryReduce(x)
+		f[207+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[208+k]
 		f[208+k] = FieldAdd(t, f[209+k])
 		x := uint64(7857917) * uint64(f[209+k]-t+q)
-		f[209+k] = FieldMontgomeryReduce(x)
+		f[209+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[210+k]
 		f[210+k] = FieldAdd(t, f[211+k])
 		x := uint64(8337157) * uint64(f[211+k]-t+q)
-		f[211+k] = FieldMontgomeryReduce(x)
+		f[211+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[212+k]
 		f[212+k] = FieldAdd(t, f[213+k])
 		x := uint64(6767243) * uint64(f[213+k]-t+q)
-		f[213+k] = FieldMontgomeryReduce(x)
+		f[213+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[214+k]
 		f[214+k] = FieldAdd(t, f[215+k])
 		x := uint64(495491) * uint64(f[215+k]-t+q)
-		f[215+k] = FieldMontgomeryReduce(x)
+		f[215+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[216+k]
 		f[216+k] = FieldAdd(t, f[217+k])
 		x := uint64(819034) * uint64(f[217+k]-t+q)
-		f[217+k] = FieldMontgomeryReduce(x)
+		f[217+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[218+k]
 		f[218+k] = FieldAdd(t, f[219+k])
 		x := uint64(909542) * uint64(f[219+k]-t+q)
-		f[219+k] = FieldMontgomeryReduce(x)
+		f[219+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[220+k]
 		f[220+k] = FieldAdd(t, f[221+k])
 		x := uint64(1859098) * uint64(f[221+k]-t+q)
-		f[221+k] = FieldMontgomeryReduce(x)
+		f[221+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[222+k]
 		f[222+k] = FieldAdd(t, f[223+k])
 		x := uint64(900702) * uint64(f[223+k]-t+q)
-		f[223+k] = FieldMontgomeryReduce(x)
+		f[223+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[224+k]
 		f[224+k] = FieldAdd(t, f[225+k])
 		x := uint64(5187039) * uint64(f[225+k]-t+q)
-		f[225+k] = FieldMontgomeryReduce(x)
+		f[225+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[226+k]
 		f[226+k] = FieldAdd(t, f[227+k])
 		x := uint64(7183191) * uint64(f[227+k]-t+q)
-		f[227+k] = FieldMontgomeryReduce(x)
+		f[227+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[228+k]
 		f[228+k] = FieldAdd(t, f[229+k])
 		x := uint64(4621053) * uint64(f[229+k]-t+q)
-		f[229+k] = FieldMontgomeryReduce(x)
+		f[229+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[230+k]
 		f[230+k] = FieldAdd(t, f[231+k])
 		x := uint64(4860065) * uint64(f[231+k]-t+q)
-		f[231+k] = FieldMontgomeryReduce(x)
+		f[231+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[232+k]
 		f[232+k] = FieldAdd(t, f[233+k])
 		x := uint64(3513181) * uint64(f[233+k]-t+q)
-		f[233+k] = FieldMontgomeryReduce(x)
+		f[233+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[234+k]
 		f[234+k] = FieldAdd(t, f[235+k])
 		x := uint64(7144689) * uint64(f[235+k]-t+q)
-		f[235+k] = FieldMontgomeryReduce(x)
+		f[235+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[236+k]
 		f[236+k] = FieldAdd(t, f[237+k])
 		x := uint64(2434439) * uint64(f[237+k]-t+q)
-		f[237+k] = FieldMontgomeryReduce(x)
+		f[237+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[238+k]
 		f[238+k] = FieldAdd(t, f[239+k])
 		x := uint64(266997) * uint64(f[239+k]-t+q)
-		f[239+k] = FieldMontgomeryReduce(x)
+		f[239+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[240+k]
 		f[240+k] = FieldAdd(t, f[241+k])
 		x := uint64(4817955) * uint64(f[241+k]-t+q)
-		f[241+k] = FieldMontgomeryReduce(x)
+		f[241+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[242+k]
 		f[242+k] = FieldAdd(t, f[243+k])
 		x := uint64(5933984) * uint64(f[243+k]-t+q)
-		f[243+k] = FieldMontgomeryReduce(x)
+		f[243+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[244+k]
 		f[244+k] = FieldAdd(t, f[245+k])
 		x := uint64(2244091) * uint64(f[245+k]-t+q)
-		f[245+k] = FieldMontgomeryReduce(x)
+		f[245+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[246+k]
 		f[246+k] = FieldAdd(t, f[247+k])
 		x := uint64(5037939) * uint64(f[247+k]-t+q)
-		f[247+k] = FieldMontgomeryReduce(x)
+		f[247+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[248+k]
 		f[248+k] = FieldAdd(t, f[249+k])
 		x := uint64(3817976) * uint64(f[249+k]-t+q)
-		f[249+k] = FieldMontgomeryReduce(x)
+		f[249+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[250+k]
 		f[250+k] = FieldAdd(t, f[251+k])
 		x := uint64(2316500) * uint64(f[251+k]-t+q)
-		f[251+k] = FieldMontgomeryReduce(x)
+		f[251+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[252+k]
 		f[252+k] = FieldAdd(t, f[253+k])
 		x := uint64(3407706) * uint64(f[253+k]-t+q)
-		f[253+k] = FieldMontgomeryReduce(x)
+		f[253+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[254+k]
 		f[254+k] = FieldAdd(t, f[255+k])
 		x := uint64(2091667) * uint64(f[255+k]-t+q)
-		f[255+k] = FieldMontgomeryReduce(x)
+		f[255+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[2+k])
 		x := uint64(3839961) * uint64(f[2+k]-t+q)
-		f[2+k] = FieldMontgomeryReduce(x)
+		f[2+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[4+k]
 		f[4+k] = FieldAdd(t, f[6+k])
 		x := uint64(4751448) * uint64(f[6+k]-t+q)
-		f[6+k] = FieldMontgomeryReduce(x)
+		f[6+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[8+k]
 		f[8+k] = FieldAdd(t, f[10+k])
 		x := uint64(4499357) * uint64(f[10+k]-t+q)
-		f[10+k] = FieldMontgomeryReduce(x)
+		f[10+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[12+k]
 		f[12+k] = FieldAdd(t, f[14+k])
 		x := uint64(5361315) * uint64(f[14+k]-t+q)
-		f[14+k] = FieldMontgomeryReduce(x)
+		f[14+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[16+k]
 		f[16+k] = FieldAdd(t, f[18+k])
 		x := uint64(6940675) * uint64(f[18+k]-t+q)
-		f[18+k] = FieldMontgomeryReduce(x)
+		f[18+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[20+k]
 		f[20+k] = FieldAdd(t, f[22+k])
 		x := uint64(7567685) * uint64(f[22+k]-t+q)
-		f[22+k] = FieldMontgomeryReduce(x)
+		f[22+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[24+k]
 		f[24+k] = FieldAdd(t, f[26+k])
 		x := uint64(6795489) * uint64(f[26+k]-t+q)
-		f[26+k] = FieldMontgomeryReduce(x)
+		f[26+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[28+k]
 		f[28+k] = FieldAdd(t, f[30+k])
 		x := uint64(1285669) * uint64(f[30+k]-t+q)
-		f[30+k] = FieldMontgomeryReduce(x)
+		f[30+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[32+k]
 		f[32+k] = FieldAdd(t, f[34+k])
 		x := uint64(1341330) * uint64(f[34+k]-t+q)
-		f[34+k] = FieldMontgomeryReduce(x)
+		f[34+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[36+k]
 		f[36+k] = FieldAdd(t, f[38+k])
 		x := uint64(1315589) * uint64(f[38+k]-t+q)
-		f[38+k] = FieldMontgomeryReduce(x)
+		f[38+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[40+k]
 		f[40+k] = FieldAdd(t, f[42+k])
 		x := uint64(8202977) * uint64(f[42+k]-t+q)
-		f[42+k] = FieldMontgomeryReduce(x)
+		f[42+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[44+k]
 		f[44+k] = FieldAdd(t, f[46+k])
 		x := uint64(5971092) * uint64(f[46+k]-t+q)
-		f[46+k] = FieldMontgomeryReduce(x)
+		f[46+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[48+k]
 		f[48+k] = FieldAdd(t, f[50+k])
 		x := uint64(6529015) * uint64(f[50+k]-t+q)
-		f[50+k] = FieldMontgomeryReduce(x)
+		f[50+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[52+k]
 		f[52+k] = FieldAdd(t, f[54+k])
 		x := uint64(3159746) * uint64(f[54+k]-t+q)
-		f[54+k] = FieldMontgomeryReduce(x)
+		f[54+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[56+k]
 		f[56+k] = FieldAdd(t, f[58+k])
 		x := uint64(4827145) * uint64(f[58+k]-t+q)
-		f[58+k] = FieldMontgomeryReduce(x)
+		f[58+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[60+k]
 		f[60+k] = FieldAdd(t, f[62+k])
 		x := uint64(189548) * uint64(f[62+k]-t+q)
-		f[62+k] = FieldMontgomeryReduce(x)
+		f[62+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[66+k])
 		x := uint64(7063561) * uint64(f[66+k]-t+q)
-		f[66+k] = FieldMontgomeryReduce(x)
+		f[66+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[68+k]
 		f[68+k] = FieldAdd(t, f[70+k])
 		x := uint64(759969) * uint64(f[70+k]-t+q)
-		f[70+k] = FieldMontgomeryReduce(x)
+		f[70+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[72+k]
 		f[72+k] = FieldAdd(t, f[74+k])
 		x := uint64(8169440) * uint64(f[74+k]-t+q)
-		f[74+k] = FieldMontgomeryReduce(x)
+		f[74+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[76+k]
 		f[76+k] = FieldAdd(t, f[78+k])
 		x := uint64(2389356) * uint64(f[78+k]-t+q)
-		f[78+k] = FieldMontgomeryReduce(x)
+		f[78+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[80+k]
 		f[80+k] = FieldAdd(t, f[82+k])
 		x := uint64(5130689) * uint64(f[82+k]-t+q)
-		f[82+k] = FieldMontgomeryReduce(x)
+		f[82+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[84+k]
 		f[84+k] = FieldAdd(t, f[86+k])
 		x := uint64(1653064) * uint64(f[86+k]-t+q)
-		f[86+k] = FieldMontgomeryReduce(x)
+		f[86+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[88+k]
 		f[88+k] = FieldAdd(t, f[90+k])
 		x := uint64(8371839) * uint64(f[90+k]-t+q)
-		f[90+k] = FieldMontgomeryReduce(x)
+		f[90+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[92+k]
 		f[92+k] = FieldAdd(t, f[94+k])
 		x := uint64(4656075) * uint64(f[94+k]-t+q)
-		f[94+k] = FieldMontgomeryReduce(x)
+		f[94+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[96+k]
 		f[96+k] = FieldAdd(t, f[98+k])
 		x := uint64(3958618) * uint64(f[98+k]-t+q)
-		f[98+k] = FieldMontgomeryReduce(x)
+		f[98+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[100+k]
 		f[100+k] = FieldAdd(t, f[102+k])
 		x := uint64(904516) * uint64(f[102+k]-t+q)
-		f[102+k] = FieldMontgomeryReduce(x)
+		f[102+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[104+k]
 		f[104+k] = FieldAdd(t, f[106+k])
 		x := uint64(7280319) * uint64(f[106+k]-t+q)
-		f[106+k] = FieldMontgomeryReduce(x)
+		f[106+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[108+k]
 		f[108+k] = FieldAdd(t, f[110+k])
 		x := uint64(44288) * uint64(f[110+k]-t+q)
-		f[110+k] = FieldMontgomeryReduce(x)
+		f[110+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[112+k]
 		f[112+k] = FieldAdd(t, f[114+k])
 		x := uint64(3097992) * uint64(f[114+k]-t+q)
-		f[114+k] = FieldMontgomeryReduce(x)
+		f[114+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[116+k]
 		f[116+k] = FieldAdd(t, f[118+k])
 		x := uint64(508951) * uint64(f[118+k]-t+q)
-		f[118+k] = FieldMontgomeryReduce(x)
+		f[118+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[120+k]
 		f[120+k] = FieldAdd(t, f[122+k])
 		x := uint64(264944) * uint64(f[122+k]-t+q)
-		f[122+k] = FieldMontgomeryReduce(x)
+		f[122+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[124+k]
 		f[124+k] = FieldAdd(t, f[126+k])
 		x := uint64(5037034) * uint64(f[126+k]-t+q)
-		f[126+k] = FieldMontgomeryReduce(x)
+		f[126+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[130+k])
 		x := uint64(6949987) * uint64(f[130+k]-t+q)
-		f[130+k] = FieldMontgomeryReduce(x)
+		f[130+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[132+k]
 		f[132+k] = FieldAdd(t, f[134+k])
 		x := uint64(1852771) * uint64(f[134+k]-t+q)
-		f[134+k] = FieldMontgomeryReduce(x)
+		f[134+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[136+k]
 		f[136+k] = FieldAdd(t, f[138+k])
 		x := uint64(1349076) * uint64(f[138+k]-t+q)
-		f[138+k] = FieldMontgomeryReduce(x)
+		f[138+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[140+k]
 		f[140+k] = FieldAdd(t, f[142+k])
 		x := uint64(7998430) * uint64(f[142+k]-t+q)
-		f[142+k] = FieldMontgomeryReduce(x)
+		f[142+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[144+k]
 		f[144+k] = FieldAdd(t, f[146+k])
 		x := uint64(7072248) * uint64(f[146+k]-t+q)
-		f[146+k] = FieldMontgomeryReduce(x)
+		f[146+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[148+k]
 		f[148+k] = FieldAdd(t, f[150+k])
 		x := uint64(8357436) * uint64(f[150+k]-t+q)
-		f[150+k] = FieldMontgomeryReduce(x)
+		f[150+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[152+k]
 		f[152+k] = FieldAdd(t, f[154+k])
 		x := uint64(7151892) * uint64(f[154+k]-t+q)
-		f[154+k] = FieldMontgomeryReduce(x)
+		f[154+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[156+k]
 		f[156+k] = FieldAdd(t, f[158+k])
 		x := uint64(7709315) * uint64(f[158+k]-t+q)
-		f[158+k] = FieldMontgomeryReduce(x)
+		f[158+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[160+k]
 		f[160+k] = FieldAdd(t, f[162+k])
 		x := uint64(5903370) * uint64(f[162+k]-t+q)
-		f[162+k] = FieldMontgomeryReduce(x)
+		f[162+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[164+k]
 		f[164+k] = FieldAdd(t, f[166+k])
 		x := uint64(7969390) * uint64(f[166+k]-t+q)
-		f[166+k] = FieldMontgomeryReduce(x)
+		f[166+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[168+k]
 		f[168+k] = FieldAdd(t, f[170+k])
 		x := uint64(4686924) * uint64(f[170+k]-t+q)
-		f[170+k] = FieldMontgomeryReduce(x)
+		f[170+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[172+k]
 		f[172+k] = FieldAdd(t, f[174+k])
 		x := uint64(5412772) * uint64(f[174+k]-t+q)
-		f[174+k] = FieldMontgomeryReduce(x)
+		f[174+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[176+k]
 		f[176+k] = FieldAdd(t, f[178+k])
 		x := uint64(2715295) * uint64(f[178+k]-t+q)
-		f[178+k] = FieldMontgomeryReduce(x)
+		f[178+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[180+k]
 		f[180+k] = FieldAdd(t, f[182+k])
 		x := uint64(2147896) * uint64(f[182+k]-t+q)
-		f[182+k] = FieldMontgomeryReduce(x)
+		f[182+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[184+k]
 		f[184+k] = FieldAdd(t, f[186+k])
 		x := uint64(7396998) * uint64(f[186+k]-t+q)
-		f[186+k] = FieldMontgomeryReduce(x)
+		f[186+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[188+k]
 		f[188+k] = FieldAdd(t, f[190+k])
 		x := uint64(3412210) * uint64(f[190+k]-t+q)
-		f[190+k] = FieldMontgomeryReduce(x)
+		f[190+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[194+k])
 		x := uint64(126922) * uint64(f[194+k]-t+q)
-		f[194+k] = FieldMontgomeryReduce(x)
+		f[194+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[196+k]
 		f[196+k] = FieldAdd(t, f[198+k])
 		x := uint64(4747489) * uint64(f[198+k]-t+q)
-		f[198+k] = FieldMontgomeryReduce(x)
+		f[198+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[200+k]
 		f[200+k] = FieldAdd(t, f[202+k])
 		x := uint64(5223087) * uint64(f[202+k]-t+q)
-		f[202+k] = FieldMontgomeryReduce(x)
+		f[202+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[204+k]
 		f[204+k] = FieldAdd(t, f[206+k])
 		x := uint64(5190273) * uint64(f[206+k]-t+q)
-		f[206+k] = FieldMontgomeryReduce(x)
+		f[206+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[208+k]
 		f[208+k] = FieldAdd(t, f[210+k])
 		x := uint64(7380215) * uint64(f[210+k]-t+q)
-		f[210+k] = FieldMontgomeryReduce(x)
+		f[210+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[212+k]
 		f[212+k] = FieldAdd(t, f[214+k])
 		x := uint64(4296819) * uint64(f[214+k]-t+q)
-		f[214+k] = FieldMontgomeryReduce(x)
+		f[214+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[216+k]
 		f[216+k] = FieldAdd(t, f[218+k])
 		x := uint64(1939314) * uint64(f[218+k]-t+q)
-		f[218+k] = FieldMontgomeryReduce(x)
+		f[218+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[220+k]
 		f[220+k] = FieldAdd(t, f[222+k])
 		x := uint64(7122806) * uint64(f[222+k]-t+q)
-		f[222+k] = FieldMontgomeryReduce(x)
+		f[222+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[224+k]
 		f[224+k] = FieldAdd(t, f[226+k])
 		x := uint64(6795196) * uint64(f[226+k]-t+q)
-		f[226+k] = FieldMontgomeryReduce(x)
+		f[226+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[228+k]
 		f[228+k] = FieldAdd(t, f[230+k])
 		x := uint64(2176455) * uint64(f[230+k]-t+q)
-		f[230+k] = FieldMontgomeryReduce(x)
+		f[230+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[232+k]
 		f[232+k] = FieldAdd(t, f[234+k])
 		x := uint64(3475950) * uint64(f[234+k]-t+q)
-		f[234+k] = FieldMontgomeryReduce(x)
+		f[234+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[236+k]
 		f[236+k] = FieldAdd(t, f[238+k])
 		x := uint64(6927966) * uint64(f[238+k]-t+q)
-		f[238+k] = FieldMontgomeryReduce(x)
+		f[238+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[240+k]
 		f[240+k] = FieldAdd(t, f[242+k])
 		x := uint64(5339162) * uint64(f[242+k]-t+q)
-		f[242+k] = FieldMontgomeryReduce(x)
+		f[242+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[244+k]
 		f[244+k] = FieldAdd(t, f[246+k])
 		x := uint64(4702672) * uint64(f[246+k]-t+q)
-		f[246+k] = FieldMontgomeryReduce(x)
+		f[246+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[248+k]
 		f[248+k] = FieldAdd(t, f[250+k])
 		x := uint64(6851714) * uint64(f[250+k]-t+q)
-		f[250+k] = FieldMontgomeryReduce(x)
+		f[250+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[252+k]
 		f[252+k] = FieldAdd(t, f[254+k])
 		x := uint64(4450022) * uint64(f[254+k]-t+q)
-		f[254+k] = FieldMontgomeryReduce(x)
+		f[254+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[4+k])
 		x := uint64(5582638) * uint64(f[4+k]-t+q)
-		f[4+k] = FieldMontgomeryReduce(x)
+		f[4+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[8+k]
 		f[8+k] = FieldAdd(t, f[12+k])
 		x := uint64(2071892) * uint64(f[12+k]-t+q)
-		f[12+k] = FieldMontgomeryReduce(x)
+		f[12+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[16+k]
 		f[16+k] = FieldAdd(t, f[20+k])
 		x := uint64(5823537) * uint64(f[20+k]-t+q)
-		f[20+k] = FieldMontgomeryReduce(x)
+		f[20+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[24+k]
 		f[24+k] = FieldAdd(t, f[28+k])
 		x := uint64(3900724) * uint64(f[28+k]-t+q)
-		f[28+k] = FieldMontgomeryReduce(x)
+		f[28+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[32+k]
 		f[32+k] = FieldAdd(t, f[36+k])
 		x := uint64(3881043) * uint64(f[36+k]-t+q)
-		f[36+k] = FieldMontgomeryReduce(x)
+		f[36+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[40+k]
 		f[40+k] = FieldAdd(t, f[44+k])
 		x := uint64(954230) * uint64(f[44+k]-t+q)
-		f[44+k] = FieldMontgomeryReduce(x)
+		f[44+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[48+k]
 		f[48+k] = FieldAdd(t, f[52+k])
 		x := uint64(531354) * uint64(f[52+k]-t+q)
-		f[52+k] = FieldMontgomeryReduce(x)
+		f[52+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[56+k]
 		f[56+k] = FieldAdd(t, f[60+k])
 		x := uint64(811944) * uint64(f[60+k]-t+q)
-		f[60+k] = FieldMontgomeryReduce(x)
+		f[60+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[68+k])
 		x := uint64(3699596) * uint64(f[68+k]-t+q)
-		f[68+k] = FieldMontgomeryReduce(x)
+		f[68+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[72+k]
 		f[72+k] = FieldAdd(t, f[76+k])
 		x := uint64(6779997) * uint64(f[76+k]-t+q)
-		f[76+k] = FieldMontgomeryReduce(x)
+		f[76+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[80+k]
 		f[80+k] = FieldAdd(t, f[84+k])
 		x := uint64(6239768) * uint64(f[84+k]-t+q)
-		f[84+k] = FieldMontgomeryReduce(x)
+		f[84+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[88+k]
 		f[88+k] = FieldAdd(t, f[92+k])
 		x := uint64(3507263) * uint64(f[92+k]-t+q)
-		f[92+k] = FieldMontgomeryReduce(x)
+		f[92+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[96+k]
 		f[96+k] = FieldAdd(t, f[100+k])
 		x := uint64(4558682) * uint64(f[100+k]-t+q)
-		f[100+k] = FieldMontgomeryReduce(x)
+		f[100+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[104+k]
 		f[104+k] = FieldAdd(t, f[108+k])
 		x := uint64(3505694) * uint64(f[108+k]-t+q)
-		f[108+k] = FieldMontgomeryReduce(x)
+		f[108+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[112+k]
 		f[112+k] = FieldAdd(t, f[116+k])
 		x := uint64(6736599) * uint64(f[116+k]-t+q)
-		f[116+k] = FieldMontgomeryReduce(x)
+		f[116+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[120+k]
 		f[120+k] = FieldAdd(t, f[124+k])
 		x := uint64(6681150) * uint64(f[124+k]-t+q)
-		f[124+k] = FieldMontgomeryReduce(x)
+		f[124+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[132+k])
 		x := uint64(7841118) * uint64(f[132+k]-t+q)
-		f[132+k] = FieldMontgomeryReduce(x)
+		f[132+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[136+k]
 		f[136+k] = FieldAdd(t, f[140+k])
 		x := uint64(2348700) * uint64(f[140+k]-t+q)
-		f[140+k] = FieldMontgomeryReduce(x)
+		f[140+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[144+k]
 		f[144+k] = FieldAdd(t, f[148+k])
 		x := uint64(8079950) * uint64(f[148+k]-t+q)
-		f[148+k] = FieldMontgomeryReduce(x)
+		f[148+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[152+k]
 		f[152+k] = FieldAdd(t, f[156+k])
 		x := uint64(3539968) * uint64(f[156+k]-t+q)
-		f[156+k] = FieldMontgomeryReduce(x)
+		f[156+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[160+k]
 		f[160+k] = FieldAdd(t, f[164+k])
 		x := uint64(5512770) * uint64(f[164+k]-t+q)
-		f[164+k] = FieldMontgomeryReduce(x)
+		f[164+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[168+k]
 		f[168+k] = FieldAdd(t, f[172+k])
 		x := uint64(3574422) * uint64(f[172+k]-t+q)
-		f[172+k] = FieldMontgomeryReduce(x)
+		f[172+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[176+k]
 		f[176+k] = FieldAdd(t, f[180+k])
 		x := uint64(5336701) * uint64(f[180+k]-t+q)
-		f[180+k] = FieldMontgomeryReduce(x)
+		f[180+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[184+k]
 		f[184+k] = FieldAdd(t, f[188+k])
 		x := uint64(4519302) * uint64(f[188+k]-t+q)
-		f[188+k] = FieldMontgomeryReduce(x)
+		f[188+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[196+k])
 		x := uint64(3915439) * uint64(f[196+k]-t+q)
-		f[196+k] = FieldMontgomeryReduce(x)
+		f[196+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[200+k]
 		f[200+k] = FieldAdd(t, f[204+k])
 		x := uint64(5842901) * uint64(f[204+k]-t+q)
-		f[204+k] = FieldMontgomeryReduce(x)
+		f[204+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[208+k]
 		f[208+k] = FieldAdd(t, f[212+k])
 		x := uint64(4788269) * uint64(f[212+k]-t+q)
-		f[212+k] = FieldMontgomeryReduce(x)
+		f[212+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[216+k]
 		f[216+k] = FieldAdd(t, f[220+k])
 		x := uint64(6718724) * uint64(f[220+k]-t+q)
-		f[220+k] = FieldMontgomeryReduce(x)
+		f[220+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[224+k]
 		f[224+k] = FieldAdd(t, f[228+k])
 		x := uint64(3530437) * uint64(f[228+k]-t+q)
-		f[228+k] = FieldMontgomeryReduce(x)
+		f[228+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[232+k]
 		f[232+k] = FieldAdd(t, f[236+k])
 		x := uint64(3077325) * uint64(f[236+k]-t+q)
-		f[236+k] = FieldMontgomeryReduce(x)
+		f[236+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[240+k]
 		f[240+k] = FieldAdd(t, f[244+k])
 		x := uint64(95776) * uint64(f[244+k]-t+q)
-		f[244+k] = FieldMontgomeryReduce(x)
+		f[244+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[248+k]
 		f[248+k] = FieldAdd(t, f[252+k])
 		x := uint64(2706023) * uint64(f[252+k]-t+q)
-		f[252+k] = FieldMontgomeryReduce(x)
+		f[252+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[8+k])
 		x := uint64(280005) * uint64(f[8+k]-t+q)
-		f[8+k] = FieldMontgomeryReduce(x)
+		f[8+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[16+k]
 		f[16+k] = FieldAdd(t, f[24+k])
 		x := uint64(4010497) * uint64(f[24+k]-t+q)
-		f[24+k] = FieldMontgomeryReduce(x)
+		f[24+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[32+k]
 		f[32+k] = FieldAdd(t, f[40+k])
 		x := uint64(8360995) * uint64(f[40+k]-t+q)
-		f[40+k] = FieldMontgomeryReduce(x)
+		f[40+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[48+k]
 		f[48+k] = FieldAdd(t, f[56+k])
 		x := uint64(1757237) * uint64(f[56+k]-t+q)
-		f[56+k] = FieldMontgomeryReduce(x)
+		f[56+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[72+k])
 		x := uint64(5102745) * uint64(f[72+k]-t+q)
-		f[72+k] = FieldMontgomeryReduce(x)
+		f[72+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[80+k]
 		f[80+k] = FieldAdd(t, f[88+k])
 		x := uint64(6980856) * uint64(f[88+k]-t+q)
-		f[88+k] = FieldMontgomeryReduce(x)
+		f[88+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[96+k]
 		f[96+k] = FieldAdd(t, f[104+k])
 		x := uint64(4520680) * uint64(f[104+k]-t+q)
-		f[104+k] = FieldMontgomeryReduce(x)
+		f[104+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[112+k]
 		f[112+k] = FieldAdd(t, f[120+k])
 		x := uint64(6262231) * uint64(f[120+k]-t+q)
-		f[120+k] = FieldMontgomeryReduce(x)
+		f[120+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[136+k])
 		x := uint64(6271868) * uint64(f[136+k]-t+q)
-		f[136+k] = FieldMontgomeryReduce(x)
+		f[136+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[144+k]
 		f[144+k] = FieldAdd(t, f[152+k])
 		x := uint64(2619752) * uint64(f[152+k]-t+q)
-		f[152+k] = FieldMontgomeryReduce(x)
+		f[152+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[160+k]
 		f[160+k] = FieldAdd(t, f[168+k])
 		x := uint64(7260833) * uint64(f[168+k]-t+q)
-		f[168+k] = FieldMontgomeryReduce(x)
+		f[168+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[176+k]
 		f[176+k] = FieldAdd(t, f[184+k])
 		x := uint64(7830929) * uint64(f[184+k]-t+q)
-		f[184+k] = FieldMontgomeryReduce(x)
+		f[184+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[200+k])
 		x := uint64(3585928) * uint64(f[200+k]-t+q)
-		f[200+k] = FieldMontgomeryReduce(x)
+		f[200+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[208+k]
 		f[208+k] = FieldAdd(t, f[216+k])
 		x := uint64(7300517) * uint64(f[216+k]-t+q)
-		f[216+k] = FieldMontgomeryReduce(x)
+		f[216+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[224+k]
 		f[224+k] = FieldAdd(t, f[232+k])
 		x := uint64(1024112) * uint64(f[232+k]-t+q)
-		f[232+k] = FieldMontgomeryReduce(x)
+		f[232+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[240+k]
 		f[240+k] = FieldAdd(t, f[248+k])
 		x := uint64(2725464) * uint64(f[248+k]-t+q)
-		f[248+k] = FieldMontgomeryReduce(x)
+		f[248+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[16+k])
 		x := uint64(2680103) * uint64(f[16+k]-t+q)
-		f[16+k] = FieldMontgomeryReduce(x)
+		f[16+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[32+k]
 		f[32+k] = FieldAdd(t, f[48+k])
 		x := uint64(3111497) * uint64(f[48+k]-t+q)
-		f[48+k] = FieldMontgomeryReduce(x)
+		f[48+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[80+k])
 		x := uint64(5495562) * uint64(f[80+k]-t+q)
-		f[80+k] = FieldMontgomeryReduce(x)
+		f[80+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[96+k]
 		f[96+k] = FieldAdd(t, f[112+k])
 		x := uint64(3119733) * uint64(f[112+k]-t+q)
-		f[112+k] = FieldMontgomeryReduce(x)
+		f[112+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[144+k])
 		x := uint64(6288512) * uint64(f[144+k]-t+q)
-		f[144+k] = FieldMontgomeryReduce(x)
+		f[144+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[160+k]
 		f[160+k] = FieldAdd(t, f[176+k])
 		x := uint64(8021166) * uint64(f[176+k]-t+q)
-		f[176+k] = FieldMontgomeryReduce(x)
+		f[176+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[208+k])
 		x := uint64(2353451) * uint64(f[208+k]-t+q)
-		f[208+k] = FieldMontgomeryReduce(x)
+		f[208+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[224+k]
 		f[224+k] = FieldAdd(t, f[240+k])
 		x := uint64(1826347) * uint64(f[240+k]-t+q)
-		f[240+k] = FieldMontgomeryReduce(x)
+		f[240+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 32; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[32+k])
 		x := uint64(466468) * uint64(f[32+k]-t+q)
-		f[32+k] = FieldMontgomeryReduce(x)
+		f[32+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 32; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[96+k])
 		x := uint64(7504169) * uint64(f[96+k]-t+q)
-		f[96+k] = FieldMontgomeryReduce(x)
+		f[96+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 32; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[160+k])
 		x := uint64(7602457) * uint64(f[160+k]-t+q)
-		f[160+k] = FieldMontgomeryReduce(x)
+		f[160+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 32; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[224+k])
 		x := uint64(237124) * uint64(f[224+k]-t+q)
-		f[224+k] = FieldMontgomeryReduce(x)
+		f[224+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 64; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[64+k])
 		x := uint64(7861508) * uint64(f[64+k]-t+q)
-		f[64+k] = FieldMontgomeryReduce(x)
+		f[64+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 64; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[192+k])
 		x := uint64(5771523) * uint64(f[192+k]-t+q)
-		f[192+k] = FieldMontgomeryReduce(x)
+		f[192+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 128; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[128+k])
 		x := uint64(25847) * uint64(f[128+k]-t+q)
-		f[128+k] = FieldMontgomeryReduce(x)
+		f[128+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 
 	f[0] = FieldMontgomeryMul(f[0], 16382)
@@ -16138,1531 +16138,1531 @@ func InverseNTTUnroll3(f NTTElement) RingElement {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[1+k])
 		x := uint64(1976782) * uint64(f[1+k]-t+q)
-		f[1+k] = FieldMontgomeryReduce(x)
+		f[1+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[2+k]
 		f[2+k] = FieldAdd(t, f[3+k])
 		x := uint64(7534263) * uint64(f[3+k]-t+q)
-		f[3+k] = FieldMontgomeryReduce(x)
+		f[3+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[4+k]
 		f[4+k] = FieldAdd(t, f[5+k])
 		x := uint64(1400424) * uint64(f[5+k]-t+q)
-		f[5+k] = FieldMontgomeryReduce(x)
+		f[5+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[6+k]
 		f[6+k] = FieldAdd(t, f[7+k])
 		x := uint64(3937738) * uint64(f[7+k]-t+q)
-		f[7+k] = FieldMontgomeryReduce(x)
+		f[7+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[8+k]
 		f[8+k] = FieldAdd(t, f[9+k])
 		x := uint64(7018208) * uint64(f[9+k]-t+q)
-		f[9+k] = FieldMontgomeryReduce(x)
+		f[9+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[10+k]
 		f[10+k] = FieldAdd(t, f[11+k])
 		x := uint64(8332111) * uint64(f[11+k]-t+q)
-		f[11+k] = FieldMontgomeryReduce(x)
+		f[11+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[12+k]
 		f[12+k] = FieldAdd(t, f[13+k])
 		x := uint64(3919660) * uint64(f[13+k]-t+q)
-		f[13+k] = FieldMontgomeryReduce(x)
+		f[13+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[14+k]
 		f[14+k] = FieldAdd(t, f[15+k])
 		x := uint64(7826001) * uint64(f[15+k]-t+q)
-		f[15+k] = FieldMontgomeryReduce(x)
+		f[15+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[16+k]
 		f[16+k] = FieldAdd(t, f[17+k])
 		x := uint64(4834730) * uint64(f[17+k]-t+q)
-		f[17+k] = FieldMontgomeryReduce(x)
+		f[17+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[18+k]
 		f[18+k] = FieldAdd(t, f[19+k])
 		x := uint64(1612842) * uint64(f[19+k]-t+q)
-		f[19+k] = FieldMontgomeryReduce(x)
+		f[19+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[20+k]
 		f[20+k] = FieldAdd(t, f[21+k])
 		x := uint64(7403526) * uint64(f[21+k]-t+q)
-		f[21+k] = FieldMontgomeryReduce(x)
+		f[21+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[22+k]
 		f[22+k] = FieldAdd(t, f[23+k])
 		x := uint64(183443) * uint64(f[23+k]-t+q)
-		f[23+k] = FieldMontgomeryReduce(x)
+		f[23+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[24+k]
 		f[24+k] = FieldAdd(t, f[25+k])
 		x := uint64(6094090) * uint64(f[25+k]-t+q)
-		f[25+k] = FieldMontgomeryReduce(x)
+		f[25+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[26+k]
 		f[26+k] = FieldAdd(t, f[27+k])
 		x := uint64(7959518) * uint64(f[27+k]-t+q)
-		f[27+k] = FieldMontgomeryReduce(x)
+		f[27+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[28+k]
 		f[28+k] = FieldAdd(t, f[29+k])
 		x := uint64(6144432) * uint64(f[29+k]-t+q)
-		f[29+k] = FieldMontgomeryReduce(x)
+		f[29+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[30+k]
 		f[30+k] = FieldAdd(t, f[31+k])
 		x := uint64(5441381) * uint64(f[31+k]-t+q)
-		f[31+k] = FieldMontgomeryReduce(x)
+		f[31+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[32+k]
 		f[32+k] = FieldAdd(t, f[33+k])
 		x := uint64(4546524) * uint64(f[33+k]-t+q)
-		f[33+k] = FieldMontgomeryReduce(x)
+		f[33+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[34+k]
 		f[34+k] = FieldAdd(t, f[35+k])
 		x := uint64(8119771) * uint64(f[35+k]-t+q)
-		f[35+k] = FieldMontgomeryReduce(x)
+		f[35+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[36+k]
 		f[36+k] = FieldAdd(t, f[37+k])
 		x := uint64(7276084) * uint64(f[37+k]-t+q)
-		f[37+k] = FieldMontgomeryReduce(x)
+		f[37+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[38+k]
 		f[38+k] = FieldAdd(t, f[39+k])
 		x := uint64(6712985) * uint64(f[39+k]-t+q)
-		f[39+k] = FieldMontgomeryReduce(x)
+		f[39+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[40+k]
 		f[40+k] = FieldAdd(t, f[41+k])
 		x := uint64(1910376) * uint64(f[41+k]-t+q)
-		f[41+k] = FieldMontgomeryReduce(x)
+		f[41+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[42+k]
 		f[42+k] = FieldAdd(t, f[43+k])
 		x := uint64(6577327) * uint64(f[43+k]-t+q)
-		f[43+k] = FieldMontgomeryReduce(x)
+		f[43+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[44+k]
 		f[44+k] = FieldAdd(t, f[45+k])
 		x := uint64(1723600) * uint64(f[45+k]-t+q)
-		f[45+k] = FieldMontgomeryReduce(x)
+		f[45+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[46+k]
 		f[46+k] = FieldAdd(t, f[47+k])
 		x := uint64(7953734) * uint64(f[47+k]-t+q)
-		f[47+k] = FieldMontgomeryReduce(x)
+		f[47+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[48+k]
 		f[48+k] = FieldAdd(t, f[49+k])
 		x := uint64(472078) * uint64(f[49+k]-t+q)
-		f[49+k] = FieldMontgomeryReduce(x)
+		f[49+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[50+k]
 		f[50+k] = FieldAdd(t, f[51+k])
 		x := uint64(1717735) * uint64(f[51+k]-t+q)
-		f[51+k] = FieldMontgomeryReduce(x)
+		f[51+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[52+k]
 		f[52+k] = FieldAdd(t, f[53+k])
 		x := uint64(7404533) * uint64(f[53+k]-t+q)
-		f[53+k] = FieldMontgomeryReduce(x)
+		f[53+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[54+k]
 		f[54+k] = FieldAdd(t, f[55+k])
 		x := uint64(2213111) * uint64(f[55+k]-t+q)
-		f[55+k] = FieldMontgomeryReduce(x)
+		f[55+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[56+k]
 		f[56+k] = FieldAdd(t, f[57+k])
 		x := uint64(269760) * uint64(f[57+k]-t+q)
-		f[57+k] = FieldMontgomeryReduce(x)
+		f[57+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[58+k]
 		f[58+k] = FieldAdd(t, f[59+k])
 		x := uint64(3866901) * uint64(f[59+k]-t+q)
-		f[59+k] = FieldMontgomeryReduce(x)
+		f[59+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[60+k]
 		f[60+k] = FieldAdd(t, f[61+k])
 		x := uint64(3523897) * uint64(f[61+k]-t+q)
-		f[61+k] = FieldMontgomeryReduce(x)
+		f[61+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[62+k]
 		f[62+k] = FieldAdd(t, f[63+k])
 		x := uint64(5341501) * uint64(f[63+k]-t+q)
-		f[63+k] = FieldMontgomeryReduce(x)
+		f[63+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[65+k])
 		x := uint64(6581310) * uint64(f[65+k]-t+q)
-		f[65+k] = FieldMontgomeryReduce(x)
+		f[65+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[66+k]
 		f[66+k] = FieldAdd(t, f[67+k])
 		x := uint64(4686184) * uint64(f[67+k]-t+q)
-		f[67+k] = FieldMontgomeryReduce(x)
+		f[67+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[68+k]
 		f[68+k] = FieldAdd(t, f[69+k])
 		x := uint64(1652634) * uint64(f[69+k]-t+q)
-		f[69+k] = FieldMontgomeryReduce(x)
+		f[69+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[70+k]
 		f[70+k] = FieldAdd(t, f[71+k])
 		x := uint64(810149) * uint64(f[71+k]-t+q)
-		f[71+k] = FieldMontgomeryReduce(x)
+		f[71+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[72+k]
 		f[72+k] = FieldAdd(t, f[73+k])
 		x := uint64(3014001) * uint64(f[73+k]-t+q)
-		f[73+k] = FieldMontgomeryReduce(x)
+		f[73+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[74+k]
 		f[74+k] = FieldAdd(t, f[75+k])
 		x := uint64(1616392) * uint64(f[75+k]-t+q)
-		f[75+k] = FieldMontgomeryReduce(x)
+		f[75+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[76+k]
 		f[76+k] = FieldAdd(t, f[77+k])
 		x := uint64(162844) * uint64(f[77+k]-t+q)
-		f[77+k] = FieldMontgomeryReduce(x)
+		f[77+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[78+k]
 		f[78+k] = FieldAdd(t, f[79+k])
 		x := uint64(5196991) * uint64(f[79+k]-t+q)
-		f[79+k] = FieldMontgomeryReduce(x)
+		f[79+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[80+k]
 		f[80+k] = FieldAdd(t, f[81+k])
 		x := uint64(7173032) * uint64(f[81+k]-t+q)
-		f[81+k] = FieldMontgomeryReduce(x)
+		f[81+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[82+k]
 		f[82+k] = FieldAdd(t, f[83+k])
 		x := uint64(185531) * uint64(f[83+k]-t+q)
-		f[83+k] = FieldMontgomeryReduce(x)
+		f[83+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[84+k]
 		f[84+k] = FieldAdd(t, f[85+k])
 		x := uint64(3369112) * uint64(f[85+k]-t+q)
-		f[85+k] = FieldMontgomeryReduce(x)
+		f[85+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[86+k]
 		f[86+k] = FieldAdd(t, f[87+k])
 		x := uint64(1957272) * uint64(f[87+k]-t+q)
-		f[87+k] = FieldMontgomeryReduce(x)
+		f[87+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[88+k]
 		f[88+k] = FieldAdd(t, f[89+k])
 		x := uint64(8215696) * uint64(f[89+k]-t+q)
-		f[89+k] = FieldMontgomeryReduce(x)
+		f[89+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[90+k]
 		f[90+k] = FieldAdd(t, f[91+k])
 		x := uint64(2454455) * uint64(f[91+k]-t+q)
-		f[91+k] = FieldMontgomeryReduce(x)
+		f[91+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[92+k]
 		f[92+k] = FieldAdd(t, f[93+k])
 		x := uint64(2432395) * uint64(f[93+k]-t+q)
-		f[93+k] = FieldMontgomeryReduce(x)
+		f[93+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[94+k]
 		f[94+k] = FieldAdd(t, f[95+k])
 		x := uint64(6366809) * uint64(f[95+k]-t+q)
-		f[95+k] = FieldMontgomeryReduce(x)
+		f[95+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[96+k]
 		f[96+k] = FieldAdd(t, f[97+k])
 		x := uint64(4603424) * uint64(f[97+k]-t+q)
-		f[97+k] = FieldMontgomeryReduce(x)
+		f[97+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[98+k]
 		f[98+k] = FieldAdd(t, f[99+k])
 		x := uint64(594136) * uint64(f[99+k]-t+q)
-		f[99+k] = FieldMontgomeryReduce(x)
+		f[99+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[100+k]
 		f[100+k] = FieldAdd(t, f[101+k])
 		x := uint64(4656147) * uint64(f[101+k]-t+q)
-		f[101+k] = FieldMontgomeryReduce(x)
+		f[101+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[102+k]
 		f[102+k] = FieldAdd(t, f[103+k])
 		x := uint64(5796124) * uint64(f[103+k]-t+q)
-		f[103+k] = FieldMontgomeryReduce(x)
+		f[103+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[104+k]
 		f[104+k] = FieldAdd(t, f[105+k])
 		x := uint64(6533464) * uint64(f[105+k]-t+q)
-		f[105+k] = FieldMontgomeryReduce(x)
+		f[105+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[106+k]
 		f[106+k] = FieldAdd(t, f[107+k])
 		x := uint64(6709241) * uint64(f[107+k]-t+q)
-		f[107+k] = FieldMontgomeryReduce(x)
+		f[107+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[108+k]
 		f[108+k] = FieldAdd(t, f[109+k])
 		x := uint64(5548557) * uint64(f[109+k]-t+q)
-		f[109+k] = FieldMontgomeryReduce(x)
+		f[109+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[110+k]
 		f[110+k] = FieldAdd(t, f[111+k])
 		x := uint64(7838005) * uint64(f[111+k]-t+q)
-		f[111+k] = FieldMontgomeryReduce(x)
+		f[111+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[112+k]
 		f[112+k] = FieldAdd(t, f[113+k])
 		x := uint64(3406031) * uint64(f[113+k]-t+q)
-		f[113+k] = FieldMontgomeryReduce(x)
+		f[113+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[114+k]
 		f[114+k] = FieldAdd(t, f[115+k])
 		x := uint64(2235880) * uint64(f[115+k]-t+q)
-		f[115+k] = FieldMontgomeryReduce(x)
+		f[115+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[116+k]
 		f[116+k] = FieldAdd(t, f[117+k])
 		x := uint64(777191) * uint64(f[117+k]-t+q)
-		f[117+k] = FieldMontgomeryReduce(x)
+		f[117+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[118+k]
 		f[118+k] = FieldAdd(t, f[119+k])
 		x := uint64(1500165) * uint64(f[119+k]-t+q)
-		f[119+k] = FieldMontgomeryReduce(x)
+		f[119+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[120+k]
 		f[120+k] = FieldAdd(t, f[121+k])
 		x := uint64(7005614) * uint64(f[121+k]-t+q)
-		f[121+k] = FieldMontgomeryReduce(x)
+		f[121+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[122+k]
 		f[122+k] = FieldAdd(t, f[123+k])
 		x := uint64(5834105) * uint64(f[123+k]-t+q)
-		f[123+k] = FieldMontgomeryReduce(x)
+		f[123+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[124+k]
 		f[124+k] = FieldAdd(t, f[125+k])
 		x := uint64(1917081) * uint64(f[125+k]-t+q)
-		f[125+k] = FieldMontgomeryReduce(x)
+		f[125+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[126+k]
 		f[126+k] = FieldAdd(t, f[127+k])
 		x := uint64(7100756) * uint64(f[127+k]-t+q)
-		f[127+k] = FieldMontgomeryReduce(x)
+		f[127+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[129+k])
 		x := uint64(6417775) * uint64(f[129+k]-t+q)
-		f[129+k] = FieldMontgomeryReduce(x)
+		f[129+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[130+k]
 		f[130+k] = FieldAdd(t, f[131+k])
 		x := uint64(3306115) * uint64(f[131+k]-t+q)
-		f[131+k] = FieldMontgomeryReduce(x)
+		f[131+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[132+k]
 		f[132+k] = FieldAdd(t, f[133+k])
 		x := uint64(1312455) * uint64(f[133+k]-t+q)
-		f[133+k] = FieldMontgomeryReduce(x)
+		f[133+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[134+k]
 		f[134+k] = FieldAdd(t, f[135+k])
 		x := uint64(7929317) * uint64(f[135+k]-t+q)
-		f[135+k] = FieldMontgomeryReduce(x)
+		f[135+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[136+k]
 		f[136+k] = FieldAdd(t, f[137+k])
 		x := uint64(6950192) * uint64(f[137+k]-t+q)
-		f[137+k] = FieldMontgomeryReduce(x)
+		f[137+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[138+k]
 		f[138+k] = FieldAdd(t, f[139+k])
 		x := uint64(5062207) * uint64(f[139+k]-t+q)
-		f[139+k] = FieldMontgomeryReduce(x)
+		f[139+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[140+k]
 		f[140+k] = FieldAdd(t, f[141+k])
 		x := uint64(1237275) * uint64(f[141+k]-t+q)
-		f[141+k] = FieldMontgomeryReduce(x)
+		f[141+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[142+k]
 		f[142+k] = FieldAdd(t, f[143+k])
 		x := uint64(7047359) * uint64(f[143+k]-t+q)
-		f[143+k] = FieldMontgomeryReduce(x)
+		f[143+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[144+k]
 		f[144+k] = FieldAdd(t, f[145+k])
 		x := uint64(7329447) * uint64(f[145+k]-t+q)
-		f[145+k] = FieldMontgomeryReduce(x)
+		f[145+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[146+k]
 		f[146+k] = FieldAdd(t, f[147+k])
 		x := uint64(1903435) * uint64(f[147+k]-t+q)
-		f[147+k] = FieldMontgomeryReduce(x)
+		f[147+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[148+k]
 		f[148+k] = FieldAdd(t, f[149+k])
 		x := uint64(1869119) * uint64(f[149+k]-t+q)
-		f[149+k] = FieldMontgomeryReduce(x)
+		f[149+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[150+k]
 		f[150+k] = FieldAdd(t, f[151+k])
 		x := uint64(5386378) * uint64(f[151+k]-t+q)
-		f[151+k] = FieldMontgomeryReduce(x)
+		f[151+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[152+k]
 		f[152+k] = FieldAdd(t, f[153+k])
 		x := uint64(4832145) * uint64(f[153+k]-t+q)
-		f[153+k] = FieldMontgomeryReduce(x)
+		f[153+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[154+k]
 		f[154+k] = FieldAdd(t, f[155+k])
 		x := uint64(2635921) * uint64(f[155+k]-t+q)
-		f[155+k] = FieldMontgomeryReduce(x)
+		f[155+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[156+k]
 		f[156+k] = FieldAdd(t, f[157+k])
 		x := uint64(1250494) * uint64(f[157+k]-t+q)
-		f[157+k] = FieldMontgomeryReduce(x)
+		f[157+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[158+k]
 		f[158+k] = FieldAdd(t, f[159+k])
 		x := uint64(4613401) * uint64(f[159+k]-t+q)
-		f[159+k] = FieldMontgomeryReduce(x)
+		f[159+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[160+k]
 		f[160+k] = FieldAdd(t, f[161+k])
 		x := uint64(1595974) * uint64(f[161+k]-t+q)
-		f[161+k] = FieldMontgomeryReduce(x)
+		f[161+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[162+k]
 		f[162+k] = FieldAdd(t, f[163+k])
 		x := uint64(2486353) * uint64(f[163+k]-t+q)
-		f[163+k] = FieldMontgomeryReduce(x)
+		f[163+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[164+k]
 		f[164+k] = FieldAdd(t, f[165+k])
 		x := uint64(1247620) * uint64(f[165+k]-t+q)
-		f[165+k] = FieldMontgomeryReduce(x)
+		f[165+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[166+k]
 		f[166+k] = FieldAdd(t, f[167+k])
 		x := uint64(4055324) * uint64(f[167+k]-t+q)
-		f[167+k] = FieldMontgomeryReduce(x)
+		f[167+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[168+k]
 		f[168+k] = FieldAdd(t, f[169+k])
 		x := uint64(1265009) * uint64(f[169+k]-t+q)
-		f[169+k] = FieldMontgomeryReduce(x)
+		f[169+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[170+k]
 		f[170+k] = FieldAdd(t, f[171+k])
 		x := uint64(5790267) * uint64(f[171+k]-t+q)
-		f[171+k] = FieldMontgomeryReduce(x)
+		f[171+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[172+k]
 		f[172+k] = FieldAdd(t, f[173+k])
 		x := uint64(2691481) * uint64(f[173+k]-t+q)
-		f[173+k] = FieldMontgomeryReduce(x)
+		f[173+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[174+k]
 		f[174+k] = FieldAdd(t, f[175+k])
 		x := uint64(2842341) * uint64(f[175+k]-t+q)
-		f[175+k] = FieldMontgomeryReduce(x)
+		f[175+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[176+k]
 		f[176+k] = FieldAdd(t, f[177+k])
 		x := uint64(203044) * uint64(f[177+k]-t+q)
-		f[177+k] = FieldMontgomeryReduce(x)
+		f[177+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[178+k]
 		f[178+k] = FieldAdd(t, f[179+k])
 		x := uint64(1735879) * uint64(f[179+k]-t+q)
-		f[179+k] = FieldMontgomeryReduce(x)
+		f[179+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[180+k]
 		f[180+k] = FieldAdd(t, f[181+k])
 		x := uint64(5038140) * uint64(f[181+k]-t+q)
-		f[181+k] = FieldMontgomeryReduce(x)
+		f[181+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[182+k]
 		f[182+k] = FieldAdd(t, f[183+k])
 		x := uint64(3437287) * uint64(f[183+k]-t+q)
-		f[183+k] = FieldMontgomeryReduce(x)
+		f[183+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[184+k]
 		f[184+k] = FieldAdd(t, f[185+k])
 		x := uint64(4108315) * uint64(f[185+k]-t+q)
-		f[185+k] = FieldMontgomeryReduce(x)
+		f[185+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[186+k]
 		f[186+k] = FieldAdd(t, f[187+k])
 		x := uint64(5942594) * uint64(f[187+k]-t+q)
-		f[187+k] = FieldMontgomeryReduce(x)
+		f[187+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[188+k]
 		f[188+k] = FieldAdd(t, f[189+k])
 		x := uint64(286988) * uint64(f[189+k]-t+q)
-		f[189+k] = FieldMontgomeryReduce(x)
+		f[189+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[190+k]
 		f[190+k] = FieldAdd(t, f[191+k])
 		x := uint64(342297) * uint64(f[191+k]-t+q)
-		f[191+k] = FieldMontgomeryReduce(x)
+		f[191+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[193+k])
 		x := uint64(4784579) * uint64(f[193+k]-t+q)
-		f[193+k] = FieldMontgomeryReduce(x)
+		f[193+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[194+k]
 		f[194+k] = FieldAdd(t, f[195+k])
 		x := uint64(7611795) * uint64(f[195+k]-t+q)
-		f[195+k] = FieldMontgomeryReduce(x)
+		f[195+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[196+k]
 		f[196+k] = FieldAdd(t, f[197+k])
 		x := uint64(7855319) * uint64(f[197+k]-t+q)
-		f[197+k] = FieldMontgomeryReduce(x)
+		f[197+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[198+k]
 		f[198+k] = FieldAdd(t, f[199+k])
 		x := uint64(4823422) * uint64(f[199+k]-t+q)
-		f[199+k] = FieldMontgomeryReduce(x)
+		f[199+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[200+k]
 		f[200+k] = FieldAdd(t, f[201+k])
 		x := uint64(3207046) * uint64(f[201+k]-t+q)
-		f[201+k] = FieldMontgomeryReduce(x)
+		f[201+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[202+k]
 		f[202+k] = FieldAdd(t, f[203+k])
 		x := uint64(2031748) * uint64(f[203+k]-t+q)
-		f[203+k] = FieldMontgomeryReduce(x)
+		f[203+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[204+k]
 		f[204+k] = FieldAdd(t, f[205+k])
 		x := uint64(5257975) * uint64(f[205+k]-t+q)
-		f[205+k] = FieldMontgomeryReduce(x)
+		f[205+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[206+k]
 		f[206+k] = FieldAdd(t, f[207+k])
 		x := uint64(7725090) * uint64(f[207+k]-t+q)
-		f[207+k] = FieldMontgomeryReduce(x)
+		f[207+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[208+k]
 		f[208+k] = FieldAdd(t, f[209+k])
 		x := uint64(7857917) * uint64(f[209+k]-t+q)
-		f[209+k] = FieldMontgomeryReduce(x)
+		f[209+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[210+k]
 		f[210+k] = FieldAdd(t, f[211+k])
 		x := uint64(8337157) * uint64(f[211+k]-t+q)
-		f[211+k] = FieldMontgomeryReduce(x)
+		f[211+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[212+k]
 		f[212+k] = FieldAdd(t, f[213+k])
 		x := uint64(6767243) * uint64(f[213+k]-t+q)
-		f[213+k] = FieldMontgomeryReduce(x)
+		f[213+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[214+k]
 		f[214+k] = FieldAdd(t, f[215+k])
 		x := uint64(495491) * uint64(f[215+k]-t+q)
-		f[215+k] = FieldMontgomeryReduce(x)
+		f[215+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[216+k]
 		f[216+k] = FieldAdd(t, f[217+k])
 		x := uint64(819034) * uint64(f[217+k]-t+q)
-		f[217+k] = FieldMontgomeryReduce(x)
+		f[217+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[218+k]
 		f[218+k] = FieldAdd(t, f[219+k])
 		x := uint64(909542) * uint64(f[219+k]-t+q)
-		f[219+k] = FieldMontgomeryReduce(x)
+		f[219+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[220+k]
 		f[220+k] = FieldAdd(t, f[221+k])
 		x := uint64(1859098) * uint64(f[221+k]-t+q)
-		f[221+k] = FieldMontgomeryReduce(x)
+		f[221+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[222+k]
 		f[222+k] = FieldAdd(t, f[223+k])
 		x := uint64(900702) * uint64(f[223+k]-t+q)
-		f[223+k] = FieldMontgomeryReduce(x)
+		f[223+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[224+k]
 		f[224+k] = FieldAdd(t, f[225+k])
 		x := uint64(5187039) * uint64(f[225+k]-t+q)
-		f[225+k] = FieldMontgomeryReduce(x)
+		f[225+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[226+k]
 		f[226+k] = FieldAdd(t, f[227+k])
 		x := uint64(7183191) * uint64(f[227+k]-t+q)
-		f[227+k] = FieldMontgomeryReduce(x)
+		f[227+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[228+k]
 		f[228+k] = FieldAdd(t, f[229+k])
 		x := uint64(4621053) * uint64(f[229+k]-t+q)
-		f[229+k] = FieldMontgomeryReduce(x)
+		f[229+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[230+k]
 		f[230+k] = FieldAdd(t, f[231+k])
 		x := uint64(4860065) * uint64(f[231+k]-t+q)
-		f[231+k] = FieldMontgomeryReduce(x)
+		f[231+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[232+k]
 		f[232+k] = FieldAdd(t, f[233+k])
 		x := uint64(3513181) * uint64(f[233+k]-t+q)
-		f[233+k] = FieldMontgomeryReduce(x)
+		f[233+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[234+k]
 		f[234+k] = FieldAdd(t, f[235+k])
 		x := uint64(7144689) * uint64(f[235+k]-t+q)
-		f[235+k] = FieldMontgomeryReduce(x)
+		f[235+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[236+k]
 		f[236+k] = FieldAdd(t, f[237+k])
 		x := uint64(2434439) * uint64(f[237+k]-t+q)
-		f[237+k] = FieldMontgomeryReduce(x)
+		f[237+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[238+k]
 		f[238+k] = FieldAdd(t, f[239+k])
 		x := uint64(266997) * uint64(f[239+k]-t+q)
-		f[239+k] = FieldMontgomeryReduce(x)
+		f[239+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[240+k]
 		f[240+k] = FieldAdd(t, f[241+k])
 		x := uint64(4817955) * uint64(f[241+k]-t+q)
-		f[241+k] = FieldMontgomeryReduce(x)
+		f[241+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[242+k]
 		f[242+k] = FieldAdd(t, f[243+k])
 		x := uint64(5933984) * uint64(f[243+k]-t+q)
-		f[243+k] = FieldMontgomeryReduce(x)
+		f[243+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[244+k]
 		f[244+k] = FieldAdd(t, f[245+k])
 		x := uint64(2244091) * uint64(f[245+k]-t+q)
-		f[245+k] = FieldMontgomeryReduce(x)
+		f[245+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[246+k]
 		f[246+k] = FieldAdd(t, f[247+k])
 		x := uint64(5037939) * uint64(f[247+k]-t+q)
-		f[247+k] = FieldMontgomeryReduce(x)
+		f[247+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[248+k]
 		f[248+k] = FieldAdd(t, f[249+k])
 		x := uint64(3817976) * uint64(f[249+k]-t+q)
-		f[249+k] = FieldMontgomeryReduce(x)
+		f[249+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[250+k]
 		f[250+k] = FieldAdd(t, f[251+k])
 		x := uint64(2316500) * uint64(f[251+k]-t+q)
-		f[251+k] = FieldMontgomeryReduce(x)
+		f[251+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[252+k]
 		f[252+k] = FieldAdd(t, f[253+k])
 		x := uint64(3407706) * uint64(f[253+k]-t+q)
-		f[253+k] = FieldMontgomeryReduce(x)
+		f[253+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 1; k++ {
 		t := f[254+k]
 		f[254+k] = FieldAdd(t, f[255+k])
 		x := uint64(2091667) * uint64(f[255+k]-t+q)
-		f[255+k] = FieldMontgomeryReduce(x)
+		f[255+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[2+k])
 		x := uint64(3839961) * uint64(f[2+k]-t+q)
-		f[2+k] = FieldMontgomeryReduce(x)
+		f[2+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[4+k]
 		f[4+k] = FieldAdd(t, f[6+k])
 		x := uint64(4751448) * uint64(f[6+k]-t+q)
-		f[6+k] = FieldMontgomeryReduce(x)
+		f[6+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[8+k]
 		f[8+k] = FieldAdd(t, f[10+k])
 		x := uint64(4499357) * uint64(f[10+k]-t+q)
-		f[10+k] = FieldMontgomeryReduce(x)
+		f[10+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[12+k]
 		f[12+k] = FieldAdd(t, f[14+k])
 		x := uint64(5361315) * uint64(f[14+k]-t+q)
-		f[14+k] = FieldMontgomeryReduce(x)
+		f[14+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[16+k]
 		f[16+k] = FieldAdd(t, f[18+k])
 		x := uint64(6940675) * uint64(f[18+k]-t+q)
-		f[18+k] = FieldMontgomeryReduce(x)
+		f[18+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[20+k]
 		f[20+k] = FieldAdd(t, f[22+k])
 		x := uint64(7567685) * uint64(f[22+k]-t+q)
-		f[22+k] = FieldMontgomeryReduce(x)
+		f[22+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[24+k]
 		f[24+k] = FieldAdd(t, f[26+k])
 		x := uint64(6795489) * uint64(f[26+k]-t+q)
-		f[26+k] = FieldMontgomeryReduce(x)
+		f[26+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[28+k]
 		f[28+k] = FieldAdd(t, f[30+k])
 		x := uint64(1285669) * uint64(f[30+k]-t+q)
-		f[30+k] = FieldMontgomeryReduce(x)
+		f[30+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[32+k]
 		f[32+k] = FieldAdd(t, f[34+k])
 		x := uint64(1341330) * uint64(f[34+k]-t+q)
-		f[34+k] = FieldMontgomeryReduce(x)
+		f[34+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[36+k]
 		f[36+k] = FieldAdd(t, f[38+k])
 		x := uint64(1315589) * uint64(f[38+k]-t+q)
-		f[38+k] = FieldMontgomeryReduce(x)
+		f[38+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[40+k]
 		f[40+k] = FieldAdd(t, f[42+k])
 		x := uint64(8202977) * uint64(f[42+k]-t+q)
-		f[42+k] = FieldMontgomeryReduce(x)
+		f[42+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[44+k]
 		f[44+k] = FieldAdd(t, f[46+k])
 		x := uint64(5971092) * uint64(f[46+k]-t+q)
-		f[46+k] = FieldMontgomeryReduce(x)
+		f[46+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[48+k]
 		f[48+k] = FieldAdd(t, f[50+k])
 		x := uint64(6529015) * uint64(f[50+k]-t+q)
-		f[50+k] = FieldMontgomeryReduce(x)
+		f[50+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[52+k]
 		f[52+k] = FieldAdd(t, f[54+k])
 		x := uint64(3159746) * uint64(f[54+k]-t+q)
-		f[54+k] = FieldMontgomeryReduce(x)
+		f[54+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[56+k]
 		f[56+k] = FieldAdd(t, f[58+k])
 		x := uint64(4827145) * uint64(f[58+k]-t+q)
-		f[58+k] = FieldMontgomeryReduce(x)
+		f[58+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[60+k]
 		f[60+k] = FieldAdd(t, f[62+k])
 		x := uint64(189548) * uint64(f[62+k]-t+q)
-		f[62+k] = FieldMontgomeryReduce(x)
+		f[62+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[66+k])
 		x := uint64(7063561) * uint64(f[66+k]-t+q)
-		f[66+k] = FieldMontgomeryReduce(x)
+		f[66+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[68+k]
 		f[68+k] = FieldAdd(t, f[70+k])
 		x := uint64(759969) * uint64(f[70+k]-t+q)
-		f[70+k] = FieldMontgomeryReduce(x)
+		f[70+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[72+k]
 		f[72+k] = FieldAdd(t, f[74+k])
 		x := uint64(8169440) * uint64(f[74+k]-t+q)
-		f[74+k] = FieldMontgomeryReduce(x)
+		f[74+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[76+k]
 		f[76+k] = FieldAdd(t, f[78+k])
 		x := uint64(2389356) * uint64(f[78+k]-t+q)
-		f[78+k] = FieldMontgomeryReduce(x)
+		f[78+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[80+k]
 		f[80+k] = FieldAdd(t, f[82+k])
 		x := uint64(5130689) * uint64(f[82+k]-t+q)
-		f[82+k] = FieldMontgomeryReduce(x)
+		f[82+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[84+k]
 		f[84+k] = FieldAdd(t, f[86+k])
 		x := uint64(1653064) * uint64(f[86+k]-t+q)
-		f[86+k] = FieldMontgomeryReduce(x)
+		f[86+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[88+k]
 		f[88+k] = FieldAdd(t, f[90+k])
 		x := uint64(8371839) * uint64(f[90+k]-t+q)
-		f[90+k] = FieldMontgomeryReduce(x)
+		f[90+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[92+k]
 		f[92+k] = FieldAdd(t, f[94+k])
 		x := uint64(4656075) * uint64(f[94+k]-t+q)
-		f[94+k] = FieldMontgomeryReduce(x)
+		f[94+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[96+k]
 		f[96+k] = FieldAdd(t, f[98+k])
 		x := uint64(3958618) * uint64(f[98+k]-t+q)
-		f[98+k] = FieldMontgomeryReduce(x)
+		f[98+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[100+k]
 		f[100+k] = FieldAdd(t, f[102+k])
 		x := uint64(904516) * uint64(f[102+k]-t+q)
-		f[102+k] = FieldMontgomeryReduce(x)
+		f[102+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[104+k]
 		f[104+k] = FieldAdd(t, f[106+k])
 		x := uint64(7280319) * uint64(f[106+k]-t+q)
-		f[106+k] = FieldMontgomeryReduce(x)
+		f[106+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[108+k]
 		f[108+k] = FieldAdd(t, f[110+k])
 		x := uint64(44288) * uint64(f[110+k]-t+q)
-		f[110+k] = FieldMontgomeryReduce(x)
+		f[110+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[112+k]
 		f[112+k] = FieldAdd(t, f[114+k])
 		x := uint64(3097992) * uint64(f[114+k]-t+q)
-		f[114+k] = FieldMontgomeryReduce(x)
+		f[114+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[116+k]
 		f[116+k] = FieldAdd(t, f[118+k])
 		x := uint64(508951) * uint64(f[118+k]-t+q)
-		f[118+k] = FieldMontgomeryReduce(x)
+		f[118+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[120+k]
 		f[120+k] = FieldAdd(t, f[122+k])
 		x := uint64(264944) * uint64(f[122+k]-t+q)
-		f[122+k] = FieldMontgomeryReduce(x)
+		f[122+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[124+k]
 		f[124+k] = FieldAdd(t, f[126+k])
 		x := uint64(5037034) * uint64(f[126+k]-t+q)
-		f[126+k] = FieldMontgomeryReduce(x)
+		f[126+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[130+k])
 		x := uint64(6949987) * uint64(f[130+k]-t+q)
-		f[130+k] = FieldMontgomeryReduce(x)
+		f[130+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[132+k]
 		f[132+k] = FieldAdd(t, f[134+k])
 		x := uint64(1852771) * uint64(f[134+k]-t+q)
-		f[134+k] = FieldMontgomeryReduce(x)
+		f[134+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[136+k]
 		f[136+k] = FieldAdd(t, f[138+k])
 		x := uint64(1349076) * uint64(f[138+k]-t+q)
-		f[138+k] = FieldMontgomeryReduce(x)
+		f[138+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[140+k]
 		f[140+k] = FieldAdd(t, f[142+k])
 		x := uint64(7998430) * uint64(f[142+k]-t+q)
-		f[142+k] = FieldMontgomeryReduce(x)
+		f[142+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[144+k]
 		f[144+k] = FieldAdd(t, f[146+k])
 		x := uint64(7072248) * uint64(f[146+k]-t+q)
-		f[146+k] = FieldMontgomeryReduce(x)
+		f[146+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[148+k]
 		f[148+k] = FieldAdd(t, f[150+k])
 		x := uint64(8357436) * uint64(f[150+k]-t+q)
-		f[150+k] = FieldMontgomeryReduce(x)
+		f[150+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[152+k]
 		f[152+k] = FieldAdd(t, f[154+k])
 		x := uint64(7151892) * uint64(f[154+k]-t+q)
-		f[154+k] = FieldMontgomeryReduce(x)
+		f[154+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[156+k]
 		f[156+k] = FieldAdd(t, f[158+k])
 		x := uint64(7709315) * uint64(f[158+k]-t+q)
-		f[158+k] = FieldMontgomeryReduce(x)
+		f[158+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[160+k]
 		f[160+k] = FieldAdd(t, f[162+k])
 		x := uint64(5903370) * uint64(f[162+k]-t+q)
-		f[162+k] = FieldMontgomeryReduce(x)
+		f[162+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[164+k]
 		f[164+k] = FieldAdd(t, f[166+k])
 		x := uint64(7969390) * uint64(f[166+k]-t+q)
-		f[166+k] = FieldMontgomeryReduce(x)
+		f[166+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[168+k]
 		f[168+k] = FieldAdd(t, f[170+k])
 		x := uint64(4686924) * uint64(f[170+k]-t+q)
-		f[170+k] = FieldMontgomeryReduce(x)
+		f[170+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[172+k]
 		f[172+k] = FieldAdd(t, f[174+k])
 		x := uint64(5412772) * uint64(f[174+k]-t+q)
-		f[174+k] = FieldMontgomeryReduce(x)
+		f[174+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[176+k]
 		f[176+k] = FieldAdd(t, f[178+k])
 		x := uint64(2715295) * uint64(f[178+k]-t+q)
-		f[178+k] = FieldMontgomeryReduce(x)
+		f[178+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[180+k]
 		f[180+k] = FieldAdd(t, f[182+k])
 		x := uint64(2147896) * uint64(f[182+k]-t+q)
-		f[182+k] = FieldMontgomeryReduce(x)
+		f[182+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[184+k]
 		f[184+k] = FieldAdd(t, f[186+k])
 		x := uint64(7396998) * uint64(f[186+k]-t+q)
-		f[186+k] = FieldMontgomeryReduce(x)
+		f[186+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[188+k]
 		f[188+k] = FieldAdd(t, f[190+k])
 		x := uint64(3412210) * uint64(f[190+k]-t+q)
-		f[190+k] = FieldMontgomeryReduce(x)
+		f[190+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[194+k])
 		x := uint64(126922) * uint64(f[194+k]-t+q)
-		f[194+k] = FieldMontgomeryReduce(x)
+		f[194+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[196+k]
 		f[196+k] = FieldAdd(t, f[198+k])
 		x := uint64(4747489) * uint64(f[198+k]-t+q)
-		f[198+k] = FieldMontgomeryReduce(x)
+		f[198+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[200+k]
 		f[200+k] = FieldAdd(t, f[202+k])
 		x := uint64(5223087) * uint64(f[202+k]-t+q)
-		f[202+k] = FieldMontgomeryReduce(x)
+		f[202+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[204+k]
 		f[204+k] = FieldAdd(t, f[206+k])
 		x := uint64(5190273) * uint64(f[206+k]-t+q)
-		f[206+k] = FieldMontgomeryReduce(x)
+		f[206+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[208+k]
 		f[208+k] = FieldAdd(t, f[210+k])
 		x := uint64(7380215) * uint64(f[210+k]-t+q)
-		f[210+k] = FieldMontgomeryReduce(x)
+		f[210+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[212+k]
 		f[212+k] = FieldAdd(t, f[214+k])
 		x := uint64(4296819) * uint64(f[214+k]-t+q)
-		f[214+k] = FieldMontgomeryReduce(x)
+		f[214+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[216+k]
 		f[216+k] = FieldAdd(t, f[218+k])
 		x := uint64(1939314) * uint64(f[218+k]-t+q)
-		f[218+k] = FieldMontgomeryReduce(x)
+		f[218+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[220+k]
 		f[220+k] = FieldAdd(t, f[222+k])
 		x := uint64(7122806) * uint64(f[222+k]-t+q)
-		f[222+k] = FieldMontgomeryReduce(x)
+		f[222+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[224+k]
 		f[224+k] = FieldAdd(t, f[226+k])
 		x := uint64(6795196) * uint64(f[226+k]-t+q)
-		f[226+k] = FieldMontgomeryReduce(x)
+		f[226+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[228+k]
 		f[228+k] = FieldAdd(t, f[230+k])
 		x := uint64(2176455) * uint64(f[230+k]-t+q)
-		f[230+k] = FieldMontgomeryReduce(x)
+		f[230+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[232+k]
 		f[232+k] = FieldAdd(t, f[234+k])
 		x := uint64(3475950) * uint64(f[234+k]-t+q)
-		f[234+k] = FieldMontgomeryReduce(x)
+		f[234+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[236+k]
 		f[236+k] = FieldAdd(t, f[238+k])
 		x := uint64(6927966) * uint64(f[238+k]-t+q)
-		f[238+k] = FieldMontgomeryReduce(x)
+		f[238+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[240+k]
 		f[240+k] = FieldAdd(t, f[242+k])
 		x := uint64(5339162) * uint64(f[242+k]-t+q)
-		f[242+k] = FieldMontgomeryReduce(x)
+		f[242+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[244+k]
 		f[244+k] = FieldAdd(t, f[246+k])
 		x := uint64(4702672) * uint64(f[246+k]-t+q)
-		f[246+k] = FieldMontgomeryReduce(x)
+		f[246+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[248+k]
 		f[248+k] = FieldAdd(t, f[250+k])
 		x := uint64(6851714) * uint64(f[250+k]-t+q)
-		f[250+k] = FieldMontgomeryReduce(x)
+		f[250+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 2; k++ {
 		t := f[252+k]
 		f[252+k] = FieldAdd(t, f[254+k])
 		x := uint64(4450022) * uint64(f[254+k]-t+q)
-		f[254+k] = FieldMontgomeryReduce(x)
+		f[254+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[4+k])
 		x := uint64(5582638) * uint64(f[4+k]-t+q)
-		f[4+k] = FieldMontgomeryReduce(x)
+		f[4+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[8+k]
 		f[8+k] = FieldAdd(t, f[12+k])
 		x := uint64(2071892) * uint64(f[12+k]-t+q)
-		f[12+k] = FieldMontgomeryReduce(x)
+		f[12+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[16+k]
 		f[16+k] = FieldAdd(t, f[20+k])
 		x := uint64(5823537) * uint64(f[20+k]-t+q)
-		f[20+k] = FieldMontgomeryReduce(x)
+		f[20+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[24+k]
 		f[24+k] = FieldAdd(t, f[28+k])
 		x := uint64(3900724) * uint64(f[28+k]-t+q)
-		f[28+k] = FieldMontgomeryReduce(x)
+		f[28+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[32+k]
 		f[32+k] = FieldAdd(t, f[36+k])
 		x := uint64(3881043) * uint64(f[36+k]-t+q)
-		f[36+k] = FieldMontgomeryReduce(x)
+		f[36+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[40+k]
 		f[40+k] = FieldAdd(t, f[44+k])
 		x := uint64(954230) * uint64(f[44+k]-t+q)
-		f[44+k] = FieldMontgomeryReduce(x)
+		f[44+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[48+k]
 		f[48+k] = FieldAdd(t, f[52+k])
 		x := uint64(531354) * uint64(f[52+k]-t+q)
-		f[52+k] = FieldMontgomeryReduce(x)
+		f[52+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[56+k]
 		f[56+k] = FieldAdd(t, f[60+k])
 		x := uint64(811944) * uint64(f[60+k]-t+q)
-		f[60+k] = FieldMontgomeryReduce(x)
+		f[60+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[68+k])
 		x := uint64(3699596) * uint64(f[68+k]-t+q)
-		f[68+k] = FieldMontgomeryReduce(x)
+		f[68+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[72+k]
 		f[72+k] = FieldAdd(t, f[76+k])
 		x := uint64(6779997) * uint64(f[76+k]-t+q)
-		f[76+k] = FieldMontgomeryReduce(x)
+		f[76+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[80+k]
 		f[80+k] = FieldAdd(t, f[84+k])
 		x := uint64(6239768) * uint64(f[84+k]-t+q)
-		f[84+k] = FieldMontgomeryReduce(x)
+		f[84+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[88+k]
 		f[88+k] = FieldAdd(t, f[92+k])
 		x := uint64(3507263) * uint64(f[92+k]-t+q)
-		f[92+k] = FieldMontgomeryReduce(x)
+		f[92+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[96+k]
 		f[96+k] = FieldAdd(t, f[100+k])
 		x := uint64(4558682) * uint64(f[100+k]-t+q)
-		f[100+k] = FieldMontgomeryReduce(x)
+		f[100+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[104+k]
 		f[104+k] = FieldAdd(t, f[108+k])
 		x := uint64(3505694) * uint64(f[108+k]-t+q)
-		f[108+k] = FieldMontgomeryReduce(x)
+		f[108+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[112+k]
 		f[112+k] = FieldAdd(t, f[116+k])
 		x := uint64(6736599) * uint64(f[116+k]-t+q)
-		f[116+k] = FieldMontgomeryReduce(x)
+		f[116+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[120+k]
 		f[120+k] = FieldAdd(t, f[124+k])
 		x := uint64(6681150) * uint64(f[124+k]-t+q)
-		f[124+k] = FieldMontgomeryReduce(x)
+		f[124+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[132+k])
 		x := uint64(7841118) * uint64(f[132+k]-t+q)
-		f[132+k] = FieldMontgomeryReduce(x)
+		f[132+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[136+k]
 		f[136+k] = FieldAdd(t, f[140+k])
 		x := uint64(2348700) * uint64(f[140+k]-t+q)
-		f[140+k] = FieldMontgomeryReduce(x)
+		f[140+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[144+k]
 		f[144+k] = FieldAdd(t, f[148+k])
 		x := uint64(8079950) * uint64(f[148+k]-t+q)
-		f[148+k] = FieldMontgomeryReduce(x)
+		f[148+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[152+k]
 		f[152+k] = FieldAdd(t, f[156+k])
 		x := uint64(3539968) * uint64(f[156+k]-t+q)
-		f[156+k] = FieldMontgomeryReduce(x)
+		f[156+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[160+k]
 		f[160+k] = FieldAdd(t, f[164+k])
 		x := uint64(5512770) * uint64(f[164+k]-t+q)
-		f[164+k] = FieldMontgomeryReduce(x)
+		f[164+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[168+k]
 		f[168+k] = FieldAdd(t, f[172+k])
 		x := uint64(3574422) * uint64(f[172+k]-t+q)
-		f[172+k] = FieldMontgomeryReduce(x)
+		f[172+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[176+k]
 		f[176+k] = FieldAdd(t, f[180+k])
 		x := uint64(5336701) * uint64(f[180+k]-t+q)
-		f[180+k] = FieldMontgomeryReduce(x)
+		f[180+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[184+k]
 		f[184+k] = FieldAdd(t, f[188+k])
 		x := uint64(4519302) * uint64(f[188+k]-t+q)
-		f[188+k] = FieldMontgomeryReduce(x)
+		f[188+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[196+k])
 		x := uint64(3915439) * uint64(f[196+k]-t+q)
-		f[196+k] = FieldMontgomeryReduce(x)
+		f[196+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[200+k]
 		f[200+k] = FieldAdd(t, f[204+k])
 		x := uint64(5842901) * uint64(f[204+k]-t+q)
-		f[204+k] = FieldMontgomeryReduce(x)
+		f[204+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[208+k]
 		f[208+k] = FieldAdd(t, f[212+k])
 		x := uint64(4788269) * uint64(f[212+k]-t+q)
-		f[212+k] = FieldMontgomeryReduce(x)
+		f[212+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[216+k]
 		f[216+k] = FieldAdd(t, f[220+k])
 		x := uint64(6718724) * uint64(f[220+k]-t+q)
-		f[220+k] = FieldMontgomeryReduce(x)
+		f[220+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[224+k]
 		f[224+k] = FieldAdd(t, f[228+k])
 		x := uint64(3530437) * uint64(f[228+k]-t+q)
-		f[228+k] = FieldMontgomeryReduce(x)
+		f[228+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[232+k]
 		f[232+k] = FieldAdd(t, f[236+k])
 		x := uint64(3077325) * uint64(f[236+k]-t+q)
-		f[236+k] = FieldMontgomeryReduce(x)
+		f[236+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[240+k]
 		f[240+k] = FieldAdd(t, f[244+k])
 		x := uint64(95776) * uint64(f[244+k]-t+q)
-		f[244+k] = FieldMontgomeryReduce(x)
+		f[244+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 4; k++ {
 		t := f[248+k]
 		f[248+k] = FieldAdd(t, f[252+k])
 		x := uint64(2706023) * uint64(f[252+k]-t+q)
-		f[252+k] = FieldMontgomeryReduce(x)
+		f[252+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[8+k])
 		x := uint64(280005) * uint64(f[8+k]-t+q)
-		f[8+k] = FieldMontgomeryReduce(x)
+		f[8+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[16+k]
 		f[16+k] = FieldAdd(t, f[24+k])
 		x := uint64(4010497) * uint64(f[24+k]-t+q)
-		f[24+k] = FieldMontgomeryReduce(x)
+		f[24+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[32+k]
 		f[32+k] = FieldAdd(t, f[40+k])
 		x := uint64(8360995) * uint64(f[40+k]-t+q)
-		f[40+k] = FieldMontgomeryReduce(x)
+		f[40+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[48+k]
 		f[48+k] = FieldAdd(t, f[56+k])
 		x := uint64(1757237) * uint64(f[56+k]-t+q)
-		f[56+k] = FieldMontgomeryReduce(x)
+		f[56+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[72+k])
 		x := uint64(5102745) * uint64(f[72+k]-t+q)
-		f[72+k] = FieldMontgomeryReduce(x)
+		f[72+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[80+k]
 		f[80+k] = FieldAdd(t, f[88+k])
 		x := uint64(6980856) * uint64(f[88+k]-t+q)
-		f[88+k] = FieldMontgomeryReduce(x)
+		f[88+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[96+k]
 		f[96+k] = FieldAdd(t, f[104+k])
 		x := uint64(4520680) * uint64(f[104+k]-t+q)
-		f[104+k] = FieldMontgomeryReduce(x)
+		f[104+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[112+k]
 		f[112+k] = FieldAdd(t, f[120+k])
 		x := uint64(6262231) * uint64(f[120+k]-t+q)
-		f[120+k] = FieldMontgomeryReduce(x)
+		f[120+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[136+k])
 		x := uint64(6271868) * uint64(f[136+k]-t+q)
-		f[136+k] = FieldMontgomeryReduce(x)
+		f[136+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[144+k]
 		f[144+k] = FieldAdd(t, f[152+k])
 		x := uint64(2619752) * uint64(f[152+k]-t+q)
-		f[152+k] = FieldMontgomeryReduce(x)
+		f[152+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[160+k]
 		f[160+k] = FieldAdd(t, f[168+k])
 		x := uint64(7260833) * uint64(f[168+k]-t+q)
-		f[168+k] = FieldMontgomeryReduce(x)
+		f[168+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[176+k]
 		f[176+k] = FieldAdd(t, f[184+k])
 		x := uint64(7830929) * uint64(f[184+k]-t+q)
-		f[184+k] = FieldMontgomeryReduce(x)
+		f[184+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[200+k])
 		x := uint64(3585928) * uint64(f[200+k]-t+q)
-		f[200+k] = FieldMontgomeryReduce(x)
+		f[200+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[208+k]
 		f[208+k] = FieldAdd(t, f[216+k])
 		x := uint64(7300517) * uint64(f[216+k]-t+q)
-		f[216+k] = FieldMontgomeryReduce(x)
+		f[216+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[224+k]
 		f[224+k] = FieldAdd(t, f[232+k])
 		x := uint64(1024112) * uint64(f[232+k]-t+q)
-		f[232+k] = FieldMontgomeryReduce(x)
+		f[232+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 8; k++ {
 		t := f[240+k]
 		f[240+k] = FieldAdd(t, f[248+k])
 		x := uint64(2725464) * uint64(f[248+k]-t+q)
-		f[248+k] = FieldMontgomeryReduce(x)
+		f[248+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[16+k])
 		x := uint64(2680103) * uint64(f[16+k]-t+q)
-		f[16+k] = FieldMontgomeryReduce(x)
+		f[16+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[32+k]
 		f[32+k] = FieldAdd(t, f[48+k])
 		x := uint64(3111497) * uint64(f[48+k]-t+q)
-		f[48+k] = FieldMontgomeryReduce(x)
+		f[48+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[80+k])
 		x := uint64(5495562) * uint64(f[80+k]-t+q)
-		f[80+k] = FieldMontgomeryReduce(x)
+		f[80+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[96+k]
 		f[96+k] = FieldAdd(t, f[112+k])
 		x := uint64(3119733) * uint64(f[112+k]-t+q)
-		f[112+k] = FieldMontgomeryReduce(x)
+		f[112+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[144+k])
 		x := uint64(6288512) * uint64(f[144+k]-t+q)
-		f[144+k] = FieldMontgomeryReduce(x)
+		f[144+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[160+k]
 		f[160+k] = FieldAdd(t, f[176+k])
 		x := uint64(8021166) * uint64(f[176+k]-t+q)
-		f[176+k] = FieldMontgomeryReduce(x)
+		f[176+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[208+k])
 		x := uint64(2353451) * uint64(f[208+k]-t+q)
-		f[208+k] = FieldMontgomeryReduce(x)
+		f[208+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 16; k++ {
 		t := f[224+k]
 		f[224+k] = FieldAdd(t, f[240+k])
 		x := uint64(1826347) * uint64(f[240+k]-t+q)
-		f[240+k] = FieldMontgomeryReduce(x)
+		f[240+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 32; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[32+k])
 		x := uint64(466468) * uint64(f[32+k]-t+q)
-		f[32+k] = FieldMontgomeryReduce(x)
+		f[32+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 32; k++ {
 		t := f[64+k]
 		f[64+k] = FieldAdd(t, f[96+k])
 		x := uint64(7504169) * uint64(f[96+k]-t+q)
-		f[96+k] = FieldMontgomeryReduce(x)
+		f[96+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 32; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[160+k])
 		x := uint64(7602457) * uint64(f[160+k]-t+q)
-		f[160+k] = FieldMontgomeryReduce(x)
+		f[160+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 32; k++ {
 		t := f[192+k]
 		f[192+k] = FieldAdd(t, f[224+k])
 		x := uint64(237124) * uint64(f[224+k]-t+q)
-		f[224+k] = FieldMontgomeryReduce(x)
+		f[224+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 64; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[64+k])
 		x := uint64(7861508) * uint64(f[64+k]-t+q)
-		f[64+k] = FieldMontgomeryReduce(x)
+		f[64+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 64; k++ {
 		t := f[128+k]
 		f[128+k] = FieldAdd(t, f[192+k])
 		x := uint64(5771523) * uint64(f[192+k]-t+q)
-		f[192+k] = FieldMontgomeryReduce(x)
+		f[192+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 	for k := 0; k < 128; k++ {
 		t := f[0+k]
 		f[0+k] = FieldAdd(t, f[128+k])
 		x := uint64(25847) * uint64(f[128+k]-t+q)
-		f[128+k] = FieldMontgomeryReduce(x)
+		f[128+k] = FieldReduceOnce(uint32((x + uint64(uint32(x)*qNegInv)*q) >> 32))
 	}
 
 	for i := range n {

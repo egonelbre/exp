@@ -87,7 +87,8 @@ func inversentt() {
 				pf("f[%d] = FieldAdd(t, f[%d])\n", x, y)
 				//pf("f[%d] = FieldMontgomeryMulSub(%d, f[%d], t)\n", y, zetas[m], y)
 				pf("x := uint64(%d) * uint64(f[%d]-t+q)\n", zetas[m], y)
-				pf("f[%d] = FieldMontgomeryReduce(x)\n", y)
+				//pf("f[%d] = FieldMontgomeryReduce(x)\n", y)
+				pf("f[%d] = FieldReduceOnce(uint32((x + uint64(uint32(x) * qNegInv)*q) >> 32))\n", y)
 				pf("}\n")
 			}
 		}
@@ -151,7 +152,8 @@ func inversentt2() {
 				pf("f[%d+k] = FieldAdd(t, f[%d+k])\n", x, y)
 				//pf("f[%d+k] = FieldMontgomeryMulSub(%d, f[%d+k], t)\n", y, zetas[m], y)
 				pf("x := uint64(%d) * uint64(f[%d+k]-t+q)\n", zetas[m], y)
-				pf("f[%d+k] = FieldMontgomeryReduce(x)\n", y)
+				//pf("f[%d+k] = FieldMontgomeryReduce(x)\n", y)
+				pf("f[%d+k] = FieldReduceOnce(uint32((x + uint64(uint32(x) * qNegInv)*q) >> 32))\n", y)
 			}
 			pf("}\n")
 		}
@@ -180,7 +182,8 @@ func inversentt3() {
 				pf("f[%d+k] = FieldAdd(t, f[%d+k])\n", x, y)
 				//pf("f[%d+k] = FieldMontgomeryMulSub(%d, f[%d+k], t)\n", y, zetas[m], y)
 				pf("x := uint64(%d) * uint64(f[%d+k]-t+q)\n", zetas[m], y)
-				pf("f[%d+k] = FieldMontgomeryReduce(x)\n", y)
+				//pf("f[%d+k] = FieldMontgomeryReduce(x)\n", y)
+				pf("f[%d+k] = FieldReduceOnce(uint32((x + uint64(uint32(x) * qNegInv)*q) >> 32))\n", y)
 			}
 			pf("}\n")
 		}
