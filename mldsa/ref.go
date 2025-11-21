@@ -120,6 +120,11 @@ func FieldMontgomeryReduce(x uint64) FieldElement {
 	return FieldReduceOnce(uint32(u))
 }
 
+// FieldMontgomeryReduce returns x * R⁻¹ mod q for x < q * R.
+func FieldMontgomeryReduce2(x uint64) FieldElement {
+	return FieldReduceOnce(uint32((x + uint64(uint32(x) * qNegInv)*q) >> 32))
+}
+
 // FieldMontgomeryReducePartial returns x * R⁻¹ mod q for x < q * R.
 func FieldMontgomeryReducePartial(x uint64) FieldElement {
 	t := uint32(x) * qNegInv
