@@ -45,18 +45,21 @@ func ntt() {
 	pln("func NTTUnroll(f RingElement) NTTElement {")
 	defer pln("}")
 
-	pf("var t FieldElement")
-
 	m := 0
 	for len := 128; len >= 1; len /= 2 {
 		for start := 0; start < 256; start += 2 * len {
 			m++
 			for k := 0; k < len; k++ {
 				x, y := start+k, start+len+k
-				pf("\n")
-				pf("t = FieldMontgomeryMul(%d, f[%d])\n", zetas[m], y)
+				pf("{\n")
+
+				//pf("t := FieldMontgomeryMul(%d, f[%d])\n", zetas[m], y)
+				pf("x := uint64(%d) * uint64(f[%d])\n", zetas[m], y)
+				pf("t := FieldMontgomeryReduce(x)\n")
 				pf("f[%d] = FieldSub(f[%d], t)\n", y, x)
 				pf("f[%d] = FieldAdd(f[%d], t)\n", x, x)
+
+				pf("}\n")
 			}
 		}
 	}
@@ -68,19 +71,19 @@ func inversentt() {
 	pln("func InverseNTTUnroll(f NTTElement) RingElement {")
 	defer pln("}")
 
-	pf("var t FieldElement")
-
 	m := 256
 	for len := 1; len < 256; len *= 2 {
 		for start := 0; start < 256; start += 2 * len {
 			m--
 			for k := 0; k < len; k++ {
 				x, y := start+k, start+len+k
-				pf("\n")
-
-				pf("t = f[%d]\n", x)
+				pf("{\n")
+				pf("t := f[%d]\n", x)
 				pf("f[%d] = FieldAdd(t, f[%d])\n", x, y)
-				pf("f[%d] = FieldMontgomeryMulSub(%d, f[%d], t)\n", y, zetas[m], y)
+				//pf("f[%d] = FieldMontgomeryMulSub(%d, f[%d], t)\n", y, zetas[m], y)
+				pf("x := uint64(%d) * uint64(f[%d]-t+q)\n", zetas[m], y)
+				pf("f[%d] = FieldMontgomeryReduce(x)\n", y)
+				pf("}\n")
 			}
 		}
 	}
