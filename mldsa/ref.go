@@ -28,11 +28,11 @@ func NTT(f RingElement) NTTElement {
 			m++
 			zeta := zetas[m]
 			// Bounds check elimination hint.
-			f, flen := f[start:start+len], f[start+len:start+len+len]
+			xs, ys := f[start:start+len], f[start+len:start+len+len]
 			for j := 0; j < len; j++ {
-				t := FieldMontgomeryMul(zeta, flen[j])
-				flen[j] = FieldSub(f[j], t)
-				f[j] = FieldAdd(f[j], t)
+				t := FieldMontgomeryMul(zeta, ys[j])
+				ys[j] = FieldSub(xs[j], t)
+				xs[j] = FieldAdd(xs[j], t)
 			}
 		}
 	}
@@ -49,12 +49,12 @@ func InverseNTT(f NTTElement) RingElement {
 			zeta := zetas[m]
 			m--
 			// Bounds check elimination hint.
-			f, flen := f[start:start+len], f[start+len:start+len+len]
+			xs, ys := f[start:start+len], f[start+len:start+len+len]
 			for j := 0; j < len; j++ {
-				t := f[j]
-				f[j] = FieldAdd(t, flen[j])
-				// -z * (t - flen[j]) = z * (flen[j] - t)
-				flen[j] = FieldMontgomeryMulSub(zeta, flen[j], t)
+				t := xs[j]
+				xs[j] = FieldAdd(t, ys[j])
+				// -z * (t - ys[j]) = z * (ys[j] - t)
+				ys[j] = FieldMontgomeryMulSub(zeta, ys[j], t)
 			}
 		}
 	}

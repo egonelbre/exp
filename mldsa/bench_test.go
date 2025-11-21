@@ -53,6 +53,13 @@ func BenchmarkNTT(b *testing.B) {
 		}
 		runtime.KeepAlive(x)
 	})
+	b.Run("Unroll", func(b *testing.B) {
+		x := x
+		for range b.N {
+			x = RingElement(NTTUnroll(x))
+		}
+		runtime.KeepAlive(x)
+	})
 }
 
 func BenchmarkNTTMul(b *testing.B) {
@@ -76,6 +83,13 @@ func BenchmarkNTTMul(b *testing.B) {
 		}
 		runtime.KeepAlive(x)
 	})
+	b.Run("Unroll", func(b *testing.B) {
+		x, y := x, y
+		for range b.N {
+			x = NTTMulUnroll(x, y)
+		}
+		runtime.KeepAlive(x)
+	})
 }
 
 func BenchmarkInverseNTT(b *testing.B) {
@@ -95,6 +109,13 @@ func BenchmarkInverseNTT(b *testing.B) {
 		x := x
 		for range b.N {
 			x = NTTElement(InverseNTT8(x))
+		}
+		runtime.KeepAlive(x)
+	})
+	b.Run("Unroll", func(b *testing.B) {
+		x := x
+		for range b.N {
+			x = NTTElement(InverseNTTUnroll(x))
 		}
 		runtime.KeepAlive(x)
 	})
