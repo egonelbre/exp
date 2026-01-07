@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "SlashCommand(/taches-cc-resources:create-prompt Write a Go analyser using golang.org/x/tools/go/analysis package)",
+      "SlashCommand(/taches-cc-resources:create-prompt:*)",
+      "SlashCommand(/taches-cc-resources:run-prompt 001)",
+      "SlashCommand(/taches-cc-resources:run-prompt:*)"
+    ]
+  }
+}

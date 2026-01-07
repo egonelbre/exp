@@ -8,7 +8,6 @@
 *.prof
 *.wasm
 *.log
-*.test
 
 x.*.go
 
