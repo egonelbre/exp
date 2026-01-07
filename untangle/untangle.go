@@ -362,8 +362,12 @@ func processSCC(pass *analysis.Pass, scc []*types.Func, localTracked map[*types.
 		}
 	}
 
+	// Track previous iteration results to detect convergence
+	prevAccesses := make(map[*types.Func]map[accessKey]bool)
+
 	// For SCCs with multiple functions (recursive), iterate until stable
 	maxIterations := 10
+	converged := false
 	for iter := 0; iter < maxIterations; iter++ {
 		changed := false
 
@@ -376,22 +380,45 @@ func processSCC(pass *analysis.Pass, scc []*types.Func, localTracked map[*types.
 			// Analyze field accesses in this function
 			accesses := analyzeFieldAccesses(pass, funcDecl, localTracked)
 
-			// Check if this differs from existing fact
-			var oldFact AccessPatternFact
-			hasOldFact := pass.ImportObjectFact(funcObj, &oldFact)
-
-			if !hasOldFact || !accessesEqual(accesses, oldFact.Accesses) {
-				changed = true
-				if len(accesses) > 0 {
-					fact := &AccessPatternFact{Accesses: accesses}
-					pass.ExportObjectFact(funcObj, fact)
+			// Convert to comparable format
+			currentKeys := make(map[accessKey]bool)
+			for typeName, fields := range accesses {
+				for fieldName := range fields {
+					currentKeys[accessKey{typeName, fieldName}] = true
 				}
+			}
+
+			// Check if accesses changed from previous iteration
+			if !accessKeysEqual(prevAccesses[funcObj], currentKeys) {
+				changed = true
+				prevAccesses[funcObj] = currentKeys
+			}
+
+			// Export fact only if there are accesses
+			if len(accesses) > 0 {
+				fact := &AccessPatternFact{Accesses: accesses}
+				pass.ExportObjectFact(funcObj, fact)
 			}
 		}
 
 		// If no changes in this iteration, we've reached a fixed point
 		if !changed {
+			converged = true
 			break
+		}
+	}
+
+	// Warn if we didn't converge (this indicates a potential bug)
+	if !converged && len(scc) > 0 {
+		// Report on the first function in the SCC
+		funcDecl := funcDecls[scc[0]]
+		if funcDecl != nil {
+			funcNames := make([]string, 0, len(scc))
+			for _, f := range scc {
+				funcNames = append(funcNames, f.Name())
+			}
+			pass.Reportf(funcDecl.Pos(), "analysis did not converge after %d iterations for recursive functions: %s",
+				maxIterations, strings.Join(funcNames, ", "))
 		}
 	}
 }
@@ -410,6 +437,25 @@ func accessesEqual(a, b map[string]map[string]bool) bool {
 			if !fieldsB[field] {
 				return false
 			}
+		}
+	}
+	return true
+}
+
+// accessKey represents a unique type+field combination
+type accessKey struct {
+	typeName  string
+	fieldName string
+}
+
+// accessKeysEqual checks if two access key sets are equal
+func accessKeysEqual(a, b map[accessKey]bool) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for key := range a {
+		if !b[key] {
+			return false
 		}
 	}
 	return true
