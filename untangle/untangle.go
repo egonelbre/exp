@@ -362,107 +362,40 @@ func processSCC(pass *analysis.Pass, scc []*types.Func, localTracked map[*types.
 		}
 	}
 
-	// Track previous iteration results to detect convergence
-	prevAccesses := make(map[*types.Func]map[accessKey]bool)
+	// Build set of functions in this SCC for ignoring recursive calls
+	sccFuncs := make(map[*types.Func]bool)
+	for _, funcObj := range scc {
+		sccFuncs[funcObj] = true
+	}
 
-	// For SCCs with multiple functions (recursive), iterate until stable
-	maxIterations := 10
-	converged := false
-	for iter := 0; iter < maxIterations; iter++ {
-		changed := false
+	// Single iteration: collect accesses from all functions in the SCC
+	combinedAccesses := make(map[string]map[string]bool)
 
+	for _, funcObj := range scc {
+		funcDecl := funcDecls[funcObj]
+		if funcDecl == nil {
+			continue
+		}
+
+		// Analyze field accesses, ignoring calls to other functions in this SCC
+		accesses := analyzeFieldAccessesIgnoring(pass, funcDecl, localTracked, sccFuncs)
+
+		// Merge into combined accesses
+		mergeAccesses(combinedAccesses, accesses)
+	}
+
+	// Export the same combined access pattern to all functions in the SCC
+	if len(combinedAccesses) > 0 {
+		fact := &AccessPatternFact{Accesses: combinedAccesses}
 		for _, funcObj := range scc {
-			funcDecl := funcDecls[funcObj]
-			if funcDecl == nil {
-				continue
-			}
-
-			// Analyze field accesses in this function
-			accesses := analyzeFieldAccesses(pass, funcDecl, localTracked)
-
-			// Convert to comparable format
-			currentKeys := make(map[accessKey]bool)
-			for typeName, fields := range accesses {
-				for fieldName := range fields {
-					currentKeys[accessKey{typeName, fieldName}] = true
-				}
-			}
-
-			// Check if accesses changed from previous iteration
-			if !accessKeysEqual(prevAccesses[funcObj], currentKeys) {
-				changed = true
-				prevAccesses[funcObj] = currentKeys
-			}
-
-			// Export fact only if there are accesses
-			if len(accesses) > 0 {
-				fact := &AccessPatternFact{Accesses: accesses}
-				pass.ExportObjectFact(funcObj, fact)
-			}
-		}
-
-		// If no changes in this iteration, we've reached a fixed point
-		if !changed {
-			converged = true
-			break
-		}
-	}
-
-	// Warn if we didn't converge (this indicates a potential bug)
-	if !converged && len(scc) > 0 {
-		// Report on the first function in the SCC
-		funcDecl := funcDecls[scc[0]]
-		if funcDecl != nil {
-			funcNames := make([]string, 0, len(scc))
-			for _, f := range scc {
-				funcNames = append(funcNames, f.Name())
-			}
-			pass.Reportf(funcDecl.Pos(), "analysis did not converge after %d iterations for recursive functions: %s",
-				maxIterations, strings.Join(funcNames, ", "))
+			pass.ExportObjectFact(funcObj, fact)
 		}
 	}
 }
 
-// accessesEqual checks if two access maps are equal
-func accessesEqual(a, b map[string]map[string]bool) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	for typeName, fieldsA := range a {
-		fieldsB, ok := b[typeName]
-		if !ok || len(fieldsA) != len(fieldsB) {
-			return false
-		}
-		for field := range fieldsA {
-			if !fieldsB[field] {
-				return false
-			}
-		}
-	}
-	return true
-}
-
-// accessKey represents a unique type+field combination
-type accessKey struct {
-	typeName  string
-	fieldName string
-}
-
-// accessKeysEqual checks if two access key sets are equal
-func accessKeysEqual(a, b map[accessKey]bool) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	for key := range a {
-		if !b[key] {
-			return false
-		}
-	}
-	return true
-}
-
-// analyzeFieldAccesses finds all field accesses of tracked structs in a function
-func analyzeFieldAccesses(pass *analysis.Pass, funcDecl *ast.FuncDecl, localTracked map[*types.TypeName]bool) map[string]map[string]bool {
+// analyzeFieldAccessesIgnoring finds all field accesses of tracked structs in a function,
+// ignoring calls to functions in the ignoreFuncs set
+func analyzeFieldAccessesIgnoring(pass *analysis.Pass, funcDecl *ast.FuncDecl, localTracked map[*types.TypeName]bool, ignoreFuncs map[*types.Func]bool) map[string]map[string]bool {
 	accesses := make(map[string]map[string]bool)
 
 	// Skip functions without a body (declarations, interface methods, etc.)
@@ -475,7 +408,7 @@ func analyzeFieldAccesses(pass *analysis.Pass, funcDecl *ast.FuncDecl, localTrac
 		case *ast.CallExpr:
 			// Check if this is a method call or function call that accesses tracked fields
 			// Process CallExpr BEFORE SelectorExpr to avoid double-processing
-			handleFunctionCall(pass, node, localTracked, accesses)
+			handleFunctionCallIgnoring(pass, node, localTracked, accesses, ignoreFuncs)
 
 		case *ast.SelectorExpr:
 			// Check if this is a field access on a tracked struct
@@ -533,8 +466,9 @@ func handleFieldAccess(pass *analysis.Pass, sel *ast.SelectorExpr, localTracked 
 	accesses[typeNameStr][fieldName] = true
 }
 
-// handleFunctionCall processes function and method calls to propagate access patterns
-func handleFunctionCall(pass *analysis.Pass, call *ast.CallExpr, localTracked map[*types.TypeName]bool, accesses map[string]map[string]bool) {
+// handleFunctionCallIgnoring processes function and method calls to propagate access patterns,
+// ignoring calls to functions in the ignoreFuncs set
+func handleFunctionCallIgnoring(pass *analysis.Pass, call *ast.CallExpr, localTracked map[*types.TypeName]bool, accesses map[string]map[string]bool, ignoreFuncs map[*types.Func]bool) {
 	var calleeObj *types.Func
 
 	switch fun := call.Fun.(type) {
@@ -559,6 +493,11 @@ func handleFunctionCall(pass *analysis.Pass, call *ast.CallExpr, localTracked ma
 	}
 
 	if calleeObj == nil {
+		return
+	}
+
+	// Skip if this function is in the ignore set
+	if ignoreFuncs != nil && ignoreFuncs[calleeObj] {
 		return
 	}
 
