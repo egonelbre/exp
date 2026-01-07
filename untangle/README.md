@@ -1,3 +1,5 @@
 # untangle
 
-A Go static analysis tool that tracks field access patterns for structs. Mark structs with `//untangle:track` to monitor which fields are accessed throughout your codebase, and use `//untangle:print` on functions to report their access patterns. The analyzer builds a call graph, detects recursive function cycles using Tarjan's algorithm, and performs topological sorting to ensure dependencies are analyzed in the correct order. This allows accurate tracking of field accesses even through complex call chains and mutually recursive functions, helping identify opportunities to split large structs into smaller, more focused types based on actual usage patterns.
+A proof-of-concept Go static analysis tool that tracks field access patterns for structs. Mark structs with `//untangle:track` to monitor which fields are accessed throughout your codebase, and use `//untangle:print` on functions to report their access patterns.
+
+The analyzer builds a call graph, detects recursive function cycles using Tarjan's algorithm, and performs topological sorting to ensure dependencies are analyzed in the correct order.
