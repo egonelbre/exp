@@ -1,0 +1,13 @@
+mode: set
+ext/sum.go:3.28,4.22 1 1
+ext/sum.go:4.22,6.3 1 0
+ext/sum.go:7.2,8.27 2 1
+ext/sum.go:8.27,10.3 1 1
+ext/sum.go:11.2,11.12 1 1
+ext/stat/minmax.go:3.44,4.22 1 1
+ext/stat/minmax.go:4.22,6.3 1 0
+ext/stat/minmax.go:7.2,9.27 3 1
+ext/stat/minmax.go:9.27,12.3 2 1
+ext/stat/minmax.go:13.2,13.8 1 1
+hello.test/main.go:10.13,15.2 4 0
+hello.test/cpu/main.go:3.24,5.2 1 1
