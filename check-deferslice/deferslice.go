@@ -57,7 +57,7 @@ func checkFunc(pass *analysis.Pass, body *ast.BlockStmt) {
 		if !ok {
 			return
 		}
-		for _, arg := range ds.Call.Args {
+		for i, arg := range ds.Call.Args {
 			ident, ok := arg.(*ast.Ident)
 			if !ok {
 				continue
@@ -67,6 +67,9 @@ func checkFunc(pass *analysis.Pass, body *ast.BlockStmt) {
 				continue
 			}
 			if _, ok := obj.Type().Underlying().(*types.Slice); ok {
+				if isRestorePattern(pass, ds, i, obj) {
+					continue
+				}
 				deferred = append(deferred, deferredSlice{
 					pos:  ds.Pos(),
 					obj:  obj,
@@ -104,10 +107,28 @@ func checkFunc(pass *analysis.Pass, body *ast.BlockStmt) {
 			}
 		case *ast.CallExpr:
 			name := calleeName(n)
-			if !mutatingFuncs[name] {
-				return
-			}
+			isMutating := mutatingFuncs[name]
 			for _, arg := range n.Args {
+				// Check for &slice (pointer to slice implies mutation).
+				if unary, ok := arg.(*ast.UnaryExpr); ok && unary.Op == token.AND {
+					if ident, ok := unary.X.(*ast.Ident); ok {
+						obj := pass.TypesInfo.ObjectOf(ident)
+						if obj == nil {
+							continue
+						}
+						for _, d := range deferredByObj[obj] {
+							if d.pos < n.Pos() {
+								pass.Reportf(n.Pos(), "pointer to slice %s is passed to %s after being passed to defer", ident.Name, name)
+								break
+							}
+						}
+					}
+					continue
+				}
+				// Check for known mutating functions.
+				if !isMutating {
+					continue
+				}
 				ident, ok := arg.(*ast.Ident)
 				if !ok {
 					continue
@@ -170,6 +191,69 @@ func sliceModTarget(pass *analysis.Pass, expr ast.Expr) (types.Object, string) {
 		}
 	}
 	return nil, ""
+}
+
+// isRestorePattern detects the save/restore idiom:
+//
+//	defer func(old []T) { x = old }(x)
+//
+// where the defer captures the current value and restores it on return.
+func isRestorePattern(pass *analysis.Pass, ds *ast.DeferStmt, argIndex int, argObj types.Object) bool {
+	funcLit, ok := ds.Call.Fun.(*ast.FuncLit)
+	if !ok {
+		return false
+	}
+
+	// Find the parameter name at the given argument index.
+	paramIdent := paramAt(funcLit.Type.Params, argIndex)
+	if paramIdent == nil {
+		return false
+	}
+	paramObj := pass.TypesInfo.ObjectOf(paramIdent)
+	if paramObj == nil {
+		return false
+	}
+
+	// Check whether the body assigns the parameter back to the original variable.
+	for _, stmt := range funcLit.Body.List {
+		assign, ok := stmt.(*ast.AssignStmt)
+		if !ok {
+			continue
+		}
+		for i, lhs := range assign.Lhs {
+			lhsIdent, ok := lhs.(*ast.Ident)
+			if !ok {
+				continue
+			}
+			if i >= len(assign.Rhs) {
+				continue
+			}
+			rhsIdent, ok := assign.Rhs[i].(*ast.Ident)
+			if !ok {
+				continue
+			}
+			if pass.TypesInfo.ObjectOf(lhsIdent) == argObj &&
+				pass.TypesInfo.ObjectOf(rhsIdent) == paramObj {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// paramAt returns the *ast.Ident of the parameter at the given index,
+// accounting for grouped parameters (e.g. func(a, b []int)).
+func paramAt(params *ast.FieldList, index int) *ast.Ident {
+	i := 0
+	for _, field := range params.List {
+		for _, name := range field.Names {
+			if i == index {
+				return name
+			}
+			i++
+		}
+	}
+	return nil
 }
 
 // inspectSkippingFuncLit walks the AST calling fn for each node,

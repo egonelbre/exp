@@ -143,3 +143,48 @@ func readNonDeferredSlice() {
 	var r myReader
 	r.Read(other) // ok: other is not deferred
 }
+
+// Save/restore pattern should not be flagged.
+
+var global []string
+
+func restorePattern() {
+	defer func(old []string) { global = old }(global)
+	global = []string{"a", "b"} // ok: defer restores the original value
+}
+
+func restorePatternAppend() {
+	defer func(old []string) { global = old }(global)
+	global = append(global, "c") // ok: defer restores the original value
+}
+
+// But a func literal that does NOT restore should still flag.
+
+func nonRestoreFuncLit() {
+	s := []int{1, 2, 3}
+	defer func(b []int) {}(s)
+	s[0] = 99 // want `slice s is modified after being passed to defer`
+}
+
+// Passing &slice to a function implies mutation.
+
+func pointerArg(p *[]int) {}
+
+func slicePointerAfterDefer() {
+	s := []int{1, 2, 3}
+	defer use(s)
+	pointerArg(&s) // want `pointer to slice s is passed to pointerArg after being passed to defer`
+}
+
+func slicePointerBeforeDefer() {
+	s := []int{1, 2, 3}
+	pointerArg(&s)
+	defer use(s) // ok: pointer use is before defer
+}
+
+func slicePointerDifferentVar() {
+	s := []int{1, 2, 3}
+	other := []int{4, 5}
+	defer use(s)
+	pointerArg(&other) // ok: other is not deferred
+}
