@@ -90,7 +90,12 @@ func checkFunc(pass *analysis.Pass, body *ast.BlockStmt) {
 	}
 
 	// Find modifications to deferred slices that occur after the defer.
-	inspectSkippingFuncLit(body, func(n ast.Node) {
+	// This walks into closures because closures capture variables by reference,
+	// so modifications inside them affect the deferred slice.
+	ast.Inspect(body, func(n ast.Node) bool {
+		if n == nil {
+			return false
+		}
 		switch n := n.(type) {
 		case *ast.AssignStmt:
 			for _, lhs := range n.Lhs {
@@ -145,6 +150,7 @@ func checkFunc(pass *analysis.Pass, body *ast.BlockStmt) {
 				}
 			}
 		}
+		return true
 	})
 }
 

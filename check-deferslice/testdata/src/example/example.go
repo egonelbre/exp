@@ -82,7 +82,7 @@ func modifyInClosure() {
 	s := []int{1, 2, 3}
 	defer use(s)
 	go func() {
-		s[0] = 5 // not flagged: inside a func literal
+		s[0] = 5 // want `slice s is modified after being passed to defer`
 	}()
 }
 
@@ -174,6 +174,26 @@ func slicePointerAfterDefer() {
 	s := []int{1, 2, 3}
 	defer use(s)
 	pointerArg(&s) // want `pointer to slice s is passed to pointerArg after being passed to defer`
+}
+
+func slicePointerAfterDeferInClosure() {
+	s := []int{1, 2, 3}
+	defer use(s)
+
+	func(){
+		pointerArg(&s) // want `pointer to slice s is passed to pointerArg after being passed to defer`
+	}()
+}
+
+func slicePointerAfterDeferInClosure2() {
+	s := []int{1, 2, 3}
+	defer use(s)
+
+	defer func(){
+		func(){
+			pointerArg(&s) // want `pointer to slice s is passed to pointerArg after being passed to defer`
+		}()
+	}()
 }
 
 func slicePointerBeforeDefer() {
