@@ -14,19 +14,55 @@ microarchitecture-dependent.
 
 ## Running
 
+> **IMPORTANT**: do not benchmark with a Go toolchain that already has the
+> strength reduction you're trying to evaluate baked in (e.g. an in-progress
+> SSA change). Use a stock release that does not yet apply intrinsic-time SR
+> to `bits.Mul64`. On systems where multiple toolchains coexist, force the
+> system install with `GOTOOLCHAIN=local`.
+
 ```
-go test ./...                              # verify the shift variants match
-go test -bench . -benchtime=2s -count=6    # bench all variants
+GOTOOLCHAIN=local go test ./...                            # correctness first
+GOTOOLCHAIN=local go test -bench . -benchtime=2s -count=6
 ```
 
 For comparing variants, redirect to a file and use `benchstat`:
 
 ```
-go test -bench BenchmarkLatency -count=10 > latency.txt
+GOTOOLCHAIN=local go test -bench BenchmarkLatency -count=10 > latency.txt
 benchstat -filter '.name:/Mul$' latency.txt latency.txt
 ```
 
-(or just eyeball the `*/Mul` vs `*/Sft` pairs).
+(or just eyeball the `*/Raw` vs `*/Mul` vs `*/Sft` triples).
+
+## The compiler already does partial SR
+
+Go 1.26 emits these patterns *inline* for `bits.Mul64(x, K)` with `K` a
+compile-time constant — without any additional SSA work:
+
+| K | What Go 1.26 emits |
+|---|---|
+| `0xFFFFFFFFFFFFFFFF` | `NEG` + `UMULH x, -1` |
+| `0xFFFFFFFF00000000` | `NEG` + `LSL` + `UMULH` |
+| `0xFFFFFFFFFFFFFFFE` | `NEG` + `ADD` + `UMULH` |
+| `1<<32` | `LSL` + `UMULH` |
+| `0x100000001` | `ADD x<<32, x` + `UMULH` |
+| `0xFFFFFFFF` | `LSL` + `SUB` + `UMULH` |
+
+So the `mul<Name>` variants in this bench are *not* a pure-MUL baseline — they
+already get partial SR (lo via shifts/adds, hi still via `UMULH`). To get a
+real MUL+UMULH baseline use the `raw<Name>` / `BenchmarkRaw_*` variants, which
+route the constant through a `//go:noinline` parameter so the compiler can't
+fold it.
+
+This gives a three-way comparison:
+
+- **Raw**: full `MUL`+`UMULH` (no compiler optimization at the call site).
+- **Mul**: `bits.Mul64` with the constant inline (Go 1.26 partial SR applies).
+- **Sft**: explicit full SR (shifts/adds/subs, no multiplier).
+
+The relevant question for an SSA-level full-SR change is `Mul vs Sft` — does
+going beyond the existing partial SR help? `Raw vs Mul` shows how much the
+existing partial SR is already buying you.
 
 ## What's measured
 
@@ -121,6 +157,75 @@ This matches what we see in the standard library: replacing
 modest win on P-256 ord, while the same SSA-level rewrite on the larger
 `p384OrdMul` (more parallel sparse muls in flight, multipliers already
 saturated) is a small loss.
+
+### Apple M4 Max (Go 1.26 stock, 2026-05) — full sweep
+
+All numbers ns/op, average of 6 runs at `-benchtime=2s`.
+
+Isolated latency (table-driven harness, indirect call):
+
+| Pattern | Raw (true MUL+UMULH) | Mul (partial SR) | Sft (full SR) |
+|---|---:|---:|---:|
+| AllOnes | 1.26 | 1.49 | 1.64 |
+| NegPow32 | 1.24 | 1.67 | 1.81 |
+| NegTwo | 1.26 | 1.66 | 1.81 |
+| Pow32 | 1.26 | 1.48 | **1.01** ← Sft wins |
+| PlusOne | 1.26 | 1.49 | 1.49 |
+| Pow32Minus1 | 1.24 | (—) | (—) |
+
+(`Raw` looks fastest because it uses a *direct* call to `mulRaw`, while
+`Mul`/`Sft` go through an indirect callback — see "Harness overhead" above.
+The `Mul vs Sft` comparison is fair; the `Raw` column shows the baseline
+without any SR.)
+
+Realistic kernels (one full Montgomery reduction round, function-call):
+
+| Kernel | Mul | Sft | Sft vs Mul |
+|---|---:|---:|---:|
+| ReductionRound (P-256, 2/4 sparse) | 3.39 | 3.44 | +1.5% slower |
+| `Inline_`ReductionRound | 3.16 | 3.15 | ~tied |
+| FourRoundsParallel | 6.65 | 7.06 | **+6.1% slower** |
+| ChainedMontMul (4 sequential) | 57.6 | 57.8 | +0.3% |
+| P384Round (6/6 sparse) | 8.51 | 8.81 | **+3.5% slower** |
+
+Density sweep (4-limb kernel with N of 4 sparse multiplications):
+
+| Sparse density | Mul | Sft | Sft vs Mul |
+|---|---:|---:|---:|
+| S1 (1/4) | 11.42 | 11.53 | +1.0% |
+| S2 (2/4) | 11.54 | 11.59 | +0.5% |
+| S3 (3/4) | 11.57 | 11.57 | ~tied |
+| S4 (4/4) | 11.61 | 11.67 | +0.5% |
+
+### Findings (M4 Max)
+
+1. **Stock Go's partial SR is already quite good.** For `bits.Mul64(x, K)`
+   with sparse `K`, it emits ~3 instructions (one `NEG`/`LSL`/`ADD` + one
+   `UMULH`) — saving one MUL but keeping one to compute the high half.
+
+2. **Going from partial SR to full SR (Mul→Sft) is rarely a win.** It's
+   ~tied or slightly slower for 4-limb kernels, and meaningfully slower
+   (+3-6%) for kernels with high sparse density and parallel rounds —
+   matching the observed regression on `Sign/P384` and `Sign/P521`.
+
+3. **The one clear full-SR win is `K = 2^s` (pure power of two).** Stock Go
+   still emits `LSL + UMULH` here, while just `LSL + LSR` would give the
+   correct (hi, lo) without using the multiplier at all. This is a tiny
+   peephole opportunity, not a general SR.
+
+4. **Parallel-rounds kernels are where full SR hurts most.** Replacing the
+   `UMULH` (which uses the dedicated multiplier units) with ALU ops removes
+   work from a unit with spare capacity and adds it to a unit that's
+   already busy with the dense muls and carry chains.
+
+### Other architectures
+
+Run the bench on the target hardware to find out. amd64 (3-cycle, 1-per-cycle
+MUL) and in-order ARMv7 / Cortex-A53 / MIPS cores may tip more uniformly
+toward full SR being a win, but the data above suggests that **on any modern
+out-of-order CPU with a dedicated multiplier unit, the existing partial SR
+captures most of the available win and full SR adds risk without much
+upside.**
 
 ### Apple M4 Max (Go 1.27 dev, 2026-05) summary
 
