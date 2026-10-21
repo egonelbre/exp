@@ -3,7 +3,6 @@
 package main
 
 import (
-	"bytes"
 	"cmp"
 	"flag"
 	"fmt"
@@ -110,12 +109,13 @@ func must[T any](v T, err error) T {
 }
 
 func tryExtractPackagePath(path string) (pkgpath string, err error) {
-	data, err := os.ReadFile(path)
+	f, err := os.Open(path)
 	if err != nil {
 		return "", fmt.Errorf("%s: unable to open package: %w", path, err)
 	}
+	defer f.Close()
 
-	r, err := gcexportdata.NewReader(bytes.NewReader(data))
+	r, err := gcexportdata.NewReader(f)
 	if err != nil {
 		return "", fmt.Errorf("%s: not an export data file: %w", path, err)
 	}
